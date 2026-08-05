@@ -49,6 +49,7 @@ around this with `check_suite` and `schedule` triggers — at the cost of latenc
 | [04-roadmap.md](docs/04-roadmap.md) | Phases 0–5, each independently shippable |
 | [05-configuration.md](docs/05-configuration.md) | Minimal config and adoption workflow |
 | [06-open-questions.md](docs/06-open-questions.md) | Unresolved decisions, with recommendations |
+| [PROJECT-MANAGEMENT.md](docs/PROJECT-MANAGEMENT.md) | Team, process, sprint plan, full backlog — backup of the Notion board |
 
 ## Start here
 
