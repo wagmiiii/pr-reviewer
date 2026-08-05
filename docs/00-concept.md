@@ -42,7 +42,9 @@ status.
 ### Bucket 2 — Heuristics (no AI, but fallible)
 
 Pattern matching and thresholds. Useful, wrong sometimes. **Warn only — never blocks.**
-Every threshold here is a guess until it has been tuned against a real queue.
+Every threshold here is a guess until it has been tuned against real PRs — which now
+means the 162-PR archive rather than a live queue, with the caveats in
+`docs/03-review-pipeline.md`.
 
 - Linked-issue detection (regex over PR body/title — misses prose references)
 - Duplicate-PR detection (file overlap between open PRs)
@@ -94,13 +96,29 @@ deferred. Reasons:
 
 ## What success looks like
 
+Every item here is a statement about a live queue, and as of 2026-08-05 there is no live
+queue to measure against — the contributor wave that motivated this project ran
+2026-07-06 to 2026-08-04 and ended, leaving 162 closed PRs and zero open ones [Certain,
+`docs/spikes/premise-test.md`]. The list stands as the definition of success. What
+changes is when it can be checked: **not until another wave arrives.**
+
 - Time-to-first-actionable-feedback drops from days to **one CI cycle** (see the
-  latency constraint in `02-architecture.md` — this is not seconds).
+  latency constraint in `02-architecture.md` — this is not seconds). *Requires live
+  traffic; a replay over history has no clock.*
 - The maintainer can filter the PR list by bot-applied labels and get a usable
-  shortlist without opening anything.
-- Hand-written "please fix CI" comments go to zero.
+  shortlist without opening anything. *Requires live traffic.*
+- Hand-written "please fix CI" comments go to zero. *Requires live traffic. The
+  historical count from the wave is the baseline to beat, not the measurement.*
 - PRs blocked on the contributor become visible and self-resolve without a maintainer
-  touch.
+  touch. *Requires live traffic; the bot is the intervention, so the historical
+  self-resolve rate is a baseline only.*
+
+What can be checked now, against the 162-PR corpus, is narrower and worth stating
+separately so it is not mistaken for the above: **the fact rules classify historical PRs
+the way a human does, with zero disagreements**, and **how often a required check was
+failing on the base branch at the same time it was failing on the PR**. The second is the
+lead differentiator and is directly countable. Neither says anything about whether the
+maintainer's day improves. [Certain]
 
 ## Explicit non-goals
 
@@ -162,5 +180,19 @@ with the noise budget in `docs/03-review-pipeline.md`.
 
 Mergify plus two free marketplace actions delivers conflict labels, CI-failure labels,
 and linked-issue enforcement today for zero engineering — a real fraction of Phases 1–2
-[Likely]. Before committing to the build, install exactly that on a real repo for a week.
-If the queue becomes tractable, the correct decision is to stop.
+[Likely]. The original test of this was: install exactly that on a real repo for a week,
+and if the queue becomes tractable, stop.
+
+**That test is not runnable.** There is no queue. Install the configs anyway — the cost
+is zero and they are in place for the next wave — but the evidence for the go/no-go now
+comes from replaying the fact rules over the 162 archived PRs and asking what the
+alternatives would have missed. Concretely: how many of those PRs had a required check
+failing that was *also* failing on base, since no surveyed competitor makes that
+distinction. A low count means the alternatives were close to sufficient and the correct
+decision is to stop. [Certain that the count is obtainable; Guessing what it shows]
+
+The honest weakness of this substitution: a replay compares rule outputs, not maintainer
+experience. It cannot tell you whether four bots posting four comments would have been
+worse than one, which is differentiator #4 and the strongest argument in this section.
+That one stays untested until a wave arrives, and should be presented at PR-003 as an
+argument rather than as a finding.

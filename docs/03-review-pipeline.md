@@ -36,7 +36,19 @@ Status derivation, from fact rules only:
 ## Bucket 2 — Heuristic rules (warn only, never set status)
 
 Fallible by nature. Every threshold below is **untuned** and marked as such; they are
-starting guesses to be corrected against a real queue, not defaults to trust.
+starting guesses, not defaults to trust.
+
+They were to be corrected "against a real queue". There is no open queue on any repo the
+team owns [Certain, 2026-08-05 — `docs/spikes/premise-test.md`], so tuning happens against
+the archived 162-PR corpus instead. Two consequences worth stating rather than glossing:
+
+- `DUPLICATE_FILES` and `ISSUE_CLAIMED_ELSEWHERE` compare a PR against *other open PRs*.
+  Replaying them requires reconstructing which PRs were open concurrently from open/close
+  timestamps. That is doable and the wave was dense enough to make it meaningful, but it
+  is a reconstruction, not an observation [Likely].
+- Ground truth for a heuristic false positive is what the maintainers actually did with
+  the PR, which is noisier than a fact rule's ground truth. A tuned threshold from this
+  corpus is better than intuition and worse than a live queue. Say so when reporting it.
 
 | Code | Method | Threshold status |
 |---|---|---|

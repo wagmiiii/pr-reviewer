@@ -89,8 +89,8 @@ conversations, and each is answered in writing and committed to `docs/decisions/
 | Ref | Gate | Can it stop the project? |
 |---|---|---|
 | PR-003 | Go / no-go after spike + competitor research | **Yes** — adopt an existing tool and stop |
-| PR-042 | Phase 0 exit measurement | Blocks all Phase 1 investment |
-| PR-062 | Labels-only trial findings | Feeds PR-090 |
+| PR-042 | Phase 0 exit measurement — **restated against the 162-PR corpus, 2026-08-05** | Blocks all Phase 1 investment |
+| PR-062 | Labels-only trial findings — **deferred, needs live traffic** | Feeds PR-090, which is therefore also stalled |
 | PR-090 | Does the digest beat a saved search? | **Yes** — skips epic E9 |
 | PR-100 | Build the judgment layer at all? | **Yes** — skips epic E10 |
 
@@ -105,10 +105,18 @@ A plan that cannot be cancelled is not a plan.
 | Sprint 0 | 1 | Validation + scaffold | Go/no-go answered in writing | 8 | 5 | 4 | 17 |
 | Sprint 1 | 2 | Context type, collectors, fact rules | Rules run green against fixtures | 18 | 18 | — | 36 |
 | Sprint 2 | 2 | Phase 0 CLI | Scan beats a timed manual pass | 11 | 13 | 3 | 27 |
-| Sprint 3 | 2 | Action delivery + labels | Labels live on a real repo | 13 | 10 | 2 | 25 |
-| Sprint 4 | 2 | Sticky comment | A week with zero manual "fix your CI" comments | 12 | 13 | — | 25 |
+| Sprint 3 | 2 | Action delivery + labels | Labels reconcile correctly over replayed PRs, live on the repo in dry-run | 13 | 10 | 2 | 25 |
+| Sprint 4 | 2 | Sticky comment | Comment bodies render for all 162 replayed PRs; noise gate deferred | 12 | 13 | — | 25 |
 
 Scheduled total: **128 points**. Unscheduled backlog: **50 points**.
+
+Sprint 3 and Sprint 4 exit criteria were rewritten on 2026-08-05. They previously read
+"labels live on a real repo" and "a week with zero manual 'fix your CI' comments", both of
+which need a live PR queue that no longer exists. The replacements test the same code
+against replayed history. **They are weaker**: they prove the writers behave correctly,
+not that the output reduces anyone's workload. The noise and workload halves of those
+gates are deferred until a contributor wave arrives, and are recorded as open in
+`docs/04-roadmap.md` rather than quietly dropped. [Certain]
 
 Sprint 1 runs at 9 points per person per week against an assumed 10–12. The slack is
 deliberate — it is the sprint with the most unknowns in it.
@@ -162,7 +170,7 @@ Status of every ticket at time of writing: `Ready` for PR-001, PR-002, PR-010;
 | PR-036 | Fact-rule test suite with a zero-false-positive gate | Allison | P0 | 5 | Test | PR-012, PR-031/2/3 |
 | PR-040 | CLI: scan command and config loader | Ademola | P0 | 3 | Feature | PR-021, PR-030 |
 | PR-041 | Terminal report renderer grouped by blockage owner | Allison | P0 | 3 | Feature | PR-040 |
-| PR-042 | Phase 0 exit measurement | Joint | P0 | 3 | Decision | PR-036, PR-041 |
+| PR-042 | Phase 0 exit measurement — **criterion restated against replayed history, see `docs/04-roadmap.md`** | Joint | P0 | 3 | Decision | PR-005, PR-036, PR-041 |
 
 ### Sprint 3 — Action delivery and labels
 
@@ -175,7 +183,7 @@ Status of every ticket at time of writing: `Ready` for PR-001, PR-002, PR-010;
 | PR-054 | Verdict hashing and the noise budget | Allison | P1 | 3 | Feature | PR-052 |
 | PR-060 | Label reconciliation | Allison | P1 | 3 | Feature | PR-051 |
 | PR-061 | Label config and prefix support | Allison | P2 | 2 | Feature | PR-060 |
-| PR-062 | One-week labels-only trial | Joint | P1 | 2 | Decision | PR-060 |
+| PR-062 | One-week labels-only trial — **deferred until a contributor wave arrives; needs live traffic** | Joint | P1 | 2 | Decision | PR-060 |
 
 ### Sprint 4 — Sticky comment
 
@@ -219,7 +227,11 @@ Recorded so the reasoning survives, rather than silently editing rows.
 | 2026-08-05 | **PR-004 added, P0, Sprint 0** | PR-002 surfaced a cheaper test of the premise than anything else on the board: install the existing tools for a week first. Now blocks PR-003. |
 | 2026-08-05 | **PR-004 blocked and redesigned** | No repo has any open PRs. The contributor wave on `Tollcraft/soroban-cost-linter` (162 PRs, ~65 contributors) ran 2026-07-06 to 2026-08-04 and is over. "Install and wait a week" measures nothing. Redesigned as install + archive + retrospective replay. See `docs/spikes/premise-test.md`. |
 | 2026-08-05 | **PR-005 added, P0, Sprint 0** | The 162-PR history is the evidence base for PR-003, PR-012's fixture corpus, and the only way to validate PR-024 — and Actions logs are decaying now. Only genuinely time-sensitive ticket on the board. |
-| 2026-08-05 | **PR-042 exit criterion needs rewriting** | It assumes an open queue to hand-classify. There isn't one. Must be restated against historical PRs. Not yet done. |
+| 2026-08-05 | **PR-042 exit criterion rewritten — done** | It assumed an open queue to hand-classify. There isn't one. Now measured by retrospective replay: blind hand-classification of a seeded random sample of 40 of the 162 archived PRs, committed before the run; **zero fact-rule disagreements** required; plus a reported `CI_BROKEN_ON_BASE` count over all 162 (differentiator #1, countable from history, reported not thresholded); scan of all 162 replayed PRs under 2 minutes. Now also blocked by PR-005, since it needs the archive. Full text in `docs/04-roadmap.md`. |
+| 2026-08-05 | **Live-traffic exit criteria marked deferred, not rewritten** | Phase 1's noise gate (≈1 bot comment per PR, zero manual "fix your CI" comments, no contributor complaints), Phase 2's "digest is the first thing you open", Phase 3's three-week shadow-mode agreement gate, and PR-062's one-week labels trial all measure maintainer or contributor behaviour under the bot. A replay posts nothing and has no clock, so none of them has an honest retrospective substitute. Marked deferred until a wave arrives rather than downgraded into something weaker that would read as passed. |
+| 2026-08-05 | **Phase 1 metrics list split into measurable / deferred** | Fact-rule false positives, the `CI_BROKEN_ON_BASE` count, and heuristic tuning survive as replay measurements. Median time-to-first-actionable-feedback, bot comments per PR, manual comments per week, and PRs that self-resolve do not — the historical figures are baselines for a future live comparison, not results. Recorded in `docs/04-roadmap.md` and `docs/00-concept.md`. |
+| 2026-08-05 | **Sprint 3 and Sprint 4 exit criteria rewritten** | "Labels live on a real repo" and "a week with zero manual 'fix your CI' comments" both need an open queue. Replaced with replay-based criteria over the corpus, with the workload half of each explicitly deferred. The replacements are weaker and the sprint table says so. |
+| 2026-08-05 | **Bucket 2 threshold tuning re-sourced** | `docs/03-review-pipeline.md` said thresholds would be tuned "against a real queue". Now tuned against the archive. `DUPLICATE_FILES` and `ISSUE_CLAIMED_ELSEWHERE` need concurrently-open PRs reconstructed from open/close timestamps, which is a reconstruction rather than an observation. Noted in the doc. |
 
 ---
 
@@ -256,6 +268,8 @@ infrastructure rather than a weekend Action. Find out in week 1, not month 2.
 | Heuristic thresholds are guesses | **High** | False positives erode trust | Warn-only by construction (PR-080), tuning logs committed |
 | Comment tone alienates contributors | Medium | Community incident | PR-071 copy reviewed by both; contributor text is mechanics only |
 | Scope drift into line-by-line review | Medium | Loses to funded competitors | Listed as a non-goal in `docs/00-concept.md` |
+| No live traffic to validate against | **Certain, already happened** | Every behavioural exit criterion is unmeasurable | Retrospective replay over the 162-PR archive for rule correctness; behavioural gates explicitly deferred rather than faked. Accept that Phase 1+ ships partly unvalidated. |
+| Contributor waves are episodic, not continuous | Unknown [Guessing — one observed wave] | The tool only has value during a wave, which weakens the case for building it | State it plainly at PR-003. One wave is not a pattern; check whether earlier waves exist on other repos before treating it as either a rule or an outlier. |
 
 ---
 
