@@ -128,7 +128,8 @@ Status of every ticket at time of writing: `Ready` for PR-001, PR-002, PR-010;
 |---|---|---|---|---|---|---|
 | PR-001 | Spike: can the Action write on fork PRs? | Ademola | P0 | 3 | Spike | — |
 | PR-002 | Competitor research: does this already exist? — **findings in `docs/spikes/competitors.md`** | Allison | P0 | 2 | Spike | — |
-| PR-004 | Premise test: install Mergify + linked-issue action for a week | Allison | P0 | 2 | Spike | PR-002 |
+| PR-004 | Premise test — **BLOCKED, redesigned as install + archive + replay** | Allison | P0 | 2 | Spike | PR-002, PR-005 |
+| PR-005 | **Archive the 162-PR corpus — time-sensitive, logs are decaying** | Ademola | P0 | 3 | Spike | — |
 | PR-003 | Decision: go / no-go / pivot | Joint | P0 | 1 | Decision | PR-001, PR-002, PR-004 |
 | PR-010 | Repo scaffold: TypeScript, Node 24, tooling | Ademola | P0 | 3 | Chore | — |
 | PR-011 | Define the `PullRequestContext` type | Joint | P0 | 3 | Feature | PR-010 |
@@ -216,6 +217,9 @@ Recorded so the reasoning survives, rather than silently editing rows.
 |---|---|---|
 | 2026-08-05 | **PR-082 demoted P2 → P3** | PR-002 found `nearform/github-action-check-linked-issues` does this better than our planned regex, including cross-repo references. Either adopt their matching logic or reduce PR-082 to "recommend their action" inside PR-094. |
 | 2026-08-05 | **PR-004 added, P0, Sprint 0** | PR-002 surfaced a cheaper test of the premise than anything else on the board: install the existing tools for a week first. Now blocks PR-003. |
+| 2026-08-05 | **PR-004 blocked and redesigned** | No repo has any open PRs. The contributor wave on `Tollcraft/soroban-cost-linter` (162 PRs, ~65 contributors) ran 2026-07-06 to 2026-08-04 and is over. "Install and wait a week" measures nothing. Redesigned as install + archive + retrospective replay. See `docs/spikes/premise-test.md`. |
+| 2026-08-05 | **PR-005 added, P0, Sprint 0** | The 162-PR history is the evidence base for PR-003, PR-012's fixture corpus, and the only way to validate PR-024 — and Actions logs are decaying now. Only genuinely time-sensitive ticket on the board. |
+| 2026-08-05 | **PR-042 exit criterion needs rewriting** | It assumes an open queue to hand-classify. There isn't one. Must be restated against historical PRs. Not yet done. |
 
 ---
 
