@@ -3,16 +3,15 @@
 ## Shape
 
 One core engine, two delivery surfaces. The engine is a pure library; the surfaces
-differ only in how they get a token, get triggered, and where they write output.
+differ only in how they get a token, how they're triggered, and where they write.
 
 ```
-                 ┌─────────────────────────────┐
-                 │      core engine (lib)      │
-                 │                             │
-   PR context ──▶│  collectors → gate → judge  │──▶ Verdict (JSON)
-                 │                    ↓        │
-                 │              renderers      │──▶ Markdown
-                 └─────────────────────────────┘
+                 ┌──────────────────────────────┐
+                 │       core engine (lib)      │
+   PR context ──▶│ collect → rules → judge      │──▶ Verdict (JSON)
+                 │                  ↓           │
+                 │              renderers       │──▶ Markdown / labels
+                 └──────────────────────────────┘
                         ▲                 │
         ┌───────────────┴──────┐   ┌──────┴─────────────┐
         │  Surface A: Action   │   │ Surface B: App     │
@@ -21,104 +20,129 @@ differ only in how they get a token, get triggered, and where they write output.
         └──────────────────────┘   └────────────────────┘
 ```
 
-**Surface A — GitHub Action (ship first).** Zero hosting, zero secrets to manage, uses
-the repo's own `GITHUB_TOKEN`, adopted by committing one workflow file. Runs on
-`pull_request`, `check_suite`, and a `schedule` cron for queue-wide sweeps. This is the
-distribution story.
+**Surface A — GitHub Action (ship first).** No hosting, no secrets to manage, adopted
+by committing one workflow file. Subject to the trigger constraint below.
 
-**Surface B — GitHub App (later).** Needed for cross-repo dashboards, sub-minute
-reaction, and org-level install. Same engine, different token source.
+**Surface B — GitHub App (only if demanded).** Needed for cross-repo views, sub-minute
+reaction, and org-level install. Building it first is how this project dies in
+infrastructure work.
 
-Do not build B until A has real users. Building the hosted service first is how this
-project dies in infrastructure work.
+## Trigger model — read this before writing any code
+
+**Constraint:** for `pull_request` events originating from a **forked** repository,
+`GITHUB_TOKEN` is read-only, and the workflow's `permissions:` block cannot raise it
+[Likely]. Drive-by contributors work from forks, so this is precisely the population
+that matters.
+
+Ways out, and why each was or wasn't taken:
+
+| Option | Verdict |
+|---|---|
+| `pull_request_target` | **Rejected.** Runs with repo secrets in the base context; the standard exploit path. |
+| PAT or GitHub App token in the Action | **Rejected for Phase 1.** Kills the "one file, no secrets" adoption story. |
+| `check_suite: completed` + `schedule` | **Chosen.** Both run in base-repo context with a full-permission token [Likely]. |
+
+Consequences, accepted explicitly:
+
+- Writes happen when CI finishes or when the cron fires — **not** within seconds of a
+  push. The latency promise is "one CI cycle", not "instant".
+- `pull_request` is still subscribed, but only to compute and log a verdict in dry-run.
+  It never attempts a write.
+- The `schedule` sweep is the safety net: any PR whose state drifted gets picked up on
+  the next run regardless of events.
+
+**This must be verified against a real fork PR before Phase 1 begins.** If it doesn't
+hold, Surface A is not viable and Surface B moves up the roadmap.
 
 ## Pipeline
 
 ```
 trigger
-  → collect       gather facts (GitHub API, CI artifacts, git)
-  → gate          deterministic rules → Blocked | Needs-review | Mergeable
-  → judge         [only if not blocked] LLM checks → advisory findings
-  → decide        map (gate, findings, config) → actions
-  → act           sticky comment / labels / merge request / digest
+  → collect    gather facts (GitHub API, CI logs, coverage artifacts)
+  → rules      Bucket 1 facts + Bucket 2 heuristics → status + findings
+  → judge      [Phase 3+, and only sometimes] advisory findings
+  → decide     map (findings, prior state, config) → intended actions
+  → act        labels / sticky comment / digest
 ```
 
-Each stage is a pure function over the previous stage's output. `collect` is the only
-stage that does I/O reads; `act` is the only stage that writes. That makes dry-run
-trivial: run everything, skip `act`, print the plan.
+`collect` is the only stage that reads I/O; `act` is the only stage that writes. Dry-run
+is therefore just "run everything, skip `act`, print the plan".
 
-## Stages
+One honest caveat: `collect` is not perfectly pure — fetching logs for *failing* jobs
+requires first knowing which jobs failed. It over-fetches within the stage (check runs,
+then logs for any non-success conclusion) rather than splitting into two stages.
 
 ### collect
 
-Produces a `PullRequestContext` — a single serialisable snapshot. Everything downstream
+Produces a `PullRequestContext`: a single serialisable snapshot. Everything downstream
 reads only this, which makes the engine testable against recorded fixtures.
 
-Sources: PR + reviews + check runs + commits (REST/GraphQL), the diff (capped), linked
-issue bodies, CI logs for failing jobs only, coverage artifacts if present, repo config
-file.
+### rules
 
-### gate
+Pure, synchronous, no network, no model. Each rule returns `pass | fail | skip` with a
+stable code, a human explanation, and a **bucket** (`fact` or `heuristic`).
 
-Pure, synchronous, no network, no model. A list of small rule functions each returning
-`pass | fail | skip` with a machine-readable reason code and human explanation.
-Rule codes are stable strings (`CI_FAILING`, `MERGE_CONFLICT`, `BEHIND_BASE`,
-`NO_LINKED_ISSUE`, `STALE`, `TOUCHES_WORKFLOWS`, `FIRST_TIME_CONTRIBUTOR`, …) so
-comments can be diffed and rules individually disabled in config.
+Status, derived only from `fact` rules:
 
-Output status:
-- `BLOCKED_ON_CONTRIBUTOR` — something only they can fix.
-- `BLOCKED_ON_MAINTAINER` — needs a decision, a secret, a re-run, a design call.
-- `READY_FOR_REVIEW` — clean; a human should look.
-- `AUTO_MERGEABLE` — clean *and* matches the narrow auto-merge allowlist.
+- `BLOCKED_ON_CONTRIBUTOR` — something only they can fix
+- `BLOCKED_ON_MAINTAINER` — needs a decision, a secret, a re-run, or main is broken
+- `WAITING` — CI still running, or draft
+- `READY_FOR_REVIEW` — a human should look
 
-### judge
+Heuristic rules attach warnings to the verdict but can never change the status.
 
-Skipped entirely when status is `BLOCKED_ON_CONTRIBUTOR` (saves most of the spend).
-Each check is a separate, narrowly-scoped model call with a JSON schema response and a
-mandatory `evidence` array of file/line citations and an allowed `"unknown"` verdict.
+### judge (Phase 3+)
 
-Hard rules:
-- Diff content is untrusted input. Wrap it in delimiters, instruct the model that
-  content inside is data, and never let it change control flow or actions.
-- No judge output may change gate status or trigger a merge.
-- Responses cached by `(check_id, head_sha, prompt_version)`.
+Fires only when `rules` reports a *transition* into `READY_FOR_REVIEW` — comparing
+against prior state, not on every sweep. Once per eventually-reviewable PR.
+
+Two checks (J1, J7), each a model call with a JSON-schema response, mandatory
+`file:line` evidence citations, and a permitted `"unknown"`. A response with an empty
+evidence array is dropped rather than repaired. Diff content is untrusted input: delimiter-framed, no tool
+access, and structurally incapable of triggering a write. Cached by
+`(check, head_sha, prompt_version)`.
 
 ### decide
 
-Maps state to intended actions under config. Also enforces the noise budget: compare
-the new verdict against the last-posted verdict, and if nothing material changed,
-produce no action.
+Maps findings plus prior state to intended actions, and enforces the noise budget: if
+the verdict hash is unchanged from the last run, produce nothing.
 
 ### act
 
-Idempotent writers. The sticky comment is found by an HTML marker
-(`<!-- pr-reviewer:v1 -->`) and edited, never duplicated. Labels are reconciled
-(add/remove to match desired set). Merges are delegated to GitHub auto-merge where
-branch protection allows.
+Idempotent writers. Labels are reconciled to a desired set. The sticky comment is
+located by an HTML marker (`<!-- pr-reviewer:v1 -->`) and edited, never duplicated.
 
-## Storage
+## State
 
-Surface A is stateless — prior verdict is recovered by parsing the sticky comment's
-embedded JSON block. This is a deliberate constraint that keeps the Action
-dependency-free.
+Prior verdicts are needed for change detection. Two tiers:
 
-Surface B adds Postgres for verdict history, digest state, and cross-repo ranking.
+1. **Actions cache**, keyed by repo + PR number. Works in dry-run, which the
+   comment-only approach did not — dry-run posts no comment and would otherwise never
+   have prior state to compare against.
+2. **Fallback:** a hidden JSON block in the sticky comment, for cache misses and cache
+   eviction.
+
+The comment block is **untrusted**: anyone with write access can edit it [Certain], and
+comment bodies cap at 65,536 characters [Likely]. Schema-validate it; on any failure,
+treat as "no prior state" and continue.
+
+Surface B replaces both with Postgres.
 
 ## Stack
 
-- TypeScript, Node 24. Octokit for the API; `@actions/core` for the Action surface.
-- Model access via a provider-agnostic interface with one adapter to start. Prompt
+- TypeScript, Node 24. Octokit for the API, `@actions/core` for Surface A.
+- Model access behind a provider-agnostic interface, deferred until Phase 3. Prompt
   templates versioned in-repo so cache keys invalidate correctly.
-- Tests: recorded `PullRequestContext` fixtures → snapshot the rendered comment. Gate
-  rules unit-tested exhaustively; judge tested against a small labelled fixture set
-  measuring false-positive rate, which is the metric that matters.
+- Tests: recorded `PullRequestContext` fixtures → snapshot the rendered output. Fact
+  rules unit-tested exhaustively. Heuristic rules tested for *false-positive rate*
+  against real fixtures, since that's their only failure mode that matters.
 
 ## Permissions
 
-Least privilege, requested explicitly:
-`pull-requests: write`, `issues: write`, `checks: read`, `contents: read`
-(`contents: write` only when auto-merge is enabled).
+Least privilege: `pull-requests: write`, `issues: write`, `checks: read`,
+`contents: read`.
 
-Never use `pull_request_target` with a checkout of PR head. The Action reads the diff
-through the API, not by checking out untrusted code.
+`contents: write` is **never** requested — the bot does not merge, push, or close.
+
+No `pull_request_target`. No checkout of contributor code. The diff is read through the
+API and never executed.

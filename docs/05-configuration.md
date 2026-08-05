@@ -1,104 +1,119 @@
 # Configuration
 
-Config lives in the target repo at `.github/pr-reviewer.yml`. Every behaviour that
-writes anything is opt-in or has a conservative default. Unknown keys are an error, not
-silently ignored — silent misconfiguration on a bot with write access is unacceptable.
+Config lives at `.github/pr-reviewer.yml` in the target repo.
+
+The first draft of this document specified ~60 keys before a line of code existed.
+Every key is a compatibility promise and a maintenance obligation, so this is cut to
+what Phases 0–2 actually consume. Keys get added when a phase needs them, not in
+advance.
+
+Unknown keys are an **error**, not silently ignored. Silent misconfiguration on a bot
+with write access is unacceptable.
+
+## Phase 0–1
 
 ```yaml
 version: 1
 
-# Global kill switch. Runs the full pipeline, writes nothing, prints the plan.
+# Runs the full pipeline, writes nothing, prints the plan. Start here.
 dry_run: true
 
-gate:
+rules:
   required_checks: []          # empty = use branch-protection required checks
-  behind_base_threshold: 20    # commits behind before BEHIND_BASE warns
-  huge_diff_lines: 800
-  require_linked_issue: warn   # off | warn | block
-  require_dco: false
+  behind_base_threshold: 20    # untuned guess
+  huge_diff_lines: 800         # untuned guess
+  stale_days: 14               # untuned guess
   protected_paths:
     - ".github/workflows/**"
-    - "**/Dockerfile"
-    - "scripts/release/**"
-  disabled_rules: []           # stable rule codes, e.g. ["STALE"]
-
-comment:
-  enabled: true
-  include_ci_logs: true
-  ci_log_lines: 20
-  include_rebase_instructions: true
-  max_edits_per_day: 10
+  disabled: []                 # stable rule codes, e.g. ["STALE"]
 
 labels:
   enabled: true
-  map:
-    needs_ci_fix: "needs-ci-fix"
-    has_conflicts: "has-conflicts"
-    ready_for_review: "ready-for-review"
-    needs_decision: "needs-maintainer-decision"
-    stale: "stale"
+  prefix: ""                   # e.g. "bot/" to namespace them
 
-digest:
+comment:
   enabled: true
-  target: issue                # issue | none
+  ci_log_lines: 20
+```
+
+Every threshold above is a starting guess, not a researched default. Tune them against
+a real queue and record what you changed and why — that record is more valuable than
+the numbers.
+
+## Phase 2 (add when the phase starts)
+
+```yaml
+digest:
+  enabled: false
   issue_number: null           # created on first run if null
-  schedule: "0 8 * * 1-5"
   max_items_per_section: 10
 
 stale:
-  enabled: false
   nudge_after_days: 14
   nudge_interval_days: 14
-  warn_after_days: 30
-  close_after_days: 45         # null = never close
+  # No close_after_days. The bot does not close PRs.
 
+# Required for the NO_TEST_CHANGED / TESTS_REMOVED rules — repo-specific, no
+# useful default. When unset, both rules report "not configured" rather than firing.
+tests:
+  paths:
+    - "tests/**"
+    - "**/*_test.*"
+    - "**/*.test.*"
+```
+
+## Phase 3+ (add when the phase starts)
+
+```yaml
 judgment:
   enabled: false
-  checks: [issue_resolution, test_presence, test_deletion, effort_estimate]
-  destination: digest          # digest | comment | both
+  checks: [issue_resolution, effort_estimate]   # the only two; see 03-review-pipeline.md
+  shadow: true                 # write to digest marked unvalidated; exit shadow by hand
   max_diff_bytes: 120000
-  min_confidence_to_report: 0.7
+  # No `destination` key. Both checks are maintainer-facing, permanently — that is a
+  # design decision (Q3), not a setting.
 
 coverage:
   enabled: false
   source: artifact             # artifact | codecov
-  artifact_name: coverage
-  format: lcov                 # lcov | cobertura
-  drop_threshold_pct: 1.0
-
-automerge:
-  enabled: false               # keep it that way unless you mean it
-  max_lines: 50
-  allow_paths:
-    - "docs/**"
-    - "**/*.md"
-  trusted_authors: []
-  min_merged_prs: 3
-  allow_first_time_contributors: false
-  method: native               # native = GitHub auto-merge (recommended)
+  format: lcov
 ```
+
+## Not configurable, by design
+
+- **Merging.** There is no merge configuration because there is no merge feature.
+- **Auto-closing PRs.**
+- Heuristic rules blocking a PR. Bucket 2 is warn-only and that is not a setting.
+- Sending judgment output to contributors. Maintainer-facing is permanent (Q3).
 
 ## Precedence
 
-Repo config overrides defaults. Action inputs override repo config (so a maintainer can
-force `dry_run` from the workflow without editing the config file). Nothing overrides
-the hard-coded auto-merge exclusions in `03-review-pipeline.md`.
+Defaults ← repo config ← Action inputs. Action inputs win so a maintainer can force
+`dry_run` from the workflow without editing the config file.
 
 ## Adoption workflow
 
 ```yaml
 # .github/workflows/pr-reviewer.yml
 name: PR Reviewer
+
 on:
-  pull_request: { types: [opened, synchronize, reopened, ready_for_review] }
-  check_suite: { types: [completed] }
-  schedule: [{ cron: "0 8 * * 1-5" }]
+  # Writes happen here: check_suite and schedule run in the base-repo
+  # context with a full-permission token, including for fork PRs.
+  check_suite:
+    types: [completed]
+  schedule:
+    - cron: "0 8 * * 1-5"
+  # Dry-run logging only. On fork PRs this token is read-only and
+  # cannot comment or label — see docs/02-architecture.md.
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
 
 permissions:
   pull-requests: write
   issues: write
   checks: read
-  contents: read
+  contents: read      # never contents: write — the bot does not merge or push
 
 jobs:
   review:
@@ -106,8 +121,12 @@ jobs:
     steps:
       - uses: <owner>/pr-reviewer@v1
         with:
-          dry_run: true        # flip to false once you trust the output
+          dry_run: true    # flip to false once you trust the output
 ```
 
-Note the absence of `pull_request_target` and the absence of a checkout step — the
+Note the absence of `pull_request_target` and the absence of a checkout step. The
 Action never executes contributor code.
+
+**Unverified assumption:** that `check_suite: completed` grants a writable token for
+fork-originated PRs [Likely, not yet tested]. Phase −1 in the roadmap exists to confirm
+this before anything depends on it.

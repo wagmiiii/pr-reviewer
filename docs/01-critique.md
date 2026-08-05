@@ -1,118 +1,219 @@
-# Critique of the original idea
+# Critique
 
-Honest assessment of the concept as first stated, with the changes it implies.
+Two parts: flaws in the original idea, then flaws found auditing the first draft of
+this plan. The second list is the more useful one.
 
-## Flaws
+Confidence tags: [Certain] / [Likely] / [Guessing].
 
-### F1 — Auto-merge is a supply-chain vulnerability, not a feature
+---
 
-"Merge PRs where necessary" is the highest-risk sentence in the brief. A bot with
-write access that merges based on an LLM's opinion can be steered by whoever wrote the
-diff it is reading. Prompt injection inside a source comment, a README, or a test
-fixture is a live attack, not a theoretical one. Related classic: a workflow triggered
-by `pull_request_target` runs with repo secrets *and* checks out attacker code.
+## Part 1 — Flaws in the original idea
 
-**Implication.** Auto-merge must be driven exclusively by deterministic facts, gated by
-an explicit allowlist of conditions, disabled by default, and never influenced by model
-output. Prefer delegating the actual merge to GitHub's native auto-merge / merge queue
-so the platform enforces branch protection rather than our bot bypassing it.
+### F1 — Auto-merge was the highest-risk element. Removed.
+
+"Merge PRs where necessary" was the most dangerous line in the brief. A bot with write
+access that merges based on a model's opinion can be steered by whoever wrote the diff
+it is reading — prompt injection in a source comment or test fixture is a live
+technique, not a theory [Likely]. The related classic is a `pull_request_target`
+workflow that checks out attacker code with secrets in scope [Certain].
+
+Resolution: merging is out of scope entirely. GitHub's native auto-merge and merge
+queue already do this under branch protection [Certain]. This is not a deferral.
 
 ### F2 — Comment spam recreates the original problem
 
-The pain was "I had to add comments manually to every PR." A bot posting a fresh
-comment on every push produces *more* noise, and contributors mute it within a week.
+The pain was hand-writing comments on every PR. A bot posting a fresh comment per push
+produces more noise and gets muted.
 
-**Implication.** Exactly one bot comment per PR, edited in place. Keyed to head SHA so
-it only rewrites when something actually changed. A hard per-PR daily comment budget.
-Never comment when the only news is "still failing, same as before".
+Resolution: one comment per PR, edited in place, keyed to head SHA, with a hard noise
+budget. No comment when nothing material changed.
 
-### F3 — Using an LLM for facts the API already gives you
+### F3 — Using a model for facts the API already returns
 
-Merge conflicts and CI status are structured fields. Asking a model about them is
-slower, costlier, and strictly less reliable.
+CI status and merge conflicts are structured fields [Certain]. Asking a model about
+them is slower, costlier, and less reliable.
 
-**Implication.** The deterministic/judgment split in `00-concept.md`. LLM calls only
-for questions with no API answer.
+Resolution: the three-bucket model in `00-concept.md`.
 
 ### F4 — "Check coverage" is not implementable as stated
 
-Coverage cannot be inferred from a diff. It requires a coverage report produced by the
+Coverage cannot be derived from a diff [Certain]. It requires a report produced by the
 target repo's CI.
 
-**Implication.** Coverage is an *optional capability*, enabled only when the repo
-publishes an lcov/cobertura artifact or uses Codecov. Degrade honestly: "coverage not
-reported" rather than a guess. Never let a hallucinated coverage number reach a comment.
+Resolution: optional capability, gated on an lcov/cobertura artifact or Codecov.
+Degrade to "not reported" — never a guessed number.
 
-### F5 — "Quality of work" is undefined and unfalsifiable
+### F5 — "Quality of work" is unfalsifiable
 
-An LLM asked "is this good quality?" will produce confident, generic, unhelpful prose.
+A model asked "is this good quality?" returns confident generic prose.
 
-**Implication.** Decompose into narrow, checkable questions with evidence attached:
-Does the diff touch files plausibly related to the issue? Is there a test for the new
-behaviour? Does it delete tests? Does the PR description match the diff? Each answer
-must cite files/lines, and must be allowed to return "cannot determine".
+Resolution: decompose into narrow checkable questions with mandatory file/line
+evidence and a permitted "unknown".
 
-### F6 — Cost and rate limits at queue scale
+### F6 — Cost and rate limits *(and a measurement error, now corrected)*
 
-40 open PRs × several pushes/day × a full-diff LLM call is a real bill and a real
-secondary-rate-limit problem.
+The cost controls are: skip the judgment layer on PRs the rules already blocked, cache
+verdicts by head SHA, and cap the diff bytes sent to the model.
 
-**Implication.** Cache verdicts by head SHA. Debounce pushes (~2 min). Skip the
-judgment layer entirely for PRs the deterministic gate already blocked — a PR with
-failing CI does not need a quality opinion yet. Cap diff size sent to the model and
-truncate deliberately.
+An earlier revision of this document claimed those two facts — *skip blocked PRs* and
+*most PRs are blocked* — together meant the judgment layer would rarely run, and
+therefore that Bucket 3 might be worthless. **That was a stock/flow error.** "Most PRs
+are blocked at any instant" is not "few PRs become ready." The judge fires on a PR's
+*transition* into `READY_FOR_REVIEW`, not on a headcount of the queue, and every PR
+that is ever reviewed makes that transition at least once [Certain — it follows from
+the status machine in `03-review-pipeline.md`].
 
-### F7 — The bot is only as trusted as its false-positive rate
+Corrected reading: the judge runs **once per eventually-reviewable PR, at the moment
+its output is useful**, and abandoned PRs never cost a call. The cost optimisation and
+the feature are aligned rather than in tension. Q4 is resolved on that basis.
 
-One wrong "this doesn't fix the issue" on a good PR and the maintainer disables it.
+### F7 — Trust dies at the first false positive
 
-**Implication.** Ship dry-run mode first (writes nothing, produces a report). Never let
-the judgment layer emit a blocking verdict. Phrase advice as questions to the
-maintainer, not verdicts about the contributor.
+One wrong "this doesn't fix the issue" on a good PR and the bot gets disabled.
 
-### F8 — Tone matters more than you'd think
+Resolution: dry-run first; Bucket 3 never blocks; advisory output goes to the
+maintainer, not the contributor.
 
-Volunteers quit over curt bot comments. A bot telling a first-time contributor their
-work is low quality is a community-management incident.
+### F8 — Tone is a community-management risk
 
-**Implication.** Comments are addressed to the *state of the PR*, never to the person.
-The judgment layer's output goes to the maintainer digest by default, not into the PR
-thread. Contributor-facing text is limited to actionable mechanics: CI failures, rebase
-instructions, missing checklist items.
+A bot telling a first-time contributor their work is low quality is an incident.
 
-## Missing pieces worth adding
+Resolution: contributor-facing text covers mechanics only — CI failures, rebase steps,
+missing checklist items. Never quality, never the person.
 
-- **A ranked triage queue.** The real deliverable. A dashboard or a single daily issue
-  comment: "3 PRs ready for you, 12 blocked on contributor, 5 stale, 2 duplicates."
-- **Duplicate detection.** Multiple contributors fixing the same issue is endemic
-  (especially Hacktoberfest). Detect overlapping PRs and surface them together.
-- **Actionable CI feedback.** Don't say "CI failed" — extract the failing job, the
-  failing test name, and ~20 relevant log lines. This single feature removes most
-  maintainer round-trips.
-- **Copy-pasteable conflict resolution.** Exact `git fetch upstream && git rebase
-  upstream/main` block with the contributor's real remote/branch names filled in.
-- **Stale-PR lifecycle.** Nudge at N days, warn at M, close at K, all configurable and
-  off by default.
-- **Trust tiers.** First-time contributor vs. repeat contributor vs. maintainer changes
-  what is checked and what may be auto-merged.
-- **Prevention over correction.** A PR template checklist and required-status
-  configuration prevent more bad PRs than any bot fixes. Ship a `recommend` command that
-  audits the repo's own contribution setup.
+---
 
-## Utility — is this worth building?
+## Part 2 — Flaws found auditing the first draft of this plan
 
-**Yes, with the scope corrected.** The strong case:
+### P1 — The Action cannot write on fork PRs *(most damaging)*
+
+For `pull_request` events from a forked repo, `GITHUB_TOKEN` is read-only and the
+workflow's `permissions:` block cannot elevate it [Likely — verify with a throwaway
+fork PR before writing code]. The first draft's workflow requested
+`pull-requests: write` on `pull_request`, i.e. exactly the population the project
+exists for.
+
+Resolution: `check_suite: completed` and `schedule` run in the base-repo context with a
+full-permission token [Likely] and become the write triggers. `pull_request` is kept
+for dry-run logging only. Cost: latency goes from seconds to one CI cycle. The
+"minutes not days" claim in the first draft was overstated and has been corrected in
+`00-concept.md`.
+
+### P2 — The differentiation thesis was asserted, not argued
+
+The first draft called the ranked queue "the real product" and "the wedge" with no
+evidence. GitHub search plus labels already delivers a filterable queue [Certain the
+filters exist; Guessing how much perceived value they absorb — plausibly most of it].
+
+Resolution: labels are promoted from a Phase 1 bullet to a Phase 1 headline — cheap,
+reliable, and possibly the majority of the value. The digest drops to Phase 2 and must
+justify itself against "just use a saved search". Competitor research is now Phase 0's
+first task.
+
+### P3 — Dry-run and the noise budget were mutually incompatible
+
+State was to be recovered by parsing JSON out of the sticky comment. Dry-run posts no
+comment, therefore has no prior state, therefore can never exercise the
+"did-the-verdict-change" check [Certain — follows from the two documents]. The
+mechanism protecting against the original complaint was untestable at exactly the
+moment trust is being established.
+
+Resolution: state lives in the Actions cache, with the comment block as a fallback.
+
+### P4 — The comment-embedded state was treated as trusted
+
+Anyone with write access can edit the bot's comment [Certain], and comment bodies cap
+at 65,536 characters [Likely]. The first draft would have `JSON.parse`'d it directly.
+
+Resolution: schema-validate; on any parse or validation failure, treat as "no prior
+state" and proceed.
+
+### P5 — Three heuristics were disguised as facts
+
+`NO_LINKED_ISSUE` (regex over prose), `DUPLICATE_FILES` (a 70% overlap threshold that
+was invented with no basis [Guessing]), and `NEW_DEPENDENCY` (presented as one table
+row; actually means parsing npm/yarn/pnpm/pip/poetry/cargo/go.mod) all sat in the
+"always correct" bucket.
+
+Resolution: Bucket 2 in `00-concept.md` exists specifically to hold them. Warn-only,
+never blocking, thresholds explicitly marked as untuned.
+
+### P6 — Phase 0's success criterion was circular
+
+"Done when the ranked list matches your own judgment" — if it matches, it told you
+nothing you didn't already know [Certain, it's circular].
+
+Resolution: measurable criteria in `04-roadmap.md`.
+
+### P7 — A 30-PR eval set cannot gate a release
+
+At a true 10% false-positive rate, n=30 gives roughly ±11 percentage points [Likely,
+standard binomial interval]. Distinguishing 5% from 15% needs on the order of 200
+labelled PRs.
+
+Resolution: either accept that Phase 3's gate is qualitative and say so, or start
+labelling from Phase 1. This plan does the latter.
+
+### P8 — The config file was 60 keys of commitment before any code
+
+Every key is a maintenance obligation and a compatibility promise.
+
+Resolution: `05-configuration.md` cut to what Phases 0–2 actually consume.
+
+### P9 — "Cheap wins first" ranking was an unbacked assertion
+
+The first draft sorted the digest by ascending reviewer effort. Maintainers may well
+want the *important* PR first, not the cheapest [Guessing — no evidence either way].
+
+Resolution: recorded as an open question; the digest is Phase 2 and can be sorted
+whichever way turns out to be right in practice.
+
+### P10 — `collect` is not cleanly pure
+
+The design says each stage is a pure function of the last, but fetching CI logs for
+*failing* jobs requires knowing which jobs failed — knowledge the gate produces
+[Certain].
+
+Resolution: `collect` over-fetches (check runs first, then logs for non-success
+conclusions) within one stage. Minor, but the "pure pipeline" description was tidier
+than the reality.
+
+### P11 — Two heuristics were disguised as judgment (P5 in reverse)
+
+P5 caught heuristics sitting in the facts bucket. The same error ran the other way:
+`J2 test-presence` and `J3 test-deletion` were specified as model calls, but
+
+- "did any file under a test path change?" is a path glob [Certain]
+- "were lines matching `assert|it\(|test\(|def test_` removed, or `skip`/`xit` added?"
+  is a regex over the diff [Likely to catch the large majority of real cases]
+
+The model version adds a marginal refinement over each and inherits the whole apparatus
+of evidence citation, caching, injection defence, and eval gating.
+
+Resolution: both demoted to Bucket 2, shipped in Phase 2 with no model. Being
+deterministic, they are also safe to put in the contributor-facing comment, which the
+model versions never would have been. Bucket 3 shrinks to J1 and J7.
+
+---
+
+## Is it worth building?
+
+**Yes, with the scope as now written — but the first real deliverable is 30 minutes of
+competitor research, not code.**
+
+The case for:
 
 - The pain is real, recurring, and self-experienced.
-- ~80% of the value (the deterministic gate + sticky comment + ranked queue) needs no
-  AI, which means it can be reliable, cheap, and shippable.
-- Distribution is easy: a GitHub Action other maintainers can adopt in one file.
+- With merging removed and Bucket 3 deferred, roughly all of the near-term value is
+  deterministic, cheap, and reliable.
+- Labels alone are a genuinely useful product that fits in Phase 1.
 
-The honest risks:
+The case against, stated fairly:
 
-- Crowded adjacent market. Survival depends on staying the *queue* tool, not becoming a
-  worse line-comment bot.
-- Mergify, Renovate, stale-bot, and GitHub merge queue each solve a slice already. The
-  wedge is that none of them unify status + conflict + issue-linkage + ranking into one
-  maintainer view.
-- Value is concentrated in high-traffic repos. Small repos won't feel it.
+- Mergify covers a real portion of the conditions-based automation [Likely].
+- GitHub search plus labels may absorb most of the digest's value [Guessing].
+- P1 means the delivery mechanism has an unverified dependency.
+- Value concentrates in high-traffic repos; small repos won't feel it [Likely].
+
+If competitor research shows the three differentiators in `00-concept.md` are already
+covered, the correct decision is to adopt the existing tool and stop.
