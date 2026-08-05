@@ -111,20 +111,56 @@ deferred. Reasons:
 - **Not a linter.** That belongs in CI.
 - **Not an auto-closer.** Closing a contributor's work is a human decision.
 
-## Differentiation — stated honestly
+## Differentiation — tested, not assumed
 
-The earlier draft claimed "existing tools review the diff; this reviews the queue" as a
-clean wedge. That was overstated. Mergify does conditions-based PR automation and
-covers a real portion of this [Likely — verify before building]. GitHub's own search
-(`is:pr is:open status:failure`, label filters) covers more of the "ranked queue" idea
-than the first draft admitted [Certain that the filters exist].
+Competitor research is done: `docs/spikes/competitors.md` (PR-002, 2026-08-05). Of the
+three differentiators the first draft claimed, **one survived cleanly, one narrowed, and
+one died.** What follows is the corrected version.
 
-What is genuinely not covered elsewhere, as far as this plan can tell:
+### 1. Blockage ownership — genuinely uncovered
 
-- Assigning each PR an **owner of the blockage** (contributor vs. maintainer) rather
-  than just a status.
-- Turning a red CI into a **specific, actionable instruction** in the PR thread.
-- Issue-linkage verification.
+Assigning each PR an **owner of the blockage** (contributor vs. maintainer) rather than
+just a status. Mergify labels by *condition* — `needs-rebase` on conflict, a toggled
+label on CI failure — but nothing surveyed answers "whose problem is this?" [Likely —
+absence of evidence across the tools surveyed, not proof of absence].
 
-If those three don't hold up under 30 minutes of competitor research, the project
-should be reconsidered rather than built. That research is Phase 0's first task.
+Included in this: distinguishing `CI_FAILING` from `CI_BROKEN_ON_BASE`. No surveyed tool
+compares a failing check against the base branch before assigning blame. This is the
+sharpest gap and the thing to lead with.
+
+### 2. Actionable CI instructions on GitHub Actions — an implementation gap
+
+Turning a red CI into a specific instruction in the PR thread. **The concept is proven,
+not novel:** `ci-reporter` already finds the failing part of a build and comments back,
+with update-in-place — but it supports TravisCI and CircleCI only, not GitHub Actions
+[Certain — stated in its own docs]. Other options are per-language (pytest plugins) or
+single-purpose marketplace actions.
+
+The claim must name GitHub Actions explicitly, or it is false.
+
+### 3. ~~Issue-linkage verification~~ — dropped
+
+Covered. `nearform/github-action-check-linked-issues`, `Verify Linked Issue`, and others
+enforce this today for free, and handle cross-repo references that this project's planned
+regex would have missed [Certain]. Verifying that a diff *actually addresses* the issue
+is still uncovered, but that is J1 — P3, digest-only, and already gated behind a decision
+that may cancel it.
+
+### 4. The single-bot argument — stronger than any of the above
+
+Not on the original list, and the best of them. Adopting the alternatives means
+installing **four or five separate bots**: Mergify for labels and conflicts, a
+linked-issue action, a CI-comment app, a stale bot, something for duplicates. Each posts
+its own comment.
+
+That recreates the exact problem this project exists to solve — the maintainer goes from
+writing three comments by hand to receiving five bot comments per PR. One bot, one
+comment, one reconciled label set, one noise budget is the wedge, and it is consistent
+with the noise budget in `docs/03-review-pipeline.md`.
+
+### The honest counter-argument
+
+Mergify plus two free marketplace actions delivers conflict labels, CI-failure labels,
+and linked-issue enforcement today for zero engineering — a real fraction of Phases 1–2
+[Likely]. Before committing to the build, install exactly that on a real repo for a week.
+If the queue becomes tractable, the correct decision is to stop.

@@ -16,12 +16,19 @@ Both can invalidate the plan. Doing them after building would be expensive.
    Run a workflow on `pull_request` requesting `pull-requests: write` and attempt a
    comment. Then repeat via `check_suite: completed`. Confirm which can write.
    *If neither can, Surface A is dead and the roadmap restarts at Surface B.*
-2. **Competitor research (30 min).** Mergify, CodeRabbit, GitHub merge queue,
-   stale-bot, Danger. Specifically: does anything already assign a **blockage owner**,
-   turn red CI into **specific instructions**, or verify **issue linkage**? If all
-   three are covered, adopt that tool and stop.
+2. ~~**Competitor research (30 min).**~~ **DONE** — `docs/spikes/competitors.md`
+   (PR-002, 2026-08-05). One differentiator survived cleanly (blockage ownership), one
+   narrowed to a GitHub-Actions implementation gap (actionable CI instructions), one
+   died (issue-linkage verification, covered by free actions). A stronger argument
+   emerged that was not on the original list: the alternative is 4–5 separate bots each
+   posting their own comment, which recreates the problem this project exists to solve.
+   Recommendation was **proceed with the pitch rewritten**.
+3. **Cheapest possible premise test (new, from PR-002).** Install Mergify's conflict
+   label and a linked-issue action on the real repo for one week. If that alone makes
+   the queue tractable, PR-003 should be a no-go. An afternoon's work against a
+   two-month build.
 
-**Exit:** written answers to both, committed to this repo.
+**Exit:** written answers to all three, committed to this repo.
 
 ---
 

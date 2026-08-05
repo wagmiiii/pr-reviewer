@@ -50,6 +50,8 @@ around this with `check_suite` and `schedule` triggers — at the cost of latenc
 | [05-configuration.md](docs/05-configuration.md) | Minimal config and adoption workflow |
 | [06-open-questions.md](docs/06-open-questions.md) | Unresolved decisions, with recommendations |
 | [PROJECT-MANAGEMENT.md](docs/PROJECT-MANAGEMENT.md) | Team, process, sprint plan, full backlog — backup of the Notion board |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Branches, commits, PRs, Definition of Done, testing standards per bucket |
+| [spikes/competitors.md](docs/spikes/competitors.md) | PR-002 findings — which differentiators survived contact with the market |
 
 ## Start here
 

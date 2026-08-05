@@ -102,7 +102,7 @@ A plan that cannot be cancelled is not a plan.
 
 | Sprint | Weeks | Goal | Exit criterion | Ademola | Allison | Joint | Total |
 |---|---|---|---|---|---|---|---|
-| Sprint 0 | 1 | Validation + scaffold | Go/no-go answered in writing | 8 | 3 | 4 | 15 |
+| Sprint 0 | 1 | Validation + scaffold | Go/no-go answered in writing | 8 | 5 | 4 | 17 |
 | Sprint 1 | 2 | Context type, collectors, fact rules | Rules run green against fixtures | 18 | 18 | — | 36 |
 | Sprint 2 | 2 | Phase 0 CLI | Scan beats a timed manual pass | 11 | 13 | 3 | 27 |
 | Sprint 3 | 2 | Action delivery + labels | Labels live on a real repo | 13 | 10 | 2 | 25 |
@@ -127,8 +127,9 @@ Status of every ticket at time of writing: `Ready` for PR-001, PR-002, PR-010;
 | Ref | Task | Owner | Pri | Pts | Type | Blocked by |
 |---|---|---|---|---|---|---|
 | PR-001 | Spike: can the Action write on fork PRs? | Ademola | P0 | 3 | Spike | — |
-| PR-002 | Competitor research: does this already exist? | Allison | P0 | 2 | Spike | — |
-| PR-003 | Decision: go / no-go / pivot | Joint | P0 | 1 | Decision | PR-001, PR-002 |
+| PR-002 | Competitor research: does this already exist? — **findings in `docs/spikes/competitors.md`** | Allison | P0 | 2 | Spike | — |
+| PR-004 | Premise test: install Mergify + linked-issue action for a week | Allison | P0 | 2 | Spike | PR-002 |
+| PR-003 | Decision: go / no-go / pivot | Joint | P0 | 1 | Decision | PR-001, PR-002, PR-004 |
 | PR-010 | Repo scaffold: TypeScript, Node 24, tooling | Ademola | P0 | 3 | Chore | — |
 | PR-011 | Define the `PullRequestContext` type | Joint | P0 | 3 | Feature | PR-010 |
 | PR-013 | CI for this repo: lint, typecheck, test | Ademola | P1 | 2 | Chore | PR-010 |
@@ -191,7 +192,7 @@ Status of every ticket at time of writing: `Ready` for PR-001, PR-002, PR-010;
 
 | Ref | Task | Owner | Pri | Pts | Type | Blocked by |
 |---|---|---|---|---|---|---|
-| PR-082 | Issue-linkage heuristics | Allison | P2 | 3 | Feature | PR-025, PR-080 |
+| PR-082 | Issue-linkage heuristics — **demoted, see note** | Allison | P3 | 3 | Feature | PR-025, PR-080 |
 | PR-083 | Duplicate-PR detection and threshold tuning | Ademola | P2 | 5 | Feature | PR-080 |
 | PR-084 | `NEW_DEPENDENCY` detection (npm only) | Ademola | P2 | 3 | Feature | PR-080 |
 | PR-085 | `POSSIBLE_SECRET` detection | Ademola | P3 | 3 | Feature | PR-080 |
@@ -206,6 +207,15 @@ Status of every ticket at time of writing: `Ready` for PR-001, PR-002, PR-010;
 | PR-103 | J7 reviewer effort estimate | Allison | P3 | 3 | Feature | PR-101 |
 | PR-104 | Shadow mode and the agreement log | Allison | P3 | 3 | Feature | PR-102 |
 | PR-105 | Adversarial prompt-injection fixture | Ademola | P3 | 2 | Test | PR-102 |
+
+### Backlog changes
+
+Recorded so the reasoning survives, rather than silently editing rows.
+
+| Date | Change | Why |
+|---|---|---|
+| 2026-08-05 | **PR-082 demoted P2 → P3** | PR-002 found `nearform/github-action-check-linked-issues` does this better than our planned regex, including cross-repo references. Either adopt their matching logic or reduce PR-082 to "recommend their action" inside PR-094. |
+| 2026-08-05 | **PR-004 added, P0, Sprint 0** | PR-002 surfaced a cheaper test of the premise than anything else on the board: install the existing tools for a week first. Now blocks PR-003. |
 
 ---
 
