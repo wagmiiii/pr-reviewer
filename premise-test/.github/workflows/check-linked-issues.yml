@@ -1,0 +1,46 @@
+# PR-004 premise test — linked-issue enforcement
+#
+# Drop this at `.github/workflows/check-linked-issues.yml` in the target repo.
+#
+# Uses nearform-actions/github-action-check-linked-issues, which PR-002 found
+# does this better than our own planned regex — it handles cross-repo references
+# (`org/repo#123`, full issue URLs) that a naive `#\d+` match would miss.
+# See docs/spikes/competitors.md § Q3.
+
+name: Check linked issues
+
+# ---------------------------------------------------------------------------
+# WHY pull_request_target AND NOT pull_request
+#
+# This is direct third-party confirmation of the PR-001 hypothesis: on a
+# `pull_request` event from a FORK, GITHUB_TOKEN is read-only and the
+# permissions block cannot raise it, so the action could not post its comment.
+# nearform reach for `pull_request_target` for exactly that reason.
+#
+# It is safe HERE only because there is no `actions/checkout` step below.
+# `pull_request_target` runs in the base-repo context with a writable token;
+# combining it with a checkout of the PR head is the classic exploit, and it is
+# why pr-reviewer itself refuses this trigger (docs/02-architecture.md).
+#
+# Do not add a checkout step to this file.
+# ---------------------------------------------------------------------------
+on:
+  pull_request_target:
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  pull-requests: write
+  issues: read
+
+jobs:
+  check-linked-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: nearform-actions/github-action-check-linked-issues@v1
+        id: check-linked-issues
+        with:
+          exclude-branches: "release/**, dependabot/**"
+          # Comment rather than fail the check for the duration of the test.
+          # Failing it would change contributor behaviour and contaminate the
+          # measurement we are trying to take.
+          comment: true

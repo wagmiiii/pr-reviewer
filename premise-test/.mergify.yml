@@ -1,0 +1,83 @@
+# PR-004 premise test — Mergify configuration
+#
+# Drop this at the ROOT of the target repo as `.mergify.yml`.
+# Requires the Mergify GitHub App to be installed on the org first
+# (https://dashboard.mergify.com) — that is an OAuth step a human must do.
+#
+# Purpose: reproduce the cheap version of what pr-reviewer would do, so we can
+# find out whether the existing tools already make the queue tractable. If they
+# do, PR-003 should be a no-go.
+#
+# Every rule below uses `toggle`, which adds the label when conditions match and
+# removes it when they stop matching. Do NOT split these into add/remove rule
+# pairs — Mergify's own docs warn that two rules flipping the same label will
+# toggle indefinitely.
+
+pull_request_rules:
+  # ---------------------------------------------------------------------------
+  # 1. Conflict labelling — the closest existing analogue to MERGE_CONFLICT
+  # ---------------------------------------------------------------------------
+  - name: Label conflicting pull requests
+    conditions:
+      - conflict
+    actions:
+      label:
+        toggle:
+          - needs-rebase
+
+  # ---------------------------------------------------------------------------
+  # 2. Failing CI labelling — the closest existing analogue to CI_FAILING
+  #
+  # NOTE FOR THE TEST: this fires on ANY failing check. It does not know whether
+  # the same check is also failing on `main`. Watch specifically for PRs where
+  # this label blames a contributor for a broken base branch — that gap is
+  # differentiator #1 in docs/00-concept.md, and this is where we find out
+  # whether it matters in practice or is a theoretical concern.
+  # ---------------------------------------------------------------------------
+  - name: Label pull requests with failing CI
+    conditions:
+      - "#check-failure>0"
+    actions:
+      label:
+        toggle:
+          - needs-ci-fix
+
+  # ---------------------------------------------------------------------------
+  # 3. Ready-for-review labelling — the closest existing analogue to
+  #    READY_FOR_REVIEW. Note how much has to be spelled out by hand here, and
+  #    that it still cannot express "blocked on maintainer".
+  # ---------------------------------------------------------------------------
+  - name: Label pull requests that look reviewable
+    conditions:
+      - -conflict
+      - -draft
+      - "#check-failure=0"
+      - "#check-pending=0"
+      - "#changes-requested-reviews-by=0"
+    actions:
+      label:
+        toggle:
+          - ready-for-review
+
+  # ---------------------------------------------------------------------------
+  # 4. Conflict comment
+  #
+  # DELIBERATELY INCLUDED. This is the noise measurement. Count how many bot
+  # comments a single PR accumulates once this, the linked-issue action, and
+  # Dependabot are all running. If it is already more than one, the multi-bot
+  # noise problem in docs/00-concept.md is confirmed live rather than argued.
+  # ---------------------------------------------------------------------------
+  - name: Comment when a pull request goes into conflict
+    conditions:
+      - conflict
+    actions:
+      comment:
+        message: |
+          Hi @{{author}} — this pull request now has conflicts with `{{base}}`.
+
+          The easiest fix is the **Update branch** button on this page. If that
+          is not available, `gh pr checkout {{number}}` then merge or rebase
+          `{{base}}` into your branch.
+
+          Once the conflicts are resolved this comment's label will clear
+          automatically.
