@@ -94,6 +94,8 @@ export interface CheckRun {
   readonly isRequired?: boolean;
   /** Workflow run this check belongs to, for fetching logs later (PR-024). */
   readonly workflowRunId?: string;
+  /** Excerpt of the failing job log (PR-024). */
+  readonly failureExcerpt?: string;
 }
 
 /** A review left on the PR. */
