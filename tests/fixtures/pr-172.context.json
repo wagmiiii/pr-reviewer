@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:14:21Z",
+  "number": 172,
+  "author": "wagmiiii",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-24T21:53:27Z",
+  "updatedAt": "2026-07-24T22:01:02Z",
+  "closedAt": "2026-07-24T22:01:02Z",
+  "mergedAt": "2026-07-24T22:01:02Z",
+  "baseBranch": "main",
+  "headBranch": "optimize-ci",
+  "baseSha": "7e842c78e19468c446a38c936c172e2e463e8a6b",
+  "headSha": "b1f0c986d23eb856267c20cb610d48963f57f589",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 4,
+  "deletions": 0,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "4a342c4002160c9b3f058b5b2e12b3ff70fbd111",
+      "message": "ci: optimize workflow with rust-cache",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T21:52:45Z"
+    },
+    {
+      "sha": "b1f0c986d23eb856267c20cb610d48963f57f589",
+      "message": "Merge branch 'main' into optimize-ci",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T21:54:20Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30129285698"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30129285698"
+    },
+    {
+      "name": "lint-matrix (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30129285698"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30129285698"
+    },
+    {
+      "name": "Code Quality (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30129285698"
+    },
+    {
+      "name": ".github/dependabot.yml",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30118922818"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30118922818"
+    },
+    {
+      "name": "lint-matrix (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30118922818"
+    },
+    {
+      "name": "Code Quality (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30118922818"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30118922818"
+    }
+  ]
+}

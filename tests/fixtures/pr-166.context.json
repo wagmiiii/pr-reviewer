@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:14:11Z",
+  "number": 166,
+  "author": "lekanay2005-coder",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-24T14:14:13Z",
+  "updatedAt": "2026-07-24T14:32:13Z",
+  "closedAt": "2026-07-24T14:32:13Z",
+  "mergedAt": "2026-07-24T14:32:13Z",
+  "baseBranch": "main",
+  "headBranch": "work-flow",
+  "baseSha": "557b21319ea7aad7045f67dc3831cbc28932dedd",
+  "headSha": "c1b607496db5434ce103c13693b69f7b8d9854f2",
+  "isFork": true,
+  "headRepo": "lekanay2005-coder/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 52,
+  "deletions": 0,
+  "changedFiles": 2,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "2ecf8afab75bd02ee2edc58ea2c4cd89bfeea0fe",
+      "message": "refactor: extract AST matching into reusable query functions (Closes #66)",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T14:09:42Z"
+    },
+    {
+      "sha": "c1b607496db5434ce103c13693b69f7b8d9854f2",
+      "message": "Merge branch 'main' into work-flow",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T14:15:34Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 51,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/Cargo.toml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30100263870"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30100263870"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30100263870"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "Dependabot",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30096875291"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30096786561"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30096786561"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30096786561"
+    }
+  ]
+}

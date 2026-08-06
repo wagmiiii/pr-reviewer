@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:12Z",
+  "number": 236,
+  "author": "adelekevictor12",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-25T23:53:42Z",
+  "updatedAt": "2026-07-27T13:47:59Z",
+  "closedAt": "2026-07-27T13:47:59Z",
+  "mergedAt": "2026-07-27T13:47:59Z",
+  "baseBranch": "main",
+  "headBranch": "feat/lint-loop-invariant-storage-access",
+  "baseSha": "d45b6bee6b7a51a92aa9ec3e0504624038edf467",
+  "headSha": "dced5d35324cebd1195b74da3292fb00a86c7817",
+  "isFork": true,
+  "headRepo": "adelekevictor12/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 392,
+  "deletions": 0,
+  "changedFiles": 5,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "d2bb4967f7461205fffc5c32e901df3fd8ee286b",
+      "message": "feat: add loop_invariant_storage_access lint for provably hoistable storage in loops",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T23:49:24Z"
+    },
+    {
+      "sha": "a357338aac454dcb20d0d2394180b936b7704f86",
+      "message": "fix: rebless .stderr after rebasing onto upstream/main for CI",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T00:06:09Z"
+    },
+    {
+      "sha": "23f0e18e2029507a866056360838c7e4f239f09b",
+      "message": "Merge branch 'main' into feat/lint-loop-invariant-storage-access",
+      "isVerified": true,
+      "authoredAt": "2026-07-26T17:11:29Z"
+    },
+    {
+      "sha": "dced5d35324cebd1195b74da3292fb00a86c7817",
+      "message": "Merge branch 'main' into feat/lint-loop-invariant-storage-access",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T12:43:28Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/SUMMARY.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/lints/loop_invariant_storage_access.md",
+      "status": "added",
+      "additions": 104,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 47,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 65,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 175,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5081102226,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@adelekevictor12 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-25T23:53:50Z",
+      "updatedAt": "2026-07-25T23:53:50Z"
+    },
+    {
+      "id": 5090164947,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "fix your cl and resolve conflict",
+      "createdAt": "2026-07-27T10:23:52Z",
+      "updatedAt": "2026-07-27T10:23:52Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30267098631"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30271969813"
+    }
+  ]
+}

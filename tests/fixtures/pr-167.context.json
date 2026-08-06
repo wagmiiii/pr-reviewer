@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:14:21Z",
+  "number": 167,
+  "author": "CHASE3020",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-24T14:19:55Z",
+  "updatedAt": "2026-07-24T15:14:08Z",
+  "closedAt": "2026-07-24T15:14:07Z",
+  "mergedAt": "2026-07-24T15:14:07Z",
+  "baseBranch": "main",
+  "headBranch": "chore/setup-nightly-toolchain-matrix-in-ci",
+  "baseSha": "0ebbe612086424277d72132d80f3ccec54ab2111",
+  "headSha": "fbd0aa8252e7150e724bdc6f53e288c361331c87",
+  "isFork": true,
+  "headRepo": "CHASE3020/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 28,
+  "deletions": 8,
+  "changedFiles": 1,
+  "reviews": [
+    {
+      "author": "wagmiiii",
+      "state": "APPROVED",
+      "submittedAt": "2026-07-24T15:00:52Z"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "f68d0abce1060ff94e983ef4baf6fec71c1d487b",
+      "message": "chore: setup nightly toolchain matrix in CI\n\nCloses #73",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T14:20:15Z"
+    },
+    {
+      "sha": "d264b455229bb891a6bcb60e5768776de6f45276",
+      "message": "Merge branch 'main' into chore/setup-nightly-toolchain-matrix-in-ci",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T14:40:25Z"
+    },
+    {
+      "sha": "8b58c6d3340ae26926dd897182fa1950d6b554f9",
+      "message": "fix: override repo rust-toolchain with matrix toolchain in CI",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T14:47:40Z"
+    },
+    {
+      "sha": "03769e651ecbceb1caffd8b605320992ac2c91d2",
+      "message": "fix: remove rolling nightly from matrix to prevent AST breakage in CI",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T14:55:16Z"
+    },
+    {
+      "sha": "fbd0aa8252e7150e724bdc6f53e288c361331c87",
+      "message": "fix: add dummy aggregator jobs to satisfy branch protection rules",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T15:02:43Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 28,
+      "deletions": 8
+    }
+  ],
+  "comments": [
+    {
+      "id": 5070866092,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@CHASE3020 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-24T14:20:02Z",
+      "updatedAt": "2026-07-24T14:20:02Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30103506481"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30103506481"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30103506481"
+    },
+    {
+      "name": "lint-matrix (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30103506481"
+    },
+    {
+      "name": "Code Quality (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30103506481"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "Dependabot",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30102069033"
+    },
+    {
+      "name": "Code Quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30101976000"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30101976000"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30101976000"
+    }
+  ]
+}

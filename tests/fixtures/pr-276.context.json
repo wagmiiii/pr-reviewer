@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:16:22Z",
+  "number": 276,
+  "author": "Cerome360",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-27T08:51:45Z",
+  "updatedAt": "2026-07-29T20:41:34Z",
+  "closedAt": "2026-07-29T20:41:34Z",
+  "mergedAt": "2026-07-29T20:41:34Z",
+  "baseBranch": "main",
+  "headBranch": "fix/redundant-env-clone-ufcs",
+  "baseSha": "9092d4e38fdc2598bf86275261bc720bbe601277",
+  "headSha": "9406ce781bce14347d96d9ea83bac1acd94bd00b",
+  "isFork": true,
+  "headRepo": "Cerome360/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 43,
+  "deletions": 19,
+  "changedFiles": 3,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "c8ce2223e0117f7f14d7fae35666aebaf885a381",
+      "message": "fix: redundant_env_clone lint misses UFCS-style Env::clone(&env) calls",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T08:43:50Z"
+    },
+    {
+      "sha": "4fb24ac643244c9a1d38d33a849379d7ad0446e9",
+      "message": "Merge branch 'main' into fix/redundant-env-clone-ufcs",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T09:49:41Z"
+    },
+    {
+      "sha": "9406ce781bce14347d96d9ea83bac1acd94bd00b",
+      "message": "Merge branch 'main' into fix/redundant-env-clone-ufcs",
+      "isVerified": true,
+      "authoredAt": "2026-07-29T20:35:24Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 19,
+      "deletions": 19
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 8,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 16,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5089251608,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@Cerome360 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-27T08:51:53Z",
+      "updatedAt": "2026-07-27T08:51:53Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30489049830"
+    },
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30489049830"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30489049626"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30448442379"
+    },
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30448442379"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30448442385"
+    }
+  ]
+}

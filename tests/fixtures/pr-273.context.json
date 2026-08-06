@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:16:23Z",
+  "number": 273,
+  "author": "jerryjuche",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T18:23:53Z",
+  "updatedAt": "2026-07-27T12:15:49Z",
+  "closedAt": "2026-07-27T12:15:48Z",
+  "mergedAt": "2026-07-27T12:15:48Z",
+  "baseBranch": "main",
+  "headBranch": "test/task-18",
+  "baseSha": "4053c206796b5054d607e29219ac5cfe7f302547",
+  "headSha": "5d438dae8afe5555832936355cd5917a9013fcc8",
+  "isFork": true,
+  "headRepo": "jerryjuche/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 241,
+  "deletions": 0,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "5d438dae8afe5555832936355cd5917a9013fcc8",
+      "message": "docs: add Phase 1 reconnaissance analysis for edge case testing\n\n- Analyze current lint structure and test patterns\n- Identify placeholder text in issue description (src/module_18.rs)\n- Document all 9 implemented lints and their edge case categories\n- Highlight critical clarifications needed before implementation\n- Provide testing patterns and code quality standards reference\n- List recommended next steps and blocking questions\n\nThis document clarifies that the original issue requires stakeholder\ninput to determine which lints need edge case testing and what\nspecific boundary conditions should be targeted.\n\nContributes to: Closes #18",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T18:16:39Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "PHASE_1_RECONNAISSANCE_ANALYSIS.md",
+      "status": "added",
+      "additions": 241,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5089690644,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "fix your cl\r\n",
+      "createdAt": "2026-07-27T09:33:54Z",
+      "updatedAt": "2026-07-27T09:33:54Z"
+    },
+    {
+      "id": 5089729859,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "fix your check",
+      "createdAt": "2026-07-27T09:38:02Z",
+      "updatedAt": "2026-07-27T09:38:02Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30214628491"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30265193450"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:17:22Z",
+  "number": 290,
+  "author": "HassanKorey",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-27T14:05:40Z",
+  "updatedAt": "2026-07-28T13:17:31Z",
+  "closedAt": "2026-07-28T13:17:31Z",
+  "mergedAt": "2026-07-28T13:17:31Z",
+  "baseBranch": "main",
+  "headBranch": "docs/verify-map-insert-in-loop-coverage",
+  "baseSha": "bc620c89751118324335e02a7ec70378d742728d",
+  "headSha": "c0b86fe69078007ed839002c16068d4e0b9f98a2",
+  "isFork": true,
+  "headRepo": "HassanKorey/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 16,
+  "deletions": 1,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "c0b86fe69078007ed839002c16068d4e0b9f98a2",
+      "message": "docs: clarify map_insert_in_loop closure-loop coverage (#50)\n\nDocument that MapInsertInLoop uses the syntactic-only enclosing_loop\nhelper and does not flag Map::insert calls inside multi-call iterator\nclosures (e.g. .for_each), unlike UnnecessaryHostFunctionCall which\nuses the closure-aware enclosing_loop_or_closure helper. No behavior\nchange; this records current, verified coverage for issue #50.",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T14:05:13Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/lints/map_insert_in_loop.md",
+      "status": "modified",
+      "additions": 16,
+      "deletions": 1
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30273400022"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30362771255"
+    }
+  ]
+}

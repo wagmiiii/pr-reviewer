@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:12:52Z",
+  "number": 337,
+  "author": "wagmiiii",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-08-04T11:25:29Z",
+  "updatedAt": "2026-08-04T11:31:40Z",
+  "closedAt": "2026-08-04T11:31:40Z",
+  "mergedAt": "2026-08-04T11:31:40Z",
+  "baseBranch": "main",
+  "headBranch": "chore/remove-clutter",
+  "baseSha": "6b53135fbabc2a42b348e25fcb528d247329ab12",
+  "headSha": "9f91a2b67fd72d857e7b132dcc33c6943fe85cb1",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 0,
+  "deletions": 473,
+  "changedFiles": 3,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "9f91a2b67fd72d857e7b132dcc33c6943fe85cb1",
+      "message": "chore: remove administrative and temporary clutter",
+      "isVerified": false,
+      "authoredAt": "2026-08-04T11:24:15Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "PHASE_1_ANALYSIS_TASK_27.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 214
+    },
+    {
+      "filename": "PHASE_1_RECONNAISSANCE_ANALYSIS.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 241
+    },
+    {
+      "filename": "opencode.json",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 18
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30904752917"
+    },
+    {
+      "name": "test (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30904752917"
+    },
+    {
+      "name": "test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30904752917"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30904752830"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30904387018"
+    },
+    {
+      "name": "test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30904387018"
+    },
+    {
+      "name": "test (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30904387018"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30904386966"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:17:47Z",
+  "number": 300,
+  "author": "odusanya03",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-27T15:52:00Z",
+  "updatedAt": "2026-07-28T13:16:24Z",
+  "closedAt": "2026-07-28T13:16:23Z",
+  "mergedAt": "2026-07-28T13:16:23Z",
+  "baseBranch": "main",
+  "headBranch": "add-lint-for-blind-storage-writes-without-reads",
+  "baseSha": "b98e614949559f5a0255366864b2f0a74adda80a",
+  "headSha": "4aee81440da632456d36626a3228d30aab4653c3",
+  "isFork": true,
+  "headRepo": "odusanya03/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 84,
+  "deletions": 1,
+  "changedFiles": 3,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "f864f53b354a2adf5eee7b244f06b849c2b56005",
+      "message": "feat: add blind_storage_write lint\n\nDetect Soroban storage .set() calls that have no preceding read\n(.get()/.try_get()/.has()/.remove()/.update()) on the same key in\nthe same function. This catches silent overwrites and accidental\nkey collisions before they reach the network.\n\n- New lint BlindStorageWrite (StorageOperations category) implemented\n  via a HIR-level visitor that walks each function body linearly and\n  records (bucket, key) pairs observed on read-like interactions.\n- UI fixtures cover bad (blind write on Instance/Persistent/Temporary\n  and a bad cross-bucket case) and good (after get/has/try_get/remove/\n  update) variants, plus an #[allow]-suppressed case.\n- Real-SDK fixtures under test_fixtures/real_sdk/src/lib.rs add\n  integration coverage.\n- New docs page docs/lints/blind_storage_write.md and CHANGELOG entry\n  under Unreleased. README, SUMMARY.md, and lints index updated.\n\nCloses #52",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T15:50:54Z"
+    },
+    {
+      "sha": "4aee81440da632456d36626a3228d30aab4653c3",
+      "message": "Merge branch 'main' into add-lint-for-blind-storage-writes-without-reads",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T15:54:49Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/lints/blind_storage_write.md",
+      "status": "added",
+      "additions": 82,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "comments": [],
+  "checks": [],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30362712055"
+    }
+  ]
+}

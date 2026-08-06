@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:13:43Z",
+  "number": 148,
+  "author": "larryjay007",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-23T16:06:14Z",
+  "updatedAt": "2026-07-24T09:51:47Z",
+  "closedAt": "2026-07-24T09:51:47Z",
+  "mergedAt": "2026-07-24T09:51:46Z",
+  "baseBranch": "main",
+  "headBranch": "docs/add-changelog",
+  "baseSha": "28a6c81f075ad372c2ce269c3ba829052c4be166",
+  "headSha": "30779e7e1f6a0390b75175dea894a989c22807b2",
+  "isFork": true,
+  "headRepo": "larryjay007/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 63,
+  "deletions": 1,
+  "changedFiles": 4,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "e61a3e0a4e86413544f868735276c7c183e982a9",
+      "message": "chore: add Dependabot configuration for Cargo and GitHub Actions",
+      "isVerified": false,
+      "authoredAt": "2026-07-23T15:11:36Z"
+    },
+    {
+      "sha": "30779e7e1f6a0390b75175dea894a989c22807b2",
+      "message": "docs: add changelog and reconcile README version",
+      "isVerified": false,
+      "authoredAt": "2026-07-23T15:57:03Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/dependabot.yml",
+      "status": "added",
+      "additions": 39,
+      "deletions": 0
+    },
+    {
+      "filename": "CHANGELOG.md",
+      "status": "added",
+      "additions": 22,
+      "deletions": 0
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    }
+  ],
+  "comments": [
+    {
+      "id": 5060650911,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@larryjay007 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-23T16:06:26Z",
+      "updatedAt": "2026-07-23T16:06:26Z"
+    },
+    {
+      "id": 5060654930,
+      "author": "larryjay007",
+      "authorAssociation": "CONTRIBUTOR",
+      "body": "Hi @mallison031 , please review.",
+      "createdAt": "2026-07-23T16:06:49Z",
+      "updatedAt": "2026-07-23T16:06:49Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30023621899"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30023621899"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30084102958"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30084102958"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30084102958"
+    }
+  ]
+}

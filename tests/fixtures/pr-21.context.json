@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:13:24Z",
+  "number": 21,
+  "author": "mallison031",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-08T13:15:40Z",
+  "updatedAt": "2026-07-08T13:20:41Z",
+  "closedAt": "2026-07-08T13:20:41Z",
+  "mergedAt": "2026-07-08T13:20:41Z",
+  "baseBranch": "main",
+  "headBranch": "ci/code-quality-checks",
+  "baseSha": "ce47a83548b6ff5e83c1c8a2989c1f05d327674f",
+  "headSha": "6339f6c10fe5f5460f5e86dcffd98f59021e664b",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 98,
+  "deletions": 61,
+  "changedFiles": 4,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "97a1abd4d44e4e96605f094ef092cbe6f62a9a4a",
+      "message": "style: apply rustfmt across the workspace",
+      "isVerified": false,
+      "authoredAt": "2026-07-08T13:10:26Z"
+    },
+    {
+      "sha": "901b24eceb1c4ccaa318e196e2c092debe43ee33",
+      "message": "refactor(lints): collapse nested if-lets in soroban_storage_in_loop",
+      "isVerified": false,
+      "authoredAt": "2026-07-08T13:11:34Z"
+    },
+    {
+      "sha": "bac9c05ef1fefdb5fa8b10d2a970a3e2cd3a0fe3",
+      "message": "refactor(lints): collapse nested if-lets in redundant_env_clone",
+      "isVerified": false,
+      "authoredAt": "2026-07-08T13:12:19Z"
+    },
+    {
+      "sha": "4f73cdcc4a46a9e3df56b952d93b76420076eda5",
+      "message": "refactor(lints): collapse nested if-lets in unnecessary_host_function_call",
+      "isVerified": false,
+      "authoredAt": "2026-07-08T13:12:55Z"
+    },
+    {
+      "sha": "cf55dcddc155544bd0957517e04d6fbe9ddbcdd0",
+      "message": "ci: add fmt and clippy quality job to lint workflow",
+      "isVerified": false,
+      "authoredAt": "2026-07-08T13:13:05Z"
+    },
+    {
+      "sha": "6339f6c10fe5f5460f5e86dcffd98f59021e664b",
+      "message": "docs(contributing): add code quality standards section",
+      "isVerified": false,
+      "authoredAt": "2026-07-08T13:13:05Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 14,
+      "deletions": 0
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 20,
+      "deletions": 2
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 8,
+      "deletions": 3
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 56,
+      "deletions": 56
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28945541003"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28945541003"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28868851191"
+    }
+  ]
+}

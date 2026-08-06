@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:14:21Z",
+  "number": 171,
+  "author": "Adediwura-dev",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-24T15:53:46Z",
+  "updatedAt": "2026-07-24T18:57:21Z",
+  "closedAt": "2026-07-24T18:57:13Z",
+  "mergedAt": "2026-07-24T18:57:13Z",
+  "baseBranch": "main",
+  "headBranch": "docs/cargo-cost-lint-examples",
+  "baseSha": "82989afb445711e1e61fb5cdbce9c31eeaa2e466",
+  "headSha": "a776a274a937a410616347906dced2b61b953d4d",
+  "isFork": true,
+  "headRepo": "Adediwura-dev/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 122,
+  "deletions": 5,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "7e9cdc33b4e28bbacb5d3852e55cc1e9141de791",
+      "message": "docs: add usage examples to cargo-cost-lint README\n\nAdds quick-start commands, detailed usage examples for all three lints\n(storage in loop, redundant env clone, unnecessary host function call),\nand linter output examples showing how to interpret and fix warnings.\n\nCloses #36",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T15:53:06Z"
+    },
+    {
+      "sha": "a776a274a937a410616347906dced2b61b953d4d",
+      "message": "Merge branch 'main' into docs/cargo-cost-lint-examples",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T15:55:56Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 122,
+      "deletions": 5
+    }
+  ],
+  "comments": [
+    {
+      "id": 5071770096,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@Adediwura-dev Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-24T15:53:54Z",
+      "updatedAt": "2026-07-24T15:53:54Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30107384696"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30107384696"
+    },
+    {
+      "name": "Code Quality (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30107384696"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30107384696"
+    },
+    {
+      "name": "lint-matrix (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30107384696"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30107199450"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30107199450"
+    },
+    {
+      "name": "Dependabot",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30107289536"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30107199450"
+    },
+    {
+      "name": "Code Quality (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30107199450"
+    },
+    {
+      "name": "lint-matrix (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30107199450"
+    }
+  ]
+}

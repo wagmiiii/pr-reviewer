@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:16:08Z",
+  "number": 271,
+  "author": "0dillon",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T16:44:13Z",
+  "updatedAt": "2026-07-28T13:19:28Z",
+  "closedAt": "2026-07-28T13:19:28Z",
+  "mergedAt": "2026-07-28T13:19:28Z",
+  "baseBranch": "main",
+  "headBranch": "chore/pin-github-actions",
+  "baseSha": "c1859cacfdca51bb31a99634adde88369fe05aa7",
+  "headSha": "3a47055ed34afa8b8ee399e34ec355c9ce243d6c",
+  "isFork": true,
+  "headRepo": "0dillon/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 5,
+  "deletions": 5,
+  "changedFiles": 3,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "f648dba30c58903f3f7b2efd14a5df91e1b97d77",
+      "message": "chore: pin GitHub Actions used by lint.yml to specific commit SHAs",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T16:35:05Z"
+    },
+    {
+      "sha": "ccf65145596b61dd2b3c8831b5c0549645a6b399",
+      "message": "Merge branch 'main' into chore/pin-github-actions",
+      "isVerified": true,
+      "authoredAt": "2026-07-26T16:44:33Z"
+    },
+    {
+      "sha": "0de819ff7683d5da99ccff10d883a8b5152e0b96",
+      "message": "style: run cargo fmt",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T16:50:03Z"
+    },
+    {
+      "sha": "f1be6779e3cc54ec0a3ec7df59af9fc6c6dead51",
+      "message": "fix: resolve compile errors in integration tests and SARIF generation",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T18:15:57Z"
+    },
+    {
+      "sha": "3a47055ed34afa8b8ee399e34ec355c9ce243d6c",
+      "message": "Merge branch 'main' into chore/pin-github-actions",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T10:58:42Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 2
+    },
+    {
+      "filename": "templates/github-action.yml",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 5084420466,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@0dillon Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-26T16:44:22Z",
+      "updatedAt": "2026-07-26T16:44:22Z"
+    },
+    {
+      "id": 5089748777,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "fix your cl",
+      "createdAt": "2026-07-27T09:39:45Z",
+      "updatedAt": "2026-07-27T09:39:45Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30260142829"
+    }
+  ],
+  "baseChecks": []
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:12Z",
+  "number": 231,
+  "author": "Olasunkanmi975",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-25T22:35:34Z",
+  "updatedAt": "2026-07-26T06:32:35Z",
+  "closedAt": "2026-07-26T06:32:35Z",
+  "mergedAt": "2026-07-26T06:32:35Z",
+  "baseBranch": "main",
+  "headBranch": "fix/redundant-env-clone-false-positives",
+  "baseSha": "f21a1b0f742cb20fa00b12b09fd33064eebe138c",
+  "headSha": "b338c33305b37b0d43cf53b1816fd1e02beef617",
+  "isFork": true,
+  "headRepo": "Olasunkanmi975/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 209,
+  "deletions": 0,
+  "changedFiles": 5,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "19c1cd41a1970e8b3cdec188f2a37510a6b36dcd",
+      "message": "docs: add guide on handling false positives\n\n- Create docs/false_positives.md covering:\n  - Definition and known false positive patterns per lint\n  - Three suppression methods: #[allow], .lintignore, budget.toml\n  - How to evaluate and report false positives\n  - Verification of suppression in tests\n- Update docs/SUMMARY.md with new guide entry\n- Update README.md suppression section to reference the guide\n- Add batch_write_different_keys test fixture demonstrating\n  realistic false-positive suppression scenario",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T21:49:46Z"
+    },
+    {
+      "sha": "93cefff1f60ebfeae97de3922562c196cbee05cc",
+      "message": "fix: update stderr line numbers after adding batch_write_different_keys test fixture",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T22:02:08Z"
+    },
+    {
+      "sha": "91a2c5247ac9d33d438490e3e9d92eb981d781da",
+      "message": "fix(redundant_env_clone): skip lint when clone is needed for compilation\n\nAdd two guards to RedundantEnvClone::check_expr:\n- Skip if the receiver has reference layers (&Env, &mut Env) — clone\n  produces an owned Env from a borrow.\n- Skip if the original Env binding is used again after the clone — both\n  original and clone are live.\n\nWhen the receiver isn't a simple local binding (e.g. field access),\nthe lint conservatively skips.\n\nUpdate UI test fixtures and stderr to cover the new non-flagged cases.\nDocument known false positives in the lint reference page.",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T22:32:16Z"
+    },
+    {
+      "sha": "f17d6f0837475699469bfd18cdcd417f74776d28",
+      "message": "fix: correct stderr whitespace for Symbol::new warning entries\n\nThe UI test framework does exact byte-level comparison. Three lines in\nthe Symbol::new sections had 4-space indent before '|' instead of the\nexpected 3-space indent, causing cargo test to exit 101.",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T22:42:08Z"
+    },
+    {
+      "sha": "b338c33305b37b0d43cf53b1816fd1e02beef617",
+      "message": "Merge branch 'main' into fix/redundant-env-clone-false-positives",
+      "isVerified": true,
+      "authoredAt": "2026-07-26T06:28:32Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/SUMMARY.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/false_positives.md",
+      "status": "added",
+      "additions": 134,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/lints/redundant_env_clone.md",
+      "status": "modified",
+      "additions": 28,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 21,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 25,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5080865518,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@Olasunkanmi975 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-25T22:35:46Z",
+      "updatedAt": "2026-07-25T22:35:46Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30191111100"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30190388994"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-06T07:03:52Z",
+  "number": 315,
+  "author": "Adejumo-2",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-28T08:26:07Z",
+  "updatedAt": "2026-07-28T13:13:14Z",
+  "closedAt": "2026-07-28T13:13:14Z",
+  "mergedAt": "2026-07-28T13:13:14Z",
+  "baseBranch": "main",
+  "headBranch": "ci/cache-and-binstall",
+  "baseSha": "52a5de4847390e9ffb1a42a4925f29c22968bede",
+  "headSha": "41512ff8ac12282e562accb90a6c2aa1d0303a9c",
+  "isFork": true,
+  "headRepo": "Adejumo-2/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 0,
+  "deletions": 0,
+  "changedFiles": 0,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "e2e910caa2e528748e47d7e796232ce17b5b02fd",
+      "message": "ci: install dylint tools as prebuilt binaries via taiki-e/install-action\n\nReplace `cargo install cargo-dylint dylint-link` with `taiki-e/install-action@v2`\nwhich downloads prebuilt binaries instead of compiling from source.\nThis cuts several minutes from CI runtime on each push/PR.\n\nThe Swatinem/rust-cache@v2 step was already present in the workflow.\n\nCloses #13",
+      "isVerified": false,
+      "authoredAt": "2026-07-28T08:25:43Z"
+    },
+    {
+      "sha": "41512ff8ac12282e562accb90a6c2aa1d0303a9c",
+      "message": "Merge branch 'main' into ci/cache-and-binstall",
+      "isVerified": true,
+      "authoredAt": "2026-07-28T08:33:37Z"
+    }
+  ],
+  "files": [],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30342881786"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30362466286"
+    }
+  ]
+}

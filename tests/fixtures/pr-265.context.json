@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:58Z",
+  "number": 265,
+  "author": "ndyugwu",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T13:33:58Z",
+  "updatedAt": "2026-07-26T16:38:40Z",
+  "closedAt": "2026-07-26T16:38:40Z",
+  "mergedAt": "2026-07-26T16:38:40Z",
+  "baseBranch": "main",
+  "headBranch": "driptide/issue-72-1785072835640",
+  "baseSha": "83d31fb7820644fca371d417bd3ca954a21f865c",
+  "headSha": "26927f2cf71f8705180749e8f8b066a304c5cd40",
+  "isFork": true,
+  "headRepo": "ndyugwu/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 81,
+  "deletions": 3,
+  "changedFiles": 2,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "0c5695b2ce69086421ceb09425d4da47e6a4a998",
+      "message": "Fix issue #72: update CONTRIBUTING.md",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T13:33:56Z"
+    },
+    {
+      "sha": "26927f2cf71f8705180749e8f8b066a304c5cd40",
+      "message": "Fix issue #72: update docs/release_process.md",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T13:33:57Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 3
+    },
+    {
+      "filename": "docs/release_process.md",
+      "status": "added",
+      "additions": 72,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5083696123,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@ndyugwu Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-26T13:34:06Z",
+      "updatedAt": "2026-07-26T13:34:06Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30204300565"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30210875702"
+    }
+  ]
+}

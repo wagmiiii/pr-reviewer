@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:14:52Z",
+  "number": 224,
+  "author": "Adejumo-2",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-25T18:29:55Z",
+  "updatedAt": "2026-07-27T12:14:25Z",
+  "closedAt": "2026-07-27T12:14:24Z",
+  "mergedAt": "2026-07-27T12:14:24Z",
+  "baseBranch": "main",
+  "headBranch": "feat/run-summary-line",
+  "baseSha": "aa669eff128e7306476b83805a917dabf9ca124c",
+  "headSha": "f91cedd6d0af029f34cfe991c37184872497d9f3",
+  "isFork": true,
+  "headRepo": "Adejumo-2/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 22,
+  "deletions": 0,
+  "changedFiles": 2,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "727fe934c9255a0d0e0835eeac216d7e6d37fd0f",
+      "message": "feat: print per-lint summary to stderr after run\n\nAdd a per-lint count of findings and a total printed to stderr at\nthe end of each run. The summary is suppressed when there are no\nfindings, keeping clean runs quiet. Exit-code behaviour is unchanged.\n\nCloses #97",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T18:29:27Z"
+    },
+    {
+      "sha": "f91cedd6d0af029f34cfe991c37184872497d9f3",
+      "message": "Merge branch 'main' into feat/run-summary-line",
+      "isVerified": true,
+      "authoredAt": "2026-07-26T17:20:06Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 6,
+      "deletions": 0
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 16,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5079924532,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@Adejumo-2 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-25T18:30:02Z",
+      "updatedAt": "2026-07-25T18:30:02Z"
+    }
+  ],
+  "checks": [],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30264266023"
+    }
+  ]
+}

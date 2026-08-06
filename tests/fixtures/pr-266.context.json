@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:58Z",
+  "number": 266,
+  "author": "ndyugwu",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T13:34:15Z",
+  "updatedAt": "2026-07-27T12:15:30Z",
+  "closedAt": "2026-07-27T12:15:30Z",
+  "mergedAt": "2026-07-27T12:15:30Z",
+  "baseBranch": "main",
+  "headBranch": "driptide/issue-75-1785072853641",
+  "baseSha": "8ede88238aa6b7c47ee38e8c7e3c8f09b1c48e6e",
+  "headSha": "85287fa051344fd8601de0a2c2a391e70d248d1e",
+  "isFork": true,
+  "headRepo": "ndyugwu/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 177,
+  "deletions": 0,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "85287fa051344fd8601de0a2c2a391e70d248d1e",
+      "message": "Fix issue #75: update cargo-cost-lint/benches/linter_performance.rs",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T13:34:14Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/benches/linter_performance.rs",
+      "status": "added",
+      "additions": 177,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5083697424,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@ndyugwu Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-26T13:34:22Z",
+      "updatedAt": "2026-07-26T13:34:22Z"
+    },
+    {
+      "id": 5089890030,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "fix your cl",
+      "createdAt": "2026-07-27T09:54:49Z",
+      "updatedAt": "2026-07-27T09:54:49Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30204311231"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30265171406"
+    }
+  ]
+}

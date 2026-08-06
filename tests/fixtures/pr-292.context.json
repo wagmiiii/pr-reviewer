@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:17:36Z",
+  "number": 292,
+  "author": "khaylebfortune",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-27T14:38:06Z",
+  "updatedAt": "2026-07-27T14:40:51Z",
+  "closedAt": "2026-07-27T14:40:51Z",
+  "mergedAt": "2026-07-27T14:40:51Z",
+  "baseBranch": "main",
+  "headBranch": "feat/shared-budget-toml-schema",
+  "baseSha": "7e6c52d78252216de206ce1356d44405e63a4d2e",
+  "headSha": "aab2ce8298b2f37a1a57fea3dd52db7b55303ce4",
+  "isFork": true,
+  "headRepo": "khaylebfortune/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 30,
+  "deletions": 1,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "c441e61f245c60a1bc1fe53218b814f39137e408",
+      "message": "feat: implement shared budget.toml schema with validation (#102)\n\n- Add LintsConfig struct with #[serde(deny_unknown_fields)] to reject\n  unknown lint names at parse time, while BudgetConfig root leaves\n  foreign top-level sections (network, source, functions.*) untouched\n  for soroban-budget-assert coexistence\n- Extract validate_lint_level() as pure Result-returning function for\n  testability; validate severity as \"allow\"|\"warn\"|\"deny\"\n- Replace silent if-let-Ok config parsing with unwrap_or_else that\n  prints errors and exits\n- Add 8 unit tests: valid lints, foreign section coexistence, unknown\n  lint name rejection, empty/missing lints section, level validation\n- Update test_fixtures/smoke_test/budget.toml to proper [lints] schema\n  with soroban-budget-assert sections (network, source, functions.*)\n- Document the full shared budget.toml schema and section ownership\n  table in docs/integration.md\n\nCloses #102",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T14:36:55Z"
+    },
+    {
+      "sha": "aab2ce8298b2f37a1a57fea3dd52db7b55303ce4",
+      "message": "Merge branch 'main' into feat/shared-budget-toml-schema",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T14:40:39Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 30,
+      "deletions": 1
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30276240412"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30276168087"
+    },
+    {
+      "name": "cargo-deny check",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30276167889"
+    }
+  ]
+}

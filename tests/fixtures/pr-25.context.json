@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:13:33Z",
+  "number": 25,
+  "author": "wagmiiii",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-14T11:07:00Z",
+  "updatedAt": "2026-07-14T11:14:50Z",
+  "closedAt": "2026-07-14T11:14:50Z",
+  "mergedAt": "2026-07-14T11:14:50Z",
+  "baseBranch": "main",
+  "headBranch": "chore/repo-setup",
+  "baseSha": "c93369e065e9b64ecbf96f7de9e0bd584bbf9882",
+  "headSha": "da00d658e24c2dcca3828686774a2e62608727ba",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 79,
+  "deletions": 0,
+  "changedFiles": 4,
+  "reviews": [
+    {
+      "author": "mallison031",
+      "state": "APPROVED",
+      "submittedAt": "2026-07-14T11:14:41Z"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "da00d658e24c2dcca3828686774a2e62608727ba",
+      "message": "chore: setup project issue and PR templates",
+      "isVerified": false,
+      "authoredAt": "2026-07-14T10:59:48Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "status": "added",
+      "additions": 31,
+      "deletions": 0
+    },
+    {
+      "filename": ".github/ISSUE_TEMPLATE/feature_request.yml",
+      "status": "added",
+      "additions": 24,
+      "deletions": 0
+    },
+    {
+      "filename": ".github/pull_request_template.md",
+      "status": "added",
+      "additions": 23,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29327767177"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29327767177"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29316624850"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29316624850"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:17:40Z",
+  "number": 295,
+  "author": "HassanKorey",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-27T14:48:58Z",
+  "updatedAt": "2026-07-30T09:03:32Z",
+  "closedAt": "2026-07-30T09:03:32Z",
+  "mergedAt": "2026-07-30T09:03:32Z",
+  "baseBranch": "main",
+  "headBranch": "feat/lint-instance-storage-unbounded",
+  "baseSha": "d78028c02d505c45223221716903d0020418f27b",
+  "headSha": "18df3d651cfc42d2831413eb83534b7961a5a672",
+  "isFork": true,
+  "headRepo": "HassanKorey/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 371,
+  "deletions": 1,
+  "changedFiles": 8,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "18df3d651cfc42d2831413eb83534b7961a5a672",
+      "message": "feat: implement instance_storage_for_unbounded_data lint (#107)\n\nDetects env.storage().instance().set(key, value) calls where the written\nvalue's own type resolves directly to soroban_sdk::Vec, Map, or Bytes.\nInstance storage is read and rewritten as a single blob on every contract\ninvocation, so a growing collection there is paid for by every call, not\njust the ones that touch it, and the fee climbs unnoticed over the life of\nthe contract.\n\nThe lint only matches when the value expression's type IS one of the three\nSDK container types directly; it does not look inside structs/enums that\nmerely contain a Vec/Map/Bytes field, and does not fire on persistent or\ntemporary storage, since those are keyed per entry and unbounded data is\nthe expected shape there.",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T14:47:57Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "CHANGELOG.md",
+      "status": "modified",
+      "additions": 6,
+      "deletions": 0
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 1
+    },
+    {
+      "filename": "docs/SUMMARY.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/lints/instance_storage_for_unbounded_data.md",
+      "status": "added",
+      "additions": 98,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 104,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/ui/instance_storage_for_unbounded_data.rs",
+      "status": "added",
+      "additions": 129,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/ui/instance_storage_for_unbounded_data.stderr",
+      "status": "added",
+      "additions": 27,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5093124954,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@HassanKorey Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-27T15:14:02Z",
+      "updatedAt": "2026-07-27T15:14:02Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30463498978"
+    },
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30463498978"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30463498401"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30489441934"
+    },
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30489441934"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30489441917"
+    }
+  ]
+}

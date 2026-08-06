@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:16:46Z",
+  "number": 279,
+  "author": "kimmoris12345",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-27T09:51:05Z",
+  "updatedAt": "2026-07-28T13:19:08Z",
+  "closedAt": "2026-07-28T13:19:08Z",
+  "mergedAt": "2026-07-28T13:19:08Z",
+  "baseBranch": "main",
+  "headBranch": "refactor/task-32",
+  "baseSha": "9c8be4a8923535185a20b2101b9f47a7ffc46565",
+  "headSha": "408c88cff7332a37fb55b3229840afa29ed7ff97",
+  "isFork": true,
+  "headRepo": "kimmoris12345/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 18,
+  "deletions": 29,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "85d62abf0270662fd54ca82468f06c9a47d59520",
+      "message": "refactor: extract try_get_adt_def helper to consolidate duplicated ADT validation logic (Closes #192)",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T09:37:50Z"
+    },
+    {
+      "sha": "05c0a2d4f2b8ee95745fdd3270d7124f7d08121f",
+      "message": "Merge branch 'main' into refactor/task-32",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T10:05:29Z"
+    },
+    {
+      "sha": "408c88cff7332a37fb55b3229840afa29ed7ff97",
+      "message": "Merge branch 'main' into refactor/task-32",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T13:57:46Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 18,
+      "deletions": 29
+    }
+  ],
+  "comments": [
+    {
+      "id": 5089991540,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@kimmoris12345 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-27T10:05:37Z",
+      "updatedAt": "2026-07-27T10:05:37Z"
+    },
+    {
+      "id": 5089999735,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "fix your cl",
+      "createdAt": "2026-07-27T10:06:31Z",
+      "updatedAt": "2026-07-27T10:06:31Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30272766223"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "publish",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30362807332"
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:30Z",
+  "number": 246,
+  "author": "adelekevictor12",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T00:49:39Z",
+  "updatedAt": "2026-07-27T12:15:00Z",
+  "closedAt": "2026-07-27T12:15:00Z",
+  "mergedAt": "2026-07-27T12:15:00Z",
+  "baseBranch": "main",
+  "headBranch": "feat/lint-unbounded-input-loop",
+  "baseSha": "03bba2a20191ab85f32943d992c1015c92d6c9c6",
+  "headSha": "10e4f2159ed6628b8db8c5115db5b5c4df0b6ba0",
+  "isFork": true,
+  "headRepo": "adelekevictor12/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 279,
+  "deletions": 9,
+  "changedFiles": 3,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "f57e1161541cbea99887be7a140dc92322f106c3",
+      "message": "feat: add unbounded_input_loop lint for caller-controlled storage write amplification",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T00:48:30Z"
+    },
+    {
+      "sha": "0acbc4d66e70fdd58dbb3b9a327bd5115590790f",
+      "message": "Merge branch 'main' into feat/lint-unbounded-input-loop",
+      "isVerified": true,
+      "authoredAt": "2026-07-26T07:05:46Z"
+    },
+    {
+      "sha": "155ade9ac18c8d69a83396d5904b705de5b988ec",
+      "message": "fix(ui): bless main.stderr to match updated test fixtures\n\nThe stderr reference was out of date after main.rs was updated with new lint\ntest fixtures for unbounded_input_loop, map_insert_in_loop, inefficient_bytes_concat,\nstorage_write_without_read, and existing lints. Updated to reflect 52 warnings\n(was 37), shifted line numbers, and new warning output.",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T10:08:03Z"
+    },
+    {
+      "sha": "442e7b63ef1996e027a4c1b7322a5d5912a98354",
+      "message": "Merge remote-tracking branch 'upstream/main' into feat/lint-unbounded-input-loop",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T10:19:17Z"
+    },
+    {
+      "sha": "133ea6232258400c06e3e63d24ecfce8c40a0730",
+      "message": "fix(ui): rebless main.stderr after merging upstream/main lint quality changes\n\nUpstream/main commit db8769d (lint quality bundle) changed lint behaviour:\n- Deduplicated soroban_storage_in_loop spans (1 per site, was 3)\n- Differentiated help text for storage reads vs writes\n- Added closure-invocation unnecessary_host_function_call fixture\nMerged upstream/main and blessed stderr to match: 35 warnings (was 52).",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T10:22:06Z"
+    },
+    {
+      "sha": "2ca468cdc9ac292b5d1e2ab5d7dbcc8574b3a5c6",
+      "message": "Merge branch 'main' into feat/lint-unbounded-input-loop",
+      "isVerified": true,
+      "authoredAt": "2026-07-26T17:15:12Z"
+    },
+    {
+      "sha": "412b0de6ebb3a31015296095e2b4fdfe5b4ac9c5",
+      "message": "Merge branch 'main' into feat/lint-unbounded-input-loop",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T09:49:30Z"
+    },
+    {
+      "sha": "ac5494013549072c08c7ce7be3bbde82f53bac16",
+      "message": "fix: resolve 7 compilation errors in cargo-cost-lint SARIF output\n\n- Fix undefined 'diagnostic' variable -> use 'message'\n- Fix undefined 'span_obj' -> use 'primary_span'\n- Fix undefined 'msg_text' -> use 'diagnostic_message'\n- Add missing 'rules' field to SarifToolDriver\n- Fix SarifRun.results type from Vec<Value> to Vec<SarifResult>",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T10:08:06Z"
+    },
+    {
+      "sha": "eeca359900d0f44520a26d4eecc6a13a95f8297b",
+      "message": "style: fix cargo fmt issue on line 240",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T10:26:49Z"
+    },
+    {
+      "sha": "1ee40601c7b25c2c191d896923ade668ea5f573c",
+      "message": "style: fix cargo fmt issues in integration tests",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T10:49:54Z"
+    },
+    {
+      "sha": "10e4f2159ed6628b8db8c5115db5b5c4df0b6ba0",
+      "message": "style: fix cargo fmt line breaks in SARIF integration test",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T11:53:34Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 8,
+      "deletions": 7
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 223,
+      "deletions": 2
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 48,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5081274100,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@adelekevictor12 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-26T00:49:47Z",
+      "updatedAt": "2026-07-26T00:49:47Z"
+    },
+    {
+      "id": 5090007323,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "fix your cl",
+      "createdAt": "2026-07-27T10:07:21Z",
+      "updatedAt": "2026-07-27T10:07:21Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30264076028"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30265139410"
+    }
+  ]
+}

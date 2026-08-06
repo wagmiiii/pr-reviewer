@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:13:23Z",
+  "number": 17,
+  "author": "wagmiiii",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-06T11:25:37Z",
+  "updatedAt": "2026-07-06T11:29:34Z",
+  "closedAt": "2026-07-06T11:29:34Z",
+  "mergedAt": "2026-07-06T11:29:34Z",
+  "baseBranch": "main",
+  "headBranch": "fix/action-template-toolchain",
+  "baseSha": "25ed0c48113f7b90d653eb91c63387ac4fd86f69",
+  "headSha": "76ec443a4367b3664d823cbb69132b997f468d99",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 9,
+  "deletions": 5,
+  "changedFiles": 3,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "76ec443a4367b3664d823cbb69132b997f468d99",
+      "message": "fix: pin toolchain and add rustc-dev components in GitHub Action template",
+      "isVerified": false,
+      "authoredAt": "2026-07-06T11:23:51Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "filename": "docs/src/integration.md",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 2
+    },
+    {
+      "filename": "templates/github-action.yml",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 2
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28788090903"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "deploy",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28788104197"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28788104181"
+    }
+  ]
+}

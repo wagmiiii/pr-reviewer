@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-06T07:03:54Z",
+  "number": 325,
+  "author": "Gabbydunkk",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-29T11:26:01Z",
+  "updatedAt": "2026-07-29T11:37:32Z",
+  "closedAt": "2026-07-29T11:37:31Z",
+  "mergedAt": "2026-07-29T11:37:31Z",
+  "baseBranch": "main",
+  "headBranch": "chore/editorconfig-changelog-unwrap",
+  "baseSha": "ccebde94f9ab9713176420df734adef10914fda8",
+  "headSha": "9c84012d3b69f2430de39eb4d33860bb004ab685",
+  "isFork": true,
+  "headRepo": "Gabbydunkk/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 152,
+  "deletions": 326,
+  "changedFiles": 8,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "f73e25eed1637e17a404f9f1f13b013cc09ec813",
+      "message": "chore: add .editorconfig, link CHANGELOG in README, verify no bare unwrap in lint lib\n\nCloses #319, Closes #321, Closes #322",
+      "isVerified": false,
+      "authoredAt": "2026-07-29T11:24:00Z"
+    },
+    {
+      "sha": "9c84012d3b69f2430de39eb4d33860bb004ab685",
+      "message": "fix: apply cargo fmt and fix build.rs unclosed delimiter\n\n- Fix stray incomplete main() in cargo-cost-lint/build.rs that blocked rustfmt\n- Apply cargo fmt --all to fix pre-existing formatting issues across the workspace",
+      "isVerified": false,
+      "authoredAt": "2026-07-29T11:29:30Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".editorconfig",
+      "status": "added",
+      "additions": 27,
+      "deletions": 0
+    },
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 276
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0
+    },
+    {
+      "filename": "cargo-cost-lint/build.rs",
+      "status": "modified",
+      "additions": 28,
+      "deletions": 13
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 31,
+      "deletions": 21
+    },
+    {
+      "filename": "cargo-cost-lint/tests/integration.rs",
+      "status": "modified",
+      "additions": 27,
+      "deletions": 7
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 12,
+      "deletions": 3
+    },
+    {
+      "filename": "tools/generate-lint-docs/src/main.rs",
+      "status": "modified",
+      "additions": 16,
+      "deletions": 6
+    }
+  ],
+  "comments": [
+    {
+      "id": 5117099822,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@Gabbydunkk Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-29T11:26:08Z",
+      "updatedAt": "2026-07-29T11:26:08Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30448010725"
+    },
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30448010725"
+    },
+    {
+      "name": "cargo-deny check",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30448010702"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30439830280"
+    },
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30439830280"
+    }
+  ]
+}

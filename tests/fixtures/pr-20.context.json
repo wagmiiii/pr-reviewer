@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:11:05Z",
+  "number": 20,
+  "author": "wagmiiii",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-07T13:10:53Z",
+  "updatedAt": "2026-07-07T13:12:11Z",
+  "closedAt": "2026-07-07T13:12:11Z",
+  "mergedAt": "2026-07-07T13:12:11Z",
+  "baseBranch": "main",
+  "headBranch": "docs/gitbook-migration",
+  "baseSha": "1b2760e0c55b5e7af3efd7e96025ceae73322408",
+  "headSha": "90d82ab4dc5f040b9a4e89d4e3c102250ccf0196",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 3,
+  "deletions": 3,
+  "changedFiles": 2,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "90d82ab4dc5f040b9a4e89d4e3c102250ccf0196",
+      "message": "docs: update social and contact links",
+      "isVerified": false,
+      "authoredAt": "2026-07-07T12:39:13Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 2
+    },
+    {
+      "filename": "SECURITY.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28868769782"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28805407251"
+    }
+  ]
+}

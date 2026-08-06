@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:58Z",
+  "number": 261,
+  "author": "amina69",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T13:17:03Z",
+  "updatedAt": "2026-07-26T16:41:10Z",
+  "closedAt": "2026-07-26T16:41:10Z",
+  "mergedAt": "2026-07-26T16:41:10Z",
+  "baseBranch": "main",
+  "headBranch": "refactor/task-10",
+  "baseSha": "ca95253fe6a75190cebe526a53d1a07fe8031a10",
+  "headSha": "dbd5a99edc58ae6e205f0ba771612d1b95e58e55",
+  "isFork": true,
+  "headRepo": "amina69/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 10,
+  "deletions": 0,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "dbd5a99edc58ae6e205f0ba771612d1b95e58e55",
+      "message": "fix",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T13:10:39Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs",
+      "status": "modified",
+      "additions": 10,
+      "deletions": 0
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30203734503"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30210968656"
+    }
+  ]
+}

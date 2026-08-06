@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:13:34Z",
+  "number": 142,
+  "author": "Oyintarede",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-23T14:50:19Z",
+  "updatedAt": "2026-07-24T09:52:02Z",
+  "closedAt": "2026-07-24T09:52:02Z",
+  "mergedAt": "2026-07-24T09:52:02Z",
+  "baseBranch": "main",
+  "headBranch": "chore/remove-nested-lockfile",
+  "baseSha": "8dbc0ce66da8c2e246bcc357e45b0fd5da7ddc0f",
+  "headSha": "74974c0f57f6e399d3291f6d3a5332a297ad9fd9",
+  "isFork": true,
+  "headRepo": "Oyintarede/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 0,
+  "deletions": 1501,
+  "changedFiles": 1,
+  "reviews": [
+    {
+      "author": "wagmiiii",
+      "state": "APPROVED",
+      "submittedAt": "2026-07-24T09:36:01Z"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "adfdf0b0df84beb4cbeeea60f45c86b785902020",
+      "message": "chore: remove stale nested Cargo.lock from workspace member\n\nsoroban_cost_lints/Cargo.lock was a leftover from before the crate\njoined the workspace. Cargo resolves dependencies for the whole\nworkspace from the root Cargo.lock, so this nested lockfile was\nnever consulted and had already drifted out of sync.",
+      "isVerified": false,
+      "authoredAt": "2026-07-23T14:50:05Z"
+    },
+    {
+      "sha": "74974c0f57f6e399d3291f6d3a5332a297ad9fd9",
+      "message": "Merge branch 'main' into chore/remove-nested-lockfile",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T09:35:50Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "soroban_cost_lints/Cargo.lock",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 1501
+    }
+  ],
+  "comments": [
+    {
+      "id": 5059862802,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@Oyintarede Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-23T14:50:28Z",
+      "updatedAt": "2026-07-23T14:50:28Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30083155665"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30083155665"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30084119660"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30084119660"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30084119660"
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:40Z",
+  "number": 253,
+  "author": "khaylebfortune",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T10:25:50Z",
+  "updatedAt": "2026-07-29T11:40:00Z",
+  "closedAt": "2026-07-29T11:40:00Z",
+  "mergedAt": "2026-07-29T11:40:00Z",
+  "baseBranch": "main",
+  "headBranch": "feat/composite-github-action",
+  "baseSha": "e6664e80af38adec6832f30c72a8ad21d175891f",
+  "headSha": "900e7e5505046cff83f047170293c1dfd2c17cb6",
+  "isFork": true,
+  "headRepo": "khaylebfortune/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 107,
+  "deletions": 17,
+  "changedFiles": 6,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "357f4f63df901dcafe6775c2aad3c4fa5eaf5030",
+      "message": "feat: publish a reusable composite GitHub Action for cargo cost-lint\n\nCloses #100\n\nAdd a composite action (`action.yml`) at the repository root so consumers\ncan replace the copy-paste workflow template with a single `uses:` line:\n\n    - uses: Tollcraft/soroban-cost-linter@v1\n\nThe action:\n- Installs the pinned Rust nightly with rustc-dev and llvm-tools-preview\n- Installs cargo-dylint and dylint-link\n- Builds soroban_cost_lints and cargo-cost-lint from source (guaranteeing\n  version consistency with the pinned action tag)\n- Runs cargo cost-lint, propagating the linter's exit code so deny-level\n  findings fail the job\n\nInputs: config, toolchain (default: nightly-2026-04-16), args, working-directory\n\nDesign decisions:\n- Composite action (not Docker): simpler, no registry setup, works on all\n  GitHub-hosted runners. Tradeoff: no layer caching, so first build takes a\n  few minutes.\n- Floating v1 tag: follows the actions/checkout@v4 convention; users get\n  non-breaking improvements automatically. Breaking changes go to v2.\n- Build-from-source via github.action_path: ensures the action uses the\n  exact code at the pinned tag, not whatever is on main.\n\nChanges:\n- action.yml: new composite action at repo root\n- templates/github-action.yml: rewritten to a 3-line consumer\n- docs/integration.md: updated with uses: form as recommended, full input\n  reference table, and examples\n- README.md: added \"GitHub Actions (recommended)\" section\n- .github/workflows/dogfood-action.yml: new workflow that dogfoods the\n  action against soroban_cost_lints/test_fixtures/real_sdk\n- CONTRIBUTING.md: updated toolchain upgrade procedure to reference\n  action.yml instead of templates/github-action.yml",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T10:10:37Z"
+    },
+    {
+      "sha": "884a867c7f232d1f15d67115b815b0f02ad9879b",
+      "message": "fix: update drift guard to check action.yml instead of templates/github-action.yml\n\nThe template now references the composite action via uses:\nTollcraft/soroban-cost-linter@v1 and no longer contains a hardcoded\nnightly pin. The action.yml now has the toolchain input default that\nmust stay in sync, so the drift guard should check that instead.",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T10:24:46Z"
+    },
+    {
+      "sha": "670830c3a1518a1c41cc48258ce48a5ac321aab9",
+      "message": "fix(action): register lint library with cargo-dylint for proper discovery\n\nThe CLI runs 'cargo dylint --lib soroban_cost_lints' which requires the\nlibrary to be registered in dylint's internal cache. Plain 'cargo build'\ncompiles the .so but doesn't generate/register the dylint metadata.\n\nThis commit adds a registration step that runs 'cargo dylint --lib\nsoroban_cost_lints -p cargo-cost-lint' from the action workspace. This\nbuilds and registers the library so subsequent 'cargo dylint' calls\n(including those made by the CLI) can discover it.\n\nThe release build is kept as the primary path via DYLINT_LIBRARY_PATH,\nand the dylint registration is a secondary discovery mechanism.",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T11:01:19Z"
+    },
+    {
+      "sha": "900e7e5505046cff83f047170293c1dfd2c17cb6",
+      "message": "Merge branch 'main' into feat/composite-github-action",
+      "isVerified": true,
+      "authoredAt": "2026-07-29T11:39:47Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/scripts/validate-toolchain-pins.sh",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "filename": ".github/workflows/dogfood-action.yml",
+      "status": "added",
+      "additions": 17,
+      "deletions": 0
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "filename": "action.yml",
+      "status": "added",
+      "additions": 63,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 19,
+      "deletions": 15
+    },
+    {
+      "filename": "templates/github-action.yml",
+      "status": "modified",
+      "additions": 6,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5083076354,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@khaylebfortune Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-26T10:25:58Z",
+      "updatedAt": "2026-07-26T10:25:58Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30448432074"
+    },
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30448432074"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30448431849"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "cargo-deny check",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30448290199"
+    },
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30448289091"
+    },
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30448289091"
+    }
+  ]
+}

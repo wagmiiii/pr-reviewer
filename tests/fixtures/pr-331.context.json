@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:18:32Z",
+  "number": 331,
+  "author": "dependabot[bot]",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-08-04T08:16:32Z",
+  "updatedAt": "2026-08-04T10:54:45Z",
+  "closedAt": "2026-08-04T10:54:37Z",
+  "mergedAt": "2026-08-04T10:54:37Z",
+  "baseBranch": "main",
+  "headBranch": "dependabot/cargo/cargo-dependencies-ee666de523",
+  "baseSha": "50cce44d1471c5af81244e0ea249e9c99da7acc1",
+  "headSha": "692d753209051e26a7cb81c7fa737b3b599daae0",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 10,
+  "deletions": 10,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "692d753209051e26a7cb81c7fa737b3b599daae0",
+      "message": "chore(deps): bump the cargo-dependencies group across 1 directory with 2 updates\n\nBumps the cargo-dependencies group with 2 updates in the / directory: [toml](https://github.com/toml-rs/toml) and [clap](https://github.com/clap-rs/clap).\n\n\nUpdates `toml` from 1.1.2+spec-1.1.0 to 1.1.4+spec-1.1.0\n- [Commits](https://github.com/toml-rs/toml/compare/toml-v1.1.2...toml-v1.1.4)\n\nUpdates `clap` from 4.6.4 to 4.6.5\n- [Release notes](https://github.com/clap-rs/clap/releases)\n- [Changelog](https://github.com/clap-rs/clap/blob/master/CHANGELOG.md)\n- [Commits](https://github.com/clap-rs/clap/compare/clap_complete-v4.6.4...clap_complete-v4.6.5)\n\n---\nupdated-dependencies:\n- dependency-name: clap\n  dependency-version: 4.6.5\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n  dependency-group: cargo-dependencies\n- dependency-name: toml\n  dependency-version: 1.1.4+spec-1.1.0\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n  dependency-group: cargo-dependencies\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>",
+      "isVerified": true,
+      "authoredAt": "2026-08-04T10:47:21Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 10,
+      "deletions": 10
+    }
+  ],
+  "comments": [
+    {
+      "id": 5177942208,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "@dependabot rebase",
+      "createdAt": "2026-08-04T10:45:42Z",
+      "updatedAt": "2026-08-04T10:45:42Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30902099534"
+    },
+    {
+      "name": "test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30902099534"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30902099619"
+    },
+    {
+      "name": "test (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30902099534"
+    },
+    {
+      "name": "cargo-deny check",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30902099536"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "Dependabot",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30901991341"
+    },
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30899554727"
+    },
+    {
+      "name": "test (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30899554727"
+    },
+    {
+      "name": "test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30899554727"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30899554609"
+    }
+  ]
+}

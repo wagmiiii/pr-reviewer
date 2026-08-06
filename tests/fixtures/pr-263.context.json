@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:59Z",
+  "number": 263,
+  "author": "Ennyblack",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T13:27:24Z",
+  "updatedAt": "2026-07-31T16:23:18Z",
+  "closedAt": "2026-07-31T16:23:18Z",
+  "mergedAt": "2026-07-31T16:23:18Z",
+  "baseBranch": "main",
+  "headBranch": "driptide/issue-26-1785072441932",
+  "baseSha": "8d318d2adbc7493e8044d8d0dbca2110b0f1750a",
+  "headSha": "a14c986978b86d613ae05c6ee5a18a683684371e",
+  "isFork": true,
+  "headRepo": "Ennyblack/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 29,
+  "deletions": 53,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "7346802e523c50d0cfa55f6b8d1ed0beed003eee",
+      "message": "Fix issue #26: update soroban_cost_lints/src/lib.rs",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T13:27:23Z"
+    },
+    {
+      "sha": "a14c986978b86d613ae05c6ee5a18a683684371e",
+      "message": "Merge branch 'main' into driptide/issue-26-1785072441932",
+      "isVerified": true,
+      "authoredAt": "2026-07-31T16:23:00Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 29,
+      "deletions": 53
+    }
+  ],
+  "comments": [
+    {
+      "id": 5083671528,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@Ennyblack Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-26T13:27:37Z",
+      "updatedAt": "2026-07-26T13:27:37Z"
+    },
+    {
+      "id": 5089892924,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "fix your cl",
+      "createdAt": "2026-07-27T09:55:09Z",
+      "updatedAt": "2026-07-27T09:55:09Z"
+    },
+    {
+      "id": 5089908783,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "resolve your conflicts",
+      "createdAt": "2026-07-27T09:56:51Z",
+      "updatedAt": "2026-07-27T09:56:51Z"
+    },
+    {
+      "id": 5129187660,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "Hi @Ennyblack 👋\n\nThis PR currently has **merge conflicts with `main`** and can't be merged as-is. Please resolve them so we can move forward with the review.\n\n```bash\ngit remote add upstream https://github.com/Tollcraft/soroban-cost-linter.git   # if not already added\ngit fetch upstream\ngit checkout <your-branch>\ngit rebase upstream/main      # or: git merge upstream/main\n# resolve the conflicted files, then:\ngit add .\ngit rebase --continue         # or: git commit  (if you merged)\ngit push --force-with-lease    # plain 'git push' if you merged instead of rebased\n```\n\nA couple of reminders while you're at it:\n- Make sure the branch still builds and `cargo test` passes after the rebase.\n- Commit messages must follow [Conventional Commits](https://www.conventionalcommits.org/) — CI enforces this.\n\nPing us here once it's updated and we'll re-review. Thanks for contributing! 🙏",
+      "createdAt": "2026-07-30T09:41:05Z",
+      "updatedAt": "2026-07-30T09:41:05Z"
+    },
+    {
+      "id": 5129401819,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "Hi @Ennyblack 👋\n\nThis PR currently has **merge conflicts with `main`** and can't be merged as-is. Please resolve them so we can move forward with the review.\n\n```bash\ngit remote add upstream https://github.com/Tollcraft/soroban-cost-linter.git   # if not already added\ngit fetch upstream\ngit checkout <your-branch>\ngit rebase upstream/main      # or: git merge upstream/main\n# resolve the conflicted files, then:\ngit add .\ngit rebase --continue         # or: git commit  (if you merged)\ngit push --force-with-lease    # plain 'git push' if you merged instead of rebased\n```\n\nA couple of reminders while you're at it:\n- Make sure the branch still builds and `cargo test` passes after the rebase.\n- Commit messages must follow [Conventional Commits](https://www.conventionalcommits.org/) — CI enforces this.\n\nPing us here once it's updated and we'll re-review. Thanks for contributing! 🙏",
+      "createdAt": "2026-07-30T10:04:05Z",
+      "updatedAt": "2026-07-30T10:04:05Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30646894841"
+    },
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30646894841"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30646894831"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30558368020"
+    },
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30558368020"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30558367954"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:21Z",
+  "number": 238,
+  "author": "Queen-T16",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T00:09:26Z",
+  "updatedAt": "2026-07-26T09:43:47Z",
+  "closedAt": "2026-07-26T09:43:47Z",
+  "mergedAt": "2026-07-26T09:43:47Z",
+  "baseBranch": "main",
+  "headBranch": "fix/lint-quality-bundle",
+  "baseSha": "fe8a83a552589e6abeddbdcee0160fb4336d97cf",
+  "headSha": "aaec591c9a90f7549476500d1ddd070af134234c",
+  "isFork": true,
+  "headRepo": "Queen-T16/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 145,
+  "deletions": 17,
+  "changedFiles": 7,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "dc7428dc882e1b6cb8abe515e664a56d311c05c7",
+      "message": "lint quality bundle: dedup storage-loop warnings, branch storage-in-loop help, detect host calls in iterator closures, document --config (Closes #127 #128 #129 #130)\n\nIssues consolidated onto a single branch (one PR, four issues) per request. All four are pure code/docs changes; no new dependencies.\n\n* Closes #127 — soroban_storage_in_loop differentiates help text for reads (.get/.has) vs writes (.set); docs page split accordingly.\n\n* Closes #128 — unnecessary_host_function_call now fires for host calls inside multi-call iterator closures via a new enclosing_loop_or_closure helper (storage / HostInLoop kept on the loop-only helper by design).\n\n* Closes #129 — soroban_storage_in_loop collapses overlapping warnings on chained storage calls (env.storage().instance().set(&k, &v)) by gating on terminal-op method names only.\n\n* Closes #130 — README and docs/integration.md document the --config <PATH> CLI flag, its absence-of-default behaviour, and relative/absolute-path examples.\n\nVerified: cargo fmt --all -- --check, cargo clippy --workspace --all-targets -- -D warnings, and the dylint UI snapshot (BLESS=1 cycle) all pass on the pinned nightly-2026-04-16 toolchain.",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T00:08:38Z"
+    },
+    {
+      "sha": "aaec591c9a90f7549476500d1ddd070af134234c",
+      "message": "Merge branch 'main' into fix/lint-quality-bundle",
+      "isVerified": true,
+      "authoredAt": "2026-07-26T08:18:34Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "CHANGELOG.md",
+      "status": "modified",
+      "additions": 18,
+      "deletions": 0
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 18,
+      "deletions": 1
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 15,
+      "deletions": 3
+    },
+    {
+      "filename": "docs/lints/soroban_storage_in_loop.md",
+      "status": "modified",
+      "additions": 17,
+      "deletions": 1
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 62,
+      "deletions": 12
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 7,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 8,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5082675779,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@Queen-T16 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-26T08:13:52Z",
+      "updatedAt": "2026-07-26T08:13:52Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30194390279"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30191248000"
+    }
+  ]
+}

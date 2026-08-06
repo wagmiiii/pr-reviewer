@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:13:24Z",
+  "number": 23,
+  "author": "mallison031",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-14T07:23:34Z",
+  "updatedAt": "2026-07-14T08:02:39Z",
+  "closedAt": "2026-07-14T08:02:39Z",
+  "mergedAt": "2026-07-14T08:02:39Z",
+  "baseBranch": "main",
+  "headBranch": "chore/remove-drips-references",
+  "baseSha": "36882b1f513f4dc252655ed9306ba4deda6c7096",
+  "headSha": "abfd177bd19c774f88f60c247572e8c3d5fdc345",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 32,
+  "deletions": 221,
+  "changedFiles": 7,
+  "reviews": [
+    {
+      "author": "wagmiiii",
+      "state": "APPROVED",
+      "submittedAt": "2026-07-14T08:02:27Z"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "c324e3afd23e008079a56dd9295134aeccb36a99",
+      "message": "chore: remove Drips Wave program artifacts\n\nThe project is independent of the Drips Wave program. Drop the funding\nclaim from the README and delete the program-specific submission docs,\nplanning notes, and master prompt PDF.",
+      "isVerified": false,
+      "authoredAt": "2026-07-14T07:22:54Z"
+    },
+    {
+      "sha": "1333e758798a2822a6db804a00b57059c5db016a",
+      "message": "docs: add launch checklist for remaining v0.1.x work\n\nReplaces the deleted submission checklist with a program-neutral list.\nLive repo state (release, issues, topics, branch protection) verified\nvia the GitHub API on 2026-07-14.",
+      "isVerified": false,
+      "authoredAt": "2026-07-14T07:23:00Z"
+    },
+    {
+      "sha": "f342e5b9c3f7fc3827f25bcdd449ae229ca4061a",
+      "message": "docs(readme): link the GitBook documentation site\n\nThe README linked individual lint docs but never the docs site itself.\nPoint readers at https://tollcraft.gitbook.io/docs from the header.",
+      "isVerified": false,
+      "authoredAt": "2026-07-14T07:23:17Z"
+    },
+    {
+      "sha": "7eb671693632aedd347051bfc3e9f67291ac9177",
+      "message": "docs: link the demo recording, check off completed launch items\n\nDemo recorded per demo_script.md and uploaded to\nhttps://asciinema.org/a/1DpqHMqqOOXoZzMI; linked from the README header.\nThe lint status check is now required on main, and the workspace test\nsuite passes locally, leaving only the optional crates.io publish.",
+      "isVerified": false,
+      "authoredAt": "2026-07-14T07:51:07Z"
+    },
+    {
+      "sha": "abfd177bd19c774f88f60c247572e8c3d5fdc345",
+      "message": "Merge branch 'main' into chore/remove-drips-references",
+      "isVerified": true,
+      "authoredAt": "2026-07-14T07:55:43Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 5,
+      "deletions": 1
+    },
+    {
+      "filename": "audit_and_roadmap.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 72
+    },
+    {
+      "filename": "github_publish_steps.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 82
+    },
+    {
+      "filename": "launch_checklist.md",
+      "status": "added",
+      "additions": 27,
+      "deletions": 0
+    },
+    {
+      "filename": "stellar_wave_builder_master_prompt.md.pdf",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 0
+    },
+    {
+      "filename": "submission.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 13
+    },
+    {
+      "filename": "submission_checklist.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 53
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29316223551"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29316223551"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29316201840"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29316201840"
+    }
+  ]
+}

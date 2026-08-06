@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:18:02Z",
+  "number": 307,
+  "author": "teeschima",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-27T22:50:07Z",
+  "updatedAt": "2026-07-28T13:15:41Z",
+  "closedAt": "2026-07-28T13:15:41Z",
+  "mergedAt": "2026-07-28T13:15:41Z",
+  "baseBranch": "main",
+  "headBranch": "enhancement/task-15",
+  "baseSha": "a4c7533f2c9f460c495889c83a2a925f4634c79a",
+  "headSha": "01d26fdd794437b54b689ad99040111624a4a733",
+  "isFork": true,
+  "headRepo": "teeschima/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 247,
+  "deletions": 0,
+  "changedFiles": 3,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "b6832eb7d5f936603a9d74677f616de7baca9aea",
+      "message": "fix: fallback defaults for missing/empty config fields (Closes #211, Closes #13)",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T22:43:08Z"
+    },
+    {
+      "sha": "2b01f37fbf9e7905f37af25bbcc1741793b2e373",
+      "message": "feat: replace linear LINT_NAMES scan with O(1) HashSet lookup (Closes #209, Closes #15)",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T22:49:50Z"
+    },
+    {
+      "sha": "01d26fdd794437b54b689ad99040111624a4a733",
+      "message": "Merge branch 'main' into enhancement/task-15",
+      "isVerified": true,
+      "authoredAt": "2026-07-28T05:29:03Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0
+    },
+    {
+      "filename": "cargo-cost-lint/src/module_13.rs",
+      "status": "added",
+      "additions": 156,
+      "deletions": 0
+    },
+    {
+      "filename": "cargo-cost-lint/src/module_15.rs",
+      "status": "added",
+      "additions": 87,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5100330559,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@teeschima Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-28T05:29:13Z",
+      "updatedAt": "2026-07-28T05:29:13Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30331765694"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30362655234"
+    }
+  ]
+}

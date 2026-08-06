@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:14:20Z",
+  "number": 168,
+  "author": "wagmiiii",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-24T14:33:00Z",
+  "updatedAt": "2026-07-24T14:39:55Z",
+  "closedAt": "2026-07-24T14:39:55Z",
+  "mergedAt": "2026-07-24T14:39:55Z",
+  "baseBranch": "main",
+  "headBranch": "chore/repo-setup",
+  "baseSha": "88cf0ac3b39f613d51c45e94202f31f8ae13c45c",
+  "headSha": "5f11135ab505fb9b29608e57d2b7a3b3901ce90e",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 1,
+  "deletions": 0,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "7a4382d1f7c092f4701a7d76b4c43da4669fc4ef",
+      "message": "chore: Rename quality job to Code Quality to fix branch protection requirements",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T14:18:03Z"
+    },
+    {
+      "sha": "5f11135ab505fb9b29608e57d2b7a3b3901ce90e",
+      "message": "Merge branch 'main' into chore/repo-setup",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T14:33:11Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30101504501"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30101504501"
+    },
+    {
+      "name": "Code Quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30101504501"
+    },
+    {
+      "name": ".github/dependabot.yml",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "Dependabot",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30101526645"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30101435288"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30101435288"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30101435288"
+    }
+  ]
+}

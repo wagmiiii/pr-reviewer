@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:18:00Z",
+  "number": 304,
+  "author": "lawalajose",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-27T21:33:34Z",
+  "updatedAt": "2026-07-28T13:16:09Z",
+  "closedAt": "2026-07-28T13:16:09Z",
+  "mergedAt": "2026-07-28T13:16:09Z",
+  "baseBranch": "main",
+  "headBranch": "docs/document-how-to-write-a-custom-lint",
+  "baseSha": "662d3258d563d2351e6ab0e2bc6e612965e5a284",
+  "headSha": "8fcfe9615f2c79c9d4903458f94e3488a85f1bd6",
+  "isFork": true,
+  "headRepo": "lawalajose/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 193,
+  "deletions": 0,
+  "changedFiles": 3,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "bd33f7d483c40e1842267ad169524dbb41513227",
+      "message": "Added a new markdown file listing every supported lint with default severity, brief description, and links to the detailed documentation.\ndocs/SUMMARY.md\tInserted a link to the new Lint Catalog entry under the “Lints” section.",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T21:22:18Z"
+    },
+    {
+      "sha": "8fcfe9615f2c79c9d4903458f94e3488a85f1bd6",
+      "message": " \"docs: add guide for writing a custom lint\"",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T21:32:37Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/SUMMARY.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/custom_lint_guide.md",
+      "status": "added",
+      "additions": 167,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/lint_catalog.md",
+      "status": "added",
+      "additions": 25,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5097061767,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@lawalajose Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-27T21:33:39Z",
+      "updatedAt": "2026-07-27T21:33:39Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30307369017"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30362661328"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:17:45Z",
+  "number": 297,
+  "author": "aigbagbobila",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-27T15:10:48Z",
+  "updatedAt": "2026-07-28T13:32:32Z",
+  "closedAt": "2026-07-28T13:32:32Z",
+  "mergedAt": "2026-07-28T13:32:32Z",
+  "baseBranch": "main",
+  "headBranch": "test/task-28",
+  "baseSha": "e736b9ad8397485f908f320d1b3d6586489a6be8",
+  "headSha": "3050b1c2e5adf522f6e12f53c6e5787c81fb7c50",
+  "isFork": true,
+  "headRepo": "aigbagbobila/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 192,
+  "deletions": 99,
+  "changedFiles": 5,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "62623eb77ca43700a8ef36b5a9711ce5db82a742",
+      "message": "test: add edge-case boundary-condition fixtures for off-by-one, zero-length, and single-iteration inputs\n\n- Fix LINT_METADATA: separate LOOP_INVARIANT_STORAGE_ACCESS and UNBOUNDED_INPUT_LOOP into their own entries with proper categories\n- Add edge-case fixtures: zero-iteration loops, single-iteration loops, single-char symbol, 10-char boundary\n- Add zero-iteration storage_key_construction variant\n- Regenerate .stderr files to match updated fixture output\n\nCloses #28",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T15:08:56Z"
+    },
+    {
+      "sha": "64f5689c087d7cb79c509a641a35358c853a4548",
+      "message": "Merge branch 'main' into test/task-28",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T15:16:28Z"
+    },
+    {
+      "sha": "d2ea6fd2b26bdc5c3e5a0d3a0ee49ed58d75c0a7",
+      "message": "fix: resolve CI compilation errors in cargo-cost-lint\n\n- Define missing BudgetConfig struct with Deserialize derive\n- Add missing closing brace to load_budget_config function\n- Add HashMap and Deserialize imports\n- Remove duplicate list_lints field from Cli struct\n- Fix broken match preflight block (remove invalid Option arms)\n- Fix format string escaping ({{{ to {{{{)\n- Fix build.rs to write LINT_INFO to lint_names.rs (was constructed but never written)\n- Collapse nested if-let chains to satisfy clippy::collapsible_if\n- Suppress dead_code warnings for BudgetConfig and parse_budget_config",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T15:24:04Z"
+    },
+    {
+      "sha": "3050b1c2e5adf522f6e12f53c6e5787c81fb7c50",
+      "message": "Merge branch 'main' into test/task-28",
+      "isVerified": true,
+      "authoredAt": "2026-07-28T13:28:19Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/build.rs",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 8
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 32
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 99,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 73,
+      "deletions": 47
+    },
+    {
+      "filename": "soroban_cost_lints/ui/redundant_val_conversion.stderr",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 12
+    }
+  ],
+  "comments": [
+    {
+      "id": 5093091088,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@aigbagbobila Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-27T15:10:59Z",
+      "updatedAt": "2026-07-27T15:10:59Z"
+    },
+    {
+      "id": 5104767112,
+      "author": "aigbagbobila",
+      "authorAssociation": "CONTRIBUTOR",
+      "body": "Kindly review and merge ",
+      "createdAt": "2026-07-28T13:28:52Z",
+      "updatedAt": "2026-07-28T13:28:52Z"
+    }
+  ],
+  "checks": [],
+  "baseChecks": []
+}

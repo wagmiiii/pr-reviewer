@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:59Z",
+  "number": 262,
+  "author": "samad13",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T13:27:07Z",
+  "updatedAt": "2026-07-26T16:39:09Z",
+  "closedAt": "2026-07-26T16:39:09Z",
+  "mergedAt": "2026-07-26T16:39:09Z",
+  "baseBranch": "main",
+  "headBranch": "fix/task-3",
+  "baseSha": "6327f275b0ef2be2882ea400d76a21b97c003eb1",
+  "headSha": "21ec3b7c2cc09cd9fdbdfee4f15d46f7247d4302",
+  "isFork": true,
+  "headRepo": "samad13/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 3,
+  "deletions": 0,
+  "changedFiles": 2,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "21ec3b7c2cc09cd9fdbdfee4f15d46f7247d4302",
+      "message": "fixses",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T13:24:30Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".gitignore",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30204064776"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30210889719"
+    }
+  ]
+}

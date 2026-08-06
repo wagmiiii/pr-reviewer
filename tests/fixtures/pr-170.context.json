@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:14:21Z",
+  "number": 170,
+  "author": "ASIDISG",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-24T14:51:07Z",
+  "updatedAt": "2026-07-25T17:04:01Z",
+  "closedAt": "2026-07-25T17:04:01Z",
+  "mergedAt": "2026-07-25T17:04:01Z",
+  "baseBranch": "main",
+  "headBranch": "refactor/clean-up-dylint-wrapper-error-handling",
+  "baseSha": "5d37daba05b4c7eef8c968123146596c428e4d58",
+  "headSha": "0df1bc07c1b695fd1e46c71bbb53dadf5534db1f",
+  "isFork": true,
+  "headRepo": "ASIDISG/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 2,
+  "deletions": 0,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "2ddd69de4a46d6d1ca3ad5f6a56b42ad49c2b670",
+      "message": "feat: support ignoring specific files via .lintignore\n\n- Added ignore crate\n- Respect .lintignore in file walking\n- Closes #57",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T13:40:29Z"
+    },
+    {
+      "sha": "ea2e0f133739a6332fceb3be151e72f5ba6728d7",
+      "message": "refactor: clean up Dylint wrapper error handling",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T14:41:39Z"
+    },
+    {
+      "sha": "dde27a0144493cbb9709834b891f70daa92f129f",
+      "message": "Merge branch 'main' into refactor/clean-up-dylint-wrapper-error-handling",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T14:51:43Z"
+    },
+    {
+      "sha": "1fb07e869cffa6ab33fc6fb43c88347f1150b489",
+      "message": "Merge branch 'main' into refactor/clean-up-dylint-wrapper-error-handling",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T15:51:58Z"
+    },
+    {
+      "sha": "67d59683727916081d1c9d6be113ac502ec52197",
+      "message": "Merge branch 'main' into refactor/clean-up-dylint-wrapper-error-handling",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T22:07:37Z"
+    },
+    {
+      "sha": "f22da1a54b0da6848d83203bfc51aa5318794189",
+      "message": "fix: resolve optional budget config path",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T22:08:11Z"
+    },
+    {
+      "sha": "0bf05d6ed365840fb13a59bb0c9f6294ce37b449",
+      "message": "Merge branch 'main' into refactor/clean-up-dylint-wrapper-error-handling",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T22:34:03Z"
+    },
+    {
+      "sha": "a1a5698203f947e167c84cdd7502a15060dc2658",
+      "message": "fix: restore missing brace in cargo-cost-lint",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T00:06:38Z"
+    },
+    {
+      "sha": "589142e578ceecb86c01a044c4a880f1dcdc45be",
+      "message": "refactor(cargo-cost-lint): clean up config-loading error handling\n\n- Replace nested if-let chains with a single match, so a failed config\n  read now actually surfaces a warning instead of failing silently\n- Restore an explanatory comment and a test (test_unknown_lint_level)\n  that were dropped by an earlier merge on this branch\n- Remove an unused 'ignore' dependency that had leaked in from an\n  unrelated branch via a prior merge\n\nCloses #67",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T15:08:06Z"
+    },
+    {
+      "sha": "0df1bc07c1b695fd1e46c71bbb53dadf5534db1f",
+      "message": "Merge branch 'main' into refactor/clean-up-dylint-wrapper-error-handling",
+      "isVerified": true,
+      "authoredAt": "2026-07-25T15:59:52Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5071180372,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@ASIDISG Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-24T14:51:19Z",
+      "updatedAt": "2026-07-24T14:51:19Z"
+    },
+    {
+      "id": 5071189213,
+      "author": "ASIDISG",
+      "authorAssociation": "CONTRIBUTOR",
+      "body": "@mallison031 @wagmiiii ,, please review.\r\n",
+      "createdAt": "2026-07-24T14:52:18Z",
+      "updatedAt": "2026-07-24T14:52:18Z"
+    },
+    {
+      "id": 5071761893,
+      "author": "wagmiiii",
+      "authorAssociation": "MEMBER",
+      "body": "@ASIDISG fix ci issues",
+      "createdAt": "2026-07-24T15:52:58Z",
+      "updatedAt": "2026-07-24T15:52:58Z"
+    },
+    {
+      "id": 5074923053,
+      "author": "ASIDISG",
+      "authorAssociation": "CONTRIBUTOR",
+      "body": "@wagmiiii , i am fixing the cl at the moment",
+      "createdAt": "2026-07-24T22:09:55Z",
+      "updatedAt": "2026-07-24T22:09:55Z"
+    },
+    {
+      "id": 5075170307,
+      "author": "wagmiiii",
+      "authorAssociation": "MEMBER",
+      "body": " Hi @ASIDISG, Thanks for your contribution! 🙌\r\n  \r\n  It looks like the CI tests are failing because of a small syntax error in cargo-cost-lint/src/main.rs. The Rust compiler is reporting an \"unclosed delimiter\" (a missing or extra curly brace { / }).\r\n  \r\n  Specifically, it looks like an if block around line 138 (if !lint_flags.is_empty() {) is missing its closing brace }, which is causing the compiler to get confused when it reaches the end of the main() function at line 315.          \r\n  \r\n  If you are using an IDE like VS Code or RustRover with rust-analyzer enabled, it should highlight the exact location with a red squiggle. You can also run this locally to find it:\r\n  \r\n    cargo check -p cargo-cost-lint\r\n  \r\n  Could you double-check your braces in that file and push a fix? Let me know if you need any help finding it!***\r\n",
+      "createdAt": "2026-07-24T22:42:43Z",
+      "updatedAt": "2026-07-24T22:42:43Z"
+    },
+    {
+      "id": 5077677248,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "Fix your CI",
+      "createdAt": "2026-07-25T08:20:43Z",
+      "updatedAt": "2026-07-25T08:20:43Z"
+    },
+    {
+      "id": 5079024677,
+      "author": "ASIDISG",
+      "authorAssociation": "CONTRIBUTOR",
+      "body": "@wagmiiii @mallison031 ,,, lets try again.\r\n",
+      "createdAt": "2026-07-25T15:18:54Z",
+      "updatedAt": "2026-07-25T15:18:54Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30164730147"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30164730147"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30164730147"
+    },
+    {
+      "name": "Code Quality (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30164730147"
+    },
+    {
+      "name": "lint-matrix (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30164730147"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30164690363"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30164690363"
+    },
+    {
+      "name": "Code Quality (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30164690363"
+    },
+    {
+      "name": "lint-matrix (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30164690363"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30164690363"
+    }
+  ]
+}

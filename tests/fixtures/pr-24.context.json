@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:13:24Z",
+  "number": 24,
+  "author": "mallison031",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-14T07:41:48Z",
+  "updatedAt": "2026-07-14T07:55:23Z",
+  "closedAt": "2026-07-14T07:55:23Z",
+  "mergedAt": "2026-07-14T07:55:23Z",
+  "baseBranch": "main",
+  "headBranch": "fix/budget-toml-lint-levels",
+  "baseSha": "0878ab0f13fc217f0d67fac323cd6e8dad940087",
+  "headSha": "f7df40db5fb429e10ef0a8bdc19e150bd6c2bd72",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 9,
+  "deletions": 7,
+  "changedFiles": 1,
+  "reviews": [
+    {
+      "author": "wagmiiii",
+      "state": "APPROVED",
+      "submittedAt": "2026-07-14T07:55:10Z"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "f7df40db5fb429e10ef0a8bdc19e150bd6c2bd72",
+      "message": "fix(cli): pass budget.toml lint levels via DYLINT_RUSTFLAGS\n\nTrailing args to `cargo dylint` are forwarded to `cargo check`, which\nrejects lint-level flags, so any project with a budget.toml failed with\n\"unexpected argument '-W' found\" before linting even started. Route the\nlevels through DYLINT_RUSTFLAGS (appending to any existing value) so\nthey reach rustc.\n\nVerified end to end against a soroban-sdk contract: with\nsoroban_storage_in_loop = \"deny\", a storage write inside a loop now\nfails the build with exit code 1, and the fixed contract passes.",
+      "isVerified": false,
+      "authoredAt": "2026-07-14T07:41:44Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 7
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29315428100"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29315428100"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28946344986"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28946344986"
+    }
+  ]
+}

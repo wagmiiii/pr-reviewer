@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:49Z",
+  "number": 257,
+  "author": "LaTash1",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T12:50:35Z",
+  "updatedAt": "2026-07-26T16:39:45Z",
+  "closedAt": "2026-07-26T16:39:44Z",
+  "mergedAt": "2026-07-26T16:39:44Z",
+  "baseBranch": "main",
+  "headBranch": "docs/task-4",
+  "baseSha": "b8d9fa9ae8ab3cbb1eda22b00193f33ad6306a6d",
+  "headSha": "2185c287839dbbbb43e5d9a176d784dc322fbad2",
+  "isFork": true,
+  "headRepo": "LaTash1/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 15,
+  "deletions": 2,
+  "changedFiles": 3,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "338737d47f7114290a5cb3302a15400747807fea",
+      "message": "done",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T12:24:22Z"
+    },
+    {
+      "sha": "ceceabbcbf504b19ba70b57908df09b063dd6b3d",
+      "message": "bitwise",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T12:38:47Z"
+    },
+    {
+      "sha": "2185c287839dbbbb43e5d9a176d784dc322fbad2",
+      "message": "task 4",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T12:43:42Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "CHANGELOG.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 0
+    },
+    {
+      "filename": "test_fixtures/smoke_test/src/lib.rs",
+      "status": "modified",
+      "additions": 11,
+      "deletions": 1
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30202863055"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30210916744"
+    }
+  ]
+}
