@@ -1,0 +1,456 @@
+{
+  "$ref": "#/definitions/PullRequestContext",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AuthorAssociation": {
+      "description": "GitHub's relationship between the PR author and the repo, verbatim from the API. Drives the first-time-contributor rule (PR-035).\n\nObserved across the 159-PR archive: `CONTRIBUTOR` 139, `MEMBER` 19, `NONE` 1.",
+      "enum": [
+        "OWNER",
+        "MEMBER",
+        "COLLABORATOR",
+        "CONTRIBUTOR",
+        "FIRST_TIME_CONTRIBUTOR",
+        "FIRST_TIMER",
+        "MANNEQUIN",
+        "NONE"
+      ],
+      "type": "string"
+    },
+    "CappedDiff": {
+      "additionalProperties": false,
+      "description": "The PR diff, capped (PR-026).\n\n`truncated` is the point: a rule must never conclude \"this PR touches no test files\" from a diff that was cut short.",
+      "properties": {
+        "capBytes": {
+          "description": "Byte cap that was applied.",
+          "type": "number"
+        },
+        "patch": {
+          "type": "string"
+        },
+        "truncated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "patch",
+        "truncated",
+        "capBytes"
+      ],
+      "type": "object"
+    },
+    "ChangedFile": {
+      "additionalProperties": false,
+      "description": "A file changed by the PR.",
+      "properties": {
+        "additions": {
+          "type": "number"
+        },
+        "deletions": {
+          "type": "number"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "previousFilename": {
+          "description": "Set when `status` is `renamed`.",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "added",
+            "removed",
+            "modified",
+            "renamed",
+            "copied",
+            "changed",
+            "unchanged"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "filename",
+        "status",
+        "additions",
+        "deletions"
+      ],
+      "type": "object"
+    },
+    "CheckConclusion": {
+      "description": "Outcome of a completed check run. `null` while the check is still running.\n\n`stale` is included because GitHub can emit it and the corpus capture counts it as a failure; it does not occur in the current archive.",
+      "enum": [
+        "success",
+        "failure",
+        "neutral",
+        "cancelled",
+        "timed_out",
+        "action_required",
+        "skipped",
+        "stale",
+        null
+      ],
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "CheckRun": {
+      "additionalProperties": false,
+      "description": "A check run, on either the head or the base commit.",
+      "properties": {
+        "conclusion": {
+          "$ref": "#/definitions/CheckConclusion"
+        },
+        "isRequired": {
+          "description": "Whether this check is a required status check on the base branch.\n\nPresent on base checks as well as head checks: `CI_BROKEN_ON_BASE` compares the two sides, and it can only filter both to required-only if both carry the flag.\n\nOptional because resolving required checks needs branch-protection access the token may not have (PR-022). `undefined` means \"could not determine\".",
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/CheckStatus"
+        },
+        "workflowRunId": {
+          "description": "Workflow run this check belongs to, for fetching logs later (PR-024).",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "status",
+        "conclusion"
+      ],
+      "type": "object"
+    },
+    "CheckStatus": {
+      "description": "Lifecycle of a single check run.",
+      "enum": [
+        "queued",
+        "in_progress",
+        "completed"
+      ],
+      "type": "string"
+    },
+    "Comment": {
+      "additionalProperties": false,
+      "description": "A comment on the PR conversation.\n\nNeeded by the noise budget (PR-054) and the sticky-comment upsert (PR-070), which locates the bot's own prior comment by its HTML marker rather than by author, and by any measurement of manual maintainer effort.",
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "authorAssociation": {
+          "$ref": "#/definitions/AuthorAssociation"
+        },
+        "body": {
+          "type": "string"
+        },
+        "createdAt": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "id": {
+          "type": "number"
+        },
+        "updatedAt": {
+          "$ref": "#/definitions/Timestamp"
+        }
+      },
+      "required": [
+        "id",
+        "author",
+        "authorAssociation",
+        "body",
+        "createdAt"
+      ],
+      "type": "object"
+    },
+    "Commit": {
+      "additionalProperties": false,
+      "description": "A commit in the PR.",
+      "properties": {
+        "authoredAt": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "isVerified": {
+          "description": "GPG/SSH signature verified by GitHub.",
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        },
+        "sha": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "sha",
+        "message",
+        "isVerified"
+      ],
+      "type": "object"
+    },
+    "LinkedIssue": {
+      "additionalProperties": false,
+      "description": "An issue this PR claims to resolve.",
+      "properties": {
+        "number": {
+          "type": "number"
+        },
+        "repository": {
+          "description": "Set when the reference is cross-repo, e.g. `org/repo#123`.",
+          "type": "string"
+        },
+        "source": {
+          "description": "How the link was found — closing keyword, body reference, or title.",
+          "enum": [
+            "closing_keyword",
+            "body_reference",
+            "title_reference"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "number",
+        "source"
+      ],
+      "type": "object"
+    },
+    "MergeableState": {
+      "description": "GitHub's computed mergeability.\n\n**Only computed for open pull requests.** For anything closed it is `'unknown'`, which is why `MERGE_CONFLICT` could not be validated against the historical archive at all — 156 of 159 archived PRs read `unknown` (`docs/spikes/premise-test.md`).\n\nA rule must therefore treat `'unknown'` as *not knowable*, never as *clean*.",
+      "enum": [
+        "clean",
+        "dirty",
+        "blocked",
+        "behind",
+        "unstable",
+        "has_hooks",
+        "draft",
+        "unknown"
+      ],
+      "type": "string"
+    },
+    "PullRequestContext": {
+      "additionalProperties": false,
+      "description": "The single serialisable snapshot produced by `collect` and consumed by every downstream stage.\n\nSerialisable in the strict sense: JSON round-trips without loss. No `Date`, no `undefined`-vs-missing distinction beyond the one documented at the top of this file, no class instances. Fixtures are recorded by writing this to disk and replaying it (PR-012).",
+      "properties": {
+        "additions": {
+          "type": "number"
+        },
+        "author": {
+          "type": "string"
+        },
+        "authorAssociation": {
+          "$ref": "#/definitions/AuthorAssociation"
+        },
+        "baseBranch": {
+          "type": "string"
+        },
+        "baseChecks": {
+          "description": "Check runs on the base commit the PR branched from.\n\nNot a secondary field. 63 of the 71 archived PRs with a failing check were failing a check that was **already failing here** — the finding PR-003 is built on. This is the primary signal, and the reader is the maintainer.",
+          "items": {
+            "$ref": "#/definitions/CheckRun"
+          },
+          "type": "array"
+        },
+        "baseSha": {
+          "type": "string"
+        },
+        "changedFiles": {
+          "type": "number"
+        },
+        "checks": {
+          "description": "Check runs on  {@link  PullRequestContext.headSha } .",
+          "items": {
+            "$ref": "#/definitions/CheckRun"
+          },
+          "type": "array"
+        },
+        "closedAt": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Timestamp"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "`null` while the PR is open."
+        },
+        "collectedAt": {
+          "$ref": "#/definitions/Timestamp",
+          "description": "When `collect` ran. Not when the PR changed."
+        },
+        "comments": {
+          "items": {
+            "$ref": "#/definitions/Comment"
+          },
+          "type": "array"
+        },
+        "commits": {
+          "items": {
+            "$ref": "#/definitions/Commit"
+          },
+          "type": "array"
+        },
+        "config": {
+          "$ref": "#/definitions/RepoConfig"
+        },
+        "createdAt": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "deletions": {
+          "type": "number"
+        },
+        "diff": {
+          "$ref": "#/definitions/CappedDiff"
+        },
+        "files": {
+          "items": {
+            "$ref": "#/definitions/ChangedFile"
+          },
+          "type": "array"
+        },
+        "headBranch": {
+          "type": "string"
+        },
+        "headRepo": {
+          "description": "`owner/repo` of the head. Differs from the base repo when `isFork`.",
+          "type": "string"
+        },
+        "headSha": {
+          "type": "string"
+        },
+        "isDraft": {
+          "type": "boolean"
+        },
+        "isFork": {
+          "description": "Whether the head branch lives in a fork.\n\n134 of the 159 archived PRs are from forks. This is the population the project exists for and the reason the trigger model is what it is — a rule or renderer that ignores it is reasoning about the wrong users.",
+          "type": "boolean"
+        },
+        "isMerged": {
+          "type": "boolean"
+        },
+        "linkedIssues": {
+          "items": {
+            "$ref": "#/definitions/LinkedIssue"
+          },
+          "type": "array"
+        },
+        "mergeableState": {
+          "$ref": "#/definitions/MergeableState",
+          "description": "See  {@link  MergeableState }  — `'unknown'` is not `'clean'`."
+        },
+        "mergedAt": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Timestamp"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "`null` unless the PR was merged."
+        },
+        "number": {
+          "type": "number"
+        },
+        "reviews": {
+          "items": {
+            "$ref": "#/definitions/Review"
+          },
+          "type": "array"
+        },
+        "schemaVersion": {
+          "const": 1,
+          "description": "Bumped when a change to this shape invalidates recorded fixtures.",
+          "type": "number"
+        },
+        "state": {
+          "enum": [
+            "open",
+            "closed"
+          ],
+          "type": "string"
+        },
+        "updatedAt": {
+          "$ref": "#/definitions/Timestamp"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "collectedAt",
+        "number",
+        "author",
+        "authorAssociation",
+        "state",
+        "isDraft",
+        "isMerged",
+        "createdAt",
+        "updatedAt",
+        "closedAt",
+        "mergedAt",
+        "baseBranch",
+        "headBranch",
+        "baseSha",
+        "headSha",
+        "isFork",
+        "mergeableState",
+        "additions",
+        "deletions",
+        "changedFiles"
+      ],
+      "type": "object"
+    },
+    "RepoConfig": {
+      "additionalProperties": false,
+      "description": "Adopter configuration in effect for this scan (PR-040).",
+      "properties": {
+        "disabledRules": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "dryRun": {
+          "type": "boolean"
+        },
+        "labelPrefix": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Review": {
+      "additionalProperties": false,
+      "description": "A review left on the PR.",
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "APPROVED",
+            "CHANGES_REQUESTED",
+            "COMMENTED",
+            "DISMISSED",
+            "PENDING"
+          ],
+          "type": "string"
+        },
+        "submittedAt": {
+          "$ref": "#/definitions/Timestamp"
+        }
+      },
+      "required": [
+        "author",
+        "state"
+      ],
+      "type": "object"
+    },
+    "Timestamp": {
+      "description": "ISO-8601 timestamp, e.g. `2026-08-04T11:30:23Z`. Always UTC.",
+      "type": "string"
+    }
+  }
+}

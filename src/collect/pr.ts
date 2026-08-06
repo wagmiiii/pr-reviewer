@@ -1,5 +1,25 @@
 import { Octokit } from 'octokit';
-import type { PullRequestContext } from '../types.js';
+import type { MergeableState, PullRequestContext } from '../types.js';
+
+const MERGEABLE_STATES: readonly MergeableState[] = [
+  'clean',
+  'dirty',
+  'blocked',
+  'behind',
+  'unstable',
+  'has_hooks',
+  'draft',
+  'unknown',
+];
+
+/**
+ * GitHub types `mergeable_state` as a bare string. Anything we do not recognise
+ * becomes `'unknown'` rather than being passed through — a rule must never see
+ * a state it cannot reason about, and `'unknown'` is the honest answer.
+ */
+function toMergeableState(value: string | undefined): MergeableState {
+  return MERGEABLE_STATES.find((state) => state === value) ?? 'unknown';
+}
 
 export async function collectPullRequestCore(
   octokit: Octokit,
@@ -37,7 +57,7 @@ export async function collectPullRequestCore(
     headBranch: pr.head.ref,
     baseSha: pr.base.sha,
     headSha: pr.head.sha,
-    mergeableState: pr.mergeable_state || 'unknown',
+    mergeableState: toMergeableState(pr.mergeable_state),
     additions: pr.additions,
     deletions: pr.deletions,
     changedFiles: pr.changed_files,

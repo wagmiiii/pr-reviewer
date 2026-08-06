@@ -21,7 +21,8 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test"
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test",
+    "schema": "ts-json-schema-generator --path src/types.ts --type PullRequestContext --tsconfig tsconfig.json --no-type-check -o schema/pull-request-context.schema.json"
   },
   "repository": {
     "type": "git",
@@ -34,8 +35,10 @@
   "homepage": "https://github.com/wagmiiii/pr-reviewer#readme",
   "devDependencies": {
     "@types/node": "^26.1.2",
+    "ajv": "^8.20.0",
     "eslint": "^10.8.0",
     "prettier": "^3.9.6",
+    "ts-json-schema-generator": "^2.9.0",
     "tsup": "^8.5.1",
     "typescript": "^7.0.2",
     "vitest": "^3.2.7"
