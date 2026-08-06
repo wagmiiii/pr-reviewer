@@ -86,6 +86,7 @@ export async function applyLabels(
   repo: string,
   pullNumber: number,
   desired: Set<ManagedLabel>,
+  dryRun: boolean = false,
 ): Promise<void> {
   const pr = await octokit.rest.pulls.get({ owner, repo, pull_number: pullNumber });
   const actual = pr.data.labels.map((l: any) => l.name);
@@ -93,6 +94,13 @@ export async function applyLabels(
   const { add, remove } = reconcileLabels(desired, actual);
 
   if (add.length === 0 && remove.length === 0) {
+    return;
+  }
+
+  if (dryRun) {
+    console.log(`[DRY RUN] Label reconciliation for #${pullNumber}:`);
+    if (add.length > 0) console.log(`  + Add: ${add.join(', ')}`);
+    if (remove.length > 0) console.log(`  - Remove: ${remove.join(', ')}`);
     return;
   }
 
