@@ -127,7 +127,7 @@ Re-plan after Sprint 4. Everything beyond it is conditional on a gate.
 
 ## Backlog
 
-Status of every ticket at time of writing: `Done` for PR-001, PR-002, PR-003, PR-004, PR-005, PR-010, PR-011, PR-013, PR-014, PR-020, PR-021, PR-022, PR-023; `In Progress` for PR-026; `Ready` for PR-012; `Backlog` for everything else.
+Status of every ticket at time of writing: `Done` for PR-001, PR-002, PR-003, PR-004, PR-005, PR-010, PR-011, PR-013, PR-014, PR-020, PR-021, PR-022, PR-023; `In Review` for PR-026; `Ready` for PR-012; `Backlog` for everything else.
 
 ### Sprint 0 — Validation and scaffold
 
