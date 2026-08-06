@@ -59,3 +59,5 @@ export function deriveStatus(results: readonly RuleResult[]): TriageStatus {
 export * from './ci.js';
 export * from './mergeability.js';
 export * from './review.js';
+export * from './path.js';
+export * from './contributor.js';
