@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:13:33Z",
+  "number": 77,
+  "author": "mallison031",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-20T10:56:54Z",
+  "updatedAt": "2026-07-20T11:02:23Z",
+  "closedAt": "2026-07-20T11:02:23Z",
+  "mergedAt": "2026-07-20T11:02:23Z",
+  "baseBranch": "main",
+  "headBranch": "chore/remove-internal-ops-files",
+  "baseSha": "46259440edcc11e1ac03ada798fc463ea1e174da",
+  "headSha": "2284a8c8effdd0f5ed6557ec8fe7d6a8c845746f",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 0,
+  "deletions": 157,
+  "changedFiles": 5,
+  "reviews": [
+    {
+      "author": "wagmiiii",
+      "state": "APPROVED",
+      "submittedAt": "2026-07-20T10:58:51Z"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "2284a8c8effdd0f5ed6557ec8fe7d6a8c845746f",
+      "message": "chore: remove internal ops/tooling files not part of the shipped product\n\nRemoves Wave-application admin artifacts (launch checklist, demo script,\nissue-generation tooling, dev logs) that don't belong in a public Rust\ntool repo.",
+      "isVerified": false,
+      "authoredAt": "2026-07-20T10:56:50Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "conversation_id.txt",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 6
+    },
+    {
+      "filename": "demo_script.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 23
+    },
+    {
+      "filename": "launch_checklist.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 27
+    },
+    {
+      "filename": "project_log.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 25
+    },
+    {
+      "filename": "scripts/generate_issues.sh",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 76
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29736804406"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29736804406"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29328221344"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "29328221344"
+    }
+  ]
+}

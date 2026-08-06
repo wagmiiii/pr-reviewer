@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:49Z",
+  "number": 259,
+  "author": "LaTash1",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T12:52:34Z",
+  "updatedAt": "2026-07-26T16:39:26Z",
+  "closedAt": "2026-07-26T16:39:26Z",
+  "mergedAt": "2026-07-26T16:39:26Z",
+  "baseBranch": "main",
+  "headBranch": "increase",
+  "baseSha": "796fb8ca892be38ccbc34595e295425000196e16",
+  "headSha": "338737d47f7114290a5cb3302a15400747807fea",
+  "isFork": true,
+  "headRepo": "LaTash1/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 11,
+  "deletions": 1,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "338737d47f7114290a5cb3302a15400747807fea",
+      "message": "done",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T12:24:22Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "test_fixtures/smoke_test/src/lib.rs",
+      "status": "modified",
+      "additions": 11,
+      "deletions": 1
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30202928938"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30210906802"
+    }
+  ]
+}

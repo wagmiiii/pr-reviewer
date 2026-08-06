@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:13:51Z",
+  "number": 151,
+  "author": "samlogy1",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-23T20:04:23Z",
+  "updatedAt": "2026-07-24T10:37:19Z",
+  "closedAt": "2026-07-24T10:37:19Z",
+  "mergedAt": "2026-07-24T10:37:19Z",
+  "baseBranch": "main",
+  "headBranch": "fix/validate-lint-names",
+  "baseSha": "fd0500fd5c4bbe2b76571f155244ff20e7003eb5",
+  "headSha": "397dd0c8c48bd5e0d0f0e45a717f2a088cf35eb9",
+  "isFork": true,
+  "headRepo": "samlogy1/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 118,
+  "deletions": 12,
+  "changedFiles": 3,
+  "reviews": [
+    {
+      "author": "wagmiiii",
+      "state": "APPROVED",
+      "submittedAt": "2026-07-24T10:37:09Z"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "6fe6e62b78b4c223631744457736b1beb8610766",
+      "message": "docs: fix the invalid #[allow] suppression example in roadmap_mvp.md\n\nCloses #81",
+      "isVerified": false,
+      "authoredAt": "2026-07-23T19:54:54Z"
+    },
+    {
+      "sha": "729d5c35ffccd2d9ff85ec973fc55db1a0756691",
+      "message": "fix: validate budget.toml lint names and levels\n\nCloses #91",
+      "isVerified": false,
+      "authoredAt": "2026-07-23T20:02:14Z"
+    },
+    {
+      "sha": "06b11fe85d03e35c051d884f7043744dd27c8217",
+      "message": "Merge branch 'main' into fix/validate-lint-names",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T09:29:56Z"
+    },
+    {
+      "sha": "f2984b5ecdfdf9dd8637efceec658631b40142de",
+      "message": "Merge branch 'main' into fix/validate-lint-names",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T09:45:37Z"
+    },
+    {
+      "sha": "9276e23c00b804abf4a0ec3fc7c9889ec27df8a4",
+      "message": "Merge branch 'main' into fix/validate-lint-names",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T09:51:35Z"
+    },
+    {
+      "sha": "5f060074e64773857a9c048898f51bf9176f3b6e",
+      "message": "Merge branch 'main' into fix/validate-lint-names",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T09:51:51Z"
+    },
+    {
+      "sha": "91c0091f4ec7288179cd52b3a5a8cb34ae7f09d1",
+      "message": "Merge branch 'main' into fix/validate-lint-names",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T09:52:08Z"
+    },
+    {
+      "sha": "397dd0c8c48bd5e0d0f0e45a717f2a088cf35eb9",
+      "message": "chore: format files to fix CI",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T10:27:45Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/build.rs",
+      "status": "added",
+      "additions": 41,
+      "deletions": 0
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 71,
+      "deletions": 12
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 6,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5062828151,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@samlogy1 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-23T20:04:32Z",
+      "updatedAt": "2026-07-23T20:04:32Z"
+    },
+    {
+      "id": 5068508612,
+      "author": "wagmiiii",
+      "authorAssociation": "MEMBER",
+      "body": "Hi @samlogy1, it looks like the CI checks are currently failing for this PR. Could you please take a look and push a fix so we can merge this?",
+      "createdAt": "2026-07-24T09:54:13Z",
+      "updatedAt": "2026-07-24T09:54:13Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30086252881"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30086252881"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30086252881"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30084124784"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30084124784"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30084124784"
+    }
+  ]
+}

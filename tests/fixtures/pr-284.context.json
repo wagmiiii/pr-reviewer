@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:16:48Z",
+  "number": 284,
+  "author": "EthTobi",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": false,
+  "createdAt": "2026-07-27T12:17:15Z",
+  "updatedAt": "2026-07-27T13:29:11Z",
+  "closedAt": "2026-07-27T13:24:52Z",
+  "mergedAt": null,
+  "baseBranch": "main",
+  "headBranch": "refactor/task-16",
+  "baseSha": "5d6039a6d5c886f0b4ac5dde8ade6d6504571dc7",
+  "headSha": "899d01a1324f2692e41db55e3f1c9e2542d15667",
+  "isFork": true,
+  "headRepo": "EthTobi/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 0,
+  "deletions": 0,
+  "changedFiles": 0,
+  "reviews": [],
+  "commits": [],
+  "files": [],
+  "comments": [
+    {
+      "id": 5091229769,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@EthTobi Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-27T12:22:24Z",
+      "updatedAt": "2026-07-27T12:22:24Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30264034060"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "Dependabot",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30270389789"
+    },
+    {
+      "name": "Dependabot",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30270386667"
+    },
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30265203615"
+    }
+  ]
+}

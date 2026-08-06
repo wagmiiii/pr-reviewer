@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:16:44Z",
+  "number": 280,
+  "author": "EthTobi",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-27T10:26:52Z",
+  "updatedAt": "2026-07-27T14:36:20Z",
+  "closedAt": "2026-07-27T14:36:20Z",
+  "mergedAt": "2026-07-27T14:36:20Z",
+  "baseBranch": "main",
+  "headBranch": "fix/task-23",
+  "baseSha": "31470bf5c816aa87b0ef7c3d3b49f4223a5b4e05",
+  "headSha": "005a5cb5605a6c66ee2d10db9badab4f2bd276a7",
+  "isFork": true,
+  "headRepo": "EthTobi/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 85,
+  "deletions": 85,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "e524d66bdc20133ec5dbdf745fa908f040257b66",
+      "message": "fix: handle edge cases in config parser gracefully\n\nWhen the configuration file is empty, has unreadable permissions, or\ncontains type-mismatched values that prevent deserialization, the parser\nnow emits a warning (eprintln) and falls back to safe defaults instead\nof failing silently.",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T11:29:56Z"
+    },
+    {
+      "sha": "baa70a6a5fbffb25fa2fd170491236c9bbac06dc",
+      "message": "fix: resolve pre-existing compile errors in main.rs\n\nFix 7 pre-existing compile errors:\n- Replace undefined \"diagnostic\" references with \"message\" (3x)\n- Replace undefined \"span_obj\" with \"primary_span\"\n- Replace undefined \"msg_text\" with \"diagnostic_message\"\n- Add missing \"rules\" field to SarifToolDriver\n- Fix SarifRun.results type from Vec<Value> to Vec<SarifResult>",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T11:45:03Z"
+    },
+    {
+      "sha": "005a5cb5605a6c66ee2d10db9badab4f2bd276a7",
+      "message": "Merge branch 'main' into fix/task-23",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T14:35:07Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/config.rs",
+      "status": "modified",
+      "additions": 85,
+      "deletions": 85
+    }
+  ],
+  "comments": [
+    {
+      "id": 5090204924,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "fix your cl",
+      "createdAt": "2026-07-27T10:27:56Z",
+      "updatedAt": "2026-07-27T10:27:56Z"
+    },
+    {
+      "id": 5090295923,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@EthTobi Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-27T10:38:16Z",
+      "updatedAt": "2026-07-27T10:38:16Z"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30272008563"
+    }
+  ]
+}

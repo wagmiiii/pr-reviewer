@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:14:39Z",
+  "number": 187,
+  "author": "MidstCodes",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-25T12:05:54Z",
+  "updatedAt": "2026-07-28T13:36:12Z",
+  "closedAt": "2026-07-28T13:36:12Z",
+  "mergedAt": "2026-07-28T13:36:12Z",
+  "baseBranch": "main",
+  "headBranch": "feat/add-lint-for-multiple-sequential-reads-of-the-same-storage-key",
+  "baseSha": "818be0ac6670851a821d249311b0e778d8d1ae06",
+  "headSha": "f5648c2a17d97a5954163a805f5244fd83e06518",
+  "isFork": true,
+  "headRepo": "MidstCodes/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 228,
+  "deletions": 452,
+  "changedFiles": 6,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "f71c634aacae7b43af5946665a3837d6db1d1d84",
+      "message": "feat: add lint for multiple sequential reads of the same storage key\n\nAdds the soroban_redundant_storage_read lint that detects redundant\nget/has calls on the same Soroban storage key (Instance, Persistent,\nTemporary) without an intervening write. Uses check_block with per-block\nstate tracking for reliable sequential statement analysis.\n\n- New lint: SOROBAN_REDUNDANT_STORAGE_READ (warn)\n- Detects get->get, has->get, has->has of the same key\n- Write (set) resets tracking\n- Full UI test fixtures and real_sdk integration tests\n- Updated docs with scope/limitations documented\n\nCloses #48",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T12:04:43Z"
+    },
+    {
+      "sha": "6a590f9a247216ae1bc4f8b83845d5bc0ed0038a",
+      "message": "Merge branch 'main' into feat/add-lint-for-multiple-sequential-reads-of-the-same-storage-key",
+      "isVerified": true,
+      "authoredAt": "2026-07-25T12:07:42Z"
+    },
+    {
+      "sha": "f5648c2a17d97a5954163a805f5244fd83e06518",
+      "message": "Merge remote-tracking branch 'origin/main' into feat/add-lint-for-multiple-sequential-reads-of-the-same-storage-key",
+      "isVerified": false,
+      "authoredAt": "2026-07-28T13:35:59Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/tests/integration.rs",
+      "status": "modified",
+      "additions": 5,
+      "deletions": 381
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 3
+    },
+    {
+      "filename": "docs/lints/soroban_redundant_storage_read.md",
+      "status": "added",
+      "additions": 40,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 121,
+      "deletions": 4
+    },
+    {
+      "filename": "soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs",
+      "status": "modified",
+      "additions": 25,
+      "deletions": 21
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 33,
+      "deletions": 43
+    }
+  ],
+  "comments": [
+    {
+      "id": 5078425873,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@MidstCodes Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-25T12:07:51Z",
+      "updatedAt": "2026-07-25T12:07:51Z"
+    },
+    {
+      "id": 5079825350,
+      "author": "wagmiiii",
+      "authorAssociation": "MEMBER",
+      "body": "Hello! 👋 \n\nWe recently optimized and simplified the CI workflows on the `main` branch. \n\nSince this PR is currently failing its CI checks, could you please **rebase your branch onto `main`**? This will pull in the new workflow configurations and might automatically resolve the CI failures. \n\nLet us know if you need any help with the rebase!",
+      "createdAt": "2026-07-25T18:19:49Z",
+      "updatedAt": "2026-07-25T18:19:49Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30364258561"
+    },
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30364258561"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30364229800"
+    },
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30364229800"
+    }
+  ]
+}

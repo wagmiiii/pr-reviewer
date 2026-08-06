@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:16:07Z",
+  "number": 269,
+  "author": "Rafiat30",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T15:06:59Z",
+  "updatedAt": "2026-07-27T12:15:37Z",
+  "closedAt": "2026-07-27T12:15:36Z",
+  "mergedAt": "2026-07-27T12:15:36Z",
+  "baseBranch": "main",
+  "headBranch": "feat/excessive-vec-capacity",
+  "baseSha": "ef24f6d77d40ec6392602436bb66e896543ccb77",
+  "headSha": "673f1f4e167afd585ca60fd40d54c7e1ecf36b14",
+  "isFork": true,
+  "headRepo": "Rafiat30/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 77,
+  "deletions": 0,
+  "changedFiles": 3,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "5f68b831565a2e4d1d68b19385149dd201759da0",
+      "message": "feat: implement excessive_vec_capacity lint\n\nFlag Vec::with_capacity(N), .reserve(N), and .reserve_exact(N) calls\nwhere N is a hard-coded integer literal above 1024. Soroban's guest Wasm\ninstance runs against a small, hard-capped linear memory budget, so a\nlarge capacity reservation is charged the moment it's made regardless of\nwhether it's ever filled — unlike a long-running server process where\nover-reserving is cheap. Non-literal arguments (e.g. input.len()) are\nleft alone since they're already tied to a runtime-computed bound.\n\n- Add ExcessiveVecCapacity late lint pass matching both the free-function\n  call form (Vec::with_capacity) and the method-call form (.reserve/\n  .reserve_exact), using typeck results to confirm the receiver/return\n  type is std/alloc's Vec.\n- Add strip_generic_segments/match_generic_fn_path helpers: rustc's\n  def_path_str embeds the enclosing impl's generic parameter list for\n  associated functions on generic types (e.g. `Vec::<T>::with_capacity`),\n  which a plain suffix match against the existing match_soroban_def_path\n  helper can't see through.\n- Add UI fixtures covering all three flagged call forms, a small literal,\n  a non-literal (input-derived) capacity, incremental growth via\n  Vec::new(), and an #[allow] suppression case.\n- Document the lint in docs/lints/excessive_vec_capacity.md, the README\n  feature list, docs/lints/README.md, docs/cost_rationale.md, and\n  CHANGELOG.md.\n\nCloses #46",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T15:05:05Z"
+    },
+    {
+      "sha": "5e9e9251d4c9aa1fb070d65263b5308709cfad42",
+      "message": "Merge remote-tracking branch 'upstream/main' into feat/excessive-vec-capacity\n\n# Conflicts:\n#\tsoroban_cost_lints/ui/main.stderr",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T15:50:24Z"
+    },
+    {
+      "sha": "cab2395c52f88d551fa181c6ae6c19aea07fdd6e",
+      "message": "fix: resolve CI build failures in SARIF output and fixture workspace\n\n- SarifRun.results was typed Vec<SarifResult> while the SARIF result\n  builder constructed plain serde_json::Value objects via json!(),\n  a leftover mismatch from a prior merge that broke compilation.\n  Retype results as Vec<serde_json::Value>, drop the now-dead typed\n  Sarif* structs, and wire the already-collected rule descriptors\n  into tool.driver.rules.\n- integration.rs used HashSet<String> but inserted &str literals;\n  fix the declared type.\n- alpha/beta fixture crates each declared their own [workspace]\n  while also being listed as members of the parent workspace,\n  causing cargo metadata to fail with \"multiple workspace roots\n  found\". Drop the redundant per-crate [workspace] tables.\n\nThese were the actual cause of the \"SARIF result missing level\"\nCI failures reported on PRs #232, #267, #269, #270 (all inherited\nthe same broken merge state) — the binary failed to compile, it\nwas not a runtime field-mapping bug.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T20:14:29Z"
+    },
+    {
+      "sha": "673f1f4e167afd585ca60fd40d54c7e1ecf36b14",
+      "message": "Merge branch 'main' into feat/excessive-vec-capacity",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T09:41:49Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/cost_rationale.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/lints/excessive_vec_capacity.md",
+      "status": "added",
+      "additions": 75,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5084216475,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@Rafiat30 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-26T15:50:33Z",
+      "updatedAt": "2026-07-26T15:50:33Z"
+    },
+    {
+      "id": 5089817939,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "fix your cl",
+      "createdAt": "2026-07-27T09:47:06Z",
+      "updatedAt": "2026-07-27T09:47:06Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30255040617"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30265179385"
+    }
+  ]
+}

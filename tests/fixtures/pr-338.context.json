@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:12:42Z",
+  "number": 338,
+  "author": "mallison031",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-08-04T11:30:23Z",
+  "updatedAt": "2026-08-04T11:38:39Z",
+  "closedAt": "2026-08-04T11:38:39Z",
+  "mergedAt": "2026-08-04T11:38:39Z",
+  "baseBranch": "main",
+  "headBranch": "docs/lighter-clone",
+  "baseSha": "8bdfe71ba08f919c4ef55e2466a52844d50e0aff",
+  "headSha": "10eea9b3e410e6caeee4813b179d9e4868315b77",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 49,
+  "deletions": 8,
+  "changedFiles": 4,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "10eea9b3e410e6caeee4813b179d9e4868315b77",
+      "message": "docs(contributing): recommend a blobless clone, and guard against a repeat\n\nCloning this repository transfers 252MB, but the working tree at HEAD is 1.1MB\nacross 152 files. Over 99% of the download is history: build artefacts were\ncommitted early on and removed later, and .gitignore does not retract what is\nalready in history.\n\n  soroban_cost_lints/test_fixtures/**/target/    932.6 MB of blobs\n  target/debug/                                  640.6 MB of blobs\n  all actual source                              ~10 MB\n\nThe largest single blob is a 36.1MB libstellar_xdr rlib, committed twice. The\nfiles were added around #281 and removed in #328, so they are absent from the\ntree yet still paid for on every clone.\n\nDocument `--filter=blob:none` in the six places a clone is described. A blobless\nclone keeps the complete history and every branch, fetching file contents on\ndemand:\n\n  plain clone            252 MB    minutes    full history\n  --depth 1              432 KB    2.1 s      1 commit\n  --filter=blob:none     1.1 MB    4.8 s      full history (351 commits)\n\nNothing prevented the artefacts being committed in the first place — there is no\npre-commit config and no size check in CI — so add a repo-hygiene job that fails\non any tracked path under target/ or any tracked file over 5MB. The largest\nlegitimate tracked file is ~108KB, so that threshold has wide headroom. It is\naggregated into build-and-test rather than exposed separately, to keep a single\nrequired status context.\n\nA history rewrite would take the repository to ~10MB permanently, but it would\nbreak all 68 forks and invalidate commit SHAs cited across open issues, so it is\ndeliberately not attempted here.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01ToyjQ3F5ogZ4G2C3YRpH4N",
+      "isVerified": false,
+      "authoredAt": "2026-08-04T11:30:14Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 35,
+      "deletions": 2
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 10,
+      "deletions": 2
+    },
+    {
+      "filename": "docs/custom_lint_guide.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "filename": "docs/windows_setup.md",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 3
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30905080478"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30905080615"
+    },
+    {
+      "name": "test (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30905080478"
+    },
+    {
+      "name": "repo-hygiene",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30905080478"
+    },
+    {
+      "name": "test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30905080478"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30905168035"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30905168047"
+    },
+    {
+      "name": "test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30905168035"
+    },
+    {
+      "name": "test (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30905168035"
+    }
+  ]
+}

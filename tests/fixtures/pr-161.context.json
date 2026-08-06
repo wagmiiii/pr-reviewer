@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:14:11Z",
+  "number": 161,
+  "author": "aojomo",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-24T11:03:57Z",
+  "updatedAt": "2026-07-24T13:08:00Z",
+  "closedAt": "2026-07-24T13:08:00Z",
+  "mergedAt": "2026-07-24T13:08:00Z",
+  "baseBranch": "main",
+  "headBranch": "main",
+  "baseSha": "d67fc1eca8ea6e0472697055a02bb448f70f1c21",
+  "headSha": "3cf90dfea890ab053493bfa4bf1796de5f7815d2",
+  "isFork": true,
+  "headRepo": "aojomo/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 0,
+  "deletions": 0,
+  "changedFiles": 0,
+  "reviews": [
+    {
+      "author": "wagmiiii",
+      "state": "APPROVED",
+      "submittedAt": "2026-07-24T11:14:37Z"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "c105ec2e8363087c8ac54a785222d425e18906d2",
+      "message": "Merge upstream/main into main to sync with upstream\n\nSyncing fork with upstream changes including dependabot config, lint-proposal template, test fixtures for lint suppression, license file, changelog, toolchain pin validation, and removal of stale Cargo.lock from workspace member.\n\nNo merge conflicts encountered.",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T10:33:46Z"
+    },
+    {
+      "sha": "f5639450b2f2945a01128474a6a3f4f0efba8cf5",
+      "message": "Merge branch 'main' into main",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T11:09:51Z"
+    },
+    {
+      "sha": "13b22b0463520dd732e63e0f476b8295d32ab564",
+      "message": "Merge branch 'main' into main",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T11:13:36Z"
+    },
+    {
+      "sha": "19ea2c5686d6a829758d19a843f06a3c459dd9df",
+      "message": "Merge branch 'main' into main",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T11:23:23Z"
+    },
+    {
+      "sha": "3cf90dfea890ab053493bfa4bf1796de5f7815d2",
+      "message": "Merge branch 'main' into main",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T11:33:00Z"
+    }
+  ],
+  "files": [],
+  "comments": [],
+  "checks": [
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30089946247"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30089946247"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30089946247"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "Dependabot",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30089993817"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30089918464"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30089918464"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30089918464"
+    }
+  ]
+}

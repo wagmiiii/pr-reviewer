@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:19:00Z",
+  "number": 336,
+  "author": "wagmiiii",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-08-04T11:10:40Z",
+  "updatedAt": "2026-08-04T11:20:08Z",
+  "closedAt": "2026-08-04T11:20:08Z",
+  "mergedAt": "2026-08-04T11:20:07Z",
+  "baseBranch": "main",
+  "headBranch": "cleanup-readme",
+  "baseSha": "e489038c96617f2a99d390ebc1d7b7a072a2ca6d",
+  "headSha": "5e6698bd00453661f85383ff8705abe0a3d3cd6d",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 3,
+  "deletions": 190,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "5e6698bd00453661f85383ff8705abe0a3d3cd6d",
+      "message": "docs: clean up README.md and move detailed sections to docs/",
+      "isVerified": false,
+      "authoredAt": "2026-08-04T11:08:24Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 190
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30903730020"
+    },
+    {
+      "name": "test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30903730020"
+    },
+    {
+      "name": "test (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30903730020"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30903729865"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30902595813"
+    },
+    {
+      "name": "build-and-release",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30902842800"
+    },
+    {
+      "name": "cargo-deny check",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30902595859"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30902595857"
+    },
+    {
+      "name": "test (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30902595813"
+    },
+    {
+      "name": "test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30902595813"
+    }
+  ]
+}

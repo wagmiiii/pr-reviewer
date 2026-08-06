@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:16:54Z",
+  "number": 282,
+  "author": "Ayomide-257",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-27T12:07:01Z",
+  "updatedAt": "2026-07-28T13:17:36Z",
+  "closedAt": "2026-07-28T13:17:36Z",
+  "mergedAt": "2026-07-28T13:17:35Z",
+  "baseBranch": "main",
+  "headBranch": "feat/devcontainer-toolchain",
+  "baseSha": "6f9c057799b9a71286010a2f08e925dabfd61b1b",
+  "headSha": "0a3d4be60fc7f12166db04271a71bab293dbc52b",
+  "isFork": true,
+  "headRepo": "Ayomide-257/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 184,
+  "deletions": 1,
+  "changedFiles": 7,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "db95dc762d2572ee98983a0d1a4a560244816792",
+      "message": "feat: ship a pinned devcontainer and container image for the nightly + dylint toolchain\n\nAdd a Dockerfile and .devcontainer/devcontainer.json that provide a\nzero-setup development environment with the exact nightly toolchain,\ncompiler components (rustc-dev, llvm-tools-preview), and Dylint\nbinaries (cargo-dylint, dylint-link ^6.0.1) preinstalled.\n\nThe Dockerfile reads the nightly channel from ^Grust-toolchain^G at build\ntime using the same strict regex as ^Gvalidate-toolchain-pins.sh^G — no\nfifth hardcoded copy of the nightly string.\n\nSize optimizations:\n- ^G--profile minimal^G at rustup install time (no docs)\n- ^G--no-install-recommends^G for apt packages\n- cargo registry cache and git checkouts removed after install\n\nCI changes:\n- ^Gcontainer-test^G job (lint.yml): builds the image and runs\n  ^Gcargo test --workspace^G inside it on every PR/push\n- ^Gcontainer-publish.yml^G (new workflow): builds and pushes the image\n  to GHCR on push to main, triggered only by changes to\n  ^GDockerfile^G, ^Grust-toolchain^G, or the workflow itself\n\nDocs:\n- CONTRIBUTING.md: dev container documented as recommended setup\n- README.md: quick-start pointer to the container image\n\nCloses #105",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T11:39:09Z"
+    },
+    {
+      "sha": "0a3d4be60fc7f12166db04271a71bab293dbc52b",
+      "message": "Merge branch 'main' into feat/devcontainer-toolchain",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T12:09:48Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".devcontainer/devcontainer.json",
+      "status": "added",
+      "additions": 20,
+      "deletions": 0
+    },
+    {
+      "filename": ".dockerignore",
+      "status": "added",
+      "additions": 5,
+      "deletions": 0
+    },
+    {
+      "filename": ".github/workflows/container-publish.yml",
+      "status": "added",
+      "additions": 39,
+      "deletions": 0
+    },
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 21,
+      "deletions": 0
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 35,
+      "deletions": 1
+    },
+    {
+      "filename": "Dockerfile",
+      "status": "added",
+      "additions": 47,
+      "deletions": 0
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 17,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5091073700,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@Ayomide-257 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-27T12:07:09Z",
+      "updatedAt": "2026-07-27T12:07:09Z"
+    }
+  ],
+  "checks": [],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30362805704"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:18:31Z",
+  "number": 333,
+  "author": "mallison031",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-08-04T08:43:55Z",
+  "updatedAt": "2026-08-04T09:33:20Z",
+  "closedAt": "2026-08-04T09:33:19Z",
+  "mergedAt": "2026-08-04T09:33:19Z",
+  "baseBranch": "main",
+  "headBranch": "fix/deny-toml-schema",
+  "baseSha": "e23a352c914f3d83b5a7426645eabb2d305edc22",
+  "headSha": "0f07f16c78740847ca046ad0f701548c569c9d14",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 24,
+  "deletions": 18,
+  "changedFiles": 2,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "0f07f16c78740847ca046ad0f701548c569c9d14",
+      "message": "fix(ci): repair the cargo-deny config so the security audit actually runs\n\nThe security workflow has failed 11 out of 11 runs since it was added in #293\non 2026-07-27, on main as well as on pull requests. Every run failed while\ndeserializing deny.toml, before a single dependency was examined, so the repo\nhas had no vulnerability, license or supply-chain auditing at all — only the\nappearance of it. It surfaces on dependency PRs because security.yml has a\npaths filter for Cargo.toml/Cargo.lock.\n\ndeny.toml was written against an older cargo-deny schema and never validated\nagainst the action that consumes it, and EmbarkStudios/cargo-deny-action@v2 is\na floating tag, so the two drifted apart unnoticed:\n\n- `[advisories]` `vulnerability`, `unsound` and `notice` were removed from the\n  schema. Those advisories are now unconditional errors, acceptable only via an\n  `ignore` entry — stricter than the levels they replace, not weaker.\n- `[advisories] unmaintained` became a scope enum. Set to \"workspace\", the\n  upstream default: \"all\" reaches transitive dependencies this project cannot\n  act on.\n- `[licenses]` `unlicensed` and `copyleft` were removed. The `allow` list is now\n  exhaustive, so unlicensed crates and copyleft licenses are denied by omission.\n\nWith the config parsing, the check runs for the first time and reports clean\nadvisories, bans and sources. Two license findings, both addressed here:\n\n- generate-lint-docs declared no license, unlike its two sibling crates. Added\n  `license = \"Apache-2.0\"` to match them and the repository LICENSE.\n- rustc_apfloat is `Apache-2.0 WITH LLVM-exception`, reached transitively\n  through the rustc/clippy internals. Allowed: the exception only removes a\n  restriction, making it strictly more permissive than the plain Apache-2.0\n  already allowed.\n\nAlso dropped the `ISC` allowance, which matched no dependency in the graph.\n\nVerified locally with cargo-deny 0.20.2:\n  advisories ok, bans ok, licenses ok, sources ok\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01ToyjQ3F5ogZ4G2C3YRpH4N",
+      "isVerified": false,
+      "authoredAt": "2026-08-04T08:43:40Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "deny.toml",
+      "status": "modified",
+      "additions": 21,
+      "deletions": 18
+    },
+    {
+      "filename": "tools/generate-lint-docs/Cargo.toml",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 0
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30893199290"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30893199561"
+    },
+    {
+      "name": "cargo-deny check",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30893199288"
+    },
+    {
+      "name": "test (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30893199290"
+    },
+    {
+      "name": "test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30893199290"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30895545454"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30895545909"
+    },
+    {
+      "name": "publish",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30895545790"
+    },
+    {
+      "name": "test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30895545454"
+    },
+    {
+      "name": "test (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30895545454"
+    }
+  ]
+}

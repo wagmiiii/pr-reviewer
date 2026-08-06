@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-06T07:03:39Z",
+  "number": 311,
+  "author": "enny791",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-28T08:07:03Z",
+  "updatedAt": "2026-07-28T13:15:32Z",
+  "closedAt": "2026-07-28T13:15:31Z",
+  "mergedAt": "2026-07-28T13:15:31Z",
+  "baseBranch": "main",
+  "headBranch": "fix/storage-in-loop-closures",
+  "baseSha": "8de307a33c913cd68ea10bce6c745973b9a27c93",
+  "headSha": "201afcb35779f9711331bd51b7726e159c39017d",
+  "isFork": true,
+  "headRepo": "enny791/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 176,
+  "deletions": 34,
+  "changedFiles": 3,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "201afcb35779f9711331bd51b7726e159c39017d",
+      "message": "fix: detect storage operations inside iterator closures in storage_in_loop\n\nExtend SorobanStorageInLoop to use enclosing_loop_or_closure instead\nof enclosing_loop, so it also fires for multi-call closures such as\niterator adapter closures (for_each, map, fold).\n\nSingle-call closures like Option::map are already excluded by\nget_enclosing_loop_or_multi_call_closure.\n\nCloses #5",
+      "isVerified": false,
+      "authoredAt": "2026-07-28T08:04:29Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 5,
+      "deletions": 5
+    },
+    {
+      "filename": "soroban_cost_lints/ui/soroban_storage_in_loop.rs",
+      "status": "modified",
+      "additions": 24,
+      "deletions": 5
+    },
+    {
+      "filename": "soroban_cost_lints/ui/soroban_storage_in_loop.stderr",
+      "status": "modified",
+      "additions": 147,
+      "deletions": 24
+    }
+  ],
+  "comments": [],
+  "checks": [],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30362481608"
+    }
+  ]
+}

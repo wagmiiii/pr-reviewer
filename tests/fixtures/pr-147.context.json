@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:13:43Z",
+  "number": 147,
+  "author": "webdevayo",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-23T16:03:52Z",
+  "updatedAt": "2026-07-24T11:32:33Z",
+  "closedAt": "2026-07-24T11:32:33Z",
+  "mergedAt": "2026-07-24T11:32:33Z",
+  "baseBranch": "main",
+  "headBranch": "test/real-sdk-integration",
+  "baseSha": "b79d465b533559484a13f19026f65ecf209cda6c",
+  "headSha": "70403ea8be99b19c1695eff3f9bb609a4338485a",
+  "isFork": true,
+  "headRepo": "webdevayo/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 2079,
+  "deletions": 35,
+  "changedFiles": 10,
+  "reviews": [
+    {
+      "author": "wagmiiii",
+      "state": "APPROVED",
+      "submittedAt": "2026-07-24T09:53:10Z"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "c1d98c591120ac6d386c24c50bfedd7b3aa038cb",
+      "message": "test: lint against real soroban-sdk and harden type path resolution",
+      "isVerified": false,
+      "authoredAt": "2026-07-23T16:03:16Z"
+    },
+    {
+      "sha": "6fd325765e7351e4eefbae01ab37fd20e5601d93",
+      "message": "test: lint against real soroban-sdk and harden type path resolution",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T09:04:22Z"
+    },
+    {
+      "sha": "57a704b3094b37de0a6f6b3eed9cd85806b35863",
+      "message": "Merge branch 'main' into test/real-sdk-integration",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T09:52:28Z"
+    },
+    {
+      "sha": "dfa431e3f982799d6d6a07278321fed4b4a79021",
+      "message": "test: update UI test snapshot for new test cases in main.rs",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T11:21:29Z"
+    },
+    {
+      "sha": "66df64ca87d22b0cdb5ce006a36e9d61724f4969",
+      "message": "Fix failing test in soroban_cost_lints",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T11:26:27Z"
+    },
+    {
+      "sha": "70403ea8be99b19c1695eff3f9bb609a4338485a",
+      "message": "Merge branch 'main' into test/real-sdk-integration",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T11:27:15Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0
+    },
+    {
+      "filename": "Cargo.toml",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 0
+    },
+    {
+      "filename": "opencode.json",
+      "status": "added",
+      "additions": 18,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/Cargo.toml",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 55,
+      "deletions": 22
+    },
+    {
+      "filename": "soroban_cost_lints/test_fixtures/real_sdk/Cargo.lock",
+      "status": "added",
+      "additions": 1911,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/test_fixtures/real_sdk/Cargo.toml",
+      "status": "added",
+      "additions": 10,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs",
+      "status": "added",
+      "additions": 53,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 14,
+      "deletions": 2
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 11,
+      "deletions": 11
+    }
+  ],
+  "comments": [
+    {
+      "id": 5060627334,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@webdevayo Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-23T16:04:04Z",
+      "updatedAt": "2026-07-23T16:04:04Z"
+    },
+    {
+      "id": 5060793817,
+      "author": "wagmiiii",
+      "authorAssociation": "MEMBER",
+      "body": "@webdevayo please fix CI issues so i can merge",
+      "createdAt": "2026-07-23T16:21:21Z",
+      "updatedAt": "2026-07-23T16:21:21Z"
+    },
+    {
+      "id": 5061529211,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "Rectify this mistake ",
+      "createdAt": "2026-07-23T17:42:01Z",
+      "updatedAt": "2026-07-23T17:42:01Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30089618384"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30089618384"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30089618384"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30089306099"
+    },
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30089306099"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30089306099"
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:49Z",
+  "number": 255,
+  "author": "Olasunkanmi975",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T12:03:51Z",
+  "updatedAt": "2026-07-26T12:44:00Z",
+  "closedAt": "2026-07-26T12:43:59Z",
+  "mergedAt": "2026-07-26T12:43:59Z",
+  "baseBranch": "main",
+  "headBranch": "test/real-world-corpus",
+  "baseSha": "db8769d1f96a17d1f32105bc1e527d2f40b95dc5",
+  "headSha": "53d525acb08ab00ac8bc288b39a5310dec367f91",
+  "isFork": true,
+  "headRepo": "Olasunkanmi975/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 643,
+  "deletions": 72,
+  "changedFiles": 14,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "19c1cd41a1970e8b3cdec188f2a37510a6b36dcd",
+      "message": "docs: add guide on handling false positives\n\n- Create docs/false_positives.md covering:\n  - Definition and known false positive patterns per lint\n  - Three suppression methods: #[allow], .lintignore, budget.toml\n  - How to evaluate and report false positives\n  - Verification of suppression in tests\n- Update docs/SUMMARY.md with new guide entry\n- Update README.md suppression section to reference the guide\n- Add batch_write_different_keys test fixture demonstrating\n  realistic false-positive suppression scenario",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T21:49:46Z"
+    },
+    {
+      "sha": "93cefff1f60ebfeae97de3922562c196cbee05cc",
+      "message": "fix: update stderr line numbers after adding batch_write_different_keys test fixture",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T22:02:08Z"
+    },
+    {
+      "sha": "91a2c5247ac9d33d438490e3e9d92eb981d781da",
+      "message": "fix(redundant_env_clone): skip lint when clone is needed for compilation\n\nAdd two guards to RedundantEnvClone::check_expr:\n- Skip if the receiver has reference layers (&Env, &mut Env) — clone\n  produces an owned Env from a borrow.\n- Skip if the original Env binding is used again after the clone — both\n  original and clone are live.\n\nWhen the receiver isn't a simple local binding (e.g. field access),\nthe lint conservatively skips.\n\nUpdate UI test fixtures and stderr to cover the new non-flagged cases.\nDocument known false positives in the lint reference page.",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T22:32:16Z"
+    },
+    {
+      "sha": "f17d6f0837475699469bfd18cdcd417f74776d28",
+      "message": "fix: correct stderr whitespace for Symbol::new warning entries\n\nThe UI test framework does exact byte-level comparison. Three lines in\nthe Symbol::new sections had 4-space indent before '|' instead of the\nexpected 3-space indent, causing cargo test to exit 101.",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T22:42:08Z"
+    },
+    {
+      "sha": "d2048edf10316c4274cc26c117d597f7c8ada674",
+      "message": "docs: document budget.toml config contract, levels, names, DYLINT_RUSTFLAGS, precedence\n\nRewrite the Local Configuration section of docs/integration.md to\ndescribe the actual behaviour in cargo-cost-lint/src/main.rs:\n\n- Accepted levels: allow/warn/deny (unrecognised levels silently skipped)\n- Lint names must match rustc names exactly (unrecognised keys silently skipped)\n- DYLINT_RUSTFLAGS is appended to, not replaced\n- Precedence order: source attributes > compiler flags > defaults\n- Current limitations: the config block is a stub (issue #177)\n\nAlso shorten README.md Configuration to a concise link to the guide.",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T06:40:16Z"
+    },
+    {
+      "sha": "b45066f701fb9a91c504f7219b5c870a894cadbc",
+      "message": "fix: sync main.rs and main.stderr with upstream/main\n\nUpdate ui test fixtures and expected output to match upstream:\n- Add new lint fixture sections: storage_write_without_read,\n  inefficient_bytes_concat, map_insert_in_loop, bytes_append_in_loop\n- Update all stderr line references to match the merged main.rs\n- Fixes CI test failure (exit code 101) due to stderr drift",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T09:26:42Z"
+    },
+    {
+      "sha": "b4fa05f72b4daf1ed419167ebbcc89d7cf7b9c81",
+      "message": "fix: sync lib.rs from upstream/main (add missing lint impls)\n\nOur branch was missing the new lint implementations that upstream\nadded (storage_write_without_read, inefficient_bytes_concat,\nmap_insert_in_loop, bytes_append_in_loop) and their supporting code\n(SOROBAN_CONTAINER_TYPES, BYTES_APPEND_METHODS). Without these the\nui_test output did not match the stderr fixtures synced in the\nprevious commit.",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T09:39:32Z"
+    },
+    {
+      "sha": "14f15000dc7858f7487985f71bfd0f80cd2bf14e",
+      "message": "fix: re-sync soroban_cost_lints with latest upstream/main (db8769d)\n\nUpstream added a new lint quality commit (#238) that adds the\nbad_host_call_in_iterator_closure test fixture and updates\nlib.rs to detect host calls in iterator closures. Our branch\nwas synced to an older upstream commit, so the merge with\nlatest upstream/main caused the stderr to drift.",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T09:55:34Z"
+    },
+    {
+      "sha": "25a2b295a4555c1685ad41144b0b1d8d026deea8",
+      "message": "fix: correct stderr line number for closure warning in ui test\n\nThe stderr entry for bad_host_call_in_iterator_closure referenced\nmain.rs:254 but the actual code is at line 284. The upstream stderr\nat db8769d had this wrong line number, causing the ui_test to fail\non our branch.",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T10:08:05Z"
+    },
+    {
+      "sha": "6c27e2b4b82234cb4cb871e8f26fcdab3921ef28",
+      "message": "Merge upstream/main into docs/budget-toml-lint-contract",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T10:55:16Z"
+    },
+    {
+      "sha": "f54876b51b56e88616493cf5f8ee8233fa3fec20",
+      "message": "fix stderr line numbers: correct +32 offset for all new lints, fix warning count 27→28",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T11:15:26Z"
+    },
+    {
+      "sha": "828b397b3854189685831a676dcd5275c702c63a",
+      "message": "regenerate stderr to match actual compiler output (23 warnings, deduplicated, corrected line numbers, new help text)",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T11:23:30Z"
+    },
+    {
+      "sha": "48a150aff3795573e64c7733021a5362f5441afc",
+      "message": "fix: add trailing blank line to stderr (compiler output ends with \\n\\n)",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T11:44:58Z"
+    },
+    {
+      "sha": "f9927dc52b75704c8a4bf589ae3baadb2a2ab975",
+      "message": "feat: add real-world contract corpus and false-positive benchmarking harness\n\n- Vendored Soroban contract fixtures (token, timelock, swap) in tests/corpus/contracts/\n- Added LICENSES.md documenting license and vendoring rationale\n- Created test harness at cargo-cost-lint/tests/real_world_corpus.rs that:\n  - Runs cargo-cost-lint on each corpus contract\n  - Triages findings as TP or FP based on ALWAYS_TP list\n  - Supports BLESS=1 env var to update baseline.json\n  - Fails if FP count exceeds recorded baseline\n- Added baseline.json (empty, will be populated on first CI run)\n- Updated CI workflow to build corpus contracts and generate baseline\n- Excluded corpus contracts from workspace\n- Cleaned up .gitignore",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T12:00:51Z"
+    },
+    {
+      "sha": "0ac1ff5fdc770897818b7a30d73a234856b13b6d",
+      "message": "style: format real_world_corpus test with rustfmt",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T12:06:39Z"
+    },
+    {
+      "sha": "adbde20749e71de6bcff019d8750b7e3954d1411",
+      "message": "style: fix indentation in for loop body",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T12:09:37Z"
+    },
+    {
+      "sha": "53d525acb08ab00ac8bc288b39a5310dec367f91",
+      "message": "fix: build soroban_cost_lints cdylib before running corpus test",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T12:17:02Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 10,
+      "deletions": 0
+    },
+    {
+      "filename": ".gitignore",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0
+    },
+    {
+      "filename": "Cargo.toml",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 1
+    },
+    {
+      "filename": "cargo-cost-lint/tests/real_world_corpus.rs",
+      "status": "added",
+      "additions": 277,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 51,
+      "deletions": 4
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 27,
+      "deletions": 67
+    },
+    {
+      "filename": "tests/corpus/LICENSES.md",
+      "status": "added",
+      "additions": 25,
+      "deletions": 0
+    },
+    {
+      "filename": "tests/corpus/baseline.json",
+      "status": "added",
+      "additions": 5,
+      "deletions": 0
+    },
+    {
+      "filename": "tests/corpus/contracts/swap/Cargo.toml",
+      "status": "added",
+      "additions": 10,
+      "deletions": 0
+    },
+    {
+      "filename": "tests/corpus/contracts/swap/src/lib.rs",
+      "status": "added",
+      "additions": 76,
+      "deletions": 0
+    },
+    {
+      "filename": "tests/corpus/contracts/timelock/Cargo.toml",
+      "status": "added",
+      "additions": 10,
+      "deletions": 0
+    },
+    {
+      "filename": "tests/corpus/contracts/timelock/src/lib.rs",
+      "status": "added",
+      "additions": 65,
+      "deletions": 0
+    },
+    {
+      "filename": "tests/corpus/contracts/token/Cargo.toml",
+      "status": "added",
+      "additions": 10,
+      "deletions": 0
+    },
+    {
+      "filename": "tests/corpus/contracts/token/src/lib.rs",
+      "status": "added",
+      "additions": 71,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5083385034,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@Olasunkanmi975 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-26T12:04:09Z",
+      "updatedAt": "2026-07-26T12:04:09Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30201762301"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30196982467"
+    }
+  ]
+}

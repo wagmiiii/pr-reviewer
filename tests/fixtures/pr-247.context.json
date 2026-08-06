@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:30Z",
+  "number": 247,
+  "author": "codenerde",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T01:28:47Z",
+  "updatedAt": "2026-07-28T13:33:10Z",
+  "closedAt": "2026-07-28T13:33:09Z",
+  "mergedAt": "2026-07-28T13:33:09Z",
+  "baseBranch": "main",
+  "headBranch": "docs/task-19",
+  "baseSha": "ce8655eb21bc00e901e66c022dd447ecb8f8b727",
+  "headSha": "ddaf0c6e7ba1be6e70ffec7e1849c42d978e68ff",
+  "isFork": true,
+  "headRepo": "codenerde/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 171,
+  "deletions": 7,
+  "changedFiles": 6,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "6a779bc768148a2a2e4f07c2d26974390a644b45",
+      "message": "docs: expand setup instructions for Windows contributors (#205)",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T00:50:58Z"
+    },
+    {
+      "sha": "c1f13918a6ca1da3344f158950bce0241a7007f7",
+      "message": "Merge remote-tracking branch 'origin/main' into docs/task-19",
+      "isVerified": false,
+      "authoredAt": "2026-07-28T13:20:24Z"
+    },
+    {
+      "sha": "ddaf0c6e7ba1be6e70ffec7e1849c42d978e68ff",
+      "message": "Merge remote-tracking branch 'origin/main' into docs/task-19",
+      "isVerified": false,
+      "authoredAt": "2026-07-28T13:26:28Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/scripts/validate-toolchain-pins.ps1",
+      "status": "added",
+      "additions": 95,
+      "deletions": 0
+    },
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 5,
+      "deletions": 1
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 58,
+      "deletions": 3
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 6,
+      "deletions": 2
+    },
+    {
+      "filename": "templates/github-action.yml",
+      "status": "modified",
+      "additions": 5,
+      "deletions": 1
+    }
+  ],
+  "comments": [
+    {
+      "id": 5081391414,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@codenerde Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-26T01:28:55Z",
+      "updatedAt": "2026-07-26T01:28:55Z"
+    },
+    {
+      "id": 5089931161,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "resolve conflicts and fix cl",
+      "createdAt": "2026-07-27T09:59:19Z",
+      "updatedAt": "2026-07-27T09:59:19Z"
+    },
+    {
+      "id": 5089942577,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "resolve conflicts and fix cl",
+      "createdAt": "2026-07-27T10:00:34Z",
+      "updatedAt": "2026-07-27T10:00:34Z"
+    }
+  ],
+  "checks": [],
+  "baseChecks": []
+}

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:49Z",
+  "number": 256,
+  "author": "LaTash1",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T12:49:24Z",
+  "updatedAt": "2026-07-26T16:40:51Z",
+  "closedAt": "2026-07-26T16:40:51Z",
+  "mergedAt": "2026-07-26T16:40:51Z",
+  "baseBranch": "main",
+  "headBranch": "docs/task-7",
+  "baseSha": "d2b139547613c7ed110436d0fd26545c5ae9cbed",
+  "headSha": "ceceabbcbf504b19ba70b57908df09b063dd6b3d",
+  "isFork": true,
+  "headRepo": "LaTash1/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 12,
+  "deletions": 2,
+  "changedFiles": 2,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "338737d47f7114290a5cb3302a15400747807fea",
+      "message": "done",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T12:24:22Z"
+    },
+    {
+      "sha": "ceceabbcbf504b19ba70b57908df09b063dd6b3d",
+      "message": "bitwise",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T12:38:47Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "CHANGELOG.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "filename": "test_fixtures/smoke_test/src/lib.rs",
+      "status": "modified",
+      "additions": 11,
+      "deletions": 1
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30202822318"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30210936959"
+    }
+  ]
+}

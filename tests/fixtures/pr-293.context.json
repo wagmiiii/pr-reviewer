@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:17:38Z",
+  "number": 293,
+  "author": "smog123",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-27T14:38:08Z",
+  "updatedAt": "2026-07-27T14:39:54Z",
+  "closedAt": "2026-07-27T14:39:54Z",
+  "mergedAt": "2026-07-27T14:39:54Z",
+  "baseBranch": "main",
+  "headBranch": "ci/cargo-deny-audit",
+  "baseSha": "77d8b1e48c7cba890ad18da01ef0421cd7a9af0b",
+  "headSha": "de69ae550845d7654e0012a3d0e62f9fa6d3b3a8",
+  "isFork": true,
+  "headRepo": "smog123/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 134,
+  "deletions": 0,
+  "changedFiles": 2,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "de69ae550845d7654e0012a3d0e62f9fa6d3b3a8",
+      "message": "ci: integrate cargo-deny to audit dependency vulnerabilities and licenses\n\nAdd cargo-deny configuration and CI workflow to the repository to\nenforce security and license compliance on every PR.\n\n## Changes\n\n### deny.toml (new)\n- **Advisories:** Denies vulnerable, unmaintained, unsound, and yanked\n  crates via the RustSec Advisory Database. This catches supply-chain\n  risks before they reach production.\n- **Licenses:** Denies copyleft licenses (GPL, AGPL, LGPL, MPL-2.0)\n  and unlicensed crates. Allows the ecosystem-standard permissive\n  licenses: MIT, Apache-2.0, Unicode-3.0, and ISC. Includes an\n  explicit license exception for `clippy_utils` (pinned git dep from\n  rust-clippy whose license file may not be detectable by cargo-deny\n  from a git source).\n- **Sources:** Blocks unknown registries and git repositories.\n  Whitelists only `https://github.com/rust-lang/rust-clippy` for the\n  pinned clippy_utils dependency. Any future git dep added without\n  updating deny.toml will fail CI.\n- **Bans:** Warns on duplicate crate versions to encourage dependency\n  graph deduplication.\n\n### .github/workflows/security.yml (new)\n- Triggers on pushes and pull requests to `main` when dependency files\n  change (`Cargo.lock`, `Cargo.toml`, `deny.toml`, or the workflow\n  itself). Also supports manual `workflow_dispatch`.\n- Runs `EmbarkStudios/cargo-deny-action@v2` with `--all-features` to\n  scan all workspace members.\n- No separate Rust toolchain install needed — the action handles it\n  internally.\n\n## Why\n\nAs soroban-cost-linter brings in more external dependencies (Dylint,\nsyn, clippy_utils via git), we need automated guardrails to ensure we\naren’t accidentally inheriting vulnerable packages or copyleft-licensed\ncode that violates ecosystem policies.\n\nCloses #45",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T14:33:00Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/security.yml",
+      "status": "added",
+      "additions": 36,
+      "deletions": 0
+    },
+    {
+      "filename": "deny.toml",
+      "status": "added",
+      "additions": 98,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5092714010,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@smog123 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-27T14:38:16Z",
+      "updatedAt": "2026-07-27T14:38:16Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "cargo-deny check",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30276032346"
+    },
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30276032066"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30275885547"
+    }
+  ]
+}

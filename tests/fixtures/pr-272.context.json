@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:16:08Z",
+  "number": 272,
+  "author": "somotochukwu-dev",
+  "authorAssociation": "NONE",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T17:41:44Z",
+  "updatedAt": "2026-07-27T12:15:44Z",
+  "closedAt": "2026-07-27T12:15:44Z",
+  "mergedAt": "2026-07-27T12:15:44Z",
+  "baseBranch": "main",
+  "headBranch": "test/redundant-env-clone-ui",
+  "baseSha": "fec52a16012151956bb62f6b1cfd40705ac1e429",
+  "headSha": "a38defb1b2ed8f74cae808f076391d101cbb1789",
+  "isFork": true,
+  "headRepo": "somotochukwu-dev/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 145,
+  "deletions": 0,
+  "changedFiles": 2,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "a38defb1b2ed8f74cae808f076391d101cbb1789",
+      "message": "test: add dedicated UI test suite for redundant_env_clone lint rule\n\nAdd standalone .rs and .stderr files to soroban_cost_lints/ui/ covering\n4 triggering cases and 6 non-triggering cases for the redundant_env_clone\nlint, including reference cloning, post-clone usage, block expressions,\nshadowing, struct field receivers, and allow attributes.",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T17:40:51Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "soroban_cost_lints/ui/redundant_env_clone.rs",
+      "status": "added",
+      "additions": 110,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/ui/redundant_env_clone.stderr",
+      "status": "added",
+      "additions": 35,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5084642052,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@somotochukwu-dev Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-26T17:41:52Z",
+      "updatedAt": "2026-07-26T17:41:52Z"
+    },
+    {
+      "id": 5089744212,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "fix your cl",
+      "createdAt": "2026-07-27T09:39:24Z",
+      "updatedAt": "2026-07-27T09:39:24Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30213117785"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30265186296"
+    }
+  ]
+}

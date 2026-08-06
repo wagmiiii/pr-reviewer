@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:30Z",
+  "number": 245,
+  "author": "D-Lord-15",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T00:37:12Z",
+  "updatedAt": "2026-07-26T22:16:09Z",
+  "closedAt": "2026-07-26T22:16:09Z",
+  "mergedAt": "2026-07-26T22:16:09Z",
+  "baseBranch": "main",
+  "headBranch": "test/add-positive-negative-fixtures-#59-#62",
+  "baseSha": "4fd722e29b0413d65d52cb737d776825c7c7ea6d",
+  "headSha": "27b4c231b632c4c8e7b44d92720b9385433b78a1",
+  "isFork": true,
+  "headRepo": "D-Lord-15/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 211,
+  "deletions": 76,
+  "changedFiles": 9,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "7ac6785c226ce475b78e03014b536ae70b66206b",
+      "message": "test: add positive/negative UI fixtures for the four proposed follow-up lints\n\nCloses #59, #60, #61, #62\n\nEach section adds a bad_/good_/allowed_ triplet of fixture functions that\ndocuments the structural pattern the (not-yet-implemented) lint is expected\nto catch.\n\n  - excessive_vec_capacity       (issue #59) — Vec::with_capacity on a wildly\n    larger capacity than needed\n  - expensive_crypto_in_loop     (issue #60) — env.crypto() calls inside a\n    loop (loop-bound input so existing unnecessary_host_function_call does\n    not also fire and skew main.stderr)\n  - redundant_storage_read       (issue #61) — repeated storage::get of the\n    same key inside a function (kept outside any loop so the existing\n    soroban_storage_in_loop does not also fire)\n  - unnecessary_vec_allocation   (issue #62) — empty / unused Vec::new()\n    allocations\n\nThe mock soroban_sdk::Vec in this UI test now also exposes new() and\nwith_capacity() so the capacity fixture has something concrete to call.\n\nA crate-inner-attribute #![allow(unknown_lints)] sits at the top so rustc\ndoes not emit unknown_lints warnings for the seven #[allow(<future_lint>)]\nmarkers — those markers are forward-compatible: no-op until each lint is\nregistered in src/lib.rs, at which point they become real suppressions\nwithout any further edit.\n\nmain.stderr remains unchanged because the four lints are not yet wired\ninto the lint pass; the fixtures are a behavioural specification for when\nthey are.",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T00:09:33Z"
+    },
+    {
+      "sha": "6aeb3f8c57785af8ec1536b56f95d28815935dcd",
+      "message": "Merge branch 'Tollcraft:main' into test/add-positive-negative-fixtures-#59-#62",
+      "isVerified": true,
+      "authoredAt": "2026-07-26T15:13:55Z"
+    },
+    {
+      "sha": "09f6603c52e4a70edc724be7b2168a04b3cc3a1f",
+      "message": "Merge branch 'Tollcraft:main' into test/add-positive-negative-fixtures-#59-#62",
+      "isVerified": true,
+      "authoredAt": "2026-07-26T18:33:34Z"
+    },
+    {
+      "sha": "7313b23e1d579f0cb0c91cedaa72d99fcfb6029d",
+      "message": "fix formatting with cargo fmt",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T20:49:04Z"
+    },
+    {
+      "sha": "e8d160f546ae0fa05f6b0f2eb40e32ce9ca4b262",
+      "message": "fix type errors and clippy warnings",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T21:01:10Z"
+    },
+    {
+      "sha": "9a5eb99fc97c98b0c66a97ee5fe81082e6729ab6",
+      "message": "fix storage_iter_closure contract: import soroban_sdk vec macro and Vec type",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T21:05:02Z"
+    },
+    {
+      "sha": "cce27b2c604187760293580917680e7d7b1806aa",
+      "message": "fix soroban_sdk vec! macro usage: requires &env as first argument",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T21:10:09Z"
+    },
+    {
+      "sha": "a93d761e570673af6f1640853b092a8b1f437591",
+      "message": "fix cli_integration_workspace: remove workspace roots from child contracts",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T21:26:09Z"
+    },
+    {
+      "sha": "27b4c231b632c4c8e7b44d92720b9385433b78a1",
+      "message": "update ui test stderr line numbers (+12 shift)",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T21:54:12Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/config.rs",
+      "status": "modified",
+      "additions": 6,
+      "deletions": 6
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 39,
+      "deletions": 30
+    },
+    {
+      "filename": "cargo-cost-lint/tests/integration.rs",
+      "status": "modified",
+      "additions": 8,
+      "deletions": 9
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 126,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 23,
+      "deletions": 23
+    },
+    {
+      "filename": "tests/cli_integration_workspace/contracts/alpha/Cargo.toml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "filename": "tests/cli_integration_workspace/contracts/beta/Cargo.toml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "filename": "tests/corpus/contracts/storage_iter_closure/src/lib.rs",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 3
+    },
+    {
+      "filename": "tests/corpus/contracts/storage_iter_good/src/lib.rs",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 3
+    }
+  ],
+  "comments": [
+    {
+      "id": 5081234882,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@D-Lord-15 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-26T00:37:20Z",
+      "updatedAt": "2026-07-26T00:37:20Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30222030888"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30210979197"
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:14:12Z",
+  "number": 162,
+  "author": "CHASE3020",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-24T13:39:50Z",
+  "updatedAt": "2026-07-24T22:11:37Z",
+  "closedAt": "2026-07-24T22:11:37Z",
+  "mergedAt": "2026-07-24T22:11:37Z",
+  "baseBranch": "main",
+  "headBranch": "feature/json-output",
+  "baseSha": "415c4462244b8bb0c1ef7c1232a7b74d5d936617",
+  "headSha": "69dbcf868d17ee9665256870403323b59be49164",
+  "isFork": true,
+  "headRepo": "CHASE3020/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 291,
+  "deletions": 7,
+  "changedFiles": 7,
+  "reviews": [
+    {
+      "author": "wagmiiii",
+      "state": "APPROVED",
+      "submittedAt": "2026-07-24T18:59:06Z"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "1298999631393448059f25f050642cd52e6ed3aa",
+      "message": "feat: add --format json output to cargo-cost-lint for CI integration",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T13:40:09Z"
+    },
+    {
+      "sha": "fe7287b7093360dd04ef8689322f82f39597448c",
+      "message": "Merge branch 'main' into feature/json-output",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T14:18:03Z"
+    },
+    {
+      "sha": "8e51a8d1bdec21fe48f89054c8ffd1b87890b552",
+      "message": "Merge branch 'main' into feature/json-output",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T14:42:24Z"
+    },
+    {
+      "sha": "d1e6a5afb9556c8838c20cd4654797429973dc43",
+      "message": "fix: add rustfmt and clippy to rust-toolchain components to fix CI",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T14:52:22Z"
+    },
+    {
+      "sha": "3e1e58dbca622bd94b87700c5974a3cd128e2dfd",
+      "message": "chore: align CI with toolchain matrix and dummy jobs",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T15:06:17Z"
+    },
+    {
+      "sha": "3801e7324afd9eaa339f6fa4c6dd88a9b525651e",
+      "message": "fix: resolve compilation errors and formatting",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T15:35:39Z"
+    },
+    {
+      "sha": "65c9ce4133c55efa6aba7977043fc6e5867fb1ac",
+      "message": "style: format tests/integration.rs to fix CI",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T15:40:07Z"
+    },
+    {
+      "sha": "b130e03a8c216eb2facd5a404e3216c45ea8e521",
+      "message": "Merge branch 'main' into feature/json-output",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T15:39:41Z"
+    },
+    {
+      "sha": "289d8375d08111488e4a4a41b3aebcaa440c8e3d",
+      "message": "test: ensure soroban_cost_lints cdylib is built before integration tests",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T15:48:22Z"
+    },
+    {
+      "sha": "ce15dc54fd970a26112f33406250a67200134218",
+      "message": "test: run build from within soroban_cost_lints to use dylint-link config",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T15:57:52Z"
+    },
+    {
+      "sha": "f635c00f484c08fd5bc4ee4d73eb8d257211e6ab",
+      "message": "fix: resolve target dir and cargo executable dynamically in test",
+      "isVerified": false,
+      "authoredAt": "2026-07-24T16:05:08Z"
+    },
+    {
+      "sha": "00e8a90fee10f358f51a0bf13d3575592dd71127",
+      "message": "Merge branch 'main' into feature/json-output",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T16:04:53Z"
+    },
+    {
+      "sha": "92a5fda818ec977642e08a1e4f5fcc257c94d100",
+      "message": "Merge branch 'main' into feature/json-output",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T18:58:32Z"
+    },
+    {
+      "sha": "69dbcf868d17ee9665256870403323b59be49164",
+      "message": "Merge branch 'main' into feature/json-output",
+      "isVerified": true,
+      "authoredAt": "2026-07-24T22:08:20Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "filename": "cargo-cost-lint/Cargo.toml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 159,
+      "deletions": 7
+    },
+    {
+      "filename": "cargo-cost-lint/tests/integration.rs",
+      "status": "added",
+      "additions": 85,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 34,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0
+    },
+    {
+      "filename": "templates/github-action.yml",
+      "status": "modified",
+      "additions": 7,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5070848714,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@CHASE3020 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-24T14:18:15Z",
+      "updatedAt": "2026-07-24T14:18:15Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30130031303"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30130031303"
+    },
+    {
+      "name": "lint-matrix (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30130031303"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30130031303"
+    },
+    {
+      "name": "Code Quality (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30130031303"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30129642727"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30129642727"
+    },
+    {
+      "name": "Dependabot",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30129712562"
+    },
+    {
+      "name": "lint-matrix (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30129642727"
+    },
+    {
+      "name": "validate-toolchain-pins",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30129642727"
+    },
+    {
+      "name": "Code Quality (nightly-2026-04-16)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30129642727"
+    }
+  ]
+}

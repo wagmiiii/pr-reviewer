@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:13:24Z",
+  "number": 22,
+  "author": "mallison031",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-08T13:23:19Z",
+  "updatedAt": "2026-07-08T13:28:18Z",
+  "closedAt": "2026-07-08T13:28:18Z",
+  "mergedAt": "2026-07-08T13:28:18Z",
+  "baseBranch": "main",
+  "headBranch": "chore/remove-v1-references",
+  "baseSha": "03fd8d5a35b898b3059e057735c9b8a5bf63613a",
+  "headSha": "3c73f42151a059e20acfd6e39998e8b5830af800",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 4,
+  "deletions": 4,
+  "changedFiles": 3,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "3c73f42151a059e20acfd6e39998e8b5830af800",
+      "message": "chore: point contributors at main, remove nonexistent v1 branch references",
+      "isVerified": false,
+      "authoredAt": "2026-07-08T13:23:04Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 2
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28946028334"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28946028334"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28945859894"
+    },
+    {
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "28945859894"
+    }
+  ]
+}

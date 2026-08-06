@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:17:46Z",
+  "number": 298,
+  "author": "enny791",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-27T15:14:27Z",
+  "updatedAt": "2026-07-28T13:16:41Z",
+  "closedAt": "2026-07-28T13:16:41Z",
+  "mergedAt": "2026-07-28T13:16:41Z",
+  "baseBranch": "main",
+  "headBranch": "feat/report-share-of-limits",
+  "baseSha": "0e87ec8857d46f1233c97e566f125b98202ee76b",
+  "headSha": "f37f9ac071bcd82f0a7f85fc1288509cce9eb484",
+  "isFork": true,
+  "headRepo": "enny791/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 649,
+  "deletions": 3,
+  "changedFiles": 5,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "c9db42d863c5a3218095ef39eefa4b6020cf7c2d",
+      "message": "feat: report each function's cost as a share of network resource limits\n\nAdd cargo-budget-report workspace member that displays function resource\ncosts as a percentage of Soroban's per-transaction network resource limits\n(instructions, read bytes, write bytes), alongside the raw values.\n\nKey changes:\n- New cargo-budget-report crate with --format text|json output\n- Each report row includes share_of_limit_pct (value as % of the network\n  limit for that metric)\n- Limits are fetched from the Soroban testnet RPC when available; if\n  unreachable, hardcoded Protocol 22 limits are used (clearly documented)\n- --threshold flag marks functions exceeding the configured share with ⚠\n  flag and a warning summary on stderr\n- JSON output includes limits, limit_source, threshold_pct, and per-function\n  share percentages so consumers can apply their own thresholds\n- README.md explains percentage meaning and limit provenance\n\nCloses #131",
+      "isVerified": false,
+      "authoredAt": "2026-07-27T15:14:07Z"
+    },
+    {
+      "sha": "f37f9ac071bcd82f0a7f85fc1288509cce9eb484",
+      "message": "Merge branch 'main' into feat/report-share-of-limits",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T15:41:57Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 210,
+      "deletions": 2
+    },
+    {
+      "filename": "Cargo.toml",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 1
+    },
+    {
+      "filename": "cargo-budget-report/Cargo.toml",
+      "status": "added",
+      "additions": 16,
+      "deletions": 0
+    },
+    {
+      "filename": "cargo-budget-report/README.md",
+      "status": "added",
+      "additions": 45,
+      "deletions": 0
+    },
+    {
+      "filename": "cargo-budget-report/src/main.rs",
+      "status": "added",
+      "additions": 376,
+      "deletions": 0
+    }
+  ],
+  "comments": [],
+  "checks": [],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30362717309"
+    }
+  ]
+}

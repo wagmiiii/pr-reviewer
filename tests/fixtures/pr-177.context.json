@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:14:30Z",
+  "number": 177,
+  "author": "baedboibidex-cmyk",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-25T07:28:10Z",
+  "updatedAt": "2026-07-27T11:59:07Z",
+  "closedAt": "2026-07-27T11:59:07Z",
+  "mergedAt": "2026-07-27T11:59:07Z",
+  "baseBranch": "main",
+  "headBranch": "feat/lint-discarded-storage-read",
+  "baseSha": "b957756a5d9042e4e3295bd3c446d8feaddb66e0",
+  "headSha": "b72888114a6e34a7650ca541e69fb72b75b9cac0",
+  "isFork": true,
+  "headRepo": "baedboibidex-cmyk/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 67,
+  "deletions": 0,
+  "changedFiles": 2,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "c9dc4353e00e334a995dbe5f41a0f295e9ea5c75",
+      "message": "feat: add discarded_storage_read lint for unused storage gets\n\nDetects get() calls on Instance/Persistent/Temporary storage whose\nresult is discarded (statement expression) or bound to wildcard (_).\n\nDoes not fire on has() checks or reads used in subsequent expressions.\nSuggests has() as a cheaper alternative for existence checks.\n\nCovers #116.",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T06:12:18Z"
+    },
+    {
+      "sha": "ad508c4284c85e8c4f6eb99f0698f994da4f09c0",
+      "message": "fix: collapse if and fmt check_get_discarded signature",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T07:02:06Z"
+    },
+    {
+      "sha": "06d4e5c5090cba2a5f888d82634cff7cd356b27a",
+      "message": "chore: regenerate main.stderr for discarded_storage_read",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T07:25:28Z"
+    },
+    {
+      "sha": "b72888114a6e34a7650ca541e69fb72b75b9cac0",
+      "message": "Merge branch 'main' into feat/lint-discarded-storage-read",
+      "isVerified": true,
+      "authoredAt": "2026-07-26T17:16:54Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/lints/discarded_storage_read.md",
+      "status": "added",
+      "additions": 58,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5077512713,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@baedboibidex-cmyk Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-25T07:29:56Z",
+      "updatedAt": "2026-07-25T07:29:56Z"
+    },
+    {
+      "id": 5078316087,
+      "author": "wagmiiii",
+      "authorAssociation": "MEMBER",
+      "body": "@baedboibidex-cmyk resolve conflicts",
+      "createdAt": "2026-07-25T11:28:00Z",
+      "updatedAt": "2026-07-25T11:28:00Z"
+    },
+    {
+      "id": 5079827557,
+      "author": "wagmiiii",
+      "authorAssociation": "MEMBER",
+      "body": "Hello! 👋 \n\nWe recently optimized and simplified the CI workflows on the `main` branch. \n\nSince this PR is currently failing its CI checks, could you please **rebase your branch onto `main`**? This will pull in the new workflow configurations and might automatically resolve the CI failures. \n\nLet us know if you need any help with the rebase!",
+      "createdAt": "2026-07-25T18:20:03Z",
+      "updatedAt": "2026-07-25T18:20:03Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30212245342"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30264007989"
+    }
+  ]
+}

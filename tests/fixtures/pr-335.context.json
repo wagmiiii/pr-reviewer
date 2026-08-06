@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:18:51Z",
+  "number": 335,
+  "author": "mallison031",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-08-04T09:28:28Z",
+  "updatedAt": "2026-08-04T10:10:50Z",
+  "closedAt": "2026-08-04T10:10:50Z",
+  "mergedAt": "2026-08-04T10:10:50Z",
+  "baseBranch": "main",
+  "headBranch": "fix/publish-workflow",
+  "baseSha": "3133ee5118c0ac530380fa2900fdad2b59e4037f",
+  "headSha": "5854380bd0825a4b6ace7204931ad9a2a9184ee6",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 32,
+  "deletions": 23,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "5854380bd0825a4b6ace7204931ad9a2a9184ee6",
+      "message": "fix(ci): repair the release workflow so it can publish a binary\n\npublish.yml has never produced a release with an artefact. The v0.1.0 release\nexists with zero assets, the v0.1.1 tag has no release at all, and the workflow\nhas no recorded successful run. Four independent defects, none of them caused\nby the recent action bumps in #330:\n\n- `actions/setup-rust@v2` does not exist (`gh api repos/actions/setup-rust`\n  returns 404), so the job failed at that step on every run. Replaced with the\n  same `dtolnay/rust-toolchain` action and pin the Lint workflow uses.\n- It requested `rust-version: stable`, but `rust-toolchain` at the repository\n  root pins nightly-2026-04-16 and takes precedence, so the requested toolchain\n  could never have applied. The toolchain is now stated to match that file.\n- `::set-output` has been disabled by GitHub, so `steps.tag.outputs.tag_name`\n  resolved to an empty string. Use `github.ref_name`, which is already the tag\n  name on a tag push, and drop the step entirely.\n- The asset path was `cargo-cost-lint/target/release/cargo-cost-lint`, but\n  cargo-cost-lint is a workspace member, so its artefacts land in the\n  workspace-root `target/`. That directory has never existed. Because\n  `fail_on_unmatched_files` defaults to false, the upload matched nothing and\n  still reported success — which is how v0.1.0 was published with no assets.\n\nAlso: fold the two identical action-gh-release invocations into one, add\n`fail_on_unmatched_files: true` so a missing artefact fails loudly, add the\nshared rust-cache, and mark tags carrying a pre-release suffix as pre-releases\nso a test tag such as v0.0.0-ci-test cannot be presented as the latest stable\nrelease.\n\nVerified locally that `cargo build --release --package cargo-cost-lint`\nproduces `target/release/cargo-cost-lint`.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01ToyjQ3F5ogZ4G2C3YRpH4N",
+      "isVerified": false,
+      "authoredAt": "2026-08-04T09:28:21Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/publish.yml",
+      "status": "modified",
+      "additions": 32,
+      "deletions": 23
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30896473700"
+    },
+    {
+      "name": "test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30896473700"
+    },
+    {
+      "name": "test (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30896473700"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30896473633"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30899286360"
+    },
+    {
+      "name": "test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30899286360"
+    },
+    {
+      "name": "test (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30899286360"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30899285850"
+    }
+  ]
+}

@@ -22,6 +22,25 @@ Ready:
 Then check your WIP. **Two tickets per person**, counting In Progress and In Review
 together. At the limit, finish something before starting something.
 
+### Claim it before you write anything
+
+Two people working in parallel collided four times on 2026-08-06, twice on the same
+ticket at the same time. Every one of those had the same cause: work started before the
+board said it had.
+
+1. **`git fetch` and look at `git branch -r`.** A branch that exists is work in flight,
+   whatever the board says.
+2. **Move the ticket to In Progress in Notion _before_ the first commit.** Not after, not
+   at the PR.
+3. **If it is already In Progress or In Review, it is not yours to start** — even if it is
+   your name on it, even if it looks stalled. Ask instead.
+4. **Notion is the board. `docs/PROJECT-MANAGEMENT.md` is a backup of it.** Read the live
+   one. Anything planned against a snapshot more than a few minutes old is probably wrong,
+   and the markdown copy is a snapshot by definition.
+
+Cheap, and it is the whole fix. The board can only prevent a collision if the claim
+happens before the work.
+
 ## Branches
 
 ```

@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-06T07:03:39Z",
+  "number": 313,
+  "author": "mallison031",
+  "authorAssociation": "MEMBER",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-28T08:14:36Z",
+  "updatedAt": "2026-07-28T10:51:11Z",
+  "closedAt": "2026-07-28T10:51:11Z",
+  "mergedAt": "2026-07-28T10:51:11Z",
+  "baseBranch": "main",
+  "headBranch": "fix/revert-broken-267",
+  "baseSha": "0a3295df7e0fd4b2e2ef196d53774504fd4edc78",
+  "headSha": "0db36ba563df38aada2b2ffb55336a2008c345eb",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 4,
+  "deletions": 117,
+  "changedFiles": 5,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "0db36ba563df38aada2b2ffb55336a2008c345eb",
+      "message": "Revert \"feat: implement nested_storage_collections lint (#267)\"\n\nThis reverts commit 0a3295df7e0fd4b2e2ef196d53774504fd4edc78.",
+      "isVerified": false,
+      "authoredAt": "2026-07-28T08:02:34Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/cost_rationale.md",
+      "status": "modified",
+      "additions": 0,
+      "deletions": 1
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 0,
+      "deletions": 1
+    },
+    {
+      "filename": "docs/lints/nested_storage_collections.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 71
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 0,
+      "deletions": 40
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 4
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30341595546"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30334970740"
+    }
+  ]
+}

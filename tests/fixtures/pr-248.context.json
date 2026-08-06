@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:15:31Z",
+  "number": 248,
+  "author": "codenerde",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-26T01:43:57Z",
+  "updatedAt": "2026-07-26T06:03:02Z",
+  "closedAt": "2026-07-26T06:03:02Z",
+  "mergedAt": "2026-07-26T06:03:02Z",
+  "baseBranch": "main",
+  "headBranch": "docs/task-17",
+  "baseSha": "c2dbc42b9a4a2d6a36ffd750069afe01d278a412",
+  "headSha": "dd96b84c0b5c47a570c49c57ff2b606af80cfe6f",
+  "isFork": true,
+  "headRepo": "codenerde/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 4,
+  "deletions": 0,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "dd96b84c0b5c47a570c49c57ff2b606af80cfe6f",
+      "message": "docs: note #207 is invalid — src/module_17.rs does not exist",
+      "isVerified": false,
+      "authoredAt": "2026-07-26T01:42:59Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "CHANGELOG.md",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0
+    }
+  ],
+  "comments": [],
+  "checks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30183375440"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "build-and-test",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30190324870"
+    }
+  ]
+}

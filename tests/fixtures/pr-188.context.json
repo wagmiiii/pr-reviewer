@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:14:39Z",
+  "number": 188,
+  "author": "MidstCodes",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": true,
+  "createdAt": "2026-07-25T12:19:27Z",
+  "updatedAt": "2026-07-28T13:35:49Z",
+  "closedAt": "2026-07-28T13:35:48Z",
+  "mergedAt": "2026-07-28T13:35:48Z",
+  "baseBranch": "main",
+  "headBranch": "feat/add-lint-for-inefficient-bytes-concatenation",
+  "baseSha": "c78332dcd7995f7f75a32bc6c578bfbb9fac9014",
+  "headSha": "aa681a9aca39f58703d0bfbc92672d6e8bc2642a",
+  "isFork": true,
+  "headRepo": "MidstCodes/soroban-cost-linter",
+  "mergeableState": "unknown",
+  "additions": 199,
+  "deletions": 51,
+  "changedFiles": 6,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "c7cee2998cc0468bf27b705f04e6763b6023689d",
+      "message": "feat: add lint for inefficient Bytes concatenation\n\nAdds the soroban_inefficient_bytes_concat lint that detects Bytes\npush_back and append calls inside loops. Every Bytes mutation crosses\nthe Soroban host boundary, making per-iteration calls expensive.\n\n- New lint: SOROBAN_INEFFICIENT_BYTES_CONCAT (warn)\n- Detects push_back and append on soroban_sdk::Bytes in loops\n- Suggests accumulating in Vec<u8> and converting via Bytes::from_slice\n- Test fixtures cover for/while/loop, good patterns, and #[allow]\n- Real SDK fixtures and integration test updated\n\nCloses #51",
+      "isVerified": false,
+      "authoredAt": "2026-07-25T12:17:36Z"
+    },
+    {
+      "sha": "d1c4c05e5291f1a7e6379bdc1806eca9b72b4a24",
+      "message": "Merge branch 'main' into feat/add-lint-for-inefficient-bytes-concatenation",
+      "isVerified": true,
+      "authoredAt": "2026-07-25T12:26:57Z"
+    },
+    {
+      "sha": "aa681a9aca39f58703d0bfbc92672d6e8bc2642a",
+      "message": "Merge remote-tracking branch 'origin/main' into feat/add-lint-for-inefficient-bytes-concatenation",
+      "isVerified": false,
+      "authoredAt": "2026-07-28T13:35:29Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/tests/integration.rs",
+      "status": "modified",
+      "additions": 8,
+      "deletions": 0
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 2
+    },
+    {
+      "filename": "docs/lints/soroban_inefficient_bytes_concat.md",
+      "status": "added",
+      "additions": 45,
+      "deletions": 0
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 49,
+      "deletions": 10
+    },
+    {
+      "filename": "soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs",
+      "status": "modified",
+      "additions": 31,
+      "deletions": 9
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 64,
+      "deletions": 30
+    }
+  ],
+  "comments": [
+    {
+      "id": 5078478927,
+      "author": "drips-wave[bot]",
+      "authorAssociation": "NONE",
+      "body": "@MidstCodes Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)",
+      "createdAt": "2026-07-25T12:27:05Z",
+      "updatedAt": "2026-07-25T12:27:05Z"
+    },
+    {
+      "id": 5079726641,
+      "author": "wagmiiii",
+      "authorAssociation": "MEMBER",
+      "body": "@MidstCodes This PR currently has failing checks (Lint/lint-matrix). Please fix the failing checks so we can merge this safely!",
+      "createdAt": "2026-07-25T18:04:41Z",
+      "updatedAt": "2026-07-25T18:04:41Z"
+    },
+    {
+      "id": 5079825235,
+      "author": "wagmiiii",
+      "authorAssociation": "MEMBER",
+      "body": "Hello! 👋 \n\nWe recently optimized and simplified the CI workflows on the `main` branch. \n\nSince this PR is currently failing its CI checks, could you please **rebase your branch onto `main`**? This will pull in the new workflow configurations and might automatically resolve the CI failures. \n\nLet us know if you need any help with the rebase!",
+      "createdAt": "2026-07-25T18:19:47Z",
+      "updatedAt": "2026-07-25T18:19:47Z"
+    }
+  ],
+  "checks": [],
+  "baseChecks": [
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30364192864"
+    },
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30364192864"
+    }
+  ]
+}

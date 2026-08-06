@@ -22,7 +22,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "check": "npm run format:check && npm run lint && npm run typecheck && npm run test",
-    "schema": "ts-json-schema-generator --path src/types.ts --type PullRequestContext --tsconfig tsconfig.json --no-type-check -o schema/pull-request-context.schema.json"
+    "schema": "ts-json-schema-generator --path src/types.ts --type PullRequestContext --tsconfig tsconfig.json --no-type-check -o schema/pull-request-context.schema.json",
+    "fixtures:record": "node scripts/record-fixtures.mjs"
   },
   "repository": {
     "type": "git",

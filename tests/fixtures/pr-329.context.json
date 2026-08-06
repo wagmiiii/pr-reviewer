@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-08-05T15:11:54Z",
+  "number": 329,
+  "author": "dependabot[bot]",
+  "authorAssociation": "CONTRIBUTOR",
+  "state": "closed",
+  "isDraft": false,
+  "isMerged": false,
+  "createdAt": "2026-08-03T13:27:05Z",
+  "updatedAt": "2026-08-04T08:16:28Z",
+  "closedAt": "2026-08-04T08:16:26Z",
+  "mergedAt": null,
+  "baseBranch": "main",
+  "headBranch": "dependabot/cargo/cargo-dependencies-ff1a6d245f",
+  "baseSha": "35da5fcf3cb6dbe268c4b70183852b6613ee5bda",
+  "headSha": "afac2be4871752f81a2d135413c81dbc30730148",
+  "isFork": false,
+  "headRepo": "Tollcraft/soroban-cost-linter",
+  "mergeableState": "blocked",
+  "additions": 6,
+  "deletions": 6,
+  "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "afac2be4871752f81a2d135413c81dbc30730148",
+      "message": "chore(deps): bump toml in the cargo-dependencies group\n\nBumps the cargo-dependencies group with 1 update: [toml](https://github.com/toml-rs/toml).\n\n\nUpdates `toml` from 1.1.2+spec-1.1.0 to 1.1.4+spec-1.1.0\n- [Commits](https://github.com/toml-rs/toml/compare/toml-v1.1.2...toml-v1.1.4)\n\n---\nupdated-dependencies:\n- dependency-name: toml\n  dependency-version: 1.1.4+spec-1.1.0\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n  dependency-group: cargo-dependencies\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>",
+      "isVerified": true,
+      "authoredAt": "2026-08-03T13:27:04Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 6,
+      "deletions": 6
+    }
+  ],
+  "comments": [
+    {
+      "id": 5176356315,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "@dependabot rebase",
+      "createdAt": "2026-08-04T08:14:57Z",
+      "updatedAt": "2026-08-04T08:14:57Z"
+    },
+    {
+      "id": 5176370059,
+      "author": "dependabot[bot]",
+      "authorAssociation": "CONTRIBUTOR",
+      "body": "Looks like toml is updatable in another way, so this is no longer needed.",
+      "createdAt": "2026-08-04T08:16:25Z",
+      "updatedAt": "2026-08-04T08:16:25Z"
+    }
+  ],
+  "checks": [
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30818016717"
+    },
+    {
+      "name": "cargo-deny check",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30818016389"
+    },
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30818016106"
+    },
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30818016106"
+    }
+  ],
+  "baseChecks": [
+    {
+      "name": "Dependabot",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30817878754"
+    },
+    {
+      "name": "Dependabot",
+      "status": "completed",
+      "conclusion": "success",
+      "workflowRunId": "30817876582"
+    },
+    {
+      "name": "build-and-test (windows-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30647061538"
+    },
+    {
+      "name": "build-and-test (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30647061538"
+    },
+    {
+      "name": "dogfood",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflowRunId": "30647061213"
+    }
+  ]
+}

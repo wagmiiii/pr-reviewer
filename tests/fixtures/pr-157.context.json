@@ -21,6 +21,63 @@
   "additions": 116,
   "deletions": 0,
   "changedFiles": 1,
+  "reviews": [],
+  "commits": [
+    {
+      "sha": "372d11cfad02fb80605530656a5fb0af2ed0d942",
+      "message": "fix(cli): fail on malformed budget.toml instead of silent fallback",
+      "isVerified": false,
+      "authoredAt": "2026-07-23T14:36:58Z"
+    },
+    {
+      "sha": "8834c81d74e74f9b5dfa218f713d1836c6a5d3fb",
+      "message": "Merge branch 'main' into fix/fail-on-malformed-budget-toml",
+      "isVerified": true,
+      "authoredAt": "2026-07-27T11:51:30Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 116,
+      "deletions": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 5068179479,
+      "author": "wagmiiii",
+      "authorAssociation": "MEMBER",
+      "body": "@Hikmaholadele please all checks failed. fix so i can merge",
+      "createdAt": "2026-07-24T09:12:45Z",
+      "updatedAt": "2026-07-24T09:12:45Z"
+    },
+    {
+      "id": 5068508190,
+      "author": "wagmiiii",
+      "authorAssociation": "MEMBER",
+      "body": "Hi @Hikmaholadele, it looks like the CI checks are currently failing for this PR. Could you please take a look and push a fix so we can merge this?",
+      "createdAt": "2026-07-24T09:54:10Z",
+      "updatedAt": "2026-07-24T09:54:10Z"
+    },
+    {
+      "id": 5077676029,
+      "author": "mallison031",
+      "authorAssociation": "MEMBER",
+      "body": "Please fix your checks ",
+      "createdAt": "2026-07-25T08:20:15Z",
+      "updatedAt": "2026-07-25T08:20:15Z"
+    },
+    {
+      "id": 5079828471,
+      "author": "wagmiiii",
+      "authorAssociation": "MEMBER",
+      "body": "Hello! 👋 \n\nWe recently optimized and simplified the CI workflows on the `main` branch. \n\nSince this PR is currently failing its CI checks, could you please **rebase your branch onto `main`**? This will pull in the new workflow configurations and might automatically resolve the CI failures. \n\nLet us know if you need any help with the rebase!",
+      "createdAt": "2026-07-25T18:20:12Z",
+      "updatedAt": "2026-07-25T18:20:12Z"
+    }
+  ],
   "checks": [
     {
       "name": "build-and-test",
@@ -33,7 +90,8 @@
     {
       "name": "build-and-test",
       "status": "completed",
-      "conclusion": "failure"
+      "conclusion": "failure",
+      "workflowRunId": "30258214482"
     }
   ]
 }
