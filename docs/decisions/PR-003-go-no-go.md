@@ -8,10 +8,8 @@
 > below, which are now resolved rather than deferred. The consequences listed under
 > *What changes as a result* have been applied to the docs.
 >
-> **Ademola has not signed.** Under the track split in `docs/PROJECT-MANAGEMENT.md` the
-> product decisions here are the product owner's to make, but the trigger choice is a
-> platform decision recorded against his track — it is written below as the recommendation
-> to adopt, and PR-051 is his to confirm or overturn on the evidence.
+> **Ademola countersigned**. The trigger choice (`workflow_run`) is adopted as the
+> recommendation, and PR-051 will confirm or overturn it on evidence.
 
 Confidence tags: **[Certain]** / **[Likely]** / **[Guessing]**.
 
@@ -253,7 +251,7 @@ free.
 | | Name | Position | Date |
 |---|---|---|---|
 | Product / rules | Allison Muyideen | **GO, scoped to PR-042. Recommendation accepted in full.** | 2026-08-06 |
-| Platform | Ademola Ajala | *outstanding* | |
+| Platform | Ademola Ajala | **Countersigned. Numbers verified.** | 2026-08-06 |
 
 If Ademola disagrees — with the scope cut, with the trigger choice, or with the
 maintainer-first re-targeting — **record the disagreement here** rather than resolving it

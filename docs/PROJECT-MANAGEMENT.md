@@ -127,7 +127,7 @@ Re-plan after Sprint 4. Everything beyond it is conditional on a gate.
 
 ## Backlog
 
-Status of every ticket at time of writing: `Done` for PR-001, PR-002, PR-004, PR-005, PR-010, PR-011, PR-013, PR-014, PR-020, PR-021; `In Review` for PR-022; `Ready` for PR-003, PR-012; `Backlog` for everything else.
+Status of every ticket at time of writing: `Done` for PR-001, PR-002, PR-003, PR-004, PR-005, PR-010, PR-011, PR-013, PR-014, PR-020, PR-021, PR-022; `In Progress` for PR-023; `Ready` for PR-012; `Backlog` for everything else.
 
 ### Sprint 0 — Validation and scaffold
 
@@ -137,7 +137,7 @@ Status of every ticket at time of writing: `Done` for PR-001, PR-002, PR-004, PR
 | PR-002 | Competitor research: does this already exist? — **findings in `docs/spikes/competitors.md`** | Allison | P0 | 2 | Spike | — |
 | PR-004 | Premise test — **ANSWERED against the archive, see `docs/spikes/premise-test.md`** | Allison | P0 | 2 | Spike | — |
 | PR-005 | **Archive the 162-PR corpus — time-sensitive, logs are decaying** | Ademola | P0 | 3 | Spike | — |
-| PR-003 | Decision: go / no-go / pivot — **DECIDED: GO, scoped to PR-042. `docs/decisions/PR-003-go-no-go.md`. Ademola's countersignature outstanding** | Joint | P0 | 1 | Decision | — |
+| PR-003 | Decision: go / no-go / pivot — **DECIDED: GO, scoped to PR-042. `docs/decisions/PR-003-go-no-go.md`. Countersigned.** | Joint | P0 | 1 | Decision | — |
 | PR-010 | Repo scaffold: TypeScript, Node 24, tooling | Ademola | P0 | 3 | Chore | — |
 | PR-011 | Define the `PullRequestContext` type | Joint | P0 | 3 | Feature | PR-010 |
 | PR-013 | CI for this repo: lint, typecheck, test | Ademola | P1 | 2 | Chore | PR-010 |
