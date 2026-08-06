@@ -34,7 +34,7 @@ describe('renderTerminalReport', () => {
       deletions: 5,
       changedFiles: 2,
     };
-    
+
     const results: RuleResult[] = [
       {
         code: 'CI_FAILING',
@@ -42,12 +42,12 @@ describe('renderTerminalReport', () => {
         bucket: 'fact',
         owner: 'contributor',
         severity: 'blocking',
-        explanation: 'Fails'
-      }
+        explanation: 'Fails',
+      },
     ];
 
     const report = renderTerminalReport([{ context: pr1, results }]);
-    
+
     expect(report).toContain('## Blocked on contributor (1)');
     expect(report).toContain('  #1 Fix issue [CI_FAILING] (4d)');
   });
