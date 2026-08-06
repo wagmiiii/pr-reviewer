@@ -55,3 +55,5 @@ export function deriveStatus(results: readonly RuleResult[]): TriageStatus {
 
   return 'READY_FOR_REVIEW';
 }
+
+export * from './ci.js';
