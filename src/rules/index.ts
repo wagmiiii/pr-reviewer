@@ -56,6 +56,25 @@ export function deriveStatus(results: readonly RuleResult[]): TriageStatus {
   return 'READY_FOR_REVIEW';
 }
 
+import { ciRules } from './ci.js';
+import { mergeConflictRule, behindBaseRule } from './mergeability.js';
+import { changesRequestedRule, draftRule } from './review.js';
+import { touchesProtectedRule, hugeDiffRule } from './path.js';
+import { firstTimeContributorRule, staleRule, noDcoRule } from './contributor.js';
+
+export const CORE_RULES: readonly RuleDefinition[] = [
+  ...ciRules,
+  mergeConflictRule,
+  behindBaseRule,
+  changesRequestedRule,
+  draftRule,
+  touchesProtectedRule,
+  hugeDiffRule,
+  firstTimeContributorRule,
+  staleRule,
+  noDcoRule,
+];
+
 export * from './ci.js';
 export * from './mergeability.js';
 export * from './review.js';
