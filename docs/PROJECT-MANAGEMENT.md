@@ -147,14 +147,14 @@ Status of every ticket at time of writing: `Done` for PR-001, PR-002, PR-003, PR
 
 | Ref | Task | Owner | Pri | Pts | Type | Blocked by |
 |---|---|---|---|---|---|---|
-| PR-012 | Fixture harness: record and replay real PRs | Allison | P0 | 5 | Test | PR-011 |
+| PR-012 | Fixture harness: record and replay real PRs — **moved to Sprint 0: this is the ticket that decouples the tracks** | Allison | P0 | 5 | Test | PR-011 |
 | PR-020 | Octokit client: auth, rate limits, retries | Ademola | P0 | 3 | Feature | PR-010 |
 | PR-021 | Collect PR core: metadata, reviews, commits, files | Ademola | P0 | 3 | Feature | PR-011, PR-020 |
 | PR-022 | Collect check runs and resolve required checks | Ademola | P0 | 5 | Feature | PR-020 |
 | PR-023 | Collect base-branch check status | Ademola | P0 | 5 | Feature | PR-022 |
 | PR-026 | Diff fetch with size cap | Ademola | P1 | 2 | Feature | PR-020 |
 | PR-030 | Rule interface, registry, status derivation | Allison | P0 | 3 | Feature | PR-011 |
-| PR-031 | CI rules: FAILING, BROKEN_ON_BASE, PENDING, MISSING | Allison | P0 | 5 | Feature | PR-022, PR-023, PR-030 |
+| PR-031 | CI rules: FAILING, BROKEN_ON_BASE, PENDING, MISSING | Allison | P0 | 5 | Feature | PR-030, PR-012 |
 | PR-032 | Mergeability rules: conflict and behind-base | Allison | P0 | 3 | Feature | PR-030 |
 | PR-033 | Review and draft rules | Allison | P1 | 2 | Feature | PR-030 |
 
@@ -165,10 +165,10 @@ Status of every ticket at time of writing: `Done` for PR-001, PR-002, PR-003, PR
 | PR-024 | Fetch failing-job logs and extract the useful excerpt | Ademola | P1 | 5 | Feature | PR-022 |
 | PR-025 | Collect linked issues | Ademola | P1 | 3 | Feature | PR-020 |
 | PR-034 | Path and size rules | Allison | P1 | 2 | Feature | PR-030 |
-| PR-035 | Contributor rules: first-time, stale, DCO | Allison | P1 | 3 | Feature | PR-021, PR-030 |
+| PR-035 | Contributor rules: first-time, stale, DCO | Allison | P1 | 3 | Feature | PR-030, PR-012 |
 | PR-036 | Fact-rule test suite with a zero-false-positive gate | Allison | P0 | 5 | Test | PR-012, PR-031/2/3 |
 | PR-040 | CLI: scan command and config loader | Ademola | P0 | 3 | Feature | PR-021, PR-030 |
-| PR-041 | Terminal report renderer grouped by blockage owner — **re-spec maintainer-first before building, PR-003** | Allison | P0 | 3 | Feature | PR-040 |
+| PR-041 | Terminal report renderer grouped by blockage owner — **re-spec maintainer-first before building, PR-003** | Allison | P0 | 3 | Feature | PR-030, PR-012 |
 | PR-042 | Phase 0 exit measurement — **criterion restated against replayed history, see `docs/04-roadmap.md`** | Joint | P0 | 3 | Decision | PR-005, PR-036, PR-041 |
 
 ### Sprint 3 — Action delivery and labels
@@ -179,8 +179,8 @@ Status of every ticket at time of writing: `Done` for PR-001, PR-002, PR-003, PR
 | PR-051 | Trigger wiring: **workflow_run** + schedule, dry-run pull_request — **`check_suite` rejected by PR-003; needs a tested no-checkout invariant** | Ademola | P1 | 3 | Feature | PR-001, PR-050 |
 | PR-052 | State store: Actions cache with comment fallback | Ademola | P1 | 5 | Feature | PR-050 |
 | PR-053 | Dry-run mode end to end | Allison | P1 | 2 | Feature | PR-051 |
-| PR-054 | Verdict hashing and the noise budget | Allison | P1 | 3 | Feature | PR-052 |
-| PR-060 | Label reconciliation | Allison | P1 | 3 | Feature | PR-051 |
+| PR-054 | Verdict hashing and the noise budget | Allison | P1 | 3 | Feature | PR-030 |
+| PR-060 | Label reconciliation | Allison | P1 | 3 | Feature | PR-030 |
 | PR-061 | Label config and prefix support | Allison | P2 | 2 | Feature | PR-060 |
 | PR-062 | One-week labels-only trial — **deferred until a contributor wave arrives; needs live traffic** | Joint | P1 | 2 | Decision | PR-060 |
 
@@ -189,8 +189,8 @@ Status of every ticket at time of writing: `Done` for PR-001, PR-002, PR-003, PR
 | Ref | Task | Owner | Pri | Pts | Type | Blocked by |
 |---|---|---|---|---|---|---|
 | PR-070 | Sticky comment upsert by marker | Ademola | P1 | 5 | Feature | PR-052, PR-054 |
-| PR-071 | Comment renderer: status, fixes, notes, checklist — **re-spec maintainer-first before building, PR-003** | Allison | P1 | 5 | Feature | PR-070 |
-| PR-072 | CI failure formatting in the comment | Allison | P1 | 5 | Feature | PR-024, PR-071 |
+| PR-071 | Comment renderer: status, fixes, notes, checklist — **re-spec maintainer-first before building, PR-003** | Allison | P1 | 5 | Feature | PR-030, PR-012 |
+| PR-072 | CI failure formatting in the comment | Allison | P1 | 5 | Feature | PR-071, PR-012 |
 | PR-073 | Branch-update instructions for conflicts | Allison | P1 | 3 | Feature | PR-071 |
 | PR-074 | `no-bot` opt-out label | Ademola | P2 | 2 | Feature | PR-070 |
 | PR-080 | Heuristic bucket with warn-only enforcement | Ademola | P2 | 2 | Feature | PR-030 |
@@ -228,6 +228,9 @@ Recorded so the reasoning survives, rather than silently editing rows.
 | 2026-08-06 | **PR-003 drafted: GO, scoped to PR-042 only** | The evidence supports a small sharp tool, not the 128-point plan. Authorises Sprint 0–2 (~53 points); Sprints 3–4 stay drafted and unauthorised. Pitch changes: lead with blockage ownership and `CI_BROKEN_ON_BASE`, drop issue linkage, add the single-bot/noise-budget argument. Kill criteria written into the decision. Not decided until both people sign. |
 | 2026-08-06 | **`check_suite: completed` rejected as the write trigger** | PR-001 found it does not fire when the check suite was created by GitHub Actions, which is 100% of suites on the target repo — it would have fired zero times. `docs/02-architecture.md` records it as Chosen and `docs/01-critique.md` P1 gives it as the resolution; both need amending. Replacement (`workflow_run` vs `pull_request_target`) deliberately left to PR-051, which must also encode "never check out contributor code" as a tested invariant. |
 | 2026-08-06 | **Output design may be aimed at the wrong reader** | 63 of the 71 failing PRs were "your `main` is broken" findings, not "your PR is broken". That is maintainer-facing; the roadmap assumes contributor-facing. Flagged against PR-041 and PR-071, unresolved. |
+| 2026-08-06 | **Dependency graph rewired: rules depend on fixtures, not on collectors** | Measured first. Of Allison's 24 tickets, **12 were directly blocked by one of Ademola's**; of his 26, only **4** were blocked by hers. That asymmetry is architectural, not administrative — rules are pure functions of `PullRequestContext`, so the Rules track structurally waits on the Platform track, and no board can record its way out of that. The fix is the fixture harness: a rule tested against a *recorded* context does not need the collector that would have produced it. Seven edges rewired (PR-031, PR-035, PR-041, PR-054, PR-060, PR-071, PR-072), taking cross-owner blocks from **12 to 5**. The 5 remaining are genuine: PR-053 is an integration ticket by definition, and the rest are P3 sitting behind decision gates. |
+| 2026-08-06 | **PR-012 pulled forward to Sprint 0** | It is now the highest-leverage ticket on the board, because it is what makes the rewiring above true. Its inputs already exist: 159 archived contexts in `corpus/`, and a generated JSON schema to validate them against. Once PR-011 and PR-012 land, PR-030 opens **31 points** of Allison's work with no further dependency on the Platform track. |
+| 2026-08-06 | **The contract is enforced by the schema, not by coordination** | Collectors validate their output against `schema/pull-request-context.schema.json`; rules consume fixtures validated against the same file. Neither track waits on the other to discover whether it got the shape right — the test says so. This is what "work independently" actually requires; the board only *records* dependencies, it cannot remove them. |
 | 2026-08-06 | **PR-003 DECIDED: GO, scoped to PR-042. Product owner signed; platform countersignature outstanding** | Recommendation accepted in full. Only Sprint 0–2 (~53 of 128 points) is authorised; Sprints 3–4 stay drafted. Consequences applied to `docs/00-concept.md`, `docs/01-critique.md`, `docs/02-architecture.md` and `README.md` in the same pass rather than left as follow-ups. |
 | 2026-08-06 | **Trigger resolved: `workflow_run: completed` + `schedule`** | `check_suite` rejected — zero fires. `pull_request_target` recorded as documented fallback rather than rejected, since the exploit requires checking out contributor code and this design never does. Both bound by a **tested** "never check out or execute contributor code" invariant. Recorded against the platform track; PR-051 confirms or overturns on evidence. |
 | 2026-08-06 | **Product is maintainer-first, contributor-second** | 63 of 71 findings say "your `main` is broken", which is not a message to a drive-by contributor. PR-041 and PR-071 carry a re-spec flag and must be re-pointed before Sprint 2, not after. Largest single consequence of the gate. |
