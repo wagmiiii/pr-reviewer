@@ -51,6 +51,7 @@ export async function collectPullRequestCore(
 
   return {
     number: pr.number,
+    title: pr.title,
     author: pr.user?.login || '',
     state: pr.state as 'open' | 'closed',
     isDraft: Boolean(pr.draft),
