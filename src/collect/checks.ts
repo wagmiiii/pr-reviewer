@@ -49,8 +49,8 @@ export async function collectCheckRuns(
           });
           const logText = logs.data as unknown as string;
           const lines = logText.split('\n');
-          
-          const errorLineIdx = lines.findIndex(l => l.includes('##[error]'));
+
+          const errorLineIdx = lines.findIndex((l) => l.includes('##[error]'));
           if (errorLineIdx !== -1) {
             const start = Math.max(0, errorLineIdx - 15);
             const end = Math.min(lines.length, errorLineIdx + 35);
@@ -68,10 +68,12 @@ export async function collectCheckRuns(
         status: check.status as any,
         conclusion: check.conclusion as any,
         isRequired: requiredContexts.includes(check.name),
-        ...(check.workflow_run_id ? { workflowRunId: String(check.workflow_run_id) } : {}),
+        ...(check.workflow_run_id
+          ? { workflowRunId: String(check.workflow_run_id) }
+          : {}),
         ...(failureExcerpt ? { failureExcerpt } : {}),
       };
-    })
+    }),
   );
 }
 
