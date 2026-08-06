@@ -7,12 +7,12 @@ export interface EvaluatedPR {
 }
 
 export function renderTerminalReport(prs: readonly EvaluatedPR[]): string {
-  const sections: Record<string, EvaluatedPR[]> = {
-    'Ready for you': [],
-    'Blocked on contributor': [],
-    'Needs your decision': [],
-    Waiting: [],
-    Stale: [],
+  const sections = {
+    'Ready for you': [] as EvaluatedPR[],
+    'Blocked on contributor': [] as EvaluatedPR[],
+    'Needs your decision': [] as EvaluatedPR[],
+    Waiting: [] as EvaluatedPR[],
+    Stale: [] as EvaluatedPR[],
   };
 
   for (const pr of prs) {
@@ -41,10 +41,10 @@ export function renderTerminalReport(prs: readonly EvaluatedPR[]): string {
     'Needs your decision',
     'Waiting',
     'Stale',
-  ];
+  ] as const;
 
   for (const title of sectionKeys) {
-    const items = sections[title]!;
+    const items = sections[title];
     lines.push(`## ${title} (${items.length})`);
 
     if (items.length === 0) {

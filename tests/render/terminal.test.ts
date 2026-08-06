@@ -49,6 +49,6 @@ describe('renderTerminalReport', () => {
     const report = renderTerminalReport([{ context: pr1, results }]);
 
     expect(report).toContain('## Blocked on contributor (1)');
-    expect(report).toContain('  #1 Fix issue [CI_FAILING] (4d)');
+    expect(report).toContain('  #1 Fix issue [CI_FAILING (no CI detected)] (4d)');
   });
 });
