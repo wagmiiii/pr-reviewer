@@ -1,0 +1,11 @@
+dist/
+node_modules/
+coverage/
+package-lock.json
+
+# Owned by other work tracks — formatting churn here would collide with them.
+docs/
+corpus/
+premise-test/
+CONTRIBUTING.md
+README.md
