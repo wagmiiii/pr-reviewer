@@ -16,7 +16,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { Ajv } from 'ajv';
+import Ajv from 'ajv';
 import { describe, expect, it } from 'vitest';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
@@ -49,7 +49,7 @@ describe('PullRequestContext JSON schema', () => {
   }, 60_000);
 
   it('validates every recorded fixture', () => {
-    const ajv = new Ajv({ allErrors: true, strict: false });
+    const ajv = new Ajv({ allErrors: true });
     const validate = ajv.compile(committedSchema() as object);
 
     const fixtures = readdirSync(FIXTURES).filter((f) => f.endsWith('.context.json'));
@@ -66,7 +66,7 @@ describe('PullRequestContext JSON schema', () => {
     // Not a schema check — a documentation check. `checks: []` is legal and
     // means "collected, none found". The distinction from `undefined` is a
     // contract rules must honour, so it is asserted somewhere visible.
-    const ajv = new Ajv({ allErrors: true, strict: false });
+    const ajv = new Ajv({ allErrors: true });
     const validate = ajv.compile(committedSchema() as object);
 
     const base = JSON.parse(
