@@ -1,0 +1,434 @@
+{
+  "17": [
+    "CI_MISSING",
+    "STALE",
+    "TOUCHES_PROTECTED"
+  ],
+  "19": [
+    "CI_MISSING",
+    "STALE",
+    "TOUCHES_PROTECTED"
+  ],
+  "20": [
+    "STALE"
+  ],
+  "21": [
+    "STALE",
+    "TOUCHES_PROTECTED"
+  ],
+  "22": [
+    "STALE",
+    "TOUCHES_PROTECTED"
+  ],
+  "23": [
+    "STALE"
+  ],
+  "24": [
+    "STALE"
+  ],
+  "25": [
+    "STALE"
+  ],
+  "77": [
+    "STALE"
+  ],
+  "140": [
+    "CHANGES_REQUESTED",
+    "CI_FAILING"
+  ],
+  "141": [],
+  "142": [
+    "CI_MISSING"
+  ],
+  "143": [],
+  "144": [
+    "CI_MISSING"
+  ],
+  "145": [
+    "CI_MISSING"
+  ],
+  "146": [
+    "CI_MISSING"
+  ],
+  "147": [],
+  "148": [
+    "CI_MISSING"
+  ],
+  "149": [],
+  "150": [
+    "CI_MISSING"
+  ],
+  "151": [],
+  "152": [],
+  "153": [
+    "TOUCHES_PROTECTED"
+  ],
+  "154": [],
+  "155": [],
+  "156": [
+    "TOUCHES_PROTECTED"
+  ],
+  "157": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "158": [
+    "CI_MISSING"
+  ],
+  "159": [
+    "TOUCHES_PROTECTED"
+  ],
+  "160": [],
+  "161": [
+    "CI_MISSING"
+  ],
+  "162": [
+    "CI_MISSING"
+  ],
+  "163": [],
+  "164": [
+    "CI_MISSING"
+  ],
+  "165": [
+    "CI_MISSING"
+  ],
+  "166": [
+    "CI_MISSING"
+  ],
+  "167": [
+    "CI_MISSING",
+    "TOUCHES_PROTECTED"
+  ],
+  "168": [
+    "CI_MISSING",
+    "TOUCHES_PROTECTED"
+  ],
+  "169": [],
+  "170": [],
+  "171": [
+    "CI_MISSING"
+  ],
+  "172": [
+    "TOUCHES_PROTECTED"
+  ],
+  "176": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "177": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "180": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "181": [
+    "CI_FAILING"
+  ],
+  "183": [],
+  "184": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "185": [],
+  "186": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "187": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "188": [
+    "CI_MISSING"
+  ],
+  "224": [
+    "CI_MISSING"
+  ],
+  "225": [],
+  "226": [],
+  "227": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "228": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "229": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "230": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "231": [
+    "CI_FAILING"
+  ],
+  "232": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "233": [],
+  "234": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "235": [
+    "CI_BROKEN_ON_BASE",
+    "CI_MISSING"
+  ],
+  "236": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "237": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "238": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "239": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "240": [
+    "CI_FAILING",
+    "TOUCHES_PROTECTED"
+  ],
+  "241": [
+    "CI_MISSING"
+  ],
+  "242": [
+    "CI_FAILING"
+  ],
+  "243": [
+    "CI_MISSING"
+  ],
+  "244": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "245": [],
+  "246": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "247": [
+    "CI_MISSING",
+    "TOUCHES_PROTECTED"
+  ],
+  "248": [],
+  "249": [],
+  "250": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "251": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "252": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "253": [
+    "CI_BROKEN_ON_BASE",
+    "CI_FAILING",
+    "CI_MISSING",
+    "TOUCHES_PROTECTED"
+  ],
+  "254": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "255": [
+    "TOUCHES_PROTECTED"
+  ],
+  "256": [],
+  "257": [],
+  "258": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "259": [],
+  "260": [],
+  "261": [],
+  "262": [],
+  "263": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "264": [],
+  "265": [],
+  "266": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "267": [
+    "CI_FAILING"
+  ],
+  "268": [
+    "CI_MISSING"
+  ],
+  "269": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "270": [
+    "CI_MISSING"
+  ],
+  "271": [
+    "CI_FAILING",
+    "TOUCHES_PROTECTED"
+  ],
+  "272": [
+    "CI_BROKEN_ON_BASE",
+    "FIRST_TIME_CONTRIBUTOR"
+  ],
+  "273": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "274": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "275": [],
+  "276": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "277": [],
+  "278": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "279": [
+    "CI_FAILING",
+    "CI_MISSING"
+  ],
+  "280": [],
+  "282": [
+    "CI_MISSING",
+    "TOUCHES_PROTECTED"
+  ],
+  "283": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "284": [
+    "CI_BROKEN_ON_BASE",
+    "CI_MISSING"
+  ],
+  "285": [
+    "CI_BROKEN_ON_BASE",
+    "CI_MISSING"
+  ],
+  "286": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "287": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "288": [
+    "CI_BROKEN_ON_BASE",
+    "CI_MISSING"
+  ],
+  "289": [],
+  "290": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "291": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "292": [
+    "CI_BROKEN_ON_BASE",
+    "CI_MISSING"
+  ],
+  "293": [
+    "CI_BROKEN_ON_BASE",
+    "CI_FAILING",
+    "TOUCHES_PROTECTED"
+  ],
+  "294": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "295": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "296": [
+    "CI_BROKEN_ON_BASE",
+    "CI_MISSING"
+  ],
+  "297": [
+    "CI_MISSING"
+  ],
+  "298": [
+    "CI_MISSING"
+  ],
+  "299": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "300": [
+    "CI_MISSING"
+  ],
+  "301": [],
+  "302": [
+    "CI_BROKEN_ON_BASE",
+    "TOUCHES_PROTECTED"
+  ],
+  "303": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "304": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "305": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "306": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "307": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "308": [],
+  "309": [],
+  "310": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "311": [
+    "CI_MISSING"
+  ],
+  "312": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "313": [],
+  "314": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "315": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "316": [],
+  "317": [
+    "CI_MISSING"
+  ],
+  "324": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "325": [
+    "CI_BROKEN_ON_BASE",
+    "CI_FAILING"
+  ],
+  "326": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "327": [
+    "CI_BROKEN_ON_BASE"
+  ],
+  "329": [
+    "CI_BROKEN_ON_BASE",
+    "CI_FAILING",
+    "CI_MISSING"
+  ],
+  "330": [
+    "TOUCHES_PROTECTED"
+  ],
+  "331": [
+    "CI_MISSING"
+  ],
+  "332": [
+    "CI_MISSING",
+    "TOUCHES_PROTECTED"
+  ],
+  "333": [
+    "CI_MISSING"
+  ],
+  "334": [
+    "CI_MISSING"
+  ],
+  "335": [
+    "TOUCHES_PROTECTED"
+  ],
+  "336": [
+    "CI_MISSING"
+  ],
+  "337": [],
+  "338": [
+    "TOUCHES_PROTECTED"
+  ]
+}
