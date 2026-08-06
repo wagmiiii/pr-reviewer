@@ -1,5 +1,6 @@
 import { Octokit } from 'octokit';
 import type { MergeableState, PullRequestContext } from '../types.js';
+import { parseLinkedIssues } from './issues.js';
 
 const MERGEABLE_STATES: readonly MergeableState[] = [
   'clean',
@@ -61,6 +62,7 @@ export async function collectPullRequestCore(
     additions: pr.additions,
     deletions: pr.deletions,
     changedFiles: pr.changed_files,
+    linkedIssues: parseLinkedIssues(pr.title, pr.body),
     reviews: reviews.map((review: any) => ({
       author: review.user?.login || '',
       state: review.state,
