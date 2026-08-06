@@ -2,10 +2,16 @@
 
 **Gate:** the first of five that can end the project.
 **Inputs:** PR-001 (fork token spike), PR-002 (competitor research), PR-004 (premise test).
-**Drafted:** 2026-08-06 · **Status: RECOMMENDED, awaiting both signatures.**
+**Drafted:** 2026-08-06 · **Status: DECIDED by the product owner; platform signature outstanding.**
 
-> This is a joint decision. What follows is a recommendation with its evidence and its
-> counter-evidence laid out; it is not the decision. Sign-off block is at the foot.
+> **2026-08-06 — Allison accepted this recommendation in full**, including the open items
+> below, which are now resolved rather than deferred. The consequences listed under
+> *What changes as a result* have been applied to the docs.
+>
+> **Ademola has not signed.** Under the track split in `docs/PROJECT-MANAGEMENT.md` the
+> product decisions here are the product owner's to make, but the trigger choice is a
+> platform decision recorded against his track — it is written below as the recommendation
+> to adopt, and PR-051 is his to confirm or overturn on the evidence.
 
 Confidence tags: **[Certain]** / **[Likely]** / **[Guessing]**.
 
@@ -59,8 +65,10 @@ on it:**
 Both are viable. Both need the same enforced invariant: **never check out or execute
 contributor code.** This design already never does — `act` makes API calls only.
 
-This gate does not need to pick one. **PR-051 does, and it must not inherit
-`check_suite` by default.**
+**Resolved: `workflow_run` + `schedule`, with `pull_request_target` as the documented
+fallback.** See *Items that were open at drafting* below. PR-051 confirms it against a
+real fork PR and may overturn it on evidence — but it must not inherit `check_suite` by
+default.
 
 ### PR-002 — one differentiator survives outright, and a better one appeared
 
@@ -197,13 +205,46 @@ Written now, while it is cheap to be honest.
 
 ---
 
-## Open, deliberately not resolved here
+## Items that were open at drafting, now resolved
 
-- **Trigger choice** — PR-051, on the evidence in both spikes.
-- **Whether the product is maintainer-facing or contributor-facing.** The 63/8 split
-  suggests maintainer. The roadmap assumes contributor. Unresolved, and it affects every
-  renderer ticket.
-- **Whether waves are episodic.** Unknowable from one wave. Revisit if a second arrives.
+**1. Trigger choice — `workflow_run: completed` + `schedule`.**
+`check_suite` is rejected outright: it would have fired zero times. `workflow_run` is
+documented to carry secrets and a write token where the triggering workflow could not, and
+it is what the ecosystem converged on for this exact problem. `pull_request_target` is
+recorded as the **fallback**, not a rejection — the exploit is that trigger *plus a
+checkout of contributor code*, and this design never checks out. Take the fallback if the
+`workflow_run` config burden proves unacceptable in practice.
+
+Both carry the same non-negotiable invariant: **never check out and never execute
+contributor code**, enforced by a test rather than a convention.
+
+*This is recorded against the platform track.* PR-051 confirms it against a real fork PR
+and may overturn it on evidence — no `workflow_run` run exists on the target repo yet.
+
+**2. The primary reader is the maintainer.**
+63 of 71 findings say "your `main` is broken". That is not a message to a drive-by
+contributor. The product is maintainer-first, contributor-second — the contributor-facing
+output stays, but it stops being what the renderers are designed around. **PR-041 and
+PR-071 are re-specified against this before they are built**, and both need re-pointing
+before Sprint 2 rather than after.
+
+This is the largest single consequence of the gate and the one most likely to have been
+missed if PR-004 had been skipped.
+
+**3. `NO_LINKED_ISSUE` / PR-082 — dropped as a rule.**
+Reduced to `pr-reviewer recommend` (PR-094) pointing adopters at nearform's action, which
+does it better than the planned regex. Not worth building a worse version of something
+free.
+
+## Still open, and honestly so
+
+- **Whether contributor waves are episodic.** Unknowable from one wave. If waves are
+  episodic the tool has value during a wave and none between, which is a materially weaker
+  case than "ongoing pain". Revisit if a second arrives. [Guessing]
+- **Whether `workflow_run` fires reliably for fork PRs end-to-end.** Documented, never
+  observed here. PR-051.
+- **`MERGE_CONFLICT` has no validation route** until live traffic exists. PR-032 ships on
+  reasoning.
 
 ---
 
@@ -211,9 +252,13 @@ Written now, while it is cheap to be honest.
 
 | | Name | Position | Date |
 |---|---|---|---|
-| Product / rules | Allison Muyideen | | |
-| Platform | Ademola Ajala | | |
+| Product / rules | Allison Muyideen | **GO, scoped to PR-042. Recommendation accepted in full.** | 2026-08-06 |
+| Platform | Ademola Ajala | *outstanding* | |
 
-**Not decided until both rows are filled.** If either party disagrees, record the
-disagreement here rather than resolving it in conversation — the reasoning is the point
-of the document.
+If Ademola disagrees — with the scope cut, with the trigger choice, or with the
+maintainer-first re-targeting — **record the disagreement here** rather than resolving it
+in conversation. The reasoning is the point of the document.
+
+The one thing to check before countersigning: **the 88.7% has been derived once, by one
+script, by one of us.** It is the load-bearing number in this decision. Re-derive it
+independently before Sprint 1 starts.

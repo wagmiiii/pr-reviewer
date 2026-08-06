@@ -36,23 +36,39 @@ that matters.
 
 Ways out, and why each was or wasn't taken:
 
+> **Amended 2026-08-06 by PR-003.** `check_suite: completed` was recorded here as
+> **Chosen**. PR-001 refuted it. The table below is the corrected version; see
+> `docs/spikes/fork-token.md` and `docs/decisions/PR-003-go-no-go.md`.
+
 | Option | Verdict |
 |---|---|
-| `pull_request_target` | **Rejected.** Runs with repo secrets in the base context; the standard exploit path. |
+| `check_suite: completed` + `schedule` | **Rejected — was Chosen, refuted by PR-001.** `check_suite` does not fire when the check suite was created by GitHub Actions [Certain — documented], and 100% of check suites on the target repo are created by GitHub Actions [Certain]. It would have fired **zero times**. |
+| `workflow_run: completed` + `schedule` | **Chosen, pending PR-051 confirmation.** Documented to receive secrets and a write token "even if the previous workflow was not". The ecosystem's standard fix for exactly this problem. |
+| `pull_request_target` | **Fallback, no longer rejected outright.** The exploit is `pull_request_target` *plus a checkout of contributor code*. This design never checks out and never executes contributor code, so the original rejection was made against a stronger threat model than we present. Take it if `workflow_run`'s config burden proves unacceptable. |
 | PAT or GitHub App token in the Action | **Rejected for Phase 1.** Kills the "one file, no secrets" adoption story. |
-| `check_suite: completed` + `schedule` | **Chosen.** Both run in base-repo context with a full-permission token [Likely]. |
+
+**Non-negotiable invariant for either chosen option:** the Action **never checks out and
+never executes contributor code**. `act` makes API calls only. This must be enforced by a
+test — see `tests/architecture.test.ts` — not by convention. It is the entire reason both
+`workflow_run` and `pull_request_target` are safe here, and a future contributor adding a
+`checkout` step would silently turn this into a remote-code-execution hole.
 
 Consequences, accepted explicitly:
 
-- Writes happen when CI finishes or when the cron fires — **not** within seconds of a
-  push. The latency promise is "one CI cycle", not "instant".
+- Writes happen when the upstream workflow finishes or when the cron fires — **not**
+  within seconds of a push. The latency promise is "one CI cycle", not "instant".
+- **`workflow_run` requires the adopter to name their CI workflow.** The adoption story is
+  "one file, tell us your CI workflow name", not "one file, zero config". Say so in the
+  README rather than discovering it in an issue.
 - `pull_request` is still subscribed, but only to compute and log a verdict in dry-run.
   It never attempts a write.
-- The `schedule` sweep is the safety net: any PR whose state drifted gets picked up on
-  the next run regardless of events.
+- The `schedule` sweep is the safety net, and is **eventually-consistent, not a latency
+  guarantee**: 5-minute floor, best-effort under load, and auto-disabled after 60 days of
+  repo inactivity [Certain] — a real hole for a quiet repo.
 
-**This must be verified against a real fork PR before Phase 1 begins.** If it doesn't
-hold, Surface A is not viable and Surface B moves up the roadmap.
+**Still unverified end-to-end.** No `workflow_run` run exists on the target repo. PR-051
+confirms against a real fork PR before Phase 1 ships. If it doesn't hold, take the
+fallback; if neither holds, Surface A is not viable and Surface B moves up the roadmap.
 
 ## Pipeline
 

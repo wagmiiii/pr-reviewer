@@ -93,11 +93,20 @@ fork PR before writing code]. The first draft's workflow requested
 `pull-requests: write` on `pull_request`, i.e. exactly the population the project
 exists for.
 
-Resolution: `check_suite: completed` and `schedule` run in the base-repo context with a
-full-permission token [Likely] and become the write triggers. `pull_request` is kept
-for dry-run logging only. Cost: latency goes from seconds to one CI cycle. The
-"minutes not days" claim in the first draft was overstated and has been corrected in
-`00-concept.md`.
+~~Resolution: `check_suite: completed` and `schedule` run in the base-repo context with a
+full-permission token [Likely] and become the write triggers.~~
+
+**Corrected 2026-08-06 (PR-001, ratified by PR-003).** That resolution was wrong.
+`check_suite` does not fire when the check suite was created by GitHub Actions [Certain],
+and every check suite on the target repo is [Certain] — it would have fired **zero
+times**. A workflow that is correct, tested, green, and never runs.
+
+Current resolution: **`workflow_run: completed` + `schedule`**, with
+`pull_request_target` as the documented fallback, both bound by a tested "never check out
+contributor code" invariant. See `docs/02-architecture.md` § Trigger model. `pull_request`
+is kept for dry-run logging only. Cost: latency goes from seconds to one CI cycle, plus
+the adopter must name their CI workflow. The "minutes not days" claim in the first draft
+was overstated and has been corrected in `00-concept.md`.
 
 ### P2 — The differentiation thesis was asserted, not argued
 
