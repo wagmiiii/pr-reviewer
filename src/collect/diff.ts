@@ -17,11 +17,11 @@ export async function collectDiff(
     });
 
     const diffText = response.data as unknown as string;
-    const buf = Buffer.from(diffText, 'utf8');
+    const buf = new TextEncoder().encode(diffText);
 
     if (buf.length > capBytes) {
       return {
-        patch: buf.toString('utf8', 0, capBytes),
+        patch: new TextDecoder().decode(buf.slice(0, capBytes)),
         truncated: true,
         capBytes,
       };
