@@ -1,0 +1,37 @@
+{
+  "population": {
+    "pull_requests": 159,
+    "from_forks": 134,
+    "distinct_authors": 68,
+    "merged": 154
+  },
+  "broken_on_arrival": {
+    "with_failing_check": 71,
+    "share_of_all": 44.7,
+    "with_no_ci_at_all": 14
+  },
+  "blame": {
+    "failing_and_base_also_failing": 63,
+    "failing_and_base_was_green": 8,
+    "share_not_contributors_fault": 88.7
+  },
+  "manual_nagging": {
+    "prs_needing_a_nag": 47,
+    "share_of_all": 29.6,
+    "total_nag_comments": 73,
+    "total_maintainer_comments": 78,
+    "nagged_prs_that_still_merged": 45,
+    "note": "Keyword match over maintainer comment bodies. A floor, not an exact count - a nag phrased unusually is missed. Never an overcount in the other direction is not claimed."
+  },
+  "latency_hours": {
+    "median_open_to_close": 13.9,
+    "median_when_nagged": 40.9,
+    "median_when_not_nagged": 3.8
+  },
+  "unanswerable_from_history": [
+    "MERGE_CONFLICT rate. GitHub computes mergeable_state only for open PRs; all 159 here are closed, so the field is 'unknown' throughout.",
+    "Noise budget. Comment volume under a bot can only be observed live.",
+    "Whether the maintainer's experience improves. A replay measures rule accuracy, not relief.",
+    "Time-to-first-actionable-feedback under the bot. The historical figure is a baseline for a future comparison, not a result."
+  ]
+}

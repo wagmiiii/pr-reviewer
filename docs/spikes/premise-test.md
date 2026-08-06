@@ -1,9 +1,16 @@
 # PR-004 — Premise test
 
-**Owner:** Allison Muyideen · **Date:** 2026-08-05 · **Status: BLOCKED as designed —
-redesign proposed below**
+**Owner:** Allison Muyideen · **Date:** 2026-08-05, re-scoped and answered 2026-08-06 ·
+**Status: ANSWERED against the archive**
 
 Confidence tags: [Certain] / [Likely] / [Guessing].
+
+> **2026-08-06 — re-scoped and run.** The original design was blocked by an empty PR
+> queue; that analysis is unchanged below and still stands. It is now measured against
+> the 159-PR archive instead of a live install. **Findings are in
+> [§ Findings](#findings-2026-08-06-measured-against-the-archive) at the foot of this
+> document** — read the blocker analysis first for why the method changed, then the
+> findings for what it produced. PR-003 is no longer waiting on this.
 
 ---
 
@@ -111,3 +118,110 @@ argument for building it from "ongoing pain" to "be ready for the next one".
 That is a weaker case, and it should be stated honestly at the go/no-go rather than
 discovered later. [Guessing — one observed wave is not a pattern; if there were earlier
 waves on other repos, that would change the answer.]
+
+---
+
+# Findings — 2026-08-06, measured against the archive
+
+Re-scoped per the recommendation above. Method: direct counts over the 159 archived PRs
+(`corpus/premise.sh`, output in `docs/spikes/premise-findings.json`). No rules engine —
+these are queries against captured history, so they run now rather than after Sprint 1.
+
+**Population:** 159 PRs, 154 merged, 134 from forks, 68 distinct authors, one month
+(2026-07-06 → 2026-08-04). Three PRs (179, 281, 328) are absent from the archive; see
+`corpus/README.md`. They are the three largest by diff size, so the gap is not random.
+
+## Verdict
+
+**The premise is confirmed, but not the version of it we wrote the tickets against.**
+
+The original framing was *maintainers drown in manual CI nagging, so automate the
+nagging*. The history says the nagging was real but modest in volume — and that the
+majority of it was **aimed at the wrong person**.
+
+## The numbers
+
+| Question | Answer | Confidence |
+|---|---|---|
+| PRs arriving with a failing check | **71 of 159 (44.7%)** | [Certain] |
+| …where the same check was **already failing on the base commit** | **63 of 71 (88.7%)** | [Certain] |
+| …where the base was green, i.e. genuinely the contributor's break | **8 of 71 (11.3%)** | [Certain] |
+| PRs with no CI at all | 14 | [Certain] |
+| PRs that needed a manual "fix your CI / resolve conflicts" comment | **47 of 159 (29.6%)** | [Likely — keyword floor] |
+| Maintainer comments that were such a nag | **73 of 78 (93.6%)** | [Likely — keyword floor] |
+| Median hours open→closed, PRs that needed a nag | **40.9h** | [Certain] |
+| Median hours open→closed, PRs that did not | **3.8h** | [Certain] |
+
+## What actually matters here
+
+**1. Nearly all maintainer commentary on this repo was manual triage.** 73 of 78
+comments. Not code review, not design discussion — telling people their branch was not
+mergeable. Whatever else is true, the maintainer's comment budget was spent almost
+entirely on work a deterministic rule can do. [Certain that the ratio holds; Likely on
+the exact split, since the classifier is a keyword match]
+
+**2. The maintainer was already hand-rolling this bot.** The most common comment in the
+entire history is `fix your cl` — 14 times, verbatim. A copy-pasted boilerplate
+("Hello! 👋 We recently optimized and simplified the CI workflows on the `main`
+branch…") appears 9 times. That is a human doing string templating by hand, which is the
+clearest demand signal in the corpus. [Certain]
+
+**3. And 88.7% of the time, the nag was misdirected.** Of the 71 PRs with a failing
+check, 63 were failing a check that was *already failing on the base commit they branched
+from*. The contributor had broken nothing. They were being asked to fix the maintainer's
+red `main`. [Certain from the data; the interpretation assumes the base SHA resolution is
+right, which is exact for merged PRs and approximate for 5]
+
+This inverts the product argument. **The value is not automating the nag — it is not
+sending it.** Differentiator #1 was a hypothesis in `docs/00-concept.md`; it is now the
+single strongest measured finding on the board, and it should lead PR-003 rather than sit
+third in a feature list.
+
+**4. Being blocked cost roughly 10× in wall-clock.** 40.9h median versus 3.8h. That is
+the contributor's waiting, not the maintainer's effort, and it is the number that would
+improve most obviously under instant automated feedback. [Certain on the figures;
+Guessing on causation — a PR needing a nag is plausibly also a more complicated PR]
+
+## Where this argues *against* building
+
+Stated because a premise test that only finds support is not a test.
+
+- **78 maintainer comments in a month is not drowning.** ~2.5 a day at peak. The pain was
+  real but the raw volume does not by itself justify a bot; the misdirection does.
+- **The wave is over.** 159 PRs in one month, zero open now. If waves are episodic, the
+  tool has value during a wave and none between. That case is weaker than "ongoing pain"
+  and PR-003 should say so out loud. [Guessing — one wave is not a pattern]
+- **8 PRs is the whole addressable set for the flagship rule's *positive* case.** Only 8
+  of 159 had a genuine contributor-caused CI break with a green base. If the tool is sold
+  on "tells contributors what to fix", that is the true size of the market it serves. Its
+  real job is the other 63.
+
+## What this could not answer
+
+Carried forward rather than fudged:
+
+- **`MERGE_CONFLICT` rate.** GitHub computes `mergeable_state` only for open PRs; all 159
+  are closed, so the field is `unknown` throughout. The conflict rule (PR-032) has no
+  historical validation route. Conflicts clearly happened — the nag text mentions them
+  repeatedly — but they cannot be counted.
+- **Noise budget.** Comments per PR under a bot is only observable live.
+- **Whether the maintainer's experience improves.** A replay measures rule accuracy, not
+  relief.
+- **CI log excerpts (PR-024).** Not fetched; the log phase of the capture has not been
+  run and the retention window is closing. [Likely]
+
+## Method and its limits
+
+`corpus/premise.sh`, re-runnable, pure derivation. Maintainer comments are identified by
+GitHub's `author_association` (`OWNER`/`MEMBER`/`COLLABORATOR`).
+
+The nag classifier is a keyword match and therefore a **floor**. Two corrections were
+needed after reading actual comment text rather than imagining it — this maintainer
+writes "CL" for "CI", and writes "resolve conflicts" bare rather than in the long form a
+regex written from memory expects. Missing those undercounted nags by roughly half (36 →
+73). Two genuine nags remain unmatched after tuning, and one ambiguous comment
+("Rectify this mistake") is excluded. Comments addressed to `@dependabot` are excluded as
+bot-driving, not nagging.
+
+Anyone quoting these numbers should quote them as "159 of 162 PRs" and note the three
+missing large PRs.
