@@ -11,8 +11,12 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "bin"
   ],
+  "bin": {
+    "pr-reviewer": "./bin/pr-reviewer.js"
+  },
   "scripts": {
     "build": "tsup && tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
