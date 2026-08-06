@@ -191,6 +191,7 @@ export interface PullRequestContext {
   readonly collectedAt: Timestamp;
 
   readonly number: number;
+  readonly title?: string;
   readonly author: string;
   readonly authorAssociation: AuthorAssociation;
   readonly state: 'open' | 'closed';

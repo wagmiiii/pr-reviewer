@@ -9,4 +9,5 @@
  * Not implemented here — PR-040 onwards.
  */
 
-export {};
+export { renderTerminalReport } from './terminal.js';
+export type { EvaluatedPR } from './terminal.js';

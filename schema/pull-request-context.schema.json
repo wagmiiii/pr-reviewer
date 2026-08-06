@@ -377,6 +377,9 @@
           ],
           "type": "string"
         },
+        "title": {
+          "type": "string"
+        },
         "updatedAt": {
           "$ref": "#/definitions/Timestamp"
         }
