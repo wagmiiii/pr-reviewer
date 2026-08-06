@@ -249,7 +249,7 @@ export type RuleBucket = 'fact' | 'heuristic';
 export type RuleOutcome = 'pass' | 'fail' | 'skip';
 
 /** Who has to act. The blockage-ownership call is the product's core claim. */
-export type RuleOwner = 'contributor' | 'maintainer';
+export type RuleOwner = 'contributor' | 'maintainer' | 'none';
 
 /**
  * How loudly a finding is reported.
@@ -257,7 +257,7 @@ export type RuleOwner = 'contributor' | 'maintainer';
  * PR-030 owns the final set. `blocking` is reserved for `fact` rules: a
  * `heuristic` rule can warn but can never change a PR's status.
  */
-export type RuleSeverity = 'blocking' | 'warning' | 'info';
+export type RuleSeverity = 'blocking' | 'wait' | 'warning' | 'info';
 
 /** PR-030 owns the concrete rules; this is only the shape they must return. */
 export interface RuleResult {
