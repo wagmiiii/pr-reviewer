@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:39Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 251,
+    "title": "feat: add --list-lints and --version to cargo cost-lint",
+    "body": "## Summary\n\nAdds two new CLI flags to `cargo-cost-lint`:\n\n- **`--version`**: Prints the crate version and exits 0.\n- **`--list-lints`**: Prints each registered lint with its default level and one-line description (tab-separated), then exits 0 without running a lint pass.\n\nCloses #96\n\n## Design approach\n\nThe existing `build.rs` already parses `soroban_cost_lints/src/lib.rs` at build time to extract lint names from `register_lints`. This PR extends that code-generation approach to also parse `declare_lint! { ... }` macro blocks, extracting each lint's **name**, **default level**, and **one-line description**.\n\nKey design decisions:\n\n1. **No dependency cycle**: Information flows from the lint crate (`soroban_cost_lints`) to the CLI crate (`cargo-cost-lint`) through build-time code generation, not a Cargo dependency. The build script reads source files as text and generates `LINT_INFO` / `LINT_NAMES`.\n\n2. **Consistency guaranteed at build time**: `LINT_INFO` is derived in the same order as `register_lints`. The build script panics if a lint appears in `register_lints` but not in `declare_lint!` (or vice versa), preventing drift.\n\n3. **Stable, greppable output**: `--list-lints` outputs tab-separated `name\\tlevel\\tdescription`, one lint per line.\n\n## Changes\n\n| File | Change |\n|------|--------|\n| `cargo-cost-lint/build.rs` | Added `parse_declare_lints()` to extract lint metadata. Added cross-validation between `register_lints` and `declare_lint!`. Generates `LintInfo` struct and `LINT_INFO` array. |\n| `cargo-cost-lint/src/main.rs` | Added `#[command(version)]` and `--list-lints` flag to `Cli`. Explicit early-exit for `--version`/`-V` and `--list-lints` before the cargo-dylint machinery. |\n| `cargo-cost-lint/tests/integration.rs` | Added `test_list_lints` (validates exit 0, all 5 lints present, tab-separated format, line count matches registered lints) and `test_version` (validates exit 0, correct output). |\n| `README.md` | Added CLI Flags table, `--list-lints` section with example output, `--version` section. |\n\n## Verification\n\nAll checks pass:\n\n- `cargo fmt --all -- --check` ✅\n- `cargo clippy --workspace --all-targets -- -D warnings` ✅\n- `cargo test --workspace` (10 tests, 0 failures) ✅\n",
+    "author": {
+      "login": "khaylebfortune",
+      "id": 111098422,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T09:13:45Z",
+    "updated_at": "2026-07-27T12:15:11Z",
+    "merged_at": "2026-07-27T12:15:11Z",
+    "closed_at": "2026-07-27T12:15:11Z",
+    "merged_by": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "472c705ebd591bc05423817d5c2a531d046b8922",
+    "base": {
+      "ref": "main",
+      "sha": "4fd722e29b0413d65d52cb737d776825c7c7ea6d",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feat/list-lints-and-version",
+      "sha": "29835dd4d324ca164d9060cc486b4903640960e3",
+      "repo": "khaylebfortune/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 281,
+    "deletions": 6,
+    "changed_files": 4,
+    "commits": 2,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/251"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "d89d7b0badbc05e297e32f8f618d2b5e4b7b3bc4",
+      "message": "feat: add --list-lints and --version to cargo cost-lint",
+      "author_name": "khaylebfortune",
+      "author_email": "111098422+khaylebfortune@users.noreply.github.com",
+      "authored_at": "2026-07-26T09:12:40Z",
+      "committed_at": "2026-07-26T09:28:20Z",
+      "author": {
+        "login": "khaylebfortune",
+        "id": 111098422,
+        "type": "User"
+      },
+      "committer": {
+        "login": "khaylebfortune",
+        "id": 111098422,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "29835dd4d324ca164d9060cc486b4903640960e3",
+      "message": "Merge branch 'main' into feat/list-lints-and-version",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-26T17:12:19Z",
+      "committed_at": "2026-07-26T17:12:19Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 33,
+      "deletions": 0,
+      "changes": 33,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/build.rs",
+      "status": "modified",
+      "additions": 139,
+      "deletions": 6,
+      "changes": 145,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 23,
+      "deletions": 0,
+      "changes": 23,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/tests/integration.rs",
+      "status": "modified",
+      "additions": 86,
+      "deletions": 0,
+      "changes": 86,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-26T17:12:27Z",
+        "completed_at": "2026-07-26T17:12:59Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30212086776/job/89819923929",
+        "app": "github-actions",
+        "workflow_run_id": "30212086776"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "1771cefdb82961df2293efc7dc6a0184d9918e8b",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 472c705ebd591bc05423817d5c2a531d046b8922 is the main tip at merge time.",
+    "pull_request_base_sha": "4fd722e29b0413d65d52cb737d776825c7c7ea6d",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T12:15:11Z",
+          "completed_at": "2026-07-27T12:15:54Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30265150428/job/89973937074",
+          "app": "github-actions",
+          "workflow_run_id": "30265150428"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5082864270,
+        "created_at": "2026-07-26T09:15:56Z",
+        "updated_at": "2026-07-26T09:15:56Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@khaylebfortune Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30212086776"
+    ],
+    "all_head_workflow_run_ids": [
+      "30212086776"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

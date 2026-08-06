@@ -1,0 +1,13 @@
+// Declaration emit only. `tsup` bundles the JavaScript, but its bundled
+// `rollup-plugin-dts` pins an older TypeScript internally and crashes on the
+// version this repo uses — so `tsc` owns the `.d.ts` files instead.
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "emitDeclarationOnly": true,
+    "noEmit": false
+  },
+  "include": ["src"]
+}

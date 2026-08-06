@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:21Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 237,
+    "title": "refactor: clarify variable names in diagnostic processing loop",
+    "body": "Rename ambiguous single-letter and overloaded names in main's compiler-message loop to reflect their domain meaning:\r\n- msg -> cargo_record (the whole cargo JSON record)\r\n- message -> diagnostic (the inner rustc diagnostic)\r\n- msg_text -> diagnostic_message\r\n- s / span_obj -> span / primary_span\r\n- line_str -> line\r\n\r\n## Description\r\n<!-- Describe your changes in detail -->\r\n\r\n## Related Issue\r\n<!-- If this PR addresses an existing issue, please link it here. -->\r\nCloses #198 \r\n\r\n## Motivation and Context\r\n<!-- Why is this change required? What problem does it solve? -->\r\n\r\n## How Has This Been Tested?\r\n<!-- Please describe in detail how you tested your changes. -->\r\n- [ ] Added/Updated tests\r\n- [ ] Passed `cargo test`\r\n- [ ] Passed `cargo clippy`\r\n- [ ] Formatted with `cargo fmt`\r\n\r\n## Types of changes\r\n<!-- What types of changes does your code introduce? -->\r\n- [ ] Bug fix (non-breaking change which fixes an issue)\r\n- [ ] New feature (non-breaking change which adds functionality)\r\n- [ ] Breaking change (fix or feature that would cause existing functionality to change)\r\n- [ ] Documentation update\r\n",
+    "author": {
+      "login": "GABRIELOFGOD",
+      "id": 114562466,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-25T23:58:21Z",
+    "updated_at": "2026-07-27T12:14:43Z",
+    "merged_at": "2026-07-27T12:14:43Z",
+    "closed_at": "2026-07-27T12:14:43Z",
+    "merged_by": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "428452d1c8f25ab9b2c55b90b6b654c5ad29e6b0",
+    "base": {
+      "ref": "main",
+      "sha": "4fd722e29b0413d65d52cb737d776825c7c7ea6d",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "refactor/task-26",
+      "sha": "329e03946572ee6a096238c011aea1bc35d720b0",
+      "repo": "GABRIELOFGOD/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 14,
+    "deletions": 12,
+    "changed_files": 1,
+    "commits": 2,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/237"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "6ac8b78b9d05f34419d885522a6cdd5bbbfe7f27",
+      "message": "refactor: clarify variable names in diagnostic processing loop\n\nRename ambiguous single-letter and overloaded names in main's\ncompiler-message loop to reflect their domain meaning:\n- msg -> cargo_record (the whole cargo JSON record)\n- message -> diagnostic (the inner rustc diagnostic)\n- msg_text -> diagnostic_message\n- s / span_obj -> span / primary_span\n- line_str -> line\n\nCo-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>",
+      "author_name": "GABRIELOFGOD",
+      "author_email": "gabrielayodele2021@gmail.com",
+      "authored_at": "2026-07-25T23:39:25Z",
+      "committed_at": "2026-07-25T23:39:25Z",
+      "author": {
+        "login": "GABRIELOFGOD",
+        "id": 114562466,
+        "type": "User"
+      },
+      "committer": {
+        "login": "GABRIELOFGOD",
+        "id": 114562466,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "329e03946572ee6a096238c011aea1bc35d720b0",
+      "message": "Merge branch 'main' into refactor/task-26",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-26T17:13:06Z",
+      "committed_at": "2026-07-26T17:13:06Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 14,
+      "deletions": 12,
+      "changes": 26,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-26T17:13:15Z",
+        "completed_at": "2026-07-26T17:13:52Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30212113986/job/89819996991",
+        "app": "github-actions",
+        "workflow_run_id": "30212113986"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "921b19f118e44d2436dbbe8eb33731a4c78f76b9",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 428452d1c8f25ab9b2c55b90b6b654c5ad29e6b0 is the main tip at merge time.",
+    "pull_request_base_sha": "4fd722e29b0413d65d52cb737d776825c7c7ea6d",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T12:14:29Z",
+          "completed_at": "2026-07-27T12:15:22Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30265101632/job/89973780799",
+          "app": "github-actions",
+          "workflow_run_id": "30265101632"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/eki0INI3kNkTATTDZ68C/",
+          "created_at": "2026-07-27T12:14:37Z",
+          "updated_at": "2026-07-27T12:14:37Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/eki0INI3kNkTATTDZ68C/",
+          "created_at": "2026-07-27T12:14:37Z",
+          "updated_at": "2026-07-27T12:14:37Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5081114323,
+        "created_at": "2026-07-25T23:58:28Z",
+        "updated_at": "2026-07-25T23:58:28Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@GABRIELOFGOD Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5090124544,
+        "created_at": "2026-07-27T10:19:28Z",
+        "updated_at": "2026-07-27T10:19:28Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "fix your cl"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30212113986"
+    ],
+    "all_head_workflow_run_ids": [
+      "30212113986"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

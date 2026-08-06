@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:20Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 168,
+    "title": "chore: Rename quality job to Code Quality to fix branch protection re…",
+    "body": "…quirements\r\n\r\n## Description\r\n<!-- Describe your changes in detail -->\r\n\r\n## Related Issue\r\n<!-- If this PR addresses an existing issue, please link it here. -->\r\nCloses #\r\n\r\n## Motivation and Context\r\n<!-- Why is this change required? What problem does it solve? -->\r\n\r\n## How Has This Been Tested?\r\n<!-- Please describe in detail how you tested your changes. -->\r\n- [ ] Added/Updated tests\r\n- [ ] Passed `cargo test`\r\n- [ ] Passed `cargo clippy`\r\n- [ ] Formatted with `cargo fmt`\r\n\r\n## Types of changes\r\n<!-- What types of changes does your code introduce? -->\r\n- [ ] Bug fix (non-breaking change which fixes an issue)\r\n- [ ] New feature (non-breaking change which adds functionality)\r\n- [ ] Breaking change (fix or feature that would cause existing functionality to change)\r\n- [ ] Documentation update\r\n",
+    "author": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "author_association": "MEMBER",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-24T14:33:00Z",
+    "updated_at": "2026-07-24T14:39:55Z",
+    "merged_at": "2026-07-24T14:39:55Z",
+    "closed_at": "2026-07-24T14:39:55Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "0ebbe612086424277d72132d80f3ccec54ab2111",
+    "base": {
+      "ref": "main",
+      "sha": "88cf0ac3b39f613d51c45e94202f31f8ae13c45c",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "chore/repo-setup",
+      "sha": "5f11135ab505fb9b29608e57d2b7a3b3901ce90e",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 1,
+    "deletions": 0,
+    "changed_files": 1,
+    "commits": 2,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/168"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "7a4382d1f7c092f4701a7d76b4c43da4669fc4ef",
+      "message": "chore: Rename quality job to Code Quality to fix branch protection requirements",
+      "author_name": "adajala",
+      "author_email": "ademola2993k@gmail.com",
+      "authored_at": "2026-07-24T14:18:03Z",
+      "committed_at": "2026-07-24T14:18:03Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "5f11135ab505fb9b29608e57d2b7a3b3901ce90e",
+      "message": "Merge branch 'main' into chore/repo-setup",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T14:33:11Z",
+      "committed_at": "2026-07-24T14:33:11Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 4,
+    "check_runs": [
+      {
+        "name": "validate-toolchain-pins",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T14:33:18Z",
+        "completed_at": "2026-07-24T14:33:22Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30101504501/job/89508408239",
+        "app": "github-actions",
+        "workflow_run_id": "30101504501"
+      },
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T14:33:18Z",
+        "completed_at": "2026-07-24T14:39:14Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30101504501/job/89508408178",
+        "app": "github-actions",
+        "workflow_run_id": "30101504501"
+      },
+      {
+        "name": "Code Quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T14:33:18Z",
+        "completed_at": "2026-07-24T14:35:16Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30101504501/job/89508408176",
+        "app": "github-actions",
+        "workflow_run_id": "30101504501"
+      },
+      {
+        "name": ".github/dependabot.yml",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T14:33:14Z",
+        "completed_at": "2026-07-24T14:33:15Z",
+        "details_url": "https://dependabot-api.githubapp.com",
+        "app": "dependabot",
+        "workflow_run_id": null
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "88cf0ac3b39f613d51c45e94202f31f8ae13c45c",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 0ebbe612086424277d72132d80f3ccec54ab2111 is the main tip at merge time.",
+    "pull_request_base_sha": "88cf0ac3b39f613d51c45e94202f31f8ae13c45c",
+    "check_runs": {
+      "total_count": 4,
+      "check_runs": [
+        {
+          "name": "Dependabot",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T14:33:37Z",
+          "completed_at": "2026-07-24T14:34:57Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30101526645/job/89508485939",
+          "app": "github-actions",
+          "workflow_run_id": "30101526645"
+        },
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T14:32:19Z",
+          "completed_at": "2026-07-24T14:32:25Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30101435288/job/89508169784",
+          "app": "github-actions",
+          "workflow_run_id": "30101435288"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T14:32:18Z",
+          "completed_at": "2026-07-24T14:35:46Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30101435288/job/89508169782",
+          "app": "github-actions",
+          "workflow_run_id": "30101435288"
+        },
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T14:32:18Z",
+          "completed_at": "2026-07-24T14:39:32Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30101435288/job/89508169747",
+          "app": "github-actions",
+          "workflow_run_id": "30101435288"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30101504501"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

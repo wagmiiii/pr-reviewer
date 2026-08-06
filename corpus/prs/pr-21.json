@@ -1,0 +1,328 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:13:24Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 21,
+    "title": "ci: add fmt and clippy quality checks for contributor PRs",
+    "body": "## Summary\n\nAdds automated code quality gates to CI so contributor PRs are checked for formatting and lint cleanliness, not just test correctness.\n\n- New fast `quality` job in the lint workflow running `cargo fmt --all -- --check` and `cargo clippy --workspace --all-targets -- -D warnings` (runs in parallel with the test job, no dylint install needed, so contributors get style feedback in about a minute)\n- Existing code brought into compliance: rustfmt applied across the workspace, and five `collapsible_if` clippy errors fixed by collapsing nested `if let` blocks into let-chains (one commit per lint pass; behavior unchanged)\n- CONTRIBUTING.md gains a \"Code Quality Standards\" section documenting the checks and the codebase patterns to follow\n\n## Testing\n\n- `cargo fmt --all -- --check` passes\n- `cargo clippy --workspace --all-targets -- -D warnings` passes\n- `cargo test --workspace` passes (UI tests confirm lint behavior is unchanged)\n",
+    "author": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "author_association": "MEMBER",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-08T13:15:40Z",
+    "updated_at": "2026-07-08T13:20:41Z",
+    "merged_at": "2026-07-08T13:20:41Z",
+    "closed_at": "2026-07-08T13:20:41Z",
+    "merged_by": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "03fd8d5a35b898b3059e057735c9b8a5bf63613a",
+    "base": {
+      "ref": "main",
+      "sha": "ce47a83548b6ff5e83c1c8a2989c1f05d327674f",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "ci/code-quality-checks",
+      "sha": "6339f6c10fe5f5460f5e86dcffd98f59021e664b",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 98,
+    "deletions": 61,
+    "changed_files": 4,
+    "commits": 6,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/21"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "97a1abd4d44e4e96605f094ef092cbe6f62a9a4a",
+      "message": "style: apply rustfmt across the workspace",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-08T13:10:26Z",
+      "committed_at": "2026-07-08T13:10:26Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "901b24eceb1c4ccaa318e196e2c092debe43ee33",
+      "message": "refactor(lints): collapse nested if-lets in soroban_storage_in_loop",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-08T13:11:34Z",
+      "committed_at": "2026-07-08T13:11:34Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "bac9c05ef1fefdb5fa8b10d2a970a3e2cd3a0fe3",
+      "message": "refactor(lints): collapse nested if-lets in redundant_env_clone",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-08T13:12:19Z",
+      "committed_at": "2026-07-08T13:12:19Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "4f73cdcc4a46a9e3df56b952d93b76420076eda5",
+      "message": "refactor(lints): collapse nested if-lets in unnecessary_host_function_call",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-08T13:12:55Z",
+      "committed_at": "2026-07-08T13:12:55Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "cf55dcddc155544bd0957517e04d6fbe9ddbcdd0",
+      "message": "ci: add fmt and clippy quality job to lint workflow",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-08T13:13:05Z",
+      "committed_at": "2026-07-08T13:13:05Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "6339f6c10fe5f5460f5e86dcffd98f59021e664b",
+      "message": "docs(contributing): add code quality standards section",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-08T13:13:05Z",
+      "committed_at": "2026-07-08T13:13:05Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 14,
+      "deletions": 0,
+      "changes": 14,
+      "previous_filename": null
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 20,
+      "deletions": 2,
+      "changes": 22,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 8,
+      "deletions": 3,
+      "changes": 11,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 56,
+      "deletions": 56,
+      "changes": 112,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 2,
+    "check_runs": [
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-08T13:15:46Z",
+        "completed_at": "2026-07-08T13:20:22Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/28945541003/job/85878303715",
+        "app": "github-actions",
+        "workflow_run_id": "28945541003"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-08T13:15:46Z",
+        "completed_at": "2026-07-08T13:17:03Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/28945541003/job/85878303395",
+        "app": "github-actions",
+        "workflow_run_id": "28945541003"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "success",
+    "total_count": 2,
+    "statuses": [
+      {
+        "context": "GitBook",
+        "state": "success",
+        "description": "Check the changes in the GitBook editor.",
+        "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/Z3cv0v4oYrtnZF88hYxU/",
+        "created_at": "2026-07-08T13:15:54Z",
+        "updated_at": "2026-07-08T13:15:54Z"
+      },
+      {
+        "context": "GitBook - tollcraft.gitbook.io/docs/",
+        "state": "success",
+        "description": "Check the live preview on your docs site.",
+        "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/Z3cv0v4oYrtnZF88hYxU/",
+        "created_at": "2026-07-08T13:15:54Z",
+        "updated_at": "2026-07-08T13:15:54Z"
+      }
+    ]
+  },
+  "base_branch_ci": {
+    "resolved_sha": "ce47a83548b6ff5e83c1c8a2989c1f05d327674f",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 03fd8d5a35b898b3059e057735c9b8a5bf63613a is the main tip at merge time.",
+    "pull_request_base_sha": "ce47a83548b6ff5e83c1c8a2989c1f05d327674f",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-07T13:12:16Z",
+          "completed_at": "2026-07-07T13:17:01Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/28868851191/job/85625937752",
+          "app": "github-actions",
+          "workflow_run_id": "28868851191"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/UXhJRLZF875e7F5Ecz0o/",
+          "created_at": "2026-07-07T13:12:23Z",
+          "updated_at": "2026-07-07T13:12:23Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/UXhJRLZF875e7F5Ecz0o/",
+          "created_at": "2026-07-07T13:12:24Z",
+          "updated_at": "2026-07-07T13:12:24Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "28945541003"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

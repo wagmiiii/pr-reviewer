@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:12Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 233,
+    "title": "docs: add Editor/IDE integration guide and link README claim to it",
+    "body": "## Description\r\n<!-- Describe your changes in detail -->\r\n\r\n## Related Issue\r\n<!-- If this PR addresses an existing issue, please link it here. -->\r\nCloses #135\r\n\r\n## Motivation and Context\r\n<!-- Why is this change required? What problem does it solve? -->\r\n\r\n## How Has This Been Tested?\r\n<!-- Please describe in detail how you tested your changes. -->\r\n- [ ] Added/Updated tests\r\n- [ ] Passed `cargo test`\r\n- [ ] Passed `cargo clippy`\r\n- [ ] Formatted with `cargo fmt`\r\n\r\n## Types of changes\r\n<!-- What types of changes does your code introduce? -->\r\n- [ ] Bug fix (non-breaking change which fixes an issue)\r\n- [ ] New feature (non-breaking change which adds functionality)\r\n- [ ] Breaking change (fix or feature that would cause existing functionality to change)\r\n- [ ] Documentation update\r\n",
+    "author": {
+      "login": "temieehade-coder",
+      "id": 295637460,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-25T23:13:25Z",
+    "updated_at": "2026-07-25T23:28:00Z",
+    "merged_at": "2026-07-25T23:28:00Z",
+    "closed_at": "2026-07-25T23:28:00Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "9917e9f35219f5c7fb16592ec81ae5dcc8516d0b",
+    "base": {
+      "ref": "main",
+      "sha": "ef0f2993332ca4217b6957ce8fd99cff5878379e",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "docs/ide-integration",
+      "sha": "bd4f3404e23d2ad35eddefea86c008d12d06a7fe",
+      "repo": "temieehade-coder/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 56,
+    "deletions": 1,
+    "changed_files": 2,
+    "commits": 1,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/233"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "bd4f3404e23d2ad35eddefea86c008d12d06a7fe",
+      "message": "docs: add Editor/IDE integration guide and link README claim to it",
+      "author_name": "temieehade-coder",
+      "author_email": "temieehade@gmail.com",
+      "authored_at": "2026-07-25T23:11:45Z",
+      "committed_at": "2026-07-25T23:11:45Z",
+      "author": {
+        "login": "temieehade-coder",
+        "id": 295637460,
+        "type": "User"
+      },
+      "committer": {
+        "login": "temieehade-coder",
+        "id": 295637460,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 55,
+      "deletions": 0,
+      "changes": 55,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T23:13:33Z",
+        "completed_at": "2026-07-25T23:15:59Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30179022386/job/89732391519",
+        "app": "github-actions",
+        "workflow_run_id": "30179022386"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "02403c648c7e020e0d283c69f082e14e67371779",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 9917e9f35219f5c7fb16592ec81ae5dcc8516d0b is the main tip at merge time.",
+    "pull_request_base_sha": "ef0f2993332ca4217b6957ce8fd99cff5878379e",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T23:25:11Z",
+          "completed_at": "2026-07-25T23:27:46Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30179368093/job/89733282426",
+          "app": "github-actions",
+          "workflow_run_id": "30179368093"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/LDVDRnriebqX7dvt4eJA/",
+          "created_at": "2026-07-25T23:25:18Z",
+          "updated_at": "2026-07-25T23:25:18Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/LDVDRnriebqX7dvt4eJA/",
+          "created_at": "2026-07-25T23:25:18Z",
+          "updated_at": "2026-07-25T23:25:18Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5080981252,
+        "created_at": "2026-07-25T23:13:32Z",
+        "updated_at": "2026-07-25T23:13:32Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@temieehade-coder Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30179022386"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

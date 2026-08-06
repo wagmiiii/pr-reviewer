@@ -1,0 +1,390 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:11Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 232,
+    "title": "feat: implement contract_call_in_loop lint",
+    "body": "Closes #16\n\n## Summary\n\nAdds a new lint, `contract_call_in_loop`, that flags cross-contract invocations made via `env.invoke_contract(...)` when the call site sits inside a `for`/`while`/`loop` body. Each cross-contract call spins up a new VM context and re-charges dispatch/instantiation overhead, so repeating it per iteration multiplies that cost and is almost always a sign of a missing batch endpoint on the callee, or a call whose result could be computed once and reused.\n\nDefault severity: `warn`.\n\n## Implementation details\n\n- New `CONTRACT_CALL_IN_LOOP` lint declared and registered in `soroban_cost_lints/src/lib.rs`, alongside the existing lints, with category `LintCategory::Compute` in the `LINT_METADATA` registry.\n- Detection follows the same structure as the existing loop-based lints (`SorobanStorageInLoop`, `HostInLoop`): resolve the method-call receiver's type, peel references, confirm it's `soroban_sdk::Env` via `match_soroban_def_path`, check the method name is `invoke_contract`, and confirm the call sits inside an enclosing loop via `enclosing_loop`/`get_enclosing_loop_or_multi_call_closure`.\n- Unlike `unnecessary_host_function_call`, this lint does **not** gate on `depends_on_loop_state` — a cross-contract call is expensive on every iteration regardless of whether its arguments change, since the VM-instantiation cost is fixed per call, not per distinct input.\n- Help text suggests either adding a bulk/batch endpoint on the callee contract, or hoisting the call out of the loop if its result is invariant.\n\n## What is and isn't covered\n\n**Covered:**\n- `env.invoke_contract(...)` calls inside `for`, `while`, and `loop` bodies.\n- Suppression via `#[allow(contract_call_in_loop)]`.\n\n**Not covered (documented as follow-up in `docs/lints/contract_call_in_loop.md`):**\n- `env.try_invoke_contract(...)` — the fallible counterpart is not yet matched.\n- Generated contract clients (types produced by `contractimport!`/`contractclient!`, conventionally `*Client` structs) that wrap `invoke_contract` internally — e.g. `token_client.transfer(...)` inside a loop has the same cost profile but isn't detected yet. This requires recognizing generated client types by structural convention rather than a fixed def-path, which is left as a follow-up per the issue's suggested scope.\n\n## Files changed\n\n**New:**\n- `docs/lints/contract_call_in_loop.md` — rule reference page with a batching example, \"why is this bad\", suggested fix, and a \"deliberately not covered\" section.\n\n**Modified:**\n- `soroban_cost_lints/src/lib.rs` — lint declaration, `LateLintPass` impl, registration, `LINT_METADATA` entry.\n- `soroban_cost_lints/ui/main.rs` — added `invoke_contract` to the mock `soroban_sdk::Env` stub, plus new test fixtures.\n- `soroban_cost_lints/ui/main.stderr` — updated expected UI-test output (new warnings + line-number shifts from the new fixtures).\n- `docs/SUMMARY.md`, `docs/lints/README.md`, `docs/cost_rationale.md` — link/reference the new lint.\n- `README.md`, `CHANGELOG.md` — feature list, example, `budget.toml` sample, and Unreleased changelog entry.\n\n## Tests added\n\nIn `soroban_cost_lints/ui/main.rs`:\n- `bad_invoke_contract_in_for_loop` — `invoke_contract` inside a `for` loop → **flagged**.\n- `bad_invoke_contract_in_while_loop` — inside a `while` loop → **flagged**.\n- `bad_invoke_contract_in_loop_loop` — inside a `loop` → **flagged**.\n- `good_invoke_contract_outside_loop` — single call outside any loop → **clean**.\n- `allowed_invoke_contract_in_loop` — `#[allow(contract_call_in_loop)]` suppression → **clean**.\n\n## How to test\n\n```bash\n# Install prerequisites if needed\ncargo install cargo-dylint dylint-link --version \"^6.0.1\"\n\n# From soroban_cost_lints/\ncargo test ui\n\n# Full workspace suite (unit + integration + UI tests)\ncargo test --workspace\n\n# Lint/format checks\ncargo fmt --all -- --check\ncargo clippy --workspace --all-targets -- -D warnings\n```\n\nAll of the above pass locally.",
+    "author": {
+      "login": "Rafiat30",
+      "id": 305820146,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-25T22:46:50Z",
+    "updated_at": "2026-07-28T13:35:21Z",
+    "merged_at": "2026-07-28T13:35:21Z",
+    "closed_at": "2026-07-28T13:35:21Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "c78332dcd7995f7f75a32bc6c578bfbb9fac9014",
+    "base": {
+      "ref": "main",
+      "sha": "dd6dbfd8e96b465757c5cb5c01946995d3a59718",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feature/contract-call-in-loop-lint",
+      "sha": "beaeb4024767e9ff761acc18e5c1a772db6594ee",
+      "repo": "Rafiat30/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 199,
+    "deletions": 2,
+    "changed_files": 7,
+    "commits": 6,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/232"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "434db31482ce6ef145196c1d724656be0cc3164e",
+      "message": "feat: implement contract_call_in_loop lint\n\nAdds a new lint that flags cross-contract invocations made via\nenv.invoke_contract(...) when the call site sits inside a for/while/loop\nbody. Each such call re-instantiates a VM context and re-charges dispatch\noverhead, so repeating it per iteration is almost always a structural\ndesign smell (missing batch endpoint on the callee, or a cacheable\nresult).\n\nFollows the existing receiver-type-resolution + enclosing_loop pattern\nused by soroban_storage_in_loop and host_in_loop. Client-struct detection\n(contractimport!/contractclient! generated *Client types) and\ntry_invoke_contract are documented as follow-up work, not yet covered.\n\nRefs #16",
+      "author_name": "Ajibose",
+      "author_email": "ajiboseibrahim12@gmail.com",
+      "authored_at": "2026-07-25T22:46:13Z",
+      "committed_at": "2026-07-25T22:46:13Z",
+      "author": {
+        "login": "Ajibose",
+        "id": 99620327,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Ajibose",
+        "id": 99620327,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "d14aba80ad3799b2301585b95e53da7410e449b8",
+      "message": "Merge remote-tracking branch 'upstream/main' into feature/contract-call-in-loop-lint\n\n# Conflicts:\n#\tCHANGELOG.md\n#\tREADME.md\n#\tdocs/SUMMARY.md\n#\tsoroban_cost_lints/ui/main.stderr",
+      "author_name": "Ajibose",
+      "author_email": "ajiboseibrahim12@gmail.com",
+      "authored_at": "2026-07-26T16:03:38Z",
+      "committed_at": "2026-07-26T16:03:38Z",
+      "author": {
+        "login": "Ajibose",
+        "id": 99620327,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Ajibose",
+        "id": 99620327,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "92f8f6c75e2bcbacde930a8ee0acf7274ecb0205",
+      "message": "fix: resolve CI build failures in SARIF output and fixture workspace\n\n- SarifRun.results was typed Vec<SarifResult> while the SARIF result\n  builder constructed plain serde_json::Value objects via json!(),\n  a leftover mismatch from a prior merge that broke compilation.\n  Retype results as Vec<serde_json::Value>, drop the now-dead typed\n  Sarif* structs, and wire the already-collected rule descriptors\n  into tool.driver.rules.\n- integration.rs used HashSet<String> but inserted &str literals;\n  fix the declared type.\n- alpha/beta fixture crates each declared their own [workspace]\n  while also being listed as members of the parent workspace,\n  causing cargo metadata to fail with \"multiple workspace roots\n  found\". Drop the redundant per-crate [workspace] tables.\n\nThese were the actual cause of the \"SARIF result missing level\"\nCI failures reported on PRs #232, #267, #269, #270 (all inherited\nthe same broken merge state) — the binary failed to compile, it\nwas not a runtime field-mapping bug.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+      "author_name": "Ajibose",
+      "author_email": "ajiboseibrahim12@gmail.com",
+      "authored_at": "2026-07-26T20:14:29Z",
+      "committed_at": "2026-07-26T20:14:29Z",
+      "author": {
+        "login": "Ajibose",
+        "id": 99620327,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Ajibose",
+        "id": 99620327,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "17038812b174e7bc649bc0bb8845e84ee90b9f1b",
+      "message": "Merge branch 'main' into feature/contract-call-in-loop-lint",
+      "author_name": "Allison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-27T10:35:27Z",
+      "committed_at": "2026-07-27T10:35:27Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "d9715ac816a8b18b9fd20238cf0141f0439f6dc3",
+      "message": "Merge remote-tracking branch 'upstream/main' into feature/contract-call-in-loop-lint\n\n# Conflicts:\n#\tdocs/SUMMARY.md\n#\tdocs/cost_rationale.md\n#\tsoroban_cost_lints/ui/main.rs\n#\tsoroban_cost_lints/ui/main.stderr",
+      "author_name": "Rafiat",
+      "author_email": "ajiboserafiat22@gmail.com",
+      "authored_at": "2026-07-27T23:24:07Z",
+      "committed_at": "2026-07-27T23:24:07Z",
+      "author": {
+        "login": "Rafiat30",
+        "id": 305820146,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Rafiat30",
+        "id": 305820146,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "beaeb4024767e9ff761acc18e5c1a772db6594ee",
+      "message": "Merge remote-tracking branch 'origin/main' into feature/contract-call-in-loop-lint",
+      "author_name": "adajala",
+      "author_email": "ademola2993k@gmail.com",
+      "authored_at": "2026-07-28T13:35:12Z",
+      "committed_at": "2026-07-28T13:35:12Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 23,
+      "deletions": 1,
+      "changes": 24,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/SUMMARY.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/cost_rationale.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/contract_call_in_loop.md",
+      "status": "added",
+      "additions": 60,
+      "deletions": 0,
+      "changes": 60,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 46,
+      "deletions": 0,
+      "changes": 46,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 43,
+      "deletions": 1,
+      "changes": 44,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 25,
+      "deletions": 0,
+      "changes": 25,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 2,
+    "check_runs": [
+      {
+        "name": "build-and-test (windows-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-28T13:35:25Z",
+        "completed_at": "2026-07-28T13:36:19Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364189298/job/90291082818",
+        "app": "github-actions",
+        "workflow_run_id": "30364189298"
+      },
+      {
+        "name": "build-and-test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-28T13:35:31Z",
+        "completed_at": "2026-07-28T13:36:11Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364189298/job/90291082704",
+        "app": "github-actions",
+        "workflow_run_id": "30364189298"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "dd6dbfd8e96b465757c5cb5c01946995d3a59718",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit c78332dcd7995f7f75a32bc6c578bfbb9fac9014 is the main tip at merge time.",
+    "pull_request_base_sha": "dd6dbfd8e96b465757c5cb5c01946995d3a59718",
+    "check_runs": {
+      "total_count": 2,
+      "check_runs": [
+        {
+          "name": "build-and-test (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T13:35:15Z",
+          "completed_at": "2026-07-28T13:35:54Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364167822/job/90291012355",
+          "app": "github-actions",
+          "workflow_run_id": "30364167822"
+        },
+        {
+          "name": "build-and-test (windows-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T13:35:08Z",
+          "completed_at": "2026-07-28T13:35:36Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364167822/job/90291012167",
+          "app": "github-actions",
+          "workflow_run_id": "30364167822"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/fZbnA0Lye2rVsbWCARPW/",
+          "created_at": "2026-07-28T13:35:13Z",
+          "updated_at": "2026-07-28T13:35:13Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/fZbnA0Lye2rVsbWCARPW/",
+          "created_at": "2026-07-28T13:35:14Z",
+          "updated_at": "2026-07-28T13:35:14Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5080900358,
+        "created_at": "2026-07-25T22:46:58Z",
+        "updated_at": "2026-07-25T22:46:58Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@Rafiat30 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5090288709,
+        "created_at": "2026-07-27T10:37:27Z",
+        "updated_at": "2026-07-27T10:37:27Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "fix your cl"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test (windows-latest)",
+      "build-and-test (ubuntu-latest)"
+    ],
+    "base_failing_checks": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30364189298"
+    ],
+    "all_head_workflow_run_ids": [
+      "30364189298"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

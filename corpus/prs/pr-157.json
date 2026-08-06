@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:00Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 157,
+    "title": "fix(cli): fail on malformed budget.toml instead of silent fallback",
+    "body": "Closes #92\r\n\r\n## Description\r\n\r\nA `budget.toml` that exists but is malformed or unreadable currently fails silently — the run proceeds with default lint levels, producing a green CI build even when the config declares `deny` levels. This PR makes those paths hard errors.\r\n\r\n## Changes\r\n\r\n### `cargo-cost-lint/src/main.rs`\r\n\r\n- **Extracted `parse_budget_config` helper** — cleanly separates file reading, TOML deserialization, and flag generation from the main control flow.\r\n\r\n- **Unparseable config → hard error** (was: `Warning: Failed to parse`, then proceed).  \r\n  `toml::from_str` error (message + location) is surfaced via `eprintln!` followed by `exit(1)`.\r\n\r\n- **Unreadable config → hard error** (was: silently discarded via `if let Ok(config_str)`).  \r\n  `fs::read_to_string` error is surfaced via `eprintln!` followed by `exit(1)`.\r\n\r\n- **Absent config** — keeps existing behaviour: `\"Note: ... not found, using default lint levels.\"`\r\n\r\n- **`--config` explicitly passed but file missing** — now a hard error with `exit(1)` instead of a warning.\r\n\r\n### Tests (4 new/updated)\r\n\r\n| Test | Path covered |\r\n|---|---|\r\n| `absent_config_returns_error` | File does not exist → `Failed to read` |\r\n| `unparseable_config_returns_error` | Invalid TOML content → `Failed to parse` |\r\n| `unreadable_config_returns_error` (`#[cfg(unix)]`) | File exists, no read permission → `Failed to read` |\r\n| `valid_config_returns_flags` | Valid config → correct `-D`/`-W`/`-A` flags |\r\n\r\n### `docs/integration.md`\r\n\r\nAdded a `{% hint danger %}` block stating plainly that a malformed or unreadable `budget.toml` is a hard error.\r\n\r\n## Out of scope\r\n\r\n- Validating lint names or the config schema (tracked separately).\r\n",
+    "author": {
+      "login": "Hikmaholadele",
+      "id": 178912792,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-24T08:40:56Z",
+    "updated_at": "2026-07-27T11:52:34Z",
+    "merged_at": "2026-07-27T11:52:34Z",
+    "closed_at": "2026-07-27T11:52:34Z",
+    "merged_by": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "d25c40423706e08a56454e733c6a765b1e9f15cf",
+    "base": {
+      "ref": "main",
+      "sha": "2f8e2ac13da061b2040203573b5d2c6c151c804b",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "fix/fail-on-malformed-budget-toml",
+      "sha": "8834c81d74e74f9b5dfa218f713d1836c6a5d3fb",
+      "repo": "Hikmaholadele/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 116,
+    "deletions": 0,
+    "changed_files": 1,
+    "commits": 2,
+    "comments": 4,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/157"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "372d11cfad02fb80605530656a5fb0af2ed0d942",
+      "message": "fix(cli): fail on malformed budget.toml instead of silent fallback",
+      "author_name": "Hikmah Oladele",
+      "author_email": "hikmaholadele14@gmail.com",
+      "authored_at": "2026-07-23T14:36:58Z",
+      "committed_at": "2026-07-26T07:40:10Z",
+      "author": {
+        "login": "Hikmaholadele",
+        "id": 178912792,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Hikmaholadele",
+        "id": 178912792,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "8834c81d74e74f9b5dfa218f713d1836c6a5d3fb",
+      "message": "Merge branch 'main' into fix/fail-on-malformed-budget-toml",
+      "author_name": "Allison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-27T11:51:30Z",
+      "committed_at": "2026-07-27T11:51:30Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 116,
+      "deletions": 0,
+      "changes": 116,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-27T11:51:37Z",
+        "completed_at": "2026-07-27T11:52:09Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30263537561/job/89968804246",
+        "app": "github-actions",
+        "workflow_run_id": "30263537561"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "2f8e2ac13da061b2040203573b5d2c6c151c804b",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit d25c40423706e08a56454e733c6a765b1e9f15cf is the main tip at merge time.",
+    "pull_request_base_sha": "2f8e2ac13da061b2040203573b5d2c6c151c804b",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T10:28:42Z",
+          "completed_at": "2026-07-27T10:29:21Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30258214482/job/89951714165",
+          "app": "github-actions",
+          "workflow_run_id": "30258214482"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 4,
+    "authors": [
+      {
+        "login": "mallison031",
+        "count": 1
+      },
+      {
+        "login": "wagmiiii",
+        "count": 3
+      }
+    ],
+    "comments": [
+      {
+        "id": 5068179479,
+        "created_at": "2026-07-24T09:12:45Z",
+        "updated_at": "2026-07-24T09:12:45Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "@Hikmaholadele please all checks failed. fix so i can merge"
+      },
+      {
+        "id": 5068508190,
+        "created_at": "2026-07-24T09:54:10Z",
+        "updated_at": "2026-07-24T09:54:10Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "Hi @Hikmaholadele, it looks like the CI checks are currently failing for this PR. Could you please take a look and push a fix so we can merge this?"
+      },
+      {
+        "id": 5077676029,
+        "created_at": "2026-07-25T08:20:15Z",
+        "updated_at": "2026-07-25T08:20:15Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "Please fix your checks "
+      },
+      {
+        "id": 5079828471,
+        "created_at": "2026-07-25T18:20:12Z",
+        "updated_at": "2026-07-25T18:20:12Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "Hello! 👋 \n\nWe recently optimized and simplified the CI workflows on the `main` branch. \n\nSince this PR is currently failing its CI checks, could you please **rebase your branch onto `main`**? This will pull in the new workflow configurations and might automatically resolve the CI failures. \n\nLet us know if you need any help with the rebase!"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30263537561"
+    ],
+    "all_head_workflow_run_ids": [
+      "30263537561"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

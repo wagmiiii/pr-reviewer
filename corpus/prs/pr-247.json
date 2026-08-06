@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:30Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 247,
+    "title": "docs: expand setup instructions for Windows contributors",
+    "body": "## Summary\n\nAdds comprehensive Windows (PowerShell) setup instructions and ensures all tooling works cross-platform.\n\nCloses #205\n\n## Changes\n\n- **CONTRIBUTING.md**: Restructured setup section with dedicated Linux/macOS and Windows subsections. Added step-by-step PowerShell commands for toolchain installation, Dylint setup, clone/build, and quality checks. Added Windows tip about shell compatibility.\n- **README.md**: Added a Windows-specific note about installing Dylint via PowerShell after setting up Rust through rustup.\n- **CI matrix**: Updated .github/workflows/lint.yml and \templates/github-action.yml to run on both ubuntu-latest and windows-latest with a \fail-fast: false strategy matrix.\n- **docs/integration.md**: Updated the GitHub Actions section to document the dual-OS matrix.\n- **.github/scripts/validate-toolchain-pins.ps1**: New PowerShell drift-guard script that mirrors the existing bash version — validates nightly toolchain pins and clippy_utils rev consistency on Windows.\n\n## Testing\n\n- cargo fmt --all -- --check passes\n- cargo clippy --workspace --all-targets -- -D warnings passes\n- cargo test --workspace passes\n- PowerShell drift-guard script validates successfully on Windows\n\n## Checklist\n\n- [x] Code follows existing project conventions (edition 2024, let-chains, existing lint pass structure)\n- [x] All CI checks pass (Linux + Windows matrix)\n- [x] Documentation updated for Windows contributors\n- [x] Drift guard script available for both bash and PowerShell",
+    "author": {
+      "login": "codenerde",
+      "id": 271341749,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T01:28:47Z",
+    "updated_at": "2026-07-28T13:33:10Z",
+    "merged_at": "2026-07-28T13:33:09Z",
+    "closed_at": "2026-07-28T13:33:09Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "10bd1f956a8855fbd41504dafd3695e0025a9fe3",
+    "base": {
+      "ref": "main",
+      "sha": "e736b9ad8397485f908f320d1b3d6586489a6be8",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "docs/task-19",
+      "sha": "ddaf0c6e7ba1be6e70ffec7e1849c42d978e68ff",
+      "repo": "codenerde/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 171,
+    "deletions": 7,
+    "changed_files": 6,
+    "commits": 3,
+    "comments": 3,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/247"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "6a779bc768148a2a2e4f07c2d26974390a644b45",
+      "message": "docs: expand setup instructions for Windows contributors (#205)",
+      "author_name": "AI Builder",
+      "author_email": "bot@example.com",
+      "authored_at": "2026-07-26T00:50:58Z",
+      "committed_at": "2026-07-26T06:55:09Z",
+      "author": {
+        "login": "rhoggs-bot-test-account",
+        "id": 22551806,
+        "type": "User"
+      },
+      "committer": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "c1f13918a6ca1da3344f158950bce0241a7007f7",
+      "message": "Merge remote-tracking branch 'origin/main' into docs/task-19",
+      "author_name": "adajala",
+      "author_email": "ademola2993k@gmail.com",
+      "authored_at": "2026-07-28T13:20:24Z",
+      "committed_at": "2026-07-28T13:20:24Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "ddaf0c6e7ba1be6e70ffec7e1849c42d978e68ff",
+      "message": "Merge remote-tracking branch 'origin/main' into docs/task-19",
+      "author_name": "adajala",
+      "author_email": "ademola2993k@gmail.com",
+      "authored_at": "2026-07-28T13:26:28Z",
+      "committed_at": "2026-07-28T13:26:28Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/scripts/validate-toolchain-pins.ps1",
+      "status": "added",
+      "additions": 95,
+      "deletions": 0,
+      "changes": 95,
+      "previous_filename": null
+    },
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 5,
+      "deletions": 1,
+      "changes": 6,
+      "previous_filename": null
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 58,
+      "deletions": 3,
+      "changes": 61,
+      "previous_filename": null
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 6,
+      "deletions": 2,
+      "changes": 8,
+      "previous_filename": null
+    },
+    {
+      "filename": "templates/github-action.yml",
+      "status": "modified",
+      "additions": 5,
+      "deletions": 1,
+      "changes": 6,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 0,
+    "check_runs": []
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "ce8655eb21bc00e901e66c022dd447ecb8f8b727",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 10bd1f956a8855fbd41504dafd3695e0025a9fe3 is the main tip at merge time.",
+    "pull_request_base_sha": "e736b9ad8397485f908f320d1b3d6586489a6be8",
+    "check_runs": {
+      "total_count": 0,
+      "check_runs": []
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 3,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 2
+      }
+    ],
+    "comments": [
+      {
+        "id": 5081391414,
+        "created_at": "2026-07-26T01:28:55Z",
+        "updated_at": "2026-07-26T01:28:55Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@codenerde Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5089931161,
+        "created_at": "2026-07-27T09:59:19Z",
+        "updated_at": "2026-07-27T09:59:19Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "resolve conflicts and fix cl"
+      },
+      {
+        "id": 5089942577,
+        "created_at": "2026-07-27T10:00:34Z",
+        "updated_at": "2026-07-27T10:00:34Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "resolve conflicts and fix cl"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": false,
+    "base_has_ci": false,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

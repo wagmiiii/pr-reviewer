@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:22Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 242,
+    "title": "feat(#122): implement linear_scan_in_loop lint",
+    "body": "## Description\n\nImplements a new lint \\linear_scan_in_loop\\ that detects linear-scan methods (\\contains\\, \\position\\, \\\find\\) on Soroban collection types (\\Vec\\, \\Map\\) inside a loop body, where the scanned collection is not the collection being iterated.\n\n## Why this matters\n\nA \\Vec::contains\\ or \\iter().position()\\ inside a loop turns O(n) into O(n²). In Soroban every element access on a host-side collection is a metered host call, so the quadratic term is paid in real instructions. This is the most common way a contract that tests fine on 10 elements becomes unaffordable on 1000.\n\n## Implementation\n\n- Matches method calls on \\soroban_sdk::vec::Vec\\ and \\soroban_sdk::map::Map\\ types.\n- Reuses existing \\enclosing_loop()\\ and \\depends_on_loop_state()\\ helpers.\n- Only flags when the scanned collection does NOT depend on loop state (i.e., it's the same collection every iteration), avoiding false positives when iterating the collection itself.\n\n## Known false positives\n\n- A collection scanned inside a closure body nested in the loop is still flagged (existing limitation of \\depends_on_loop_state\\)\n- Collection-like wrappers not matching the exact type path are missed (conservative by design)\n\n## Changes\n\n| File | Action |\n|------|--------|\n| \\soroban_cost_lints/src/lib.rs\\ | Added \\LINEAR_SCAN_IN_LOOP\\ lint, \\LinearScanInLoop\\ pass, \\LINT_METADATA\\ entry, pass registration |\n| \\soroban_cost_lints/ui/main.rs\\ | Added \\Vec\\/\\Map\\ stubs, 4 test fixtures |\n| \\docs/lints/linear_scan_in_loop.md\\ | Created per-lint documentation page |\n\nCloses #122",
+    "author": {
+      "login": "K1NGD4VID",
+      "id": 173216192,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T00:23:32Z",
+    "updated_at": "2026-07-28T13:33:59Z",
+    "merged_at": "2026-07-28T13:33:57Z",
+    "closed_at": "2026-07-28T13:33:57Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "3572b4624091296089ebf382593a451a7f9e79c7",
+    "base": {
+      "ref": "main",
+      "sha": "46c4aca81e13a85290f0eed636e695d8254968f9",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feat/lint-linear-scan-in-loop",
+      "sha": "823baf4831fbcdbc1635bacb1c413470ee1a5f45",
+      "repo": "K1NGD4VID/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 202,
+    "deletions": 538,
+    "changed_files": 4,
+    "commits": 2,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/242"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "1bfc5bc5e6d46a9334b70db62480afe18acd6ee2",
+      "message": "feat(#122): implement linear_scan_in_loop lint",
+      "author_name": "K1NGD4VID",
+      "author_email": "adesanyafuhad5@gmail.com",
+      "authored_at": "2026-07-26T00:04:58Z",
+      "committed_at": "2026-07-26T00:17:49Z",
+      "author": {
+        "login": "K1NGD4VID",
+        "id": 173216192,
+        "type": "User"
+      },
+      "committer": {
+        "login": "K1NGD4VID",
+        "id": 173216192,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "823baf4831fbcdbc1635bacb1c413470ee1a5f45",
+      "message": "Merge remote-tracking branch 'origin/main' into feat/lint-linear-scan-in-loop",
+      "author_name": "adajala",
+      "author_email": "ademola2993k@gmail.com",
+      "authored_at": "2026-07-28T13:33:44Z",
+      "committed_at": "2026-07-28T13:33:44Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 66,
+      "deletions": 7,
+      "changes": 73,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/linear_scan_in_loop.md",
+      "status": "added",
+      "additions": 59,
+      "deletions": 0,
+      "changes": 59,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 46,
+      "deletions": 0,
+      "changes": 46,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 31,
+      "deletions": 531,
+      "changes": 562,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "cargo-deny check",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-28T13:33:58Z",
+        "completed_at": "2026-07-28T13:35:01Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364074706/job/90290698572",
+        "app": "github-actions",
+        "workflow_run_id": "30364074706"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "46c4aca81e13a85290f0eed636e695d8254968f9",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 3572b4624091296089ebf382593a451a7f9e79c7 is the main tip at merge time.",
+    "pull_request_base_sha": "46c4aca81e13a85290f0eed636e695d8254968f9",
+    "check_runs": {
+      "total_count": 0,
+      "check_runs": []
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/zijRJAhiCZfQrztPSwlW/",
+          "created_at": "2026-07-28T13:33:43Z",
+          "updated_at": "2026-07-28T13:33:43Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/zijRJAhiCZfQrztPSwlW/",
+          "created_at": "2026-07-28T13:33:43Z",
+          "updated_at": "2026-07-28T13:33:43Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5089925124,
+        "created_at": "2026-07-27T09:58:39Z",
+        "updated_at": "2026-07-27T09:58:39Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "resolve conflict"
+      },
+      {
+        "id": 5104826284,
+        "created_at": "2026-07-28T13:33:59Z",
+        "updated_at": "2026-07-28T13:33:59Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@K1NGD4VID Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": false,
+    "head_failing_checks": [
+      "cargo-deny check"
+    ],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30364074706"
+    ],
+    "all_head_workflow_run_ids": [
+      "30364074706"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

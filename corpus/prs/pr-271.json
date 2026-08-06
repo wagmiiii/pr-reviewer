@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:16:08Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 271,
+    "title": "chore: pin GitHub Actions used by lint.yml to specific commit SHAs",
+    "body": "Closes #85\r\n\r\n### Summary\r\nThis PR updates the GitHub Actions in our CI workflows and user-facing templates to be pinned to specific commit SHAs rather than mutable tags (`@master`, `@v1`, and `@v4`). Pinning to exact SHAs improves security by ensuring we always run immutable, reviewed code and protects against upstream compromises or breaking changes.\r\n\r\n### What Changed\r\n- Pinned `actions/checkout` to `11d5960a326750d5838078e36cf38b85af677262` (`# v4`) across all workflows.\r\n- Pinned `dtolnay/rust-toolchain` to `e97e2d8cc328f1b50210efc529dca0028893a2d9` (`# v1`) across all workflows.\r\n- Synchronized these changes across `.github/workflows/lint.yml`, `docs/integration.md`, and `templates/github-action.yml`.\r\n\r\n*(Note: Prior to this PR, `.github/workflows/lint.yml` was already tracking `@v1` for `rust-toolchain` instead of `@master` as originally reported, but the mutable tag issue still applied and is now resolved via the SHA pin.)*\r\n\r\n### Acceptance Criteria Checklist\r\n- [x] `dtolnay/rust-toolchain` in `.github/workflows/lint.yml` is pinned to a specific released tag or commit SHA rather than `@master`.\r\n- [x] `actions/checkout` is pinned consistently across the workflow.\r\n- [x] `templates/github-action.yml` and the copy of the workflow embedded in `docs/integration.md` receive the same treatment.\r\n- [x] CI passes on the pinned versions.\r\n- [x] Any pin expressed as a raw SHA carries a trailing comment naming the human-readable version.\r\n\r\n### Security Note\r\nThe workflow definitions now securely reference immutable SHAs for third-party actions, preventing arbitrary code execution risks from mutating tags.",
+    "author": {
+      "login": "0dillon",
+      "id": 218941616,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T16:44:13Z",
+    "updated_at": "2026-07-28T13:19:28Z",
+    "merged_at": "2026-07-28T13:19:28Z",
+    "closed_at": "2026-07-28T13:19:28Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "e736b9ad8397485f908f320d1b3d6586489a6be8",
+    "base": {
+      "ref": "main",
+      "sha": "2f8e2ac13da061b2040203573b5d2c6c151c804b",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "chore/pin-github-actions",
+      "sha": "3a47055ed34afa8b8ee399e34ec355c9ce243d6c",
+      "repo": "0dillon/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 5,
+    "deletions": 5,
+    "changed_files": 3,
+    "commits": 5,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/271"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "f648dba30c58903f3f7b2efd14a5df91e1b97d77",
+      "message": "chore: pin GitHub Actions used by lint.yml to specific commit SHAs",
+      "author_name": "dillon ofili",
+      "author_email": "dillonofili667@gmail.com",
+      "authored_at": "2026-07-26T16:35:05Z",
+      "committed_at": "2026-07-26T16:35:05Z",
+      "author": {
+        "login": "0dillon",
+        "id": 218941616,
+        "type": "User"
+      },
+      "committer": {
+        "login": "0dillon",
+        "id": 218941616,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "ccf65145596b61dd2b3c8831b5c0549645a6b399",
+      "message": "Merge branch 'main' into chore/pin-github-actions",
+      "author_name": "Dillon Ofili",
+      "author_email": "dillonofili667@gmail.com",
+      "authored_at": "2026-07-26T16:44:33Z",
+      "committed_at": "2026-07-26T16:44:33Z",
+      "author": {
+        "login": "0dillon",
+        "id": 218941616,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "0de819ff7683d5da99ccff10d883a8b5152e0b96",
+      "message": "style: run cargo fmt",
+      "author_name": "dillon ofili",
+      "author_email": "dillonofili667@gmail.com",
+      "authored_at": "2026-07-26T16:50:03Z",
+      "committed_at": "2026-07-26T18:03:59Z",
+      "author": {
+        "login": "0dillon",
+        "id": 218941616,
+        "type": "User"
+      },
+      "committer": {
+        "login": "0dillon",
+        "id": 218941616,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "f1be6779e3cc54ec0a3ec7df59af9fc6c6dead51",
+      "message": "fix: resolve compile errors in integration tests and SARIF generation",
+      "author_name": "dillon ofili",
+      "author_email": "dillonofili667@gmail.com",
+      "authored_at": "2026-07-26T18:15:57Z",
+      "committed_at": "2026-07-26T18:15:57Z",
+      "author": {
+        "login": "0dillon",
+        "id": 218941616,
+        "type": "User"
+      },
+      "committer": {
+        "login": "0dillon",
+        "id": 218941616,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "3a47055ed34afa8b8ee399e34ec355c9ce243d6c",
+      "message": "Merge branch 'main' into chore/pin-github-actions",
+      "author_name": "Allison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-27T10:58:42Z",
+      "committed_at": "2026-07-27T10:58:42Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 2,
+      "changes": 4,
+      "previous_filename": null
+    },
+    {
+      "filename": "templates/github-action.yml",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 2,
+      "changes": 4,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-27T10:58:48Z",
+        "completed_at": "2026-07-27T10:59:23Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30260142829/job/89957851745",
+        "app": "github-actions",
+        "workflow_run_id": "30260142829"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "c1859cacfdca51bb31a99634adde88369fe05aa7",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit e736b9ad8397485f908f320d1b3d6586489a6be8 is the main tip at merge time.",
+    "pull_request_base_sha": "2f8e2ac13da061b2040203573b5d2c6c151c804b",
+    "check_runs": {
+      "total_count": 0,
+      "check_runs": []
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5084420466,
+        "created_at": "2026-07-26T16:44:22Z",
+        "updated_at": "2026-07-26T16:44:22Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@0dillon Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5089748777,
+        "created_at": "2026-07-27T09:39:45Z",
+        "updated_at": "2026-07-27T09:39:45Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "fix your cl"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": false,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30260142829"
+    ],
+    "all_head_workflow_run_ids": [
+      "30260142829"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

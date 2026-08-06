@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:16:08Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 272,
+    "title": "test: add dedicated UI test suite for redundant_env_clone lint rule",
+    "body": "# Add dedicated UI test suite for redundant_env_clone lint rule\r\n\r\nCloses #28\r\n\r\n## Summary\r\n\r\nAdds a standalone UI test file for the `redundant_env_clone` lint rule, providing comprehensive coverage of both triggering and non-triggering cases.\r\n\r\n## What changed\r\n\r\n- **`soroban_cost_lints/ui/redundant_env_clone.rs`** — Self-contained test fixture with a minimal `soroban_sdk` mock, containing:\r\n  - 4 triggering cases: simple clone, clone passed to fn, clone inside block expression, clone with variable shadowing\r\n  - 6 non-triggering cases: `&Env` reference clone, env used after clone, clone then fn call then env used, no clone at all, struct field (non-local) clone, `#[allow(redundant_env_clone)]` attribute\r\n- **`soroban_cost_lints/ui/redundant_env_clone.stderr`** — Expected diagnostic output (4 warnings)\r\n\r\n## Verification\r\n\r\n- `cargo test -p soroban_cost_lints` — all UI tests pass (both `main.rs` and `redundant_env_clone.rs`)\r\n- `cargo clippy -p soroban_cost_lints --all-targets -- -D warnings` — clean\r\n- No existing files were modified; only new files added to `soroban_cost_lints/ui/`\r\n",
+    "author": {
+      "login": "somotochukwu-dev",
+      "id": 287263128,
+      "type": "User"
+    },
+    "author_association": "NONE",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T17:41:44Z",
+    "updated_at": "2026-07-27T12:15:44Z",
+    "merged_at": "2026-07-27T12:15:44Z",
+    "closed_at": "2026-07-27T12:15:44Z",
+    "merged_by": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "4053c206796b5054d607e29219ac5cfe7f302547",
+    "base": {
+      "ref": "main",
+      "sha": "4fd722e29b0413d65d52cb737d776825c7c7ea6d",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "test/redundant-env-clone-ui",
+      "sha": "a38defb1b2ed8f74cae808f076391d101cbb1789",
+      "repo": "somotochukwu-dev/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 145,
+    "deletions": 0,
+    "changed_files": 2,
+    "commits": 1,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/272"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "a38defb1b2ed8f74cae808f076391d101cbb1789",
+      "message": "test: add dedicated UI test suite for redundant_env_clone lint rule\n\nAdd standalone .rs and .stderr files to soroban_cost_lints/ui/ covering\n4 triggering cases and 6 non-triggering cases for the redundant_env_clone\nlint, including reference cloning, post-clone usage, block expressions,\nshadowing, struct field receivers, and allow attributes.",
+      "author_name": "Owoh Chidubem Alexander",
+      "author_email": "chidubempaul91@gmail.com",
+      "authored_at": "2026-07-26T17:40:51Z",
+      "committed_at": "2026-07-26T17:40:51Z",
+      "author": {
+        "login": "Dubemtopsite",
+        "id": 31639636,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Dubemtopsite",
+        "id": 31639636,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "soroban_cost_lints/ui/redundant_env_clone.rs",
+      "status": "added",
+      "additions": 110,
+      "deletions": 0,
+      "changes": 110,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/redundant_env_clone.stderr",
+      "status": "added",
+      "additions": 35,
+      "deletions": 0,
+      "changes": 35,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-26T17:41:51Z",
+        "completed_at": "2026-07-26T17:42:30Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30213117785/job/89822595318",
+        "app": "github-actions",
+        "workflow_run_id": "30213117785"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "fec52a16012151956bb62f6b1cfd40705ac1e429",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 4053c206796b5054d607e29219ac5cfe7f302547 is the main tip at merge time.",
+    "pull_request_base_sha": "4fd722e29b0413d65d52cb737d776825c7c7ea6d",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T12:15:42Z",
+          "completed_at": "2026-07-27T12:16:25Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30265186296/job/89974052854",
+          "app": "github-actions",
+          "workflow_run_id": "30265186296"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/cPMYVnePPoxAwJ9Guoj1/",
+          "created_at": "2026-07-27T12:15:49Z",
+          "updated_at": "2026-07-27T12:15:49Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/cPMYVnePPoxAwJ9Guoj1/",
+          "created_at": "2026-07-27T12:15:49Z",
+          "updated_at": "2026-07-27T12:15:49Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5084642052,
+        "created_at": "2026-07-26T17:41:52Z",
+        "updated_at": "2026-07-26T17:41:52Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@somotochukwu-dev Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5089744212,
+        "created_at": "2026-07-27T09:39:24Z",
+        "updated_at": "2026-07-27T09:39:24Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "fix your cl"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30213117785"
+    ],
+    "all_head_workflow_run_ids": [
+      "30213117785"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

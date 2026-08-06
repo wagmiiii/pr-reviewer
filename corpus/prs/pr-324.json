@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-06T07:03:53Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 324,
+    "title": "chore: add Makefile and CLI argument parser unit tests",
+    "body": "# Closes #323\r\n# Closes #320\r\n\r\n## Changes\r\n\r\n### Issue #323: Add Makefile with common developer commands\r\n- Added a `Makefile` at the repository root with the following targets:\r\n  - `make fmt` — runs `cargo fmt --all`\r\n  - `make lint` — runs `cargo clippy --workspace --all-targets -- -D warnings`\r\n  - `make test` — runs `cargo test --workspace`\r\n  - `make doc` — runs `cargo doc --no-deps --open`\r\n  - `make check` — runs `fmt` + `lint` + `test` in sequence\r\n- All targets are declared `.PHONY` so they always run.\r\n- Updated `CONTRIBUTING.md` to reference `make check` as the preferred pre-PR validation step.\r\n\r\n### Issue #320: Add unit tests for the CLI argument parser\r\n- Added 6 unit tests for the CLI argument parsing logic in `cargo-cost-lint/src/main.rs`:\r\n  - `cli_default_values_when_no_flags` — verifies all Cli struct fields have correct defaults\r\n  - `cli_parses_config_flag` — verifies `--config <path>` is parsed correctly\r\n  - `cli_parses_list_lints_flag` — verifies `--list-lints` sets the flag to true\r\n  - `cli_parses_format_flag` — verifies `--format <format>` parses the output format enum\r\n  - `cli_parses_multiple_flags` — verifies multiple flags can be combined in a single invocation\r\n  - `cli_unknown_flag_returns_error` — verifies that passing an unknown flag results in a parse error\r\n- Uses `clap`\\u2019s built-in `try_parse_from` to unit-test argument parsing without spawning a subprocess.\r\n- `cargo test -p cargo-cost-lint` passes.",
+    "author": {
+      "login": "TemiMustapha",
+      "id": 307721807,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-29T09:00:38Z",
+    "updated_at": "2026-07-29T09:29:17Z",
+    "merged_at": "2026-07-29T09:29:16Z",
+    "closed_at": "2026-07-29T09:29:16Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "ccebde94f9ab9713176420df734adef10914fda8",
+    "base": {
+      "ref": "main",
+      "sha": "87ce8caa3448b4389687663f1c1047512a25bcf7",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "chore/add-makefile-and-cli-parser-tests",
+      "sha": "50642a7fb9a0f57441e758cc20cc44f07de349a1",
+      "repo": "TemiMustapha/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 67,
+    "deletions": 6,
+    "changed_files": 3,
+    "commits": 1,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/324"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "50642a7fb9a0f57441e758cc20cc44f07de349a1",
+      "message": "chore: add Makefile with common developer commands (Closes #323) and CLI argument parser unit tests (Closes #320)\n\n- Add Makefile with targets: fmt, lint, test, doc, check\n- Update CONTRIBUTING.md to reference make check as preferred pre-PR validation\n- Add 6 unit tests for CLI argument parsing in cargo-cost-lint/src/main.rs\n  - cli_default_values_when_no_flags\n  - cli_parses_config_flag\n  - cli_parses_list_lints_flag\n  - cli_parses_format_flag\n  - cli_parses_multiple_flags\n  - cli_unknown_flag_returns_error\n\n#Closes#323 #Closes#320",
+      "author_name": "TemiMustapha",
+      "author_email": "mmsaliumustapha@gmail.com",
+      "authored_at": "2026-07-29T08:59:37Z",
+      "committed_at": "2026-07-29T08:59:37Z",
+      "author": {
+        "login": "TemiMustapha",
+        "id": 307721807,
+        "type": "User"
+      },
+      "committer": {
+        "login": "TemiMustapha",
+        "id": 307721807,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 6,
+      "changes": 10,
+      "previous_filename": null
+    },
+    {
+      "filename": "Makefile",
+      "status": "added",
+      "additions": 15,
+      "deletions": 0,
+      "changes": 15,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 48,
+      "deletions": 0,
+      "changes": 48,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 2,
+    "check_runs": [
+      {
+        "name": "build-and-test (windows-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-29T09:02:08Z",
+        "completed_at": "2026-07-29T09:02:25Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30437840866/job/90530036703",
+        "app": "github-actions",
+        "workflow_run_id": "30437840866"
+      },
+      {
+        "name": "build-and-test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-29T09:02:08Z",
+        "completed_at": "2026-07-29T09:02:47Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30437840866/job/90530036594",
+        "app": "github-actions",
+        "workflow_run_id": "30437840866"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "87ce8caa3448b4389687663f1c1047512a25bcf7",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit ccebde94f9ab9713176420df734adef10914fda8 is the main tip at merge time.",
+    "pull_request_base_sha": "87ce8caa3448b4389687663f1c1047512a25bcf7",
+    "check_runs": {
+      "total_count": 2,
+      "check_runs": [
+        {
+          "name": "build-and-test (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T13:36:48Z",
+          "completed_at": "2026-07-28T13:37:29Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364292065/job/90291439414",
+          "app": "github-actions",
+          "workflow_run_id": "30364292065"
+        },
+        {
+          "name": "build-and-test (windows-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T13:36:44Z",
+          "completed_at": "2026-07-28T13:37:08Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364292065/job/90291439054",
+          "app": "github-actions",
+          "workflow_run_id": "30364292065"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/vhN8WwWb6sCrzfHODZSL/",
+          "created_at": "2026-07-28T13:36:49Z",
+          "updated_at": "2026-07-28T13:36:49Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/vhN8WwWb6sCrzfHODZSL/",
+          "created_at": "2026-07-28T13:36:49Z",
+          "updated_at": "2026-07-28T13:36:49Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5115426325,
+        "created_at": "2026-07-29T09:00:45Z",
+        "updated_at": "2026-07-29T09:00:45Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@TemiMustapha Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test (windows-latest)",
+      "build-and-test (ubuntu-latest)"
+    ],
+    "base_failing_checks": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30437840866"
+    ],
+    "all_head_workflow_run_ids": [
+      "30437840866"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

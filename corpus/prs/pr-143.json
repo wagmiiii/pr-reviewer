@@ -1,0 +1,290 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:13:34Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 143,
+    "title": "chore: add Dependabot configuration for Cargo and GitHub Actions",
+    "body": "## What\r\nAdds `.github/dependabot.yml` covering the `cargo` and `github-actions` ecosystems.\r\n\r\n## Why\r\nNeither dependency surface had automated update checks. Notably, `soroban_cost_lints`\r\ndepends on `clippy_utils` pinned to a raw git revision — nothing currently signals when\r\nthat pin is stale.\r\n\r\n## Details\r\n- **Cargo**: single entry at the workspace root (`/`), which covers both\r\n  `soroban_cost_lints` and `cargo-cost-lint` via `[workspace.members]`.\r\n- **`clippy_utils` is explicitly ignored.** It's pinned to a rustc-nightly-compatible\r\n  revision of clippy that has to move in lockstep with the toolchain pinned in\r\n  `rust-toolchain` (`nightly-2026-04-16`). Dependabot bumping it in isolation would break\r\n  the build against rustc's private HIR/MIR APIs — this needs a human to update it\r\n  alongside a toolchain bump.\r\n- **GitHub Actions**: covers `.github/workflows/*.yml` (currently just `lint.yml`).\r\n  `templates/github-action.yml` is a boilerplate workflow shipped for downstream\r\n  consumers to copy into their own repos — it isn't executed by this repo's CI, and\r\n  Dependabot's `github-actions` ecosystem doesn't scan outside `.github/workflows/`, so\r\n  it's out of reach of this config. Its toolchain pin will still need manual syncing.\r\n- **Volume**: both ecosystems are grouped into a single weekly PR each (Monday), rather\r\n  than defaults that would open one PR per dependency per week.\r\n\r\n## Testing\r\nNo Rust source changed, so `cargo fmt` / `cargo clippy` / `cargo test` are unaffected.\r\nValidated the YAML parses and is schema-valid via GitHub's Dependabot config check\r\n(Insights → Dependency graph → Dependabot) once this branch/PR is up.\r\n\r\n## Limitations\r\nDependabot only evaluates `dependabot.yml` from the default branch, so the actual\r\nfirst scheduled run can only be verified after this merges. I'll follow up on this\r\nissue thread once it fires to confirm the resulting PRs look sensible.\r\n\r\nCloses #86",
+    "author": {
+      "login": "larryjay007",
+      "id": 76393353,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-23T15:20:01Z",
+    "updated_at": "2026-07-24T09:51:24Z",
+    "merged_at": "2026-07-24T09:51:24Z",
+    "closed_at": "2026-07-24T09:51:24Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "228f2461ea3daadf232d47b6c0e9d5266eae9cfa",
+    "base": {
+      "ref": "main",
+      "sha": "446feb6e9d955e0dfc00636b7b32f596e4e31f94",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "chore/add-dependabot",
+      "sha": "934d8e8f486ebc2c26b7849d87c9426889a91956",
+      "repo": "larryjay007/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 39,
+    "deletions": 0,
+    "changed_files": 1,
+    "commits": 2,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/143"
+  },
+  "reviews": [
+    {
+      "id": 4772119558,
+      "state": "APPROVED",
+      "submitted_at": "2026-07-24T09:51:15Z",
+      "author_association": "MEMBER",
+      "user": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "body_present": false,
+      "body": ""
+    }
+  ],
+  "review_states": [
+    {
+      "state": "APPROVED",
+      "count": 1
+    }
+  ],
+  "commits": [
+    {
+      "sha": "e61a3e0a4e86413544f868735276c7c183e982a9",
+      "message": "chore: add Dependabot configuration for Cargo and GitHub Actions",
+      "author_name": "Larry",
+      "author_email": "odesanyalanre3@gmail.com",
+      "authored_at": "2026-07-23T15:11:36Z",
+      "committed_at": "2026-07-23T15:11:36Z",
+      "author": {
+        "login": "larryjay007",
+        "id": 76393353,
+        "type": "User"
+      },
+      "committer": {
+        "login": "larryjay007",
+        "id": 76393353,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "934d8e8f486ebc2c26b7849d87c9426889a91956",
+      "message": "Merge branch 'main' into chore/add-dependabot",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T09:40:34Z",
+      "committed_at": "2026-07-24T09:40:34Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/dependabot.yml",
+      "status": "added",
+      "additions": 39,
+      "deletions": 0,
+      "changes": 39,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 3,
+    "check_runs": [
+      {
+        "name": "validate-toolchain-pins",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T09:40:41Z",
+        "completed_at": "2026-07-24T09:40:44Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30083434591/job/89450008950",
+        "app": "github-actions",
+        "workflow_run_id": "30083434591"
+      },
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T09:40:41Z",
+        "completed_at": "2026-07-24T09:45:31Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30083434591/job/89450008949",
+        "app": "github-actions",
+        "workflow_run_id": "30083434591"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T09:40:41Z",
+        "completed_at": "2026-07-24T09:41:52Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30083434591/job/89450008916",
+        "app": "github-actions",
+        "workflow_run_id": "30083434591"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "446feb6e9d955e0dfc00636b7b32f596e4e31f94",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 228f2461ea3daadf232d47b6c0e9d5266eae9cfa is the main tip at merge time.",
+    "pull_request_base_sha": "446feb6e9d955e0dfc00636b7b32f596e4e31f94",
+    "check_runs": {
+      "total_count": 3,
+      "check_runs": [
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:38:26Z",
+          "completed_at": "2026-07-24T09:43:26Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30083300684/job/89449588673",
+          "app": "github-actions",
+          "workflow_run_id": "30083300684"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:38:25Z",
+          "completed_at": "2026-07-24T09:39:56Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30083300684/job/89449588671",
+          "app": "github-actions",
+          "workflow_run_id": "30083300684"
+        },
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:38:26Z",
+          "completed_at": "2026-07-24T09:38:33Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30083300684/job/89449588626",
+          "app": "github-actions",
+          "workflow_run_id": "30083300684"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/gj3AAn93o1XNRgiWOohv/",
+          "created_at": "2026-07-24T09:38:33Z",
+          "updated_at": "2026-07-24T09:38:33Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/gj3AAn93o1XNRgiWOohv/",
+          "created_at": "2026-07-24T09:38:33Z",
+          "updated_at": "2026-07-24T09:38:33Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "larryjay007",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5060173847,
+        "created_at": "2026-07-23T15:20:10Z",
+        "updated_at": "2026-07-23T15:20:10Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@larryjay007 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5060183887,
+        "created_at": "2026-07-23T15:21:09Z",
+        "updated_at": "2026-07-23T15:21:09Z",
+        "user": {
+          "login": "larryjay007",
+          "id": 76393353,
+          "type": "User"
+        },
+        "author_association": "CONTRIBUTOR",
+        "body": "@mallison031 please review."
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30083434591"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

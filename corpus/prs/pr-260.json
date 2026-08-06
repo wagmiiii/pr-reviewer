@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:49Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 260,
+    "title": "docs: update outdated links in README (#200)",
+    "body": "## Description\n\nThis PR updates the README to remove outdated and broken links as part of issue #200.\n\n## Changes Made\n\n- **Removed broken asciinema demo link**: The demo link (https://asciinema.org/a/1DpqHMqqOOXoZzMI) was timing out and appears to be inaccessible. This link has been removed from the README header.\n- **Verified all remaining links**: Tested all external and internal documentation links to ensure they are still valid\n  - ✓ Documentation link: https://tollcraft.gitbook.io/docs (200 OK)\n  - ✓ GitHub repository links (all valid)\n  - ✓ Community links: Discord (301 redirect, working), Telegram (200 OK)\n  - ✓ All internal documentation links point to existing files\n\n## Code Quality Checks\n\n- ✓ `cargo fmt --all -- --check` (passed - no formatting issues)\n- Documentation links verified with curl testing\n\n## Closes\n\nCloses #200",
+    "author": {
+      "login": "ayandipe",
+      "id": 110989785,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T13:12:22Z",
+    "updated_at": "2026-07-26T16:40:03Z",
+    "merged_at": "2026-07-26T16:40:03Z",
+    "closed_at": "2026-07-26T16:40:03Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "d2b139547613c7ed110436d0fd26545c5ae9cbed",
+    "base": {
+      "ref": "main",
+      "sha": "e0de3eb0a699451e6abd965444b9f742b7d24cdc",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "docs/task-24",
+      "sha": "b8179542117f6fbe810f49c5dcb1451e0e1ecff6",
+      "repo": "ayandipe/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 1,
+    "deletions": 2,
+    "changed_files": 1,
+    "commits": 1,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/260"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "b8179542117f6fbe810f49c5dcb1451e0e1ecff6",
+      "message": "docs: remove broken asciinema demo link\n\nThe asciinema link (https://asciinema.org/a/1DpqHMqqOOXoZzMI) was timing out\nand appears to be broken or inaccessible. Removed from the README as part of\nthe link verification and update task.\n\nCloses #200",
+      "author_name": "ayandipe",
+      "author_email": "110989785+ayandipe@users.noreply.github.com",
+      "authored_at": "2026-07-26T13:11:06Z",
+      "committed_at": "2026-07-26T13:11:06Z",
+      "author": {
+        "login": "ayandipe",
+        "id": 110989785,
+        "type": "User"
+      },
+      "committer": {
+        "login": "ayandipe",
+        "id": 110989785,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 2,
+      "changes": 3,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-26T13:12:28Z",
+        "completed_at": "2026-07-26T13:19:36Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30203579839/job/89797664125",
+        "app": "github-actions",
+        "workflow_run_id": "30203579839"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "4b36cd9500de2e8f3fd4dde166f46eb80778d597",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit d2b139547613c7ed110436d0fd26545c5ae9cbed is the main tip at merge time.",
+    "pull_request_base_sha": "e0de3eb0a699451e6abd965444b9f742b7d24cdc",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-26T16:39:49Z",
+          "completed_at": "2026-07-26T16:40:19Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30210926838/job/89816893192",
+          "app": "github-actions",
+          "workflow_run_id": "30210926838"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/WzQYKH2MBmYAeMbdQQpl/",
+          "created_at": "2026-07-26T16:39:56Z",
+          "updated_at": "2026-07-26T16:39:56Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/WzQYKH2MBmYAeMbdQQpl/",
+          "created_at": "2026-07-26T16:39:56Z",
+          "updated_at": "2026-07-26T16:39:56Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5083620249,
+        "created_at": "2026-07-26T13:12:29Z",
+        "updated_at": "2026-07-26T13:12:29Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@ayandipe Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30203579839"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:13:24Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 22,
+    "title": "chore: remove references to nonexistent v1 branch",
+    "body": "CONTRIBUTING.md and README.md told contributors to target their PRs at a `v1` branch that was never created, and the lint workflow listed it as a trigger. This points contributors at `main` (the actual working branch, where branch protection and the CI quality gate live) and drops the dead workflow trigger.",
+    "author": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "author_association": "MEMBER",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-08T13:23:19Z",
+    "updated_at": "2026-07-08T13:28:18Z",
+    "merged_at": "2026-07-08T13:28:18Z",
+    "closed_at": "2026-07-08T13:28:18Z",
+    "merged_by": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "0878ab0f13fc217f0d67fac323cd6e8dad940087",
+    "base": {
+      "ref": "main",
+      "sha": "03fd8d5a35b898b3059e057735c9b8a5bf63613a",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "chore/remove-v1-references",
+      "sha": "3c73f42151a059e20acfd6e39998e8b5830af800",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 4,
+    "deletions": 4,
+    "changed_files": 3,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/22"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "3c73f42151a059e20acfd6e39998e8b5830af800",
+      "message": "chore: point contributors at main, remove nonexistent v1 branch references",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-08T13:23:04Z",
+      "committed_at": "2026-07-08T13:23:04Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 2,
+      "changes": 4,
+      "previous_filename": null
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 2,
+    "check_runs": [
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-08T13:23:27Z",
+        "completed_at": "2026-07-08T13:28:05Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/28946028334/job/85880009769",
+        "app": "github-actions",
+        "workflow_run_id": "28946028334"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-08T13:23:27Z",
+        "completed_at": "2026-07-08T13:24:40Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/28946028334/job/85880009766",
+        "app": "github-actions",
+        "workflow_run_id": "28946028334"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "success",
+    "total_count": 2,
+    "statuses": [
+      {
+        "context": "GitBook",
+        "state": "success",
+        "description": "Check the changes in the GitBook editor.",
+        "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/6XPxaUVeeWjeG3a8FCvk/",
+        "created_at": "2026-07-08T13:23:33Z",
+        "updated_at": "2026-07-08T13:23:33Z"
+      },
+      {
+        "context": "GitBook - tollcraft.gitbook.io/docs/",
+        "state": "success",
+        "description": "Check the live preview on your docs site.",
+        "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/6XPxaUVeeWjeG3a8FCvk/",
+        "created_at": "2026-07-08T13:23:33Z",
+        "updated_at": "2026-07-08T13:23:33Z"
+      }
+    ]
+  },
+  "base_branch_ci": {
+    "resolved_sha": "03fd8d5a35b898b3059e057735c9b8a5bf63613a",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 0878ab0f13fc217f0d67fac323cd6e8dad940087 is the main tip at merge time.",
+    "pull_request_base_sha": "03fd8d5a35b898b3059e057735c9b8a5bf63613a",
+    "check_runs": {
+      "total_count": 2,
+      "check_runs": [
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-08T13:20:47Z",
+          "completed_at": "2026-07-08T13:25:22Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/28945859894/job/85879416085",
+          "app": "github-actions",
+          "workflow_run_id": "28945859894"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-08T13:20:47Z",
+          "completed_at": "2026-07-08T13:22:00Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/28945859894/job/85879416016",
+          "app": "github-actions",
+          "workflow_run_id": "28945859894"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/QHFYYhBfbhuYRmy78gxj/",
+          "created_at": "2026-07-08T13:20:54Z",
+          "updated_at": "2026-07-08T13:20:54Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/QHFYYhBfbhuYRmy78gxj/",
+          "created_at": "2026-07-08T13:20:54Z",
+          "updated_at": "2026-07-08T13:20:54Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "28946028334"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:17:36Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 292,
+    "title": "feat: implement shared budget.toml schema with validation",
+    "body": "Closes #102\n\n## Summary\n\nImplements and validates the shared `budget.toml` schema that `README.md` promises — both tools share one file, but each owns its own sections.\n\n## Changes\n\n### Schema & validation (`cargo-cost-lint/src/main.rs`)\n- **`BudgetConfig`** — root struct with **no** `deny_unknown_fields`, so foreign top-level sections (`[network]`, `[source]`, `[functions.*]`) from `soroban-budget-assert` parse without error\n- **`LintsConfig`** — new struct with `#[serde(deny_unknown_fields)]` — typos in lint names produce a clear serde error naming the offending key\n- **`validate_lint_level()`** — extracted as a pure `Result<(), String>` function, testable without subprocess hacks; validates levels as `allow` | `warn` | `deny`\n- Config loading now uses `unwrap_or_else` with proper error messages + exit codes (no more silent `if let Ok` swallowing parse errors)\n\n### Tests (8 new unit tests)\n- Valid lints parse correctly\n- Foreign `[network]`, `[source]`, `[functions.*]` sections coexist cleanly\n- Unknown lint name produces an error containing the offending key\n- Missing / empty `[lints]` section parses as `None`\n- Valid levels (`allow`, `warn`, `deny`) accepted\n- Invalid level produces descriptive error\n\n### Fixture (`test_fixtures/smoke_test/budget.toml`)\n- Fixed from `[budget]` wrapper to proper `[lints]` schema\n- Includes `[network]`, `[source]`, `[functions.example]` to demonstrate coexistence\n\n### Docs (`docs/integration.md`)\n- Documented the full shared schema with section ownership table\n- Added `[network]`, `[source]`, `[functions.*]` sections to the code example\n",
+    "author": {
+      "login": "khaylebfortune",
+      "id": 111098422,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-27T14:38:06Z",
+    "updated_at": "2026-07-27T14:40:51Z",
+    "merged_at": "2026-07-27T14:40:51Z",
+    "closed_at": "2026-07-27T14:40:51Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "1ad061be56859b6dc04bbbe0bb2e3fa6988fc24c",
+    "base": {
+      "ref": "main",
+      "sha": "7e6c52d78252216de206ce1356d44405e63a4d2e",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feat/shared-budget-toml-schema",
+      "sha": "aab2ce8298b2f37a1a57fea3dd52db7b55303ce4",
+      "repo": "khaylebfortune/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 30,
+    "deletions": 1,
+    "changed_files": 1,
+    "commits": 2,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/292"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "c441e61f245c60a1bc1fe53218b814f39137e408",
+      "message": "feat: implement shared budget.toml schema with validation (#102)\n\n- Add LintsConfig struct with #[serde(deny_unknown_fields)] to reject\n  unknown lint names at parse time, while BudgetConfig root leaves\n  foreign top-level sections (network, source, functions.*) untouched\n  for soroban-budget-assert coexistence\n- Extract validate_lint_level() as pure Result-returning function for\n  testability; validate severity as \"allow\"|\"warn\"|\"deny\"\n- Replace silent if-let-Ok config parsing with unwrap_or_else that\n  prints errors and exits\n- Add 8 unit tests: valid lints, foreign section coexistence, unknown\n  lint name rejection, empty/missing lints section, level validation\n- Update test_fixtures/smoke_test/budget.toml to proper [lints] schema\n  with soroban-budget-assert sections (network, source, functions.*)\n- Document the full shared budget.toml schema and section ownership\n  table in docs/integration.md\n\nCloses #102",
+      "author_name": "khaylebfortune",
+      "author_email": "111098422+khaylebfortune@users.noreply.github.com",
+      "authored_at": "2026-07-27T14:36:55Z",
+      "committed_at": "2026-07-27T14:36:55Z",
+      "author": {
+        "login": "khaylebfortune",
+        "id": 111098422,
+        "type": "User"
+      },
+      "committer": {
+        "login": "khaylebfortune",
+        "id": 111098422,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "aab2ce8298b2f37a1a57fea3dd52db7b55303ce4",
+      "message": "Merge branch 'main' into feat/shared-budget-toml-schema",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-27T14:40:39Z",
+      "committed_at": "2026-07-27T14:40:39Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 30,
+      "deletions": 1,
+      "changes": 31,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-27T14:40:52Z",
+        "completed_at": "2026-07-27T14:41:32Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30276240412/job/90010925909",
+        "app": "github-actions",
+        "workflow_run_id": "30276240412"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "7e6c52d78252216de206ce1356d44405e63a4d2e",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 1ad061be56859b6dc04bbbe0bb2e3fa6988fc24c is the main tip at merge time.",
+    "pull_request_base_sha": "7e6c52d78252216de206ce1356d44405e63a4d2e",
+    "check_runs": {
+      "total_count": 2,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T14:39:59Z",
+          "completed_at": "2026-07-27T14:40:36Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30276168087/job/90010683933",
+          "app": "github-actions",
+          "workflow_run_id": "30276168087"
+        },
+        {
+          "name": "cargo-deny check",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T14:40:00Z",
+          "completed_at": "2026-07-27T14:41:16Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30276167889/job/90010683106",
+          "app": "github-actions",
+          "workflow_run_id": "30276167889"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test",
+      "cargo-deny check"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30276240412"
+    ],
+    "all_head_workflow_run_ids": [
+      "30276240412"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

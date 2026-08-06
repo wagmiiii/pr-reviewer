@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:49Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 257,
+    "title": "Docs/task 4",
+    "body": "## Summary\r\n\r\nThis PR updates outdated documentation links in the project README to point to the latest available references.\r\n\r\n### Changes\r\n\r\n* Replaced deprecated documentation links.\r\n* Updated references to current resources.\r\n* Verified links are valid and accessible.\r\n\r\n### Validation\r\n\r\n* Ran a local link check to confirm there are no dead links.\r\n* Ensured documentation updates do not impact the build.\r\n\r\nCloses #220\r\n",
+    "author": {
+      "login": "LaTash1",
+      "id": 80977896,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T12:50:35Z",
+    "updated_at": "2026-07-26T16:39:45Z",
+    "merged_at": "2026-07-26T16:39:44Z",
+    "closed_at": "2026-07-26T16:39:44Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "4b36cd9500de2e8f3fd4dde166f46eb80778d597",
+    "base": {
+      "ref": "main",
+      "sha": "e0de3eb0a699451e6abd965444b9f742b7d24cdc",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "docs/task-4",
+      "sha": "2185c287839dbbbb43e5d9a176d784dc322fbad2",
+      "repo": "LaTash1/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 15,
+    "deletions": 2,
+    "changed_files": 3,
+    "commits": 3,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/257"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "338737d47f7114290a5cb3302a15400747807fea",
+      "message": "done",
+      "author_name": "LaTash1",
+      "author_email": "80977896+LaTash1@users.noreply.github.com",
+      "authored_at": "2026-07-26T12:24:22Z",
+      "committed_at": "2026-07-26T12:24:22Z",
+      "author": {
+        "login": "LaTash1",
+        "id": 80977896,
+        "type": "User"
+      },
+      "committer": {
+        "login": "LaTash1",
+        "id": 80977896,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "ceceabbcbf504b19ba70b57908df09b063dd6b3d",
+      "message": "bitwise",
+      "author_name": "LaTash1",
+      "author_email": "80977896+LaTash1@users.noreply.github.com",
+      "authored_at": "2026-07-26T12:38:47Z",
+      "committed_at": "2026-07-26T12:38:47Z",
+      "author": {
+        "login": "LaTash1",
+        "id": 80977896,
+        "type": "User"
+      },
+      "committer": {
+        "login": "LaTash1",
+        "id": 80977896,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "2185c287839dbbbb43e5d9a176d784dc322fbad2",
+      "message": "task 4",
+      "author_name": "LaTash1",
+      "author_email": "80977896+LaTash1@users.noreply.github.com",
+      "authored_at": "2026-07-26T12:43:42Z",
+      "committed_at": "2026-07-26T12:43:42Z",
+      "author": {
+        "login": "LaTash1",
+        "id": 80977896,
+        "type": "User"
+      },
+      "committer": {
+        "login": "LaTash1",
+        "id": 80977896,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "CHANGELOG.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 0,
+      "changes": 3,
+      "previous_filename": null
+    },
+    {
+      "filename": "test_fixtures/smoke_test/src/lib.rs",
+      "status": "modified",
+      "additions": 11,
+      "deletions": 1,
+      "changes": 12,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-26T12:50:42Z",
+        "completed_at": "2026-07-26T12:57:22Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30202863055/job/89795752339",
+        "app": "github-actions",
+        "workflow_run_id": "30202863055"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "b8d9fa9ae8ab3cbb1eda22b00193f33ad6306a6d",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 4b36cd9500de2e8f3fd4dde166f46eb80778d597 is the main tip at merge time.",
+    "pull_request_base_sha": "e0de3eb0a699451e6abd965444b9f742b7d24cdc",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-26T16:39:30Z",
+          "completed_at": "2026-07-26T16:40:00Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30210916744/job/89816865661",
+          "app": "github-actions",
+          "workflow_run_id": "30210916744"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30202863055"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

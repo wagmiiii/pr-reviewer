@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:59Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 262,
+    "title": "fix: handle unhandled edge cases in configuration parser",
+    "body": "## Summary\r\n\r\nThis PR improves the configuration parser by handling empty configuration files and missing required fields more gracefully through the use of safe fallback defaults.\r\n\r\n### Changes\r\n\r\n* Implemented fallback defaults for missing configuration fields.\r\n* Improved parser behavior for empty configuration files.\r\n* Prevented unexpected failures when optional values are absent.\r\n* Added unit tests covering empty configuration scenarios and missing fields.\r\n\r\n### Validation\r\n\r\n* Ran the full test suite.\r\n* Verified new edge-case tests pass successfully.\r\n* Confirmed the project builds successfully and passes all checks.\r\n\r\nCloses #221\r\n\r\n## Summary\r\n\r\nThis PR enhances the documentation for the core module by adding comprehensive docstrings to public trait implementations and their associated methods.\r\n\r\n### Changes\r\n\r\n* Added documentation to all public traits.\r\n* Documented public trait methods with their expected behavior.\r\n* Improved module-level documentation for better discoverability.\r\n* Included examples where appropriate and ensured they compile successfully.\r\n\r\n### Validation\r\n\r\n* Reviewed documentation for completeness and consistency.\r\n* Verified documentation examples compile successfully.\r\n* Confirmed the project builds successfully and passes all checks.\r\n\r\nCloses #223\r\n",
+    "author": {
+      "login": "samad13",
+      "id": 61961655,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T13:27:07Z",
+    "updated_at": "2026-07-26T16:39:09Z",
+    "merged_at": "2026-07-26T16:39:09Z",
+    "closed_at": "2026-07-26T16:39:09Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "796fb8ca892be38ccbc34595e295425000196e16",
+    "base": {
+      "ref": "main",
+      "sha": "e0de3eb0a699451e6abd965444b9f742b7d24cdc",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "fix/task-3",
+      "sha": "21ec3b7c2cc09cd9fdbdfee4f15d46f7247d4302",
+      "repo": "samad13/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 3,
+    "deletions": 0,
+    "changed_files": 2,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/262"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "21ec3b7c2cc09cd9fdbdfee4f15d46f7247d4302",
+      "message": "fixses",
+      "author_name": "S13",
+      "author_email": "61961655+samad13@users.noreply.github.com",
+      "authored_at": "2026-07-26T13:24:30Z",
+      "committed_at": "2026-07-26T13:24:30Z",
+      "author": {
+        "login": "samad13",
+        "id": 61961655,
+        "type": "User"
+      },
+      "committer": {
+        "login": "samad13",
+        "id": 61961655,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".gitignore",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0,
+      "changes": 2,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-26T13:27:14Z",
+        "completed_at": "2026-07-26T13:33:55Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30204064776/job/89798948691",
+        "app": "github-actions",
+        "workflow_run_id": "30204064776"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "6327f275b0ef2be2882ea400d76a21b97c003eb1",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 796fb8ca892be38ccbc34595e295425000196e16 is the main tip at merge time.",
+    "pull_request_base_sha": "e0de3eb0a699451e6abd965444b9f742b7d24cdc",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-26T16:38:44Z",
+          "completed_at": "2026-07-26T16:39:22Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30210889719/job/89816796166",
+          "app": "github-actions",
+          "workflow_run_id": "30210889719"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/T2oVmEGRc8FSuioK8vNJ/",
+          "created_at": "2026-07-26T16:38:53Z",
+          "updated_at": "2026-07-26T16:38:53Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/T2oVmEGRc8FSuioK8vNJ/",
+          "created_at": "2026-07-26T16:38:53Z",
+          "updated_at": "2026-07-26T16:38:53Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30204064776"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:39Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 187,
+    "title": "feat: add lint for multiple sequential reads of the same storage key",
+    "body": "Closes #48\n\n## Summary\n\nAdds a new lint `soroban_redundant_storage_read` that detects when the same Soroban storage key is read multiple times sequentially without an intervening write. This catches redundant `get` and `has` calls on `Instance`, `Persistent`, and `Temporary` storage types, helping developers avoid unnecessary storage read-throughput costs.\n\n## Motivation\n\nStorage reads in Soroban consume read-throughput bandwidth — one of the most expensive resources in the Soroban cost model. Reading the same key multiple times without modification wastes this resource and directly increases transaction fees. This lint catches the common pattern:\n\n```rust\n// Bad: two sequential reads of the same key\nlet a: Option<i32> = env.storage().instance().get(&key);\nlet b: Option<i32> = env.storage().instance().get(&key); // redundant!\n```\n\nAnd suggests the fix:\n\n```rust\n// Good: read once, reuse the value\nlet a: Option<i32> = env.storage().instance().get(&key);\nlet b: Option<i32> = a; // reuse the first read\n```\n\n## Implementation Approach\n\n**Detection strategy:** Uses `check_block` (a `LateLintPass` method) to iterate through block statements in sequential order, tracking the last storage read. When two consecutive reads share the same storage type (`DefId`) and key (compared via source text), the lint fires. A `set` (write) resets tracking — reads before and after a write are not flagged.\n\n**Key design decisions:**\n\n- **`check_block` over `check_expr`:** `check_block` provides natural sequential ordering of statements, avoiding the post-order traversal issues that `check_expr` would introduce for stateful tracking. This ensures reliable detection of sequential reads.\n- **Source text comparison for keys:** Key identity is determined by comparing the source text of the key expression (peeling off `&` references). This handles both variable references and literal keys correctly.\n- **Stateless per-block:** Tracking state is local to each `check_block` call (no struct-level state), preventing cross-function contamination.\n- **Only top-level statement expressions:** The lint checks the init expression of `let` statements and the expression of `Semi`/`Expr` statements. Nested reads (e.g., inside function call arguments) are intentionally not tracked in v1 to keep the implementation simple. This is documented in the lint's scope section.\n\n**Storage types covered:** `Instance`, `Persistent`, and `Temporary` (the three concrete storage accessors in `soroban_sdk::storage`). Different storage types' reads are tracked independently — reading the same key from `instance()` and `persistent()` does not trigger the lint since they are different logical stores.\n\n## Files Changed\n\n| File | Changes |\n|------|---------|\n| `soroban_cost_lints/src/lib.rs` | +123 lines — Added `SOROBAN_REDUNDANT_STORAGE_READ` lint declaration, `SorobanRedundantStorageRead` struct, `StorageOp` enum, `is_storage_type` and `extract_storage_op` helpers, `check_block` implementation, registration in `register_lints` and `LINT_METADATA` |\n| `soroban_cost_lints/ui/main.rs` | +50 lines — Added 9 UI test fixtures covering: `get→get`, `has→get`, `has→has`, persistent `get→get`, temporary `get→get`, write-resets-tracking, different keys, single read, and `#[allow]` |\n| `soroban_cost_lints/ui/main.stderr` | +43/-1 lines — Updated expected stderr output with 5 new warnings, bumping total from 11 → 16 warnings |\n| `soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs` | +34 lines — Added 5 integration test fixtures: `get→get`, `has→get`, `has→has`, different keys, and write-resets-tracking |\n| `cargo-cost-lint/tests/integration.rs` | +8 lines — Added assertion to verify `soroban_redundant_storage_read` appears in JSON output |\n| `docs/lints/README.md` | +1 line — Added new lint to the Storage Operations table |\n| `docs/lints/soroban_redundant_storage_read.md` | New file — Comprehensive documentation with description, examples, suggested fix, and scope/limitations |\n\n## Test Coverage\n\n**UI tests** (`soroban_cost_lints/ui/`):\n\n- `bad_sequential_get_same_key` — Two `get` calls on the same instance key (should warn)\n- `bad_sequential_has_then_get` — `has` followed by `get` on the same key (should warn)\n- `bad_sequential_has_then_has` — Two `has` calls on the same key (should warn)\n- `bad_sequential_persistent_get` — Two `get` calls on persistent storage (should warn)\n- `bad_sequential_temporary_get` — Two `get` calls on temporary storage (should warn)\n- `good_set_resets_tracking` — Write between reads (should not warn)\n- `good_different_keys` — Reads on different keys (should not warn)\n- `good_single_read` — Single read (should not warn)\n- `allowed_sequential_read` — `#[allow(soroban_redundant_storage_read)]` suppresses the lint\n\n**Integration tests** (`cargo-cost-lint/tests/`):\n\n- Updated `test_json_output` to verify both `soroban_storage_in_loop` and `soroban_redundant_storage_read` appear in `--format json` output\n\n**Real SDK fixtures** (`soroban_cost_lints/test_fixtures/real_sdk/`):\n\n- 5 new fixtures exercising instance, persistent, and temporary storage paths with the real `soroban_sdk` dependency\n\n## Known Limitations (v1)\n\n1. **Nested block tracking not supported** — Reads in parent and child blocks are tracked independently.\n2. **Only top-level statement expressions** — Reads nested inside function call arguments or control-flow conditions are not tracked.\n3. **Key comparison uses source text** — Two variables with the same name but in different scopes could produce false positives (unlikely in practice).\n\n## Checklist\n\n- [x] Implementation follows existing lint patterns (declare_lint!, impl_lint_pass!, LateLintPass)\n- [x] Lint registered in both `register_lints` and `LINT_METADATA`\n- [x] Categorized under `LintCategory::StorageOperations`\n- [x] UI test fixtures added with expected stderr output\n- [x] Real SDK test fixtures added\n- [x] Integration test updated to verify JSON output\n- [x] Documentation created (`docs/lints/soroban_redundant_storage_read.md`)\n- [x] Lint reference table updated (`docs/lints/README.md`)\n",
+    "author": {
+      "login": "MidstCodes",
+      "id": 306365947,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-25T12:05:54Z",
+    "updated_at": "2026-07-28T13:36:12Z",
+    "merged_at": "2026-07-28T13:36:12Z",
+    "closed_at": "2026-07-28T13:36:12Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "abc832a7b8176c089a412f5d6047fdb535549bc8",
+    "base": {
+      "ref": "main",
+      "sha": "818be0ac6670851a821d249311b0e778d8d1ae06",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feat/add-lint-for-multiple-sequential-reads-of-the-same-storage-key",
+      "sha": "f5648c2a17d97a5954163a805f5244fd83e06518",
+      "repo": "MidstCodes/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 228,
+    "deletions": 452,
+    "changed_files": 6,
+    "commits": 3,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/187"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "f71c634aacae7b43af5946665a3837d6db1d1d84",
+      "message": "feat: add lint for multiple sequential reads of the same storage key\n\nAdds the soroban_redundant_storage_read lint that detects redundant\nget/has calls on the same Soroban storage key (Instance, Persistent,\nTemporary) without an intervening write. Uses check_block with per-block\nstate tracking for reliable sequential statement analysis.\n\n- New lint: SOROBAN_REDUNDANT_STORAGE_READ (warn)\n- Detects get->get, has->get, has->has of the same key\n- Write (set) resets tracking\n- Full UI test fixtures and real_sdk integration tests\n- Updated docs with scope/limitations documented\n\nCloses #48",
+      "author_name": "MidstCodes",
+      "author_email": "trentbuzzmedia@gmail.com",
+      "authored_at": "2026-07-25T12:04:43Z",
+      "committed_at": "2026-07-25T12:04:43Z",
+      "author": {
+        "login": "MidstCodes",
+        "id": 306365947,
+        "type": "User"
+      },
+      "committer": {
+        "login": "MidstCodes",
+        "id": 306365947,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "6a590f9a247216ae1bc4f8b83845d5bc0ed0038a",
+      "message": "Merge branch 'main' into feat/add-lint-for-multiple-sequential-reads-of-the-same-storage-key",
+      "author_name": "MidstCodes",
+      "author_email": "trentbuzzmedia@gmail.com",
+      "authored_at": "2026-07-25T12:07:42Z",
+      "committed_at": "2026-07-25T12:07:42Z",
+      "author": {
+        "login": "MidstCodes",
+        "id": 306365947,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "f5648c2a17d97a5954163a805f5244fd83e06518",
+      "message": "Merge remote-tracking branch 'origin/main' into feat/add-lint-for-multiple-sequential-reads-of-the-same-storage-key",
+      "author_name": "adajala",
+      "author_email": "ademola2993k@gmail.com",
+      "authored_at": "2026-07-28T13:35:59Z",
+      "committed_at": "2026-07-28T13:35:59Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/tests/integration.rs",
+      "status": "modified",
+      "additions": 5,
+      "deletions": 381,
+      "changes": 386,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 3,
+      "changes": 7,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/soroban_redundant_storage_read.md",
+      "status": "added",
+      "additions": 40,
+      "deletions": 0,
+      "changes": 40,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 121,
+      "deletions": 4,
+      "changes": 125,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs",
+      "status": "modified",
+      "additions": 25,
+      "deletions": 21,
+      "changes": 46,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 33,
+      "deletions": 43,
+      "changes": 76,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 2,
+    "check_runs": [
+      {
+        "name": "build-and-test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-28T13:36:17Z",
+        "completed_at": "2026-07-28T13:37:05Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364258561/job/90291323333",
+        "app": "github-actions",
+        "workflow_run_id": "30364258561"
+      },
+      {
+        "name": "build-and-test (windows-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-28T13:36:18Z",
+        "completed_at": "2026-07-28T13:36:41Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364258561/job/90291323127",
+        "app": "github-actions",
+        "workflow_run_id": "30364258561"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "818be0ac6670851a821d249311b0e778d8d1ae06",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit abc832a7b8176c089a412f5d6047fdb535549bc8 is the main tip at merge time.",
+    "pull_request_base_sha": "818be0ac6670851a821d249311b0e778d8d1ae06",
+    "check_runs": {
+      "total_count": 2,
+      "check_runs": [
+        {
+          "name": "build-and-test (windows-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T13:35:59Z",
+          "completed_at": "2026-07-28T13:36:19Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364229800/job/90291224813",
+          "app": "github-actions",
+          "workflow_run_id": "30364229800"
+        },
+        {
+          "name": "build-and-test (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T13:36:01Z",
+          "completed_at": "2026-07-28T13:36:41Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364229800/job/90291224706",
+          "app": "github-actions",
+          "workflow_run_id": "30364229800"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/wsGYQfBpd36FzSkmEVNe/",
+          "created_at": "2026-07-28T13:36:04Z",
+          "updated_at": "2026-07-28T13:36:04Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/wsGYQfBpd36FzSkmEVNe/",
+          "created_at": "2026-07-28T13:36:04Z",
+          "updated_at": "2026-07-28T13:36:04Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "wagmiiii",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5078425873,
+        "created_at": "2026-07-25T12:07:51Z",
+        "updated_at": "2026-07-25T12:07:51Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@MidstCodes Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5079825350,
+        "created_at": "2026-07-25T18:19:49Z",
+        "updated_at": "2026-07-25T18:19:49Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "Hello! 👋 \n\nWe recently optimized and simplified the CI workflows on the `main` branch. \n\nSince this PR is currently failing its CI checks, could you please **rebase your branch onto `main`**? This will pull in the new workflow configurations and might automatically resolve the CI failures. \n\nLet us know if you need any help with the rebase!"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)"
+    ],
+    "base_failing_checks": [
+      "build-and-test (windows-latest)",
+      "build-and-test (ubuntu-latest)"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30364258561"
+    ],
+    "all_head_workflow_run_ids": [
+      "30364258561"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:21Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 172,
+    "title": "ci: optimize workflows",
+    "body": "Added Swatinem/rust-cache to both jobs to cache cargo dependencies and binary installs, drastically reducing CI execution time.",
+    "author": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "author_association": "MEMBER",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-24T21:53:27Z",
+    "updated_at": "2026-07-24T22:01:02Z",
+    "merged_at": "2026-07-24T22:01:02Z",
+    "closed_at": "2026-07-24T22:01:02Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "415c4462244b8bb0c1ef7c1232a7b74d5d936617",
+    "base": {
+      "ref": "main",
+      "sha": "7e842c78e19468c446a38c936c172e2e463e8a6b",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "optimize-ci",
+      "sha": "b1f0c986d23eb856267c20cb610d48963f57f589",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [
+      {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      }
+    ],
+    "assignees": [],
+    "additions": 4,
+    "deletions": 0,
+    "changed_files": 1,
+    "commits": 2,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/172"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "4a342c4002160c9b3f058b5b2e12b3ff70fbd111",
+      "message": "ci: optimize workflow with rust-cache",
+      "author_name": "wagmiiii",
+      "author_email": "ademola2993k@gmail.com",
+      "authored_at": "2026-07-24T21:52:45Z",
+      "committed_at": "2026-07-24T21:52:45Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "b1f0c986d23eb856267c20cb610d48963f57f589",
+      "message": "Merge branch 'main' into optimize-ci",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T21:54:20Z",
+      "committed_at": "2026-07-24T21:54:20Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0,
+      "changes": 4,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 6,
+    "check_runs": [
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T22:00:27Z",
+        "completed_at": "2026-07-24T22:00:31Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30129285698/job/89600965033",
+        "app": "github-actions",
+        "workflow_run_id": "30129285698"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T21:56:59Z",
+        "completed_at": "2026-07-24T21:57:03Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30129285698/job/89600389656",
+        "app": "github-actions",
+        "workflow_run_id": "30129285698"
+      },
+      {
+        "name": "lint-matrix (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T21:54:27Z",
+        "completed_at": "2026-07-24T22:00:25Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30129285698/job/89599977561",
+        "app": "github-actions",
+        "workflow_run_id": "30129285698"
+      },
+      {
+        "name": "validate-toolchain-pins",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T21:54:28Z",
+        "completed_at": "2026-07-24T21:54:35Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30129285698/job/89599977553",
+        "app": "github-actions",
+        "workflow_run_id": "30129285698"
+      },
+      {
+        "name": "Code Quality (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T21:54:28Z",
+        "completed_at": "2026-07-24T21:56:55Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30129285698/job/89599977531",
+        "app": "github-actions",
+        "workflow_run_id": "30129285698"
+      },
+      {
+        "name": ".github/dependabot.yml",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T21:54:25Z",
+        "completed_at": "2026-07-24T21:54:25Z",
+        "details_url": "https://dependabot-api.githubapp.com",
+        "app": "dependabot",
+        "workflow_run_id": null
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "7e842c78e19468c446a38c936c172e2e463e8a6b",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 415c4462244b8bb0c1ef7c1232a7b74d5d936617 is the main tip at merge time.",
+    "pull_request_base_sha": "7e842c78e19468c446a38c936c172e2e463e8a6b",
+    "check_runs": {
+      "total_count": 5,
+      "check_runs": [
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T19:04:38Z",
+          "completed_at": "2026-07-24T19:04:41Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30118922818/job/89568018255",
+          "app": "github-actions",
+          "workflow_run_id": "30118922818"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T18:59:55Z",
+          "completed_at": "2026-07-24T18:59:58Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30118922818/job/89566984714",
+          "app": "github-actions",
+          "workflow_run_id": "30118922818"
+        },
+        {
+          "name": "lint-matrix (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T18:57:18Z",
+          "completed_at": "2026-07-24T19:04:35Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30118922818/job/89566409046",
+          "app": "github-actions",
+          "workflow_run_id": "30118922818"
+        },
+        {
+          "name": "Code Quality (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T18:57:18Z",
+          "completed_at": "2026-07-24T18:59:53Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30118922818/job/89566408857",
+          "app": "github-actions",
+          "workflow_run_id": "30118922818"
+        },
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T18:57:18Z",
+          "completed_at": "2026-07-24T18:57:24Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30118922818/job/89566408848",
+          "app": "github-actions",
+          "workflow_run_id": "30118922818"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/ocaRye0Dz0EUT4snWXh6/",
+          "created_at": "2026-07-24T18:57:25Z",
+          "updated_at": "2026-07-24T18:57:25Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/ocaRye0Dz0EUT4snWXh6/",
+          "created_at": "2026-07-24T18:57:25Z",
+          "updated_at": "2026-07-24T18:57:25Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30129285698"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

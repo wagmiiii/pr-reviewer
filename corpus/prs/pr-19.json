@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:13:24Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 19,
+    "title": "docs: migrate documentation to GitBook with Web3 aesthetic",
+    "body": "Closes #18\n\n## Summary\nMigrates the documentation from mdBook to GitBook (Git Sync) with a Web3-oriented dark/neon design direction, restructured so the problem statement, lint reference, and integration guide are one click from the landing page.\n\n## What changed\n- **Added `.gitbook.yaml`** — GitBook Git Sync config (`root: ./docs/`, landing page `README.md`, nav `SUMMARY.md`).\n- **Ported all mdBook content**: `introduction.md` → `docs/README.md` (problem statement front-and-center, resource-cost table, quick links), `SUMMARY.md` → grouped GitBook table of contents, `integration.md` and the 3 lint pages re-styled with GitBook hint blocks and titled code blocks. All original prose carried over unchanged.\n- **Added `docs/branding.md`** — design spec for the hosted space (neon-teal-on-dark palette with hex values, dark-default theme, fonts, logo guidance) plus in-repo writing conventions and Git Sync cutover steps.\n- **Removed mdBook**: `docs/book.toml`, the old `docs/src/` tree, and `.github/workflows/pages.yml`.\n- **README**: the three lint links now point at the in-repo doc pages instead of the retired GitHub Pages URLs (swap for the GitBook URL once the space is live).\n\n## Key design decisions\n- **GitBook doesn't support custom CSS via Git Sync**, so visual theming must be applied in the hosted space's Customization settings. The issue anticipated this (\"…or design suggestions for the hosted space\"): `docs/branding.md` is that spec, and the in-repo styling uses everything GitBook does allow (hint blocks, grouped nav, titled code blocks).\n- Kept all docs under `docs/` via `root: ./docs/` rather than moving markdown to the repo root.\n\n## Acceptance criteria\n- [x] Migrate existing mdBook content (`docs/src/*`) to GitBook format\n- [x] Dark-mode, high-contrast Web3 aesthetic (in-repo blocks + hosted-space spec in `docs/branding.md`)\n- [x] Integration guide, lint reference, and problem statement highly visible and well-structured\n- [x] Remove old mdBook config (`book.toml`) and the mdBook deploy workflow\n- [x] Branch `docs/gitbook-migration`\n\n## Verification\n- Link check: every relative link in the 5 new pages resolves to an existing file.\n- Content audit: every sentence of the original 7 mdBook pages is preserved.\n- CI: this diff touches no Rust/Cargo files, so `cargo test --workspace` (the `Lint` workflow) is unaffected.\n\n## Cutover note (action needed after merge)\nMerging removes the GitHub Pages deploy, so **no hosted docs are live until a maintainer creates the GitBook space and enables Git Sync** (steps in `docs/branding.md`). If preferred, `pages.yml` removal can be deferred to a follow-up PR instead.\n\n## Follow-ups\n- Enable GitBook Git Sync and apply the branding settings (maintainer, requires GitBook account).\n- Update the repo About link and README lint links to the final GitBook URL.\n\n## Security\nDocs-only change: no code, dependencies, secrets, or CI permissions added; one workflow (Pages deploy) removed.\n",
+    "author": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "author_association": "MEMBER",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-06T14:36:44Z",
+    "updated_at": "2026-07-06T14:45:33Z",
+    "merged_at": "2026-07-06T14:45:32Z",
+    "closed_at": "2026-07-06T14:45:32Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "147eb889201c8572bf9707459cd36673c2555222",
+    "base": {
+      "ref": "main",
+      "sha": "c1c239cdcf5e7bd88378d0e32f2781bfa4d05da4",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "docs/gitbook-migration",
+      "sha": "147eb889201c8572bf9707459cd36673c2555222",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 195,
+    "deletions": 100,
+    "changed_files": 16,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/19"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "147eb889201c8572bf9707459cd36673c2555222",
+      "message": "docs: migrate documentation to GitBook with Web3 aesthetic",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-06T14:35:29Z",
+      "committed_at": "2026-07-06T14:35:29Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".gitbook.yaml",
+      "status": "added",
+      "additions": 5,
+      "deletions": 0,
+      "changes": 5,
+      "previous_filename": null
+    },
+    {
+      "filename": ".github/workflows/pages.yml",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 45,
+      "changes": 45,
+      "previous_filename": null
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 3,
+      "changes": 6,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/README.md",
+      "status": "added",
+      "additions": 37,
+      "deletions": 0,
+      "changes": 37,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/SUMMARY.md",
+      "status": "added",
+      "additions": 18,
+      "deletions": 0,
+      "changes": 18,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/book.toml",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 5,
+      "changes": 5,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/branding.md",
+      "status": "added",
+      "additions": 50,
+      "deletions": 0,
+      "changes": 50,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "renamed",
+      "additions": 17,
+      "deletions": 3,
+      "changes": 20,
+      "previous_filename": "docs/src/integration.md"
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "added",
+      "additions": 13,
+      "deletions": 0,
+      "changes": 13,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/redundant_env_clone.md",
+      "status": "renamed",
+      "additions": 12,
+      "deletions": 3,
+      "changes": 15,
+      "previous_filename": "docs/src/lints/redundant_env_clone.md"
+    },
+    {
+      "filename": "docs/lints/soroban_storage_in_loop.md",
+      "status": "added",
+      "additions": 28,
+      "deletions": 0,
+      "changes": 28,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/unnecessary_host_function_call.md",
+      "status": "renamed",
+      "additions": 12,
+      "deletions": 3,
+      "changes": 15,
+      "previous_filename": "docs/src/lints/unnecessary_host_function_call.md"
+    },
+    {
+      "filename": "docs/src/SUMMARY.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 8,
+      "changes": 8,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/src/introduction.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 8,
+      "changes": 8,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/src/lints/README.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 3,
+      "changes": 3,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/src/lints/soroban_storage_in_loop.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 19,
+      "changes": 19,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 2,
+    "check_runs": [
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-06T14:45:39Z",
+        "completed_at": "2026-07-06T14:49:28Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/28800209631/job/85401210947",
+        "app": "github-actions",
+        "workflow_run_id": "28800209631"
+      },
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-06T14:36:51Z",
+        "completed_at": "2026-07-06T14:41:36Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/28799627783/job/85399151190",
+        "app": "github-actions",
+        "workflow_run_id": "28799627783"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "success",
+    "total_count": 1,
+    "statuses": [
+      {
+        "context": "GitBook (docs)",
+        "state": "success",
+        "description": "Check the changes in the GitBook editor.",
+        "target_url": "https://app.gitbook.com/s/5L9kozyByS1nu5Upx4NK/~/diff/~/revisions/UWSCQ6zN1tpdVk1HxAQk/",
+        "created_at": "2026-07-06T15:03:12Z",
+        "updated_at": "2026-07-06T15:03:12Z"
+      }
+    ]
+  },
+  "base_branch_ci": {
+    "resolved_sha": "c1c239cdcf5e7bd88378d0e32f2781bfa4d05da4",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 147eb889201c8572bf9707459cd36673c2555222 is the main tip at merge time.",
+    "pull_request_base_sha": "c1c239cdcf5e7bd88378d0e32f2781bfa4d05da4",
+    "check_runs": {
+      "total_count": 2,
+      "check_runs": [
+        {
+          "name": "deploy",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-06T12:54:47Z",
+          "completed_at": "2026-07-06T12:55:03Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/28793028834/job/85376305313",
+          "app": "github-actions",
+          "workflow_run_id": "28793028834"
+        },
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-06T12:54:44Z",
+          "completed_at": "2026-07-06T12:59:25Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/28793028655/job/85376304971",
+          "app": "github-actions",
+          "workflow_run_id": "28793028655"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "28799627783",
+      "28800209631"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

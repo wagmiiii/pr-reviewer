@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-06T07:03:39Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 314,
+    "title": "docs: expand setup instructions for Windows users (#195)",
+    "body": "Closes #195\n\nThe existing setup docs assume a Unix-like environment. This PR adds an\nexplicit Windows setup guide and links it from all relevant places so Windows\ncontributors can onboard without guessing.\n\n### What's added\n\n- `docs/windows_setup.md` — new full guide:\n  - **Option A (recommended):** WSL2 with Ubuntu, matching CI.\n  - **Option B:** Native PowerShell with the MSVC toolchain, Visual Studio\n    Build Tools 2022 (incl. a concrete `Enter-VsDevShell` snippet so users\n    don't have to detour through \"x64 Native Tools Command Prompt for VS\"),\n    Git for Windows, PATH setup, and `.gitattributes` advice for LF line\n    endings.\n  - A **\"Common Windows issues\"** table covering `link.exe` errors, Defender\n    exclusions, CRLF pitfalls (with `dos2unix` / `.gitattributes` — explicitly\n    avoiding destructive commands like `git reset --hard`), `openssl-sys`\n    workarounds, etc.\n- `CONTRIBUTING.md` — Windows pointer at the top of \"Setting up Locally\".\n- `README.md` — Windows callout added to \"Getting Started → Prerequisites\"\n  (explains *why* Visual Studio Build Tools is needed: the MSVC `rustc`\n  toolchain needs `link.exe`).\n- `docs/SUMMARY.md` — new page registered in the gitbook TOC.\n- `CHANGELOG.md` — `Unreleased > Added` entry.\n\n### What is NOT in this PR\n\nIssue #195's body referenced a `src/module_29.rs` \"key file\" alongside the\ndocs task. That instruction matches the same phantom-module pattern that was\nalready recorded as invalid in `CHANGELOG.md` (issue #207 / `src/module_17.rs`),\nso `src/module_29.rs` was intentionally **not created**. This PR is strictly\ndocs.\n\n### Validation\n\nThree rounds of automated review on `docs/task-29` confirmed all flagged\nissues resolved before commit:\n\n- VS 2022 install paths now read `C:\\Program Files\\Microsoft Visual Studio\\2022\\BuildTools\\…` (no `(x86)` suffix).\n- Common Windows issues table replaced a dangerous `git reset --hard` recipe with `dos2unix` / `.gitattributes`.\n- README.md Prerequisites now closes the loop on why Build Tools is needed.\n- VsDevCmd callout now includes the concrete `Enter-VsDevShell` PowerShell snippet.\n- Defender exclusion paths are consistent across the table.\n\n`cargo fmt --all -- --check`, `cargo clippy --workspace --all-targets -- -D warnings`, and `cargo test --workspace` — these are docs-only changes (no Rust source modifications) so they should pass trivially, but please run them locally before merging (the assistant sandbox doesn't have `cargo` installed).\n\n### Conflicts\n\nNone. The branch was forked from a clean working tree on `docs/task-29`; nothing was merged from `main` during this work, so the diff applies cleanly.\n",
+    "author": {
+      "login": "kimmoris12345",
+      "id": 293177486,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-28T08:23:23Z",
+    "updated_at": "2026-07-28T13:13:19Z",
+    "merged_at": "2026-07-28T13:13:19Z",
+    "closed_at": "2026-07-28T13:13:19Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "8de307a33c913cd68ea10bce6c745973b9a27c93",
+    "base": {
+      "ref": "main",
+      "sha": "0a3295df7e0fd4b2e2ef196d53774504fd4edc78",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "docs/task-29",
+      "sha": "fb0ff7d2f9a7b33d631f7106360fc6ad9e3d948e",
+      "repo": "kimmoris12345/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 294,
+    "deletions": 2,
+    "changed_files": 5,
+    "commits": 2,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/314"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "f117ef70356ee9aa8b29f7480af7af41a756d33a",
+      "message": "docs: expand setup instructions for Windows users (#195)",
+      "author_name": "kimmoris12345",
+      "author_email": "kimmoris12345@gmail.com",
+      "authored_at": "2026-07-28T08:10:13Z",
+      "committed_at": "2026-07-28T08:10:13Z",
+      "author": {
+        "login": "kimmoris12345",
+        "id": 293177486,
+        "type": "User"
+      },
+      "committer": {
+        "login": "kimmoris12345",
+        "id": 293177486,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "fb0ff7d2f9a7b33d631f7106360fc6ad9e3d948e",
+      "message": "Merge branch 'main' into docs/task-29",
+      "author_name": "kimmoris12345",
+      "author_email": "kimmoris12345@gmail.com",
+      "authored_at": "2026-07-28T08:24:42Z",
+      "committed_at": "2026-07-28T08:24:42Z",
+      "author": {
+        "login": "kimmoris12345",
+        "id": 293177486,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "CHANGELOG.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "previous_filename": null
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0,
+      "changes": 4,
+      "previous_filename": null
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 2,
+      "changes": 11,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/SUMMARY.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/windows_setup.md",
+      "status": "added",
+      "additions": 279,
+      "deletions": 0,
+      "changes": 279,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-28T08:24:57Z",
+        "completed_at": "2026-07-28T08:25:41Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30342285888/job/90220367731",
+        "app": "github-actions",
+        "workflow_run_id": "30342285888"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "6a5cc31cc8199301cc6733a560db7100a6cdee16",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 8de307a33c913cd68ea10bce6c745973b9a27c93 is the main tip at merge time.",
+    "pull_request_base_sha": "0a3295df7e0fd4b2e2ef196d53774504fd4edc78",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T13:13:20Z",
+          "completed_at": "2026-07-28T13:14:07Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30362472764/job/90285313540",
+          "app": "github-actions",
+          "workflow_run_id": "30362472764"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/Gn8PBIUk7GvaMASoCkma/",
+          "created_at": "2026-07-28T13:13:25Z",
+          "updated_at": "2026-07-28T13:13:25Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/Gn8PBIUk7GvaMASoCkma/",
+          "created_at": "2026-07-28T13:13:25Z",
+          "updated_at": "2026-07-28T13:13:25Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5101739915,
+        "created_at": "2026-07-28T08:24:53Z",
+        "updated_at": "2026-07-28T08:24:53Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@kimmoris12345 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30342285888"
+    ],
+    "all_head_workflow_run_ids": [
+      "30342285888"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

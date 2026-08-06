@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:17:22Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 290,
+    "title": "docs: clarify map_insert_in_loop closure-loop coverage (#50)",
+    "body": "Closes #50\n\n## Summary\n\nIssue #50 asked for a lint that flags `Map::insert` calls inside loops.\n\n**That lint already exists.** `MAP_INSERT_IN_LOOP` (`MapInsertInLoop` pass in `soroban_cost_lints/src/lib.rs`) was fully implemented, registered, tested (UI fixtures `bad_map_insert_in_loop` / `allowed_map_insert_in_loop` in `soroban_cost_lints/ui/main.rs`), and documented (`docs/lints/map_insert_in_loop.md`, plus rows in `docs/lints/README.md` and the top-level `README.md`) prior to this PR, merged via PR #225. This PR does not reimplement or duplicate that work.\n\n## What this PR actually does\n\nWhile verifying the lint's current behavior against the issue, I confirmed one real, documented gap worth recording: `MapInsertInLoop` uses the `enclosing_loop(cx, expr)` helper, which only recognizes a `Map::insert` call sitting directly inside a syntactic `for`/`while`/`loop` body. It does **not** flag a `Map::insert` call made inside a multi-call iterator closure such as `.for_each(|x| { map.insert(...) })`, even though that closure body runs once per element just like a loop and incurs the same repeated storage cost.\n\nFor contrast, `UnnecessaryHostFunctionCall` in the same file uses a different, closure-aware helper (`enclosing_loop_or_closure`) that does cover that case.\n\nThis PR adds a short \"Known limitations\" section to `docs/lints/map_insert_in_loop.md` recording this, in the same style as the existing \"Deliberately not covered\" section in `docs/lints/signature_verification_in_loop.md`.\n\n## What this PR does NOT do\n\n- No change to `MapInsertInLoop`'s implementation or runtime behavior.\n- No new UI fixtures (none needed — no behavior changed).\n- No `CHANGELOG.md` entry under Added, since nothing new is shipping.\n- No duplicate lint registration or docs entries.\n\nThis is a documentation-only clarification of already-shipped behavior, opened to give issue #50 an honest, accurate closing record.\n",
+    "author": {
+      "login": "HassanKorey",
+      "id": 117786769,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-27T14:05:40Z",
+    "updated_at": "2026-07-28T13:17:31Z",
+    "merged_at": "2026-07-28T13:17:31Z",
+    "closed_at": "2026-07-28T13:17:31Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "6f9c057799b9a71286010a2f08e925dabfd61b1b",
+    "base": {
+      "ref": "main",
+      "sha": "31470bf5c816aa87b0ef7c3d3b49f4223a5b4e05",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "docs/verify-map-insert-in-loop-coverage",
+      "sha": "c0b86fe69078007ed839002c16068d4e0b9f98a2",
+      "repo": "HassanKorey/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 16,
+    "deletions": 1,
+    "changed_files": 1,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/290"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "c0b86fe69078007ed839002c16068d4e0b9f98a2",
+      "message": "docs: clarify map_insert_in_loop closure-loop coverage (#50)\n\nDocument that MapInsertInLoop uses the syntactic-only enclosing_loop\nhelper and does not flag Map::insert calls inside multi-call iterator\nclosures (e.g. .for_each), unlike UnnecessaryHostFunctionCall which\nuses the closure-aware enclosing_loop_or_closure helper. No behavior\nchange; this records current, verified coverage for issue #50.",
+      "author_name": "HassanKorey",
+      "author_email": "edunhassan1006@gmail.com",
+      "authored_at": "2026-07-27T14:05:13Z",
+      "committed_at": "2026-07-27T14:05:13Z",
+      "author": {
+        "login": "HassanKorey",
+        "id": 117786769,
+        "type": "User"
+      },
+      "committer": {
+        "login": "HassanKorey",
+        "id": 117786769,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/lints/map_insert_in_loop.md",
+      "status": "modified",
+      "additions": 16,
+      "deletions": 1,
+      "changes": 17,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-27T14:05:46Z",
+        "completed_at": "2026-07-27T14:06:25Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30273400022/job/90001301469",
+        "app": "github-actions",
+        "workflow_run_id": "30273400022"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "bc620c89751118324335e02a7ec70378d742728d",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 6f9c057799b9a71286010a2f08e925dabfd61b1b is the main tip at merge time.",
+    "pull_request_base_sha": "31470bf5c816aa87b0ef7c3d3b49f4223a5b4e05",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T13:17:15Z",
+          "completed_at": "2026-07-28T13:18:13Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30362771255/job/90286309232",
+          "app": "github-actions",
+          "workflow_run_id": "30362771255"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/praYPA5LrmJwAMoAuRNG/",
+          "created_at": "2026-07-28T13:17:21Z",
+          "updated_at": "2026-07-28T13:17:21Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/praYPA5LrmJwAMoAuRNG/",
+          "created_at": "2026-07-28T13:17:21Z",
+          "updated_at": "2026-07-28T13:17:21Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30273400022"
+    ],
+    "all_head_workflow_run_ids": [
+      "30273400022"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

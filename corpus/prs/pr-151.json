@@ -1,0 +1,426 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:13:51Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 151,
+    "title": "Fix/validate lint names",
+    "body": "closes #91 \r\n\r\n## Description\r\n<!-- Describe your changes in detail -->\r\n\r\n## Related Issue\r\n<!-- If this PR addresses an existing issue, please link it here. -->\r\nCloses #\r\n\r\n## Motivation and Context\r\n<!-- Why is this change required? What problem does it solve? -->\r\n\r\n## How Has This Been Tested?\r\n<!-- Please describe in detail how you tested your changes. -->\r\n- [ ] Added/Updated tests\r\n- [ ] Passed `cargo test`\r\n- [ ] Passed `cargo clippy`\r\n- [ ] Formatted with `cargo fmt`\r\n\r\n## Types of changes\r\n<!-- What types of changes does your code introduce? -->\r\n- [ ] Bug fix (non-breaking change which fixes an issue)\r\n- [ ] New feature (non-breaking change which adds functionality)\r\n- [ ] Breaking change (fix or feature that would cause existing functionality to change)\r\n- [ ] Documentation update\r\n",
+    "author": {
+      "login": "samlogy1",
+      "id": 206128481,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-23T20:04:23Z",
+    "updated_at": "2026-07-24T10:37:19Z",
+    "merged_at": "2026-07-24T10:37:19Z",
+    "closed_at": "2026-07-24T10:37:19Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "f67fe7d34131c1ac58379c4919b2f235609ae3ae",
+    "base": {
+      "ref": "main",
+      "sha": "fd0500fd5c4bbe2b76571f155244ff20e7003eb5",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "fix/validate-lint-names",
+      "sha": "397dd0c8c48bd5e0d0f0e45a717f2a088cf35eb9",
+      "repo": "samlogy1/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 118,
+    "deletions": 12,
+    "changed_files": 3,
+    "commits": 8,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/151"
+  },
+  "reviews": [
+    {
+      "id": 4772432393,
+      "state": "APPROVED",
+      "submitted_at": "2026-07-24T10:37:09Z",
+      "author_association": "MEMBER",
+      "user": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "body_present": false,
+      "body": ""
+    }
+  ],
+  "review_states": [
+    {
+      "state": "APPROVED",
+      "count": 1
+    }
+  ],
+  "commits": [
+    {
+      "sha": "6fe6e62b78b4c223631744457736b1beb8610766",
+      "message": "docs: fix the invalid #[allow] suppression example in roadmap_mvp.md\n\nCloses #81",
+      "author_name": "samlogy1",
+      "author_email": "akejusamuel0@gmail.com",
+      "authored_at": "2026-07-23T19:54:54Z",
+      "committed_at": "2026-07-23T19:54:54Z",
+      "author": {
+        "login": "samlogy1",
+        "id": 206128481,
+        "type": "User"
+      },
+      "committer": {
+        "login": "samlogy1",
+        "id": 206128481,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "729d5c35ffccd2d9ff85ec973fc55db1a0756691",
+      "message": "fix: validate budget.toml lint names and levels\n\nCloses #91",
+      "author_name": "samlogy1",
+      "author_email": "akejusamuel0@gmail.com",
+      "authored_at": "2026-07-23T20:02:14Z",
+      "committed_at": "2026-07-23T20:02:14Z",
+      "author": {
+        "login": "samlogy1",
+        "id": 206128481,
+        "type": "User"
+      },
+      "committer": {
+        "login": "samlogy1",
+        "id": 206128481,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "06b11fe85d03e35c051d884f7043744dd27c8217",
+      "message": "Merge branch 'main' into fix/validate-lint-names",
+      "author_name": "samlogy1",
+      "author_email": "akejusamuel0@gmail.com",
+      "authored_at": "2026-07-24T09:29:56Z",
+      "committed_at": "2026-07-24T09:29:56Z",
+      "author": {
+        "login": "samlogy1",
+        "id": 206128481,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "f2984b5ecdfdf9dd8637efceec658631b40142de",
+      "message": "Merge branch 'main' into fix/validate-lint-names",
+      "author_name": "samlogy1",
+      "author_email": "akejusamuel0@gmail.com",
+      "authored_at": "2026-07-24T09:45:37Z",
+      "committed_at": "2026-07-24T09:45:37Z",
+      "author": {
+        "login": "samlogy1",
+        "id": 206128481,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "9276e23c00b804abf4a0ec3fc7c9889ec27df8a4",
+      "message": "Merge branch 'main' into fix/validate-lint-names",
+      "author_name": "samlogy1",
+      "author_email": "akejusamuel0@gmail.com",
+      "authored_at": "2026-07-24T09:51:35Z",
+      "committed_at": "2026-07-24T09:51:35Z",
+      "author": {
+        "login": "samlogy1",
+        "id": 206128481,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "5f060074e64773857a9c048898f51bf9176f3b6e",
+      "message": "Merge branch 'main' into fix/validate-lint-names",
+      "author_name": "samlogy1",
+      "author_email": "akejusamuel0@gmail.com",
+      "authored_at": "2026-07-24T09:51:51Z",
+      "committed_at": "2026-07-24T09:51:51Z",
+      "author": {
+        "login": "samlogy1",
+        "id": 206128481,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "91c0091f4ec7288179cd52b3a5a8cb34ae7f09d1",
+      "message": "Merge branch 'main' into fix/validate-lint-names",
+      "author_name": "samlogy1",
+      "author_email": "akejusamuel0@gmail.com",
+      "authored_at": "2026-07-24T09:52:08Z",
+      "committed_at": "2026-07-24T09:52:08Z",
+      "author": {
+        "login": "samlogy1",
+        "id": 206128481,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "397dd0c8c48bd5e0d0f0e45a717f2a088cf35eb9",
+      "message": "chore: format files to fix CI",
+      "author_name": "sakeju",
+      "author_email": "akejusamuel0@gmail.com",
+      "authored_at": "2026-07-24T10:27:45Z",
+      "committed_at": "2026-07-24T10:27:45Z",
+      "author": {
+        "login": "samlogy1",
+        "id": 206128481,
+        "type": "User"
+      },
+      "committer": {
+        "login": "samlogy1",
+        "id": 206128481,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/build.rs",
+      "status": "added",
+      "additions": 41,
+      "deletions": 0,
+      "changes": 41,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 71,
+      "deletions": 12,
+      "changes": 83,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 6,
+      "deletions": 0,
+      "changes": 6,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 3,
+    "check_runs": [
+      {
+        "name": "validate-toolchain-pins",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T10:27:56Z",
+        "completed_at": "2026-07-24T10:28:00Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30086252881/job/89459009024",
+        "app": "github-actions",
+        "workflow_run_id": "30086252881"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T10:27:55Z",
+        "completed_at": "2026-07-24T10:29:14Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30086252881/job/89459009018",
+        "app": "github-actions",
+        "workflow_run_id": "30086252881"
+      },
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T10:27:56Z",
+        "completed_at": "2026-07-24T10:32:51Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30086252881/job/89459008976",
+        "app": "github-actions",
+        "workflow_run_id": "30086252881"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "fd0500fd5c4bbe2b76571f155244ff20e7003eb5",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit f67fe7d34131c1ac58379c4919b2f235609ae3ae is the main tip at merge time.",
+    "pull_request_base_sha": "fd0500fd5c4bbe2b76571f155244ff20e7003eb5",
+    "check_runs": {
+      "total_count": 3,
+      "check_runs": [
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:52:58Z",
+          "completed_at": "2026-07-24T09:53:04Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30084124784/job/89452216861",
+          "app": "github-actions",
+          "workflow_run_id": "30084124784"
+        },
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:52:52Z",
+          "completed_at": "2026-07-24T09:56:07Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30084124784/job/89452216833",
+          "app": "github-actions",
+          "workflow_run_id": "30084124784"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:52:56Z",
+          "completed_at": "2026-07-24T09:54:08Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30084124784/job/89452216813",
+          "app": "github-actions",
+          "workflow_run_id": "30084124784"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/XLGJaVoTKLGsagE0eo47/",
+          "created_at": "2026-07-24T09:52:15Z",
+          "updated_at": "2026-07-24T09:52:15Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/XLGJaVoTKLGsagE0eo47/",
+          "created_at": "2026-07-24T09:52:15Z",
+          "updated_at": "2026-07-24T09:52:15Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "wagmiiii",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5062828151,
+        "created_at": "2026-07-23T20:04:32Z",
+        "updated_at": "2026-07-23T20:04:32Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@samlogy1 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5068508612,
+        "created_at": "2026-07-24T09:54:13Z",
+        "updated_at": "2026-07-24T09:54:13Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "Hi @samlogy1, it looks like the CI checks are currently failing for this PR. Could you please take a look and push a fix so we can merge this?"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30086252881"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

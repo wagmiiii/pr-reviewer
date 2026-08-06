@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:17:08Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 286,
+    "title": "chore(deps): bump the cargo-dependencies group with 2 updates",
+    "body": "Bumps the cargo-dependencies group with 2 updates: [serde_json](https://github.com/serde-rs/json) and [toml](https://github.com/toml-rs/toml).\n\nUpdates `serde_json` from 1.0.150 to 1.0.151\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a href=\"https://github.com/serde-rs/json/releases\">serde_json's releases</a>.</em></p>\n<blockquote>\n<h2>v1.0.151</h2>\n<ul>\n<li>Add RawValue::from_string_unchecked (<a href=\"https://redirect.github.com/serde-rs/json/issues/1331\">#1331</a>, thanks <a href=\"https://github.com/WonderLawrence\"><code>@​WonderLawrence</code></a>)</li>\n</ul>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a href=\"https://github.com/serde-rs/json/commit/de8500740cdcabffb9734f503e4889def823cf10\"><code>de85007</code></a> Release 1.0.151</li>\n<li><a href=\"https://github.com/serde-rs/json/commit/3b2b3c5f28c20ed988bd081a4147c535e7e65c74\"><code>3b2b3c5</code></a> Merge pull request <a href=\"https://redirect.github.com/serde-rs/json/issues/1331\">#1331</a> from WonderLawrence/rawvalue-from-string-unchecked</li>\n<li><a href=\"https://github.com/serde-rs/json/commit/0406d96860e9d8b9252e2002fa3e626ae48ca1b0\"><code>0406d96</code></a> Debug-assert well-formedness and no-whitespace in from_string_unchecked</li>\n<li><a href=\"https://github.com/serde-rs/json/commit/cf16f75d81e28c723323bfc60a68fc02d2994fff\"><code>cf16f75</code></a> Add RawValue::from_string_unchecked</li>\n<li><a href=\"https://github.com/serde-rs/json/commit/827a315bf2198558f0325b07bcc1e2cd973aba2f\"><code>827a315</code></a> Update actions/upload-artifact@v6 -&gt; v7</li>\n<li><a href=\"https://github.com/serde-rs/json/commit/cea36a5c017ebffdeb95d0cd0f1aad473bfab758\"><code>cea36a5</code></a> Update actions/checkout@v6 -&gt; v7</li>\n<li>See full diff in <a href=\"https://github.com/serde-rs/json/compare/v1.0.150...v1.0.151\">compare view</a></li>\n</ul>\n</details>\n<br />\n\nUpdates `toml` from 0.8.23 to 1.1.2+spec-1.1.0\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a href=\"https://github.com/toml-rs/toml/commit/a3d0047c95dfc6e82997d508dd93c9908650a418\"><code>a3d0047</code></a> chore: Release</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/cc37615fc8d9213594250043e0e3b6cf73ed1e69\"><code>cc37615</code></a> docs: Update changelog</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/7f5e9e130ae2cb17497cd7811a4a1e78fb5715d7\"><code>7f5e9e1</code></a> fix(parser): Consolidate invalid unquoted key into one error (<a href=\"https://redirect.github.com/toml-rs/toml/issues/1138\">#1138</a>)</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/52feb9070cca1734db13d22796efd1115835881b\"><code>52feb90</code></a> fix(parser): Consolidate invalid unquoted key into one error</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/aad85d4921e8eb500cc7a26ac1165f111a59c433\"><code>aad85d4</code></a> chore(deps): Update j178/prek-action action to v2 (<a href=\"https://redirect.github.com/toml-rs/toml/issues/1136\">#1136</a>)</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/8b1ac44bcae5ffc4e58e8809a031ab05f486ccbe\"><code>8b1ac44</code></a> chore(deps): Update compatible (dev) (<a href=\"https://redirect.github.com/toml-rs/toml/issues/1135\">#1135</a>)</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/9effd79ff2ea692420931e2e4d58969525e6c398\"><code>9effd79</code></a> chore(deps): Update j178/prek-action action to v2</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/9db8aad6eafbc62f6b9d1950117649cc41eaf695\"><code>9db8aad</code></a> chore: Release</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/e55a6633d9e16e4406db8a9fb8ce26fa84fb1553\"><code>e55a663</code></a> docs: Update changelog</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/c11d7d7ad38781b66e7df34371ce3969677bc62d\"><code>c11d7d7</code></a> Optimisations (<a href=\"https://redirect.github.com/toml-rs/toml/issues/1133\">#1133</a>)</li>\n<li>Additional commits viewable in <a href=\"https://github.com/toml-rs/toml/compare/toml-v0.8.23...toml-v1.1.2\">compare view</a></li>\n</ul>\n</details>\n<br />\n\n\nDependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency\n- `@dependabot ignore <dependency name> major version` will close this group update PR and stop Dependabot creating any more for the specific dependency's major version (unless you unignore this specific dependency's major version or upgrade to it yourself)\n- `@dependabot ignore <dependency name> minor version` will close this group update PR and stop Dependabot creating any more for the specific dependency's minor version (unless you unignore this specific dependency's minor version or upgrade to it yourself)\n- `@dependabot ignore <dependency name>` will close this group update PR and stop Dependabot creating any more for the specific dependency (unless you unignore this specific dependency or upgrade to it yourself)\n- `@dependabot unignore <dependency name>` will remove all of the ignore conditions of the specified dependency\n- `@dependabot unignore <dependency name> <ignore condition>` will remove the ignore condition of the specified dependency and ignore conditions\n\n\n</details>",
+    "author": {
+      "login": "dependabot[bot]",
+      "id": 49699333,
+      "type": "Bot"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-27T13:29:13Z",
+    "updated_at": "2026-07-27T13:47:30Z",
+    "merged_at": "2026-07-27T13:47:23Z",
+    "closed_at": "2026-07-27T13:47:23Z",
+    "merged_by": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "e0caccb6130b67b3012300af73e902bc89214706",
+    "base": {
+      "ref": "main",
+      "sha": "5d6039a6d5c886f0b4ac5dde8ade6d6504571dc7",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "dependabot/cargo/cargo-dependencies-ceca5cde9b",
+      "sha": "48b36917ccd0b740f21e048689e9e3eab3349b8b",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [
+      "dependencies",
+      "rust"
+    ],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 10,
+    "deletions": 69,
+    "changed_files": 2,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/286"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "48b36917ccd0b740f21e048689e9e3eab3349b8b",
+      "message": "chore(deps): bump the cargo-dependencies group with 2 updates\n\nBumps the cargo-dependencies group with 2 updates: [serde_json](https://github.com/serde-rs/json) and [toml](https://github.com/toml-rs/toml).\n\n\nUpdates `serde_json` from 1.0.150 to 1.0.151\n- [Release notes](https://github.com/serde-rs/json/releases)\n- [Commits](https://github.com/serde-rs/json/compare/v1.0.150...v1.0.151)\n\nUpdates `toml` from 0.8.23 to 1.1.2+spec-1.1.0\n- [Commits](https://github.com/toml-rs/toml/compare/toml-v0.8.23...toml-v1.1.2)\n\n---\nupdated-dependencies:\n- dependency-name: serde_json\n  dependency-version: 1.0.151\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n  dependency-group: cargo-dependencies\n- dependency-name: toml\n  dependency-version: 1.1.2+spec-1.1.0\n  dependency-type: direct:production\n  update-type: version-update:semver-major\n  dependency-group: cargo-dependencies\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>",
+      "author_name": "dependabot[bot]",
+      "author_email": "49699333+dependabot[bot]@users.noreply.github.com",
+      "authored_at": "2026-07-27T13:29:12Z",
+      "committed_at": "2026-07-27T13:29:12Z",
+      "author": {
+        "login": "dependabot[bot]",
+        "id": 49699333,
+        "type": "Bot"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": true
+    }
+  ],
+  "files": [
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 68,
+      "changes": 77,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/Cargo.toml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-27T13:29:23Z",
+        "completed_at": "2026-07-27T13:30:01Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30270506320/job/89991593567",
+        "app": "github-actions",
+        "workflow_run_id": "30270506320"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "82f30c2430908e0816d80af273e436779ee0dc40",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit e0caccb6130b67b3012300af73e902bc89214706 is the main tip at merge time.",
+    "pull_request_base_sha": "5d6039a6d5c886f0b4ac5dde8ade6d6504571dc7",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T13:47:24Z",
+          "completed_at": "2026-07-27T13:48:20Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30271923330/job/89996323568",
+          "app": "github-actions",
+          "workflow_run_id": "30271923330"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30270506320"
+    ],
+    "all_head_workflow_run_ids": [
+      "30270506320"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

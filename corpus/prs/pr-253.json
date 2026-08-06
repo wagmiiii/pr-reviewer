@@ -1,0 +1,350 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:40Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 253,
+    "title": "feat: publish a reusable composite GitHub Action for cargo cost-lint",
+    "body": "## Summary\n\nCloses #100\n\nThis PR ships a real composite action at the repository root (`action.yml`) so consumers can add cost linting to CI with a single line:\n\n```yaml\n- uses: Tollcraft/soroban-cost-linter@v1\n```\n\nPreviously, `templates/github-action.yml` was a workflow template users had to copy into their own repo by hand. That meant every consumer permanently owned a copy of our install steps and toolchain pin, and any fix we made (a changed nightly, a faster install path) never reached them. Now the install logic and the pin stay ours to maintain.\n\n## What changed\n\n- **`action.yml`** (new) — Composite action at the repo root with inputs:\n  - `config` — Path to `budget.toml` (optional)\n  - `toolchain` — Nightly version, defaults to the pinned `nightly-2026-04-16` from `rust-toolchain`\n  - `args` — Extra arguments forwarded to `cargo cost-lint`\n  - `working-directory` — Directory containing the Soroban workspace (defaults to `.`)\n- **`templates/github-action.yml`** — Rewritten from a full workflow template to a three-line example that consumes the composite action.\n- **`docs/integration.md`** — Documents `uses:` as the recommended CI integration path, with examples for custom config, monorepos, extra args, and toolchain pinning.\n- **`README.md`** — Updated to surface the composite action as the recommended approach.\n- **`CONTRIBUTING.md`** — Updated the toolchain upgrade instructions to reference `action.yml` instead of `templates/github-action.yml`.\n- **`.github/workflows/dogfood-action.yml`** — New workflow that dogfoods the action against `soroban_cost_lints/test_fixtures/real_sdk`, proving it works end to end.\n- **`.github/scripts/validate-toolchain-pins.sh`** — Updated to check `action.yml` instead of `templates/github-action.yml` (which no longer contains a nightly pin).\n\n## Design decisions\n\n### Composite vs. Docker action\n\nChose a composite `run:`-based action. Docker actions would require a pre-built image or a Dockerfile that runs `cargo install` every time, which is slower and couples our toolchain pin to a container rebuild. Composite actions compose cleanly with other Actions ecosystem steps (like `dtolnay/rust-toolchain`) and let GitHub cache intermediate layers.\n\n### Versioning strategy\n\nUses a floating `v1` tag. Consumers reference `@v1` and automatically receive patch fixes (toolchain bumps, install-path improvements) without updating their workflows. Breaking changes would ship under `v2`. This is the standard convention for GitHub Actions.\n\n## Tradeoffs noted\n\n- The action builds `soroban_cost_lints` and `cargo-cost-lint` from source on every run. This is ~2–3 minutes of build time. Future iterations could publish pre-built binaries and download them instead.\n- Composite actions cannot use `dtolnay/rust-toolchain` in every context — notably, they cannot call reusable workflow actions inside a composite action. However, `dtolnay/rust-toolchain` is a JavaScript action (not a composite or reusable workflow), so it works fine here.",
+    "author": {
+      "login": "khaylebfortune",
+      "id": 111098422,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T10:25:50Z",
+    "updated_at": "2026-07-29T11:40:00Z",
+    "merged_at": "2026-07-29T11:40:00Z",
+    "closed_at": "2026-07-29T11:40:00Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "9092d4e38fdc2598bf86275261bc720bbe601277",
+    "base": {
+      "ref": "main",
+      "sha": "e6664e80af38adec6832f30c72a8ad21d175891f",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feat/composite-github-action",
+      "sha": "900e7e5505046cff83f047170293c1dfd2c17cb6",
+      "repo": "khaylebfortune/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 107,
+    "deletions": 17,
+    "changed_files": 6,
+    "commits": 4,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/253"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "357f4f63df901dcafe6775c2aad3c4fa5eaf5030",
+      "message": "feat: publish a reusable composite GitHub Action for cargo cost-lint\n\nCloses #100\n\nAdd a composite action (`action.yml`) at the repository root so consumers\ncan replace the copy-paste workflow template with a single `uses:` line:\n\n    - uses: Tollcraft/soroban-cost-linter@v1\n\nThe action:\n- Installs the pinned Rust nightly with rustc-dev and llvm-tools-preview\n- Installs cargo-dylint and dylint-link\n- Builds soroban_cost_lints and cargo-cost-lint from source (guaranteeing\n  version consistency with the pinned action tag)\n- Runs cargo cost-lint, propagating the linter's exit code so deny-level\n  findings fail the job\n\nInputs: config, toolchain (default: nightly-2026-04-16), args, working-directory\n\nDesign decisions:\n- Composite action (not Docker): simpler, no registry setup, works on all\n  GitHub-hosted runners. Tradeoff: no layer caching, so first build takes a\n  few minutes.\n- Floating v1 tag: follows the actions/checkout@v4 convention; users get\n  non-breaking improvements automatically. Breaking changes go to v2.\n- Build-from-source via github.action_path: ensures the action uses the\n  exact code at the pinned tag, not whatever is on main.\n\nChanges:\n- action.yml: new composite action at repo root\n- templates/github-action.yml: rewritten to a 3-line consumer\n- docs/integration.md: updated with uses: form as recommended, full input\n  reference table, and examples\n- README.md: added \"GitHub Actions (recommended)\" section\n- .github/workflows/dogfood-action.yml: new workflow that dogfoods the\n  action against soroban_cost_lints/test_fixtures/real_sdk\n- CONTRIBUTING.md: updated toolchain upgrade procedure to reference\n  action.yml instead of templates/github-action.yml",
+      "author_name": "khaylebfortune",
+      "author_email": "111098422+khaylebfortune@users.noreply.github.com",
+      "authored_at": "2026-07-26T10:10:37Z",
+      "committed_at": "2026-07-26T10:10:37Z",
+      "author": {
+        "login": "khaylebfortune",
+        "id": 111098422,
+        "type": "User"
+      },
+      "committer": {
+        "login": "khaylebfortune",
+        "id": 111098422,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "884a867c7f232d1f15d67115b815b0f02ad9879b",
+      "message": "fix: update drift guard to check action.yml instead of templates/github-action.yml\n\nThe template now references the composite action via uses:\nTollcraft/soroban-cost-linter@v1 and no longer contains a hardcoded\nnightly pin. The action.yml now has the toolchain input default that\nmust stay in sync, so the drift guard should check that instead.",
+      "author_name": "khaylebfortune",
+      "author_email": "111098422+khaylebfortune@users.noreply.github.com",
+      "authored_at": "2026-07-26T10:24:46Z",
+      "committed_at": "2026-07-26T10:24:46Z",
+      "author": {
+        "login": "khaylebfortune",
+        "id": 111098422,
+        "type": "User"
+      },
+      "committer": {
+        "login": "khaylebfortune",
+        "id": 111098422,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "670830c3a1518a1c41cc48258ce48a5ac321aab9",
+      "message": "fix(action): register lint library with cargo-dylint for proper discovery\n\nThe CLI runs 'cargo dylint --lib soroban_cost_lints' which requires the\nlibrary to be registered in dylint's internal cache. Plain 'cargo build'\ncompiles the .so but doesn't generate/register the dylint metadata.\n\nThis commit adds a registration step that runs 'cargo dylint --lib\nsoroban_cost_lints -p cargo-cost-lint' from the action workspace. This\nbuilds and registers the library so subsequent 'cargo dylint' calls\n(including those made by the CLI) can discover it.\n\nThe release build is kept as the primary path via DYLINT_LIBRARY_PATH,\nand the dylint registration is a secondary discovery mechanism.",
+      "author_name": "khaylebfortune",
+      "author_email": "111098422+khaylebfortune@users.noreply.github.com",
+      "authored_at": "2026-07-26T11:01:19Z",
+      "committed_at": "2026-07-26T11:01:19Z",
+      "author": {
+        "login": "khaylebfortune",
+        "id": 111098422,
+        "type": "User"
+      },
+      "committer": {
+        "login": "khaylebfortune",
+        "id": 111098422,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "900e7e5505046cff83f047170293c1dfd2c17cb6",
+      "message": "Merge branch 'main' into feat/composite-github-action",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-29T11:39:47Z",
+      "committed_at": "2026-07-29T11:39:47Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/scripts/validate-toolchain-pins.sh",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": ".github/workflows/dogfood-action.yml",
+      "status": "added",
+      "additions": 17,
+      "deletions": 0,
+      "changes": 17,
+      "previous_filename": null
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "action.yml",
+      "status": "added",
+      "additions": 63,
+      "deletions": 0,
+      "changes": 63,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 19,
+      "deletions": 15,
+      "changes": 34,
+      "previous_filename": null
+    },
+    {
+      "filename": "templates/github-action.yml",
+      "status": "modified",
+      "additions": 6,
+      "deletions": 0,
+      "changes": 6,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 3,
+    "check_runs": [
+      {
+        "name": "build-and-test (windows-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-29T11:39:55Z",
+        "completed_at": "2026-07-29T11:40:14Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30448432074/job/90564402153",
+        "app": "github-actions",
+        "workflow_run_id": "30448432074"
+      },
+      {
+        "name": "build-and-test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-29T11:39:55Z",
+        "completed_at": "2026-07-29T11:40:34Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30448432074/job/90564402141",
+        "app": "github-actions",
+        "workflow_run_id": "30448432074"
+      },
+      {
+        "name": "dogfood",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-29T11:40:02Z",
+        "completed_at": "2026-07-29T11:43:32Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30448431849/job/90564401108",
+        "app": "github-actions",
+        "workflow_run_id": "30448431849"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "e6664e80af38adec6832f30c72a8ad21d175891f",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 9092d4e38fdc2598bf86275261bc720bbe601277 is the main tip at merge time.",
+    "pull_request_base_sha": "e6664e80af38adec6832f30c72a8ad21d175891f",
+    "check_runs": {
+      "total_count": 3,
+      "check_runs": [
+        {
+          "name": "cargo-deny check",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-29T11:37:40Z",
+          "completed_at": "2026-07-29T11:38:56Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30448290199/job/90563936985",
+          "app": "github-actions",
+          "workflow_run_id": "30448290199"
+        },
+        {
+          "name": "build-and-test (windows-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-29T11:37:38Z",
+          "completed_at": "2026-07-29T11:37:57Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30448289091/job/90563933313",
+          "app": "github-actions",
+          "workflow_run_id": "30448289091"
+        },
+        {
+          "name": "build-and-test (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-29T11:37:37Z",
+          "completed_at": "2026-07-29T11:38:17Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30448289091/job/90563933219",
+          "app": "github-actions",
+          "workflow_run_id": "30448289091"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/BXCsQGscifAlh1appDIM/",
+          "created_at": "2026-07-29T11:37:52Z",
+          "updated_at": "2026-07-29T11:37:52Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/BXCsQGscifAlh1appDIM/",
+          "created_at": "2026-07-29T11:37:52Z",
+          "updated_at": "2026-07-29T11:37:52Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5083076354,
+        "created_at": "2026-07-26T10:25:58Z",
+        "updated_at": "2026-07-26T10:25:58Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@khaylebfortune Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test (windows-latest)",
+      "build-and-test (ubuntu-latest)",
+      "dogfood"
+    ],
+    "base_failing_checks": [
+      "cargo-deny check",
+      "build-and-test (windows-latest)",
+      "build-and-test (ubuntu-latest)"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30448431849",
+      "30448432074"
+    ],
+    "all_head_workflow_run_ids": [
+      "30448431849",
+      "30448432074"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

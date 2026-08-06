@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:49Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 259,
+    "title": "done",
+    "body": "## Summary\r\n\r\nThis PR adds additional unit tests covering boundary and edge-case scenarios to improve test coverage and reduce the likelihood of regressions.\r\n\r\n### Changes\r\n\r\n* Added tests for boundary conditions.\r\n* Added tests covering zero-length inputs.\r\n* Added tests targeting potential off-by-one errors.\r\n* Ensured all new tests are deterministic and reproducible.\r\n\r\n### Validation\r\n\r\n* Ran project test suite.\r\n* Verified all tests pass successfully.\r\n\r\nCloses #216\r\n",
+    "author": {
+      "login": "LaTash1",
+      "id": 80977896,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T12:52:34Z",
+    "updated_at": "2026-07-26T16:39:26Z",
+    "merged_at": "2026-07-26T16:39:26Z",
+    "closed_at": "2026-07-26T16:39:26Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "b8d9fa9ae8ab3cbb1eda22b00193f33ad6306a6d",
+    "base": {
+      "ref": "main",
+      "sha": "e0de3eb0a699451e6abd965444b9f742b7d24cdc",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "increase",
+      "sha": "338737d47f7114290a5cb3302a15400747807fea",
+      "repo": "LaTash1/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 11,
+    "deletions": 1,
+    "changed_files": 1,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/259"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "338737d47f7114290a5cb3302a15400747807fea",
+      "message": "done",
+      "author_name": "LaTash1",
+      "author_email": "80977896+LaTash1@users.noreply.github.com",
+      "authored_at": "2026-07-26T12:24:22Z",
+      "committed_at": "2026-07-26T12:24:22Z",
+      "author": {
+        "login": "LaTash1",
+        "id": 80977896,
+        "type": "User"
+      },
+      "committer": {
+        "login": "LaTash1",
+        "id": 80977896,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "test_fixtures/smoke_test/src/lib.rs",
+      "status": "modified",
+      "additions": 11,
+      "deletions": 1,
+      "changes": 12,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-26T12:52:43Z",
+        "completed_at": "2026-07-26T12:59:45Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30202928938/job/89795924802",
+        "app": "github-actions",
+        "workflow_run_id": "30202928938"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "796fb8ca892be38ccbc34595e295425000196e16",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit b8d9fa9ae8ab3cbb1eda22b00193f33ad6306a6d is the main tip at merge time.",
+    "pull_request_base_sha": "e0de3eb0a699451e6abd965444b9f742b7d24cdc",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-26T16:39:13Z",
+          "completed_at": "2026-07-26T16:39:45Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30210906802/job/89816840209",
+          "app": "github-actions",
+          "workflow_run_id": "30210906802"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/a5vlLaY2V49MQOXRUCJh/",
+          "created_at": "2026-07-26T16:39:23Z",
+          "updated_at": "2026-07-26T16:39:23Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/a5vlLaY2V49MQOXRUCJh/",
+          "created_at": "2026-07-26T16:39:23Z",
+          "updated_at": "2026-07-26T16:39:23Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30202928938"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

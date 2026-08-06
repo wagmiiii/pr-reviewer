@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:12:32Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 140,
+    "title": "fix(cli): fail on malformed budget.toml instead of silent fallback",
+    "body": "Closes #92\n\n## Summary\n\nA `budget.toml` that exists but cannot be parsed currently prints a `Warning` and then proceeds with default lint levels. An unreadable file is silently ignored. This makes both scenarios a hard error.\n\n## Changes\n\n### Error handling (`cargo-cost-lint/src/main.rs`)\n\n- **Parse failure** — if `budget.toml` exists but contains invalid TOML, the run now fails with a non-zero exit code and shows the parser's error message with location.\n- **Read failure** — if `budget.toml` exists but cannot be read (e.g. permissions), the run fails with a non-zero exit code and reports the OS error.\n- **Missing file (default path)** — when no `--config` is passed and `budget.toml` does not exist, the current behaviour is preserved: a `Note` is printed and the run continues with default lint levels.\n- **Missing file (explicit `--config`)** — if a user passes `--config <path>` and the file is missing, the run fails with a non-zero exit code.\n\n### Refactor\n\nExtracted the `budget.toml` parsing logic into `parse_budget_config()` and added unit tests covering all three paths (valid, unparseable, read error on non-existent path).\n\n### Documentation (`docs/integration.md`)\n\nAdded a note that a malformed or unreadable `budget.toml` is a hard error.\n\n## Testing\n\n```bash\ncargo test -p cargo-cost-lint\n```\n\nTests cover:\n- Valid `budget.toml` → returns correct lint flags\n- Unparseable `budget.toml` → returns parse error\n- Missing `budget.toml` → returns read error (non-existent path)",
+    "author": {
+      "login": "Hikmaholadele",
+      "id": 178912792,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": false,
+    "created_at": "2026-07-23T14:37:11Z",
+    "updated_at": "2026-07-24T08:52:20Z",
+    "merged_at": null,
+    "closed_at": "2026-07-24T08:52:20Z",
+    "merged_by": null,
+    "mergeable": true,
+    "mergeable_state": "blocked",
+    "rebaseable": false,
+    "merge_commit_sha": "11315096aa420ecb360ea4ae1f92ac77a7a29652",
+    "base": {
+      "ref": "main",
+      "sha": "6b1da56dbe12635e722699ea0b0fc429db1da14a",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "budget-toml-parse-warning",
+      "sha": "b412ba61101ae63cf7c94328832c5b7e35b8d23d",
+      "repo": "Hikmaholadele/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 109,
+    "deletions": 24,
+    "changed_files": 2,
+    "commits": 1,
+    "comments": 3,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/140"
+  },
+  "reviews": [
+    {
+      "id": 4766172801,
+      "state": "CHANGES_REQUESTED",
+      "submitted_at": "2026-07-23T16:32:13Z",
+      "author_association": "MEMBER",
+      "user": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "body_present": true,
+      "body": "@Hikmaholadele fix CI issues so i can merge "
+    }
+  ],
+  "review_states": [
+    {
+      "state": "CHANGES_REQUESTED",
+      "count": 1
+    }
+  ],
+  "commits": [
+    {
+      "sha": "b412ba61101ae63cf7c94328832c5b7e35b8d23d",
+      "message": "fix(cli): fail on malformed budget.toml instead of silent fallback",
+      "author_name": "Hikmah Oladele",
+      "author_email": "hikmaholadele14@gmail.com",
+      "authored_at": "2026-07-23T14:36:58Z",
+      "committed_at": "2026-07-23T14:36:58Z",
+      "author": {
+        "login": "Hikmaholadele",
+        "id": 178912792,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Hikmaholadele",
+        "id": 178912792,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 105,
+      "deletions": 24,
+      "changes": 129,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0,
+      "changes": 4,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 2,
+    "check_runs": [
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-23T16:03:52Z",
+        "completed_at": "2026-07-23T16:07:19Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30016678353/job/89261692870",
+        "app": "github-actions",
+        "workflow_run_id": "30016678353"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-23T16:03:52Z",
+        "completed_at": "2026-07-23T16:04:18Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30016678353/job/89261692734",
+        "app": "github-actions",
+        "workflow_run_id": "30016678353"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "6b1da56dbe12635e722699ea0b0fc429db1da14a",
+    "resolution_method": "pull_request_base_sha",
+    "approximate": true,
+    "note": "APPROXIMATE: PR was not merged, so no merge commit exists. .base.sha is the main tip as recorded when the PR was created or last synced.",
+    "pull_request_base_sha": "6b1da56dbe12635e722699ea0b0fc429db1da14a",
+    "check_runs": {
+      "total_count": 2,
+      "check_runs": [
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-20T11:02:29Z",
+          "completed_at": "2026-07-20T11:07:22Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/29737119952/job/88334995748",
+          "app": "github-actions",
+          "workflow_run_id": "29737119952"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-20T11:02:28Z",
+          "completed_at": "2026-07-20T11:03:40Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/29737119952/job/88334995736",
+          "app": "github-actions",
+          "workflow_run_id": "29737119952"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/6Mvy5KrvEUb2K1clco74/",
+          "created_at": "2026-07-20T11:02:37Z",
+          "updated_at": "2026-07-20T11:02:37Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/6Mvy5KrvEUb2K1clco74/",
+          "created_at": "2026-07-20T11:02:37Z",
+          "updated_at": "2026-07-20T11:02:37Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 3,
+    "authors": [
+      {
+        "login": "Hikmaholadele",
+        "count": 1
+      },
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "wagmiiii",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5059718338,
+        "created_at": "2026-07-23T14:37:53Z",
+        "updated_at": "2026-07-23T14:37:53Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@Hikmaholadele Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5060658061,
+        "created_at": "2026-07-23T16:07:06Z",
+        "updated_at": "2026-07-23T16:07:06Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "@Hikmaholadele please fix CI issues"
+      },
+      {
+        "id": 5068001509,
+        "created_at": "2026-07-24T08:52:20Z",
+        "updated_at": "2026-07-24T08:52:20Z",
+        "user": {
+          "login": "Hikmaholadele",
+          "id": 178912792,
+          "type": "User"
+        },
+        "author_association": "CONTRIBUTOR",
+        "body": "Closing this because of the new PR"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "lint",
+      "quality"
+    ],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30016678353"
+    ],
+    "all_head_workflow_run_ids": [
+      "30016678353"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}
