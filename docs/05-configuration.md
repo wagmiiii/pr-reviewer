@@ -19,17 +19,17 @@ version: 1
 dry_run: true
 
 rules:
-  required_checks: []          # empty = use branch-protection required checks
-  behind_base_threshold: 20    # untuned guess
-  huge_diff_lines: 800         # untuned guess
-  stale_days: 14               # untuned guess
+  required_checks: [] # empty = use branch-protection required checks
+  behind_base_threshold: 20 # untuned guess
+  huge_diff_lines: 800 # untuned guess
+  stale_days: 14 # untuned guess
   protected_paths:
     - ".github/workflows/**"
-  disabled: []                 # stable rule codes, e.g. ["STALE"]
+  disabled: [] # stable rule codes, e.g. ["STALE"]
 
 labels:
   enabled: true
-  prefix: ""                   # e.g. "bot/" to namespace them
+  prefix: "" # e.g. "bot/" to namespace them
 
 comment:
   enabled: true
@@ -45,7 +45,7 @@ the numbers.
 ```yaml
 digest:
   enabled: false
-  issue_number: null           # created on first run if null
+  issue_number: null # created on first run if null
   max_items_per_section: 10
 
 stale:
@@ -67,15 +67,15 @@ tests:
 ```yaml
 judgment:
   enabled: false
-  checks: [issue_resolution, effort_estimate]   # the only two; see 03-review-pipeline.md
-  shadow: true                 # write to digest marked unvalidated; exit shadow by hand
+  checks: [issue_resolution, effort_estimate] # the only two; see 03-review-pipeline.md
+  shadow: true # write to digest marked unvalidated; exit shadow by hand
   max_diff_bytes: 120000
   # No `destination` key. Both checks are maintainer-facing, permanently — that is a
   # design decision (Q3), not a setting.
 
 coverage:
   enabled: false
-  source: artifact             # artifact | codecov
+  source: artifact # artifact | codecov
   format: lcov
 ```
 
@@ -113,7 +113,7 @@ permissions:
   pull-requests: write
   issues: write
   checks: read
-  contents: read      # never contents: write — the bot does not merge or push
+  contents: read # never contents: write — the bot does not merge or push
 
 jobs:
   review:
@@ -121,7 +121,7 @@ jobs:
     steps:
       - uses: <owner>/pr-reviewer@v1
         with:
-          dry_run: true    # flip to false once you trust the output
+          dry_run: true # flip to false once you trust the output
 ```
 
 Note the absence of `pull_request_target` and the absence of a checkout step. The

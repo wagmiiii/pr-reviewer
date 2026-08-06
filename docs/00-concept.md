@@ -9,7 +9,7 @@ Observed failure modes from real maintenance experience:
 - Many PRs sit with merge conflicts because the base branch moved.
 - The maintainer hand-writes the same three comments ("please fix CI", "please
   rebase", "please add a test") dozens of times.
-- The maintainer cannot cheaply tell whether a PR *actually* resolves the issue it
+- The maintainer cannot cheaply tell whether a PR _actually_ resolves the issue it
   claims to, or whether test coverage moved in the right direction.
 - Net effect: reviewing costs more than contributing, so review quality degrades and
   the queue grows.
@@ -85,7 +85,7 @@ deferred. Reasons:
    Anyone who wants automated merging should use those — they're enforced by the
    platform rather than by our code. [Certain that these features exist]
 3. The value of this project is concentrated in triage. Merging was never the
-   bottleneck; deciding *what to look at* was.
+   bottleneck; deciding _what to look at_ was.
 
 ## Primary users
 
@@ -103,15 +103,15 @@ queue to measure against — the contributor wave that motivated this project ra
 changes is when it can be checked: **not until another wave arrives.**
 
 - Time-to-first-actionable-feedback drops from days to **one CI cycle** (see the
-  latency constraint in `02-architecture.md` — this is not seconds). *Requires live
-  traffic; a replay over history has no clock.*
+  latency constraint in `02-architecture.md` — this is not seconds). _Requires live
+  traffic; a replay over history has no clock._
 - The maintainer can filter the PR list by bot-applied labels and get a usable
-  shortlist without opening anything. *Requires live traffic.*
-- Hand-written "please fix CI" comments go to zero. *Requires live traffic. The
-  historical count from the wave is the baseline to beat, not the measurement.*
+  shortlist without opening anything. _Requires live traffic._
+- Hand-written "please fix CI" comments go to zero. _Requires live traffic. The
+  historical count from the wave is the baseline to beat, not the measurement._
 - PRs blocked on the contributor become visible and self-resolve without a maintainer
-  touch. *Requires live traffic; the bot is the intervention, so the historical
-  self-resolve rate is a baseline only.*
+  touch. _Requires live traffic; the bot is the intervention, so the historical
+  self-resolve rate is a baseline only._
 
 What can be checked now, against the 162-PR corpus, is narrower and worth stating
 separately so it is not mistaken for the above: **the fact rules classify historical PRs
@@ -138,7 +138,7 @@ one died.** What follows is the corrected version.
 ### 1. Blockage ownership — genuinely uncovered
 
 Assigning each PR an **owner of the blockage** (contributor vs. maintainer) rather than
-just a status. Mergify labels by *condition* — `needs-rebase` on conflict, a toggled
+just a status. Mergify labels by _condition_ — `needs-rebase` on conflict, a toggled
 label on CI failure — but nothing surveyed answers "whose problem is this?" [Likely —
 absence of evidence across the tools surveyed, not proof of absence].
 
@@ -160,7 +160,7 @@ The claim must name GitHub Actions explicitly, or it is false.
 
 Covered. `nearform/github-action-check-linked-issues`, `Verify Linked Issue`, and others
 enforce this today for free, and handle cross-repo references that this project's planned
-regex would have missed [Certain]. Verifying that a diff *actually addresses* the issue
+regex would have missed [Certain]. Verifying that a diff _actually addresses_ the issue
 is still uncovered, but that is J1 — P3, digest-only, and already gated behind a decision
 that may cancel it.
 
@@ -187,7 +187,7 @@ and if the queue becomes tractable, stop.
 is zero and they are in place for the next wave — but the evidence for the go/no-go now
 comes from replaying the fact rules over the 162 archived PRs and asking what the
 alternatives would have missed. Concretely: how many of those PRs had a required check
-failing that was *also* failing on base, since no surveyed competitor makes that
+failing that was _also_ failing on base, since no surveyed competitor makes that
 distinction. A low count means the alternatives were close to sufficient and the correct
 decision is to stop. [Certain that the count is obtainable; Guessing what it shows]
 

@@ -36,11 +36,11 @@ that matters.
 
 Ways out, and why each was or wasn't taken:
 
-| Option | Verdict |
-|---|---|
-| `pull_request_target` | **Rejected.** Runs with repo secrets in the base context; the standard exploit path. |
-| PAT or GitHub App token in the Action | **Rejected for Phase 1.** Kills the "one file, no secrets" adoption story. |
-| `check_suite: completed` + `schedule` | **Chosen.** Both run in base-repo context with a full-permission token [Likely]. |
+| Option                                | Verdict                                                                              |
+| ------------------------------------- | ------------------------------------------------------------------------------------ |
+| `pull_request_target`                 | **Rejected.** Runs with repo secrets in the base context; the standard exploit path. |
+| PAT or GitHub App token in the Action | **Rejected for Phase 1.** Kills the "one file, no secrets" adoption story.           |
+| `check_suite: completed` + `schedule` | **Chosen.** Both run in base-repo context with a full-permission token [Likely].     |
 
 Consequences, accepted explicitly:
 
@@ -68,7 +68,7 @@ trigger
 `collect` is the only stage that reads I/O; `act` is the only stage that writes. Dry-run
 is therefore just "run everything, skip `act`, print the plan".
 
-One honest caveat: `collect` is not perfectly pure — fetching logs for *failing* jobs
+One honest caveat: `collect` is not perfectly pure — fetching logs for _failing_ jobs
 requires first knowing which jobs failed. It over-fetches within the stage (check runs,
 then logs for any non-success conclusion) rather than splitting into two stages.
 
@@ -93,7 +93,7 @@ Heuristic rules attach warnings to the verdict but can never change the status.
 
 ### judge (Phase 3+)
 
-Fires only when `rules` reports a *transition* into `READY_FOR_REVIEW` — comparing
+Fires only when `rules` reports a _transition_ into `READY_FOR_REVIEW` — comparing
 against prior state, not on every sweep. Once per eventually-reviewable PR.
 
 Two checks (J1, J7), each a model call with a JSON-schema response, mandatory
@@ -134,7 +134,7 @@ Surface B replaces both with Postgres.
 - Model access behind a provider-agnostic interface, deferred until Phase 3. Prompt
   templates versioned in-repo so cache keys invalidate correctly.
 - Tests: recorded `PullRequestContext` fixtures → snapshot the rendered output. Fact
-  rules unit-tested exhaustively. Heuristic rules tested for *false-positive rate*
+  rules unit-tested exhaustively. Heuristic rules tested for _false-positive rate_
   against real fixtures, since that's their only failure mode that matters.
 
 ## Permissions

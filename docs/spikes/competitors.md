@@ -10,14 +10,14 @@ Confidence tags: [Certain] / [Likely] / [Guessing].
 
 ---
 
-## Q1 — Does anything assign a *blockage owner* (contributor vs maintainer)?
+## Q1 — Does anything assign a _blockage owner_ (contributor vs maintainer)?
 
 **No. This is genuinely uncovered.** [Likely — absence of evidence across the tools
 surveyed, not proof of absence]
 
 What exists:
 
-- **Mergify** labels by *condition*. It can add `needs-rebase` on conflict, comment
+- **Mergify** labels by _condition_. It can add `needs-rebase` on conflict, comment
   tagging the author, and remove the label when resolved. It can toggle a label on CI
   failure status. [Certain — documented behaviour]
 - **Label Conflicting Pull Requests** (marketplace action) does the conflict label alone.
@@ -38,7 +38,7 @@ What none of them do:
 
 ---
 
-## Q2 — Does anything turn a red CI into *specific, actionable instructions*?
+## Q2 — Does anything turn a red CI into _specific, actionable instructions_?
 
 **Yes, the concept is proven — but the GitHub Actions implementation is weak and
 fragmented.** [Likely]
@@ -66,7 +66,7 @@ implementation gap, not a conceptual one.**
 
 ---
 
-## Q3 — Does anything verify *issue linkage*?
+## Q3 — Does anything verify _issue linkage_?
 
 **Existence checking: fully covered, by several free actions.** [Certain]
 
@@ -90,11 +90,11 @@ dropped in favour of recommending their action from `pr-reviewer recommend` (PR-
 
 ## Scorecard
 
-| Differentiator | Status | Consequence |
-|---|---|---|
-| Blockage ownership | **Uncovered** | Keep. Lead with it. |
+| Differentiator             | Status                                                | Consequence                                    |
+| -------------------------- | ----------------------------------------------------- | ---------------------------------------------- |
+| Blockage ownership         | **Uncovered**                                         | Keep. Lead with it.                            |
 | Actionable CI instructions | Concept covered; no maintained GH-Actions-native tool | Keep, narrowed. Say "GitHub Actions" out loud. |
-| Issue-linkage verification | **Covered** for existence | Drop. Recommend nearform's action instead. |
+| Issue-linkage verification | **Covered** for existence                             | Drop. Recommend nearform's action instead.     |
 
 ---
 

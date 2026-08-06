@@ -6,10 +6,10 @@ this project should stop.** That is the point.
 
 ## Files
 
-| File | Goes where in the target repo |
-|---|---|
-| `.mergify.yml` | repo root |
-| `.github/workflows/check-linked-issues.yml` | same path |
+| File                                        | Goes where in the target repo |
+| ------------------------------------------- | ----------------------------- |
+| `.mergify.yml`                              | repo root                     |
+| `.github/workflows/check-linked-issues.yml` | same path                     |
 
 ## Install
 

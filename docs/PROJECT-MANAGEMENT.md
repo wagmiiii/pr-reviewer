@@ -10,10 +10,10 @@ Ticket refs (`PR-0xx`) are stable and match the `Ref` column exactly.
 
 ## Team and tracks
 
-| Person | Track | Owns |
-|---|---|---|
-| **Allison Muyideen** | Rules | Rules engine, renderers, all contributor-facing copy, every product decision |
-| **Ademola Ajala** | Platform | GitHub API integration, collectors, Action packaging, state, delivery |
+| Person               | Track    | Owns                                                                         |
+| -------------------- | -------- | ---------------------------------------------------------------------------- |
+| **Allison Muyideen** | Rules    | Rules engine, renderers, all contributor-facing copy, every product decision |
+| **Ademola Ajala**    | Platform | GitHub API integration, collectors, Action packaging, state, delivery        |
 
 The split is deliberate. The two tracks meet at exactly one place: the
 `PullRequestContext` type (PR-011). Define that type jointly and first; after that the
@@ -43,12 +43,12 @@ Promote to real Scrum only if the team grows past two.
 
 ### Priority levels
 
-| Level | Meaning |
-|---|---|
-| **P0 Critical** | Blocks other work or gates a go/no-go. Nothing else starts while a P0 is open. |
-| **P1 High** | Required for the next shippable milestone. |
-| **P2 Medium** | Real value, deferrable without breaking a milestone. |
-| **P3 Low** | Conditional on a gate not yet passed. Do not start. May be deleted rather than done. |
+| Level           | Meaning                                                                              |
+| --------------- | ------------------------------------------------------------------------------------ |
+| **P0 Critical** | Blocks other work or gates a go/no-go. Nothing else starts while a P0 is open.       |
+| **P1 High**     | Required for the next shippable milestone.                                           |
+| **P2 Medium**   | Real value, deferrable without breaking a milestone.                                 |
+| **P3 Low**      | Conditional on a gate not yet passed. Do not start. May be deleted rather than done. |
 
 ### Estimation scale
 
@@ -86,13 +86,13 @@ completes. Correct it from actuals; do not defend it.
 Five tickets can legitimately end or redirect the project. They are tickets, not
 conversations, and each is answered in writing and committed to `docs/decisions/`.
 
-| Ref | Gate | Can it stop the project? |
-|---|---|---|
-| PR-003 | Go / no-go after spike + competitor research | **Yes** — adopt an existing tool and stop |
-| PR-042 | Phase 0 exit measurement — **restated against the 162-PR corpus, 2026-08-05** | Blocks all Phase 1 investment |
-| PR-062 | Labels-only trial findings — **deferred, needs live traffic** | Feeds PR-090, which is therefore also stalled |
-| PR-090 | Does the digest beat a saved search? | **Yes** — skips epic E9 |
-| PR-100 | Build the judgment layer at all? | **Yes** — skips epic E10 |
+| Ref    | Gate                                                                          | Can it stop the project?                      |
+| ------ | ----------------------------------------------------------------------------- | --------------------------------------------- |
+| PR-003 | Go / no-go after spike + competitor research                                  | **Yes** — adopt an existing tool and stop     |
+| PR-042 | Phase 0 exit measurement — **restated against the 162-PR corpus, 2026-08-05** | Blocks all Phase 1 investment                 |
+| PR-062 | Labels-only trial findings — **deferred, needs live traffic**                 | Feeds PR-090, which is therefore also stalled |
+| PR-090 | Does the digest beat a saved search?                                          | **Yes** — skips epic E9                       |
+| PR-100 | Build the judgment layer at all?                                              | **Yes** — skips epic E10                      |
 
 A plan that cannot be cancelled is not a plan.
 
@@ -100,13 +100,13 @@ A plan that cannot be cancelled is not a plan.
 
 ## Sprint plan
 
-| Sprint | Weeks | Goal | Exit criterion | Ademola | Allison | Joint | Total |
-|---|---|---|---|---|---|---|---|
-| Sprint 0 | 1 | Validation + scaffold | Go/no-go answered in writing | 8 | 5 | 4 | 17 |
-| Sprint 1 | 2 | Context type, collectors, fact rules | Rules run green against fixtures | 18 | 18 | — | 36 |
-| Sprint 2 | 2 | Phase 0 CLI | Scan beats a timed manual pass | 11 | 13 | 3 | 27 |
-| Sprint 3 | 2 | Action delivery + labels | Labels reconcile correctly over replayed PRs, live on the repo in dry-run | 13 | 10 | 2 | 25 |
-| Sprint 4 | 2 | Sticky comment | Comment bodies render for all 162 replayed PRs; noise gate deferred | 12 | 13 | — | 25 |
+| Sprint   | Weeks | Goal                                 | Exit criterion                                                            | Ademola | Allison | Joint | Total |
+| -------- | ----- | ------------------------------------ | ------------------------------------------------------------------------- | ------- | ------- | ----- | ----- |
+| Sprint 0 | 1     | Validation + scaffold                | Go/no-go answered in writing                                              | 8       | 5       | 4     | 17    |
+| Sprint 1 | 2     | Context type, collectors, fact rules | Rules run green against fixtures                                          | 18      | 18      | —     | 36    |
+| Sprint 2 | 2     | Phase 0 CLI                          | Scan beats a timed manual pass                                            | 11      | 13      | 3     | 27    |
+| Sprint 3 | 2     | Action delivery + labels             | Labels reconcile correctly over replayed PRs, live on the repo in dry-run | 13      | 10      | 2     | 25    |
+| Sprint 4 | 2     | Sticky comment                       | Comment bodies render for all 162 replayed PRs; noise gate deferred       | 12      | 13      | —     | 25    |
 
 Scheduled total: **128 points**. Unscheduled backlog: **50 points**.
 
@@ -131,106 +131,106 @@ Status of every ticket at time of writing: `Done` for PR-001, PR-002, PR-004, PR
 
 ### Sprint 0 — Validation and scaffold
 
-| Ref | Task | Owner | Pri | Pts | Type | Blocked by |
-|---|---|---|---|---|---|---|
-| PR-001 | Spike: can the Action write on fork PRs? | Ademola | P0 | 3 | Spike | — |
-| PR-002 | Competitor research: does this already exist? — **findings in `docs/spikes/competitors.md`** | Allison | P0 | 2 | Spike | — |
-| PR-004 | Premise test — **BLOCKED, redesigned as install + archive + replay** | Allison | P0 | 2 | Spike | PR-002, PR-005 |
-| PR-005 | **Archive the 162-PR corpus — time-sensitive, logs are decaying** | Ademola | P0 | 3 | Spike | — |
-| PR-003 | Decision: go / no-go / pivot | Joint | P0 | 1 | Decision | PR-001, PR-002, PR-004 |
-| PR-010 | Repo scaffold: TypeScript, Node 24, tooling | Ademola | P0 | 3 | Chore | — |
-| PR-011 | Define the `PullRequestContext` type | Joint | P0 | 3 | Feature | PR-010 |
-| PR-013 | CI for this repo: lint, typecheck, test | Ademola | P1 | 2 | Chore | PR-010 |
-| PR-014 | CONTRIBUTING and Definition of Done in repo | Allison | P2 | 1 | Docs | — |
+| Ref    | Task                                                                                         | Owner   | Pri | Pts | Type     | Blocked by             |
+| ------ | -------------------------------------------------------------------------------------------- | ------- | --- | --- | -------- | ---------------------- |
+| PR-001 | Spike: can the Action write on fork PRs?                                                     | Ademola | P0  | 3   | Spike    | —                      |
+| PR-002 | Competitor research: does this already exist? — **findings in `docs/spikes/competitors.md`** | Allison | P0  | 2   | Spike    | —                      |
+| PR-004 | Premise test — **BLOCKED, redesigned as install + archive + replay**                         | Allison | P0  | 2   | Spike    | PR-002, PR-005         |
+| PR-005 | **Archive the 162-PR corpus — time-sensitive, logs are decaying**                            | Ademola | P0  | 3   | Spike    | —                      |
+| PR-003 | Decision: go / no-go / pivot                                                                 | Joint   | P0  | 1   | Decision | PR-001, PR-002, PR-004 |
+| PR-010 | Repo scaffold: TypeScript, Node 24, tooling                                                  | Ademola | P0  | 3   | Chore    | —                      |
+| PR-011 | Define the `PullRequestContext` type                                                         | Joint   | P0  | 3   | Feature  | PR-010                 |
+| PR-013 | CI for this repo: lint, typecheck, test                                                      | Ademola | P1  | 2   | Chore    | PR-010                 |
+| PR-014 | CONTRIBUTING and Definition of Done in repo                                                  | Allison | P2  | 1   | Docs     | —                      |
 
 ### Sprint 1 — Collectors and fact rules
 
-| Ref | Task | Owner | Pri | Pts | Type | Blocked by |
-|---|---|---|---|---|---|---|
-| PR-012 | Fixture harness: record and replay real PRs | Allison | P0 | 5 | Test | PR-011 |
-| PR-020 | Octokit client: auth, rate limits, retries | Ademola | P0 | 3 | Feature | PR-010 |
-| PR-021 | Collect PR core: metadata, reviews, commits, files | Ademola | P0 | 3 | Feature | PR-011, PR-020 |
-| PR-022 | Collect check runs and resolve required checks | Ademola | P0 | 5 | Feature | PR-020 |
-| PR-023 | Collect base-branch check status | Ademola | P0 | 5 | Feature | PR-022 |
-| PR-026 | Diff fetch with size cap | Ademola | P1 | 2 | Feature | PR-020 |
-| PR-030 | Rule interface, registry, status derivation | Allison | P0 | 3 | Feature | PR-011 |
-| PR-031 | CI rules: FAILING, BROKEN_ON_BASE, PENDING, MISSING | Allison | P0 | 5 | Feature | PR-022, PR-023, PR-030 |
-| PR-032 | Mergeability rules: conflict and behind-base | Allison | P0 | 3 | Feature | PR-030 |
-| PR-033 | Review and draft rules | Allison | P1 | 2 | Feature | PR-030 |
+| Ref    | Task                                                | Owner   | Pri | Pts | Type    | Blocked by             |
+| ------ | --------------------------------------------------- | ------- | --- | --- | ------- | ---------------------- |
+| PR-012 | Fixture harness: record and replay real PRs         | Allison | P0  | 5   | Test    | PR-011                 |
+| PR-020 | Octokit client: auth, rate limits, retries          | Ademola | P0  | 3   | Feature | PR-010                 |
+| PR-021 | Collect PR core: metadata, reviews, commits, files  | Ademola | P0  | 3   | Feature | PR-011, PR-020         |
+| PR-022 | Collect check runs and resolve required checks      | Ademola | P0  | 5   | Feature | PR-020                 |
+| PR-023 | Collect base-branch check status                    | Ademola | P0  | 5   | Feature | PR-022                 |
+| PR-026 | Diff fetch with size cap                            | Ademola | P1  | 2   | Feature | PR-020                 |
+| PR-030 | Rule interface, registry, status derivation         | Allison | P0  | 3   | Feature | PR-011                 |
+| PR-031 | CI rules: FAILING, BROKEN_ON_BASE, PENDING, MISSING | Allison | P0  | 5   | Feature | PR-022, PR-023, PR-030 |
+| PR-032 | Mergeability rules: conflict and behind-base        | Allison | P0  | 3   | Feature | PR-030                 |
+| PR-033 | Review and draft rules                              | Allison | P1  | 2   | Feature | PR-030                 |
 
 ### Sprint 2 — Phase 0 CLI
 
-| Ref | Task | Owner | Pri | Pts | Type | Blocked by |
-|---|---|---|---|---|---|---|
-| PR-024 | Fetch failing-job logs and extract the useful excerpt | Ademola | P1 | 5 | Feature | PR-022 |
-| PR-025 | Collect linked issues | Ademola | P1 | 3 | Feature | PR-020 |
-| PR-034 | Path and size rules | Allison | P1 | 2 | Feature | PR-030 |
-| PR-035 | Contributor rules: first-time, stale, DCO | Allison | P1 | 3 | Feature | PR-021, PR-030 |
-| PR-036 | Fact-rule test suite with a zero-false-positive gate | Allison | P0 | 5 | Test | PR-012, PR-031/2/3 |
-| PR-040 | CLI: scan command and config loader | Ademola | P0 | 3 | Feature | PR-021, PR-030 |
-| PR-041 | Terminal report renderer grouped by blockage owner | Allison | P0 | 3 | Feature | PR-040 |
-| PR-042 | Phase 0 exit measurement — **criterion restated against replayed history, see `docs/04-roadmap.md`** | Joint | P0 | 3 | Decision | PR-005, PR-036, PR-041 |
+| Ref    | Task                                                                                                 | Owner   | Pri | Pts | Type     | Blocked by             |
+| ------ | ---------------------------------------------------------------------------------------------------- | ------- | --- | --- | -------- | ---------------------- |
+| PR-024 | Fetch failing-job logs and extract the useful excerpt                                                | Ademola | P1  | 5   | Feature  | PR-022                 |
+| PR-025 | Collect linked issues                                                                                | Ademola | P1  | 3   | Feature  | PR-020                 |
+| PR-034 | Path and size rules                                                                                  | Allison | P1  | 2   | Feature  | PR-030                 |
+| PR-035 | Contributor rules: first-time, stale, DCO                                                            | Allison | P1  | 3   | Feature  | PR-021, PR-030         |
+| PR-036 | Fact-rule test suite with a zero-false-positive gate                                                 | Allison | P0  | 5   | Test     | PR-012, PR-031/2/3     |
+| PR-040 | CLI: scan command and config loader                                                                  | Ademola | P0  | 3   | Feature  | PR-021, PR-030         |
+| PR-041 | Terminal report renderer grouped by blockage owner                                                   | Allison | P0  | 3   | Feature  | PR-040                 |
+| PR-042 | Phase 0 exit measurement — **criterion restated against replayed history, see `docs/04-roadmap.md`** | Joint   | P0  | 3   | Decision | PR-005, PR-036, PR-041 |
 
 ### Sprint 3 — Action delivery and labels
 
-| Ref | Task | Owner | Pri | Pts | Type | Blocked by |
-|---|---|---|---|---|---|---|
-| PR-050 | Action packaging and release | Ademola | P1 | 5 | Feature | PR-042 |
-| PR-051 | Trigger wiring: check_suite, schedule, dry-run pull_request | Ademola | P1 | 3 | Feature | PR-001, PR-050 |
-| PR-052 | State store: Actions cache with comment fallback | Ademola | P1 | 5 | Feature | PR-050 |
-| PR-053 | Dry-run mode end to end | Allison | P1 | 2 | Feature | PR-051 |
-| PR-054 | Verdict hashing and the noise budget | Allison | P1 | 3 | Feature | PR-052 |
-| PR-060 | Label reconciliation | Allison | P1 | 3 | Feature | PR-051 |
-| PR-061 | Label config and prefix support | Allison | P2 | 2 | Feature | PR-060 |
-| PR-062 | One-week labels-only trial — **deferred until a contributor wave arrives; needs live traffic** | Joint | P1 | 2 | Decision | PR-060 |
+| Ref    | Task                                                                                           | Owner   | Pri | Pts | Type     | Blocked by     |
+| ------ | ---------------------------------------------------------------------------------------------- | ------- | --- | --- | -------- | -------------- |
+| PR-050 | Action packaging and release                                                                   | Ademola | P1  | 5   | Feature  | PR-042         |
+| PR-051 | Trigger wiring: check_suite, schedule, dry-run pull_request                                    | Ademola | P1  | 3   | Feature  | PR-001, PR-050 |
+| PR-052 | State store: Actions cache with comment fallback                                               | Ademola | P1  | 5   | Feature  | PR-050         |
+| PR-053 | Dry-run mode end to end                                                                        | Allison | P1  | 2   | Feature  | PR-051         |
+| PR-054 | Verdict hashing and the noise budget                                                           | Allison | P1  | 3   | Feature  | PR-052         |
+| PR-060 | Label reconciliation                                                                           | Allison | P1  | 3   | Feature  | PR-051         |
+| PR-061 | Label config and prefix support                                                                | Allison | P2  | 2   | Feature  | PR-060         |
+| PR-062 | One-week labels-only trial — **deferred until a contributor wave arrives; needs live traffic** | Joint   | P1  | 2   | Decision | PR-060         |
 
 ### Sprint 4 — Sticky comment
 
-| Ref | Task | Owner | Pri | Pts | Type | Blocked by |
-|---|---|---|---|---|---|---|
-| PR-070 | Sticky comment upsert by marker | Ademola | P1 | 5 | Feature | PR-052, PR-054 |
-| PR-071 | Comment renderer: status, fixes, notes, checklist | Allison | P1 | 5 | Feature | PR-070 |
-| PR-072 | CI failure formatting in the comment | Allison | P1 | 5 | Feature | PR-024, PR-071 |
-| PR-073 | Branch-update instructions for conflicts | Allison | P1 | 3 | Feature | PR-071 |
-| PR-074 | `no-bot` opt-out label | Ademola | P2 | 2 | Feature | PR-070 |
-| PR-080 | Heuristic bucket with warn-only enforcement | Ademola | P2 | 2 | Feature | PR-030 |
-| PR-081 | `NO_TEST_CHANGED` and `TESTS_REMOVED` | Ademola | P2 | 3 | Feature | PR-080 |
+| Ref    | Task                                              | Owner   | Pri | Pts | Type    | Blocked by     |
+| ------ | ------------------------------------------------- | ------- | --- | --- | ------- | -------------- |
+| PR-070 | Sticky comment upsert by marker                   | Ademola | P1  | 5   | Feature | PR-052, PR-054 |
+| PR-071 | Comment renderer: status, fixes, notes, checklist | Allison | P1  | 5   | Feature | PR-070         |
+| PR-072 | CI failure formatting in the comment              | Allison | P1  | 5   | Feature | PR-024, PR-071 |
+| PR-073 | Branch-update instructions for conflicts          | Allison | P1  | 3   | Feature | PR-071         |
+| PR-074 | `no-bot` opt-out label                            | Ademola | P2  | 2   | Feature | PR-070         |
+| PR-080 | Heuristic bucket with warn-only enforcement       | Ademola | P2  | 2   | Feature | PR-030         |
+| PR-081 | `NO_TEST_CHANGED` and `TESTS_REMOVED`             | Ademola | P2  | 3   | Feature | PR-080         |
 
 ### Unscheduled — gated on a decision
 
-| Ref | Task | Owner | Pri | Pts | Type | Blocked by |
-|---|---|---|---|---|---|---|
-| PR-082 | Issue-linkage heuristics — **demoted, see note** | Allison | P3 | 3 | Feature | PR-025, PR-080 |
-| PR-083 | Duplicate-PR detection and threshold tuning | Ademola | P2 | 5 | Feature | PR-080 |
-| PR-084 | `NEW_DEPENDENCY` detection (npm only) | Ademola | P2 | 3 | Feature | PR-080 |
-| PR-085 | `POSSIBLE_SECRET` detection | Ademola | P3 | 3 | Feature | PR-080 |
-| PR-090 | **Decision: does the digest beat a saved search?** | Joint | P2 | 1 | Decision | PR-062 |
-| PR-091 | Scheduled sweep across all open PRs | Ademola | P2 | 3 | Feature | PR-090 |
-| PR-092 | Digest renderer and pinned-issue upsert | Allison | P2 | 5 | Feature | PR-091 |
-| PR-093 | Stale nudge lifecycle | Allison | P2 | 3 | Feature | PR-091 |
-| PR-094 | `pr-reviewer recommend`: audit the repo's own setup | Ademola | P2 | 5 | Feature | — |
-| PR-100 | **Decision: build the judgment layer at all?** | Joint | P3 | 1 | Decision | PR-081, PR-090 |
-| PR-101 | Model provider interface and prompt versioning | Ademola | P3 | 5 | Feature | PR-100 |
-| PR-102 | J1 issue-resolution with mandatory citations | Allison | P3 | 5 | Feature | PR-101 |
-| PR-103 | J7 reviewer effort estimate | Allison | P3 | 3 | Feature | PR-101 |
-| PR-104 | Shadow mode and the agreement log | Allison | P3 | 3 | Feature | PR-102 |
-| PR-105 | Adversarial prompt-injection fixture | Ademola | P3 | 2 | Test | PR-102 |
+| Ref    | Task                                                | Owner   | Pri | Pts | Type     | Blocked by     |
+| ------ | --------------------------------------------------- | ------- | --- | --- | -------- | -------------- |
+| PR-082 | Issue-linkage heuristics — **demoted, see note**    | Allison | P3  | 3   | Feature  | PR-025, PR-080 |
+| PR-083 | Duplicate-PR detection and threshold tuning         | Ademola | P2  | 5   | Feature  | PR-080         |
+| PR-084 | `NEW_DEPENDENCY` detection (npm only)               | Ademola | P2  | 3   | Feature  | PR-080         |
+| PR-085 | `POSSIBLE_SECRET` detection                         | Ademola | P3  | 3   | Feature  | PR-080         |
+| PR-090 | **Decision: does the digest beat a saved search?**  | Joint   | P2  | 1   | Decision | PR-062         |
+| PR-091 | Scheduled sweep across all open PRs                 | Ademola | P2  | 3   | Feature  | PR-090         |
+| PR-092 | Digest renderer and pinned-issue upsert             | Allison | P2  | 5   | Feature  | PR-091         |
+| PR-093 | Stale nudge lifecycle                               | Allison | P2  | 3   | Feature  | PR-091         |
+| PR-094 | `pr-reviewer recommend`: audit the repo's own setup | Ademola | P2  | 5   | Feature  | —              |
+| PR-100 | **Decision: build the judgment layer at all?**      | Joint   | P3  | 1   | Decision | PR-081, PR-090 |
+| PR-101 | Model provider interface and prompt versioning      | Ademola | P3  | 5   | Feature  | PR-100         |
+| PR-102 | J1 issue-resolution with mandatory citations        | Allison | P3  | 5   | Feature  | PR-101         |
+| PR-103 | J7 reviewer effort estimate                         | Allison | P3  | 3   | Feature  | PR-101         |
+| PR-104 | Shadow mode and the agreement log                   | Allison | P3  | 3   | Feature  | PR-102         |
+| PR-105 | Adversarial prompt-injection fixture                | Ademola | P3  | 2   | Test     | PR-102         |
 
 ### Backlog changes
 
 Recorded so the reasoning survives, rather than silently editing rows.
 
-| Date | Change | Why |
-|---|---|---|
-| 2026-08-05 | **PR-082 demoted P2 → P3** | PR-002 found `nearform/github-action-check-linked-issues` does this better than our planned regex, including cross-repo references. Either adopt their matching logic or reduce PR-082 to "recommend their action" inside PR-094. |
-| 2026-08-05 | **PR-004 added, P0, Sprint 0** | PR-002 surfaced a cheaper test of the premise than anything else on the board: install the existing tools for a week first. Now blocks PR-003. |
-| 2026-08-05 | **PR-004 blocked and redesigned** | No repo has any open PRs. The contributor wave on `Tollcraft/soroban-cost-linter` (162 PRs, ~65 contributors) ran 2026-07-06 to 2026-08-04 and is over. "Install and wait a week" measures nothing. Redesigned as install + archive + retrospective replay. See `docs/spikes/premise-test.md`. |
-| 2026-08-05 | **PR-005 added, P0, Sprint 0** | The 162-PR history is the evidence base for PR-003, PR-012's fixture corpus, and the only way to validate PR-024 — and Actions logs are decaying now. Only genuinely time-sensitive ticket on the board. |
-| 2026-08-05 | **PR-042 exit criterion rewritten — done** | It assumed an open queue to hand-classify. There isn't one. Now measured by retrospective replay: blind hand-classification of a seeded random sample of 40 of the 162 archived PRs, committed before the run; **zero fact-rule disagreements** required; plus a reported `CI_BROKEN_ON_BASE` count over all 162 (differentiator #1, countable from history, reported not thresholded); scan of all 162 replayed PRs under 2 minutes. Now also blocked by PR-005, since it needs the archive. Full text in `docs/04-roadmap.md`. |
-| 2026-08-05 | **Live-traffic exit criteria marked deferred, not rewritten** | Phase 1's noise gate (≈1 bot comment per PR, zero manual "fix your CI" comments, no contributor complaints), Phase 2's "digest is the first thing you open", Phase 3's three-week shadow-mode agreement gate, and PR-062's one-week labels trial all measure maintainer or contributor behaviour under the bot. A replay posts nothing and has no clock, so none of them has an honest retrospective substitute. Marked deferred until a wave arrives rather than downgraded into something weaker that would read as passed. |
-| 2026-08-05 | **Phase 1 metrics list split into measurable / deferred** | Fact-rule false positives, the `CI_BROKEN_ON_BASE` count, and heuristic tuning survive as replay measurements. Median time-to-first-actionable-feedback, bot comments per PR, manual comments per week, and PRs that self-resolve do not — the historical figures are baselines for a future live comparison, not results. Recorded in `docs/04-roadmap.md` and `docs/00-concept.md`. |
-| 2026-08-05 | **Sprint 3 and Sprint 4 exit criteria rewritten** | "Labels live on a real repo" and "a week with zero manual 'fix your CI' comments" both need an open queue. Replaced with replay-based criteria over the corpus, with the workload half of each explicitly deferred. The replacements are weaker and the sprint table says so. |
-| 2026-08-05 | **Bucket 2 threshold tuning re-sourced** | `docs/03-review-pipeline.md` said thresholds would be tuned "against a real queue". Now tuned against the archive. `DUPLICATE_FILES` and `ISSUE_CLAIMED_ELSEWHERE` need concurrently-open PRs reconstructed from open/close timestamps, which is a reconstruction rather than an observation. Noted in the doc. |
+| Date       | Change                                                        | Why                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ---------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-08-05 | **PR-082 demoted P2 → P3**                                    | PR-002 found `nearform/github-action-check-linked-issues` does this better than our planned regex, including cross-repo references. Either adopt their matching logic or reduce PR-082 to "recommend their action" inside PR-094.                                                                                                                                                                                                                                                                                                |
+| 2026-08-05 | **PR-004 added, P0, Sprint 0**                                | PR-002 surfaced a cheaper test of the premise than anything else on the board: install the existing tools for a week first. Now blocks PR-003.                                                                                                                                                                                                                                                                                                                                                                                   |
+| 2026-08-05 | **PR-004 blocked and redesigned**                             | No repo has any open PRs. The contributor wave on `Tollcraft/soroban-cost-linter` (162 PRs, ~65 contributors) ran 2026-07-06 to 2026-08-04 and is over. "Install and wait a week" measures nothing. Redesigned as install + archive + retrospective replay. See `docs/spikes/premise-test.md`.                                                                                                                                                                                                                                   |
+| 2026-08-05 | **PR-005 added, P0, Sprint 0**                                | The 162-PR history is the evidence base for PR-003, PR-012's fixture corpus, and the only way to validate PR-024 — and Actions logs are decaying now. Only genuinely time-sensitive ticket on the board.                                                                                                                                                                                                                                                                                                                         |
+| 2026-08-05 | **PR-042 exit criterion rewritten — done**                    | It assumed an open queue to hand-classify. There isn't one. Now measured by retrospective replay: blind hand-classification of a seeded random sample of 40 of the 162 archived PRs, committed before the run; **zero fact-rule disagreements** required; plus a reported `CI_BROKEN_ON_BASE` count over all 162 (differentiator #1, countable from history, reported not thresholded); scan of all 162 replayed PRs under 2 minutes. Now also blocked by PR-005, since it needs the archive. Full text in `docs/04-roadmap.md`. |
+| 2026-08-05 | **Live-traffic exit criteria marked deferred, not rewritten** | Phase 1's noise gate (≈1 bot comment per PR, zero manual "fix your CI" comments, no contributor complaints), Phase 2's "digest is the first thing you open", Phase 3's three-week shadow-mode agreement gate, and PR-062's one-week labels trial all measure maintainer or contributor behaviour under the bot. A replay posts nothing and has no clock, so none of them has an honest retrospective substitute. Marked deferred until a wave arrives rather than downgraded into something weaker that would read as passed.    |
+| 2026-08-05 | **Phase 1 metrics list split into measurable / deferred**     | Fact-rule false positives, the `CI_BROKEN_ON_BASE` count, and heuristic tuning survive as replay measurements. Median time-to-first-actionable-feedback, bot comments per PR, manual comments per week, and PRs that self-resolve do not — the historical figures are baselines for a future live comparison, not results. Recorded in `docs/04-roadmap.md` and `docs/00-concept.md`.                                                                                                                                            |
+| 2026-08-05 | **Sprint 3 and Sprint 4 exit criteria rewritten**             | "Labels live on a real repo" and "a week with zero manual 'fix your CI' comments" both need an open queue. Replaced with replay-based criteria over the corpus, with the workload half of each explicitly deferred. The replacements are weaker and the sprint table says so.                                                                                                                                                                                                                                                    |
+| 2026-08-05 | **Bucket 2 threshold tuning re-sourced**                      | `docs/03-review-pipeline.md` said thresholds would be tuned "against a real queue". Now tuned against the archive. `DUPLICATE_FILES` and `ISSUE_CLAIMED_ELSEWHERE` need concurrently-open PRs reconstructed from open/close timestamps, which is a reconstruction rather than an observation. Noted in the doc.                                                                                                                                                                                                                  |
 
 ---
 
@@ -259,16 +259,16 @@ infrastructure rather than a weekend Action. Find out in week 1, not month 2.
 
 ## Risks on the board
 
-| Risk | Likelihood | Impact | Mitigation |
-|---|---|---|---|
-| Fork tokens cannot write | Medium | Kills Surface A | PR-001, first ticket in the plan |
-| Mergify already does this | Medium | Ends the project | PR-002, timeboxed to an hour |
-| PR-011 churns after tracks start | Medium | Constant merge conflicts | Joint design, both review, freeze before PR-020 |
-| Heuristic thresholds are guesses | **High** | False positives erode trust | Warn-only by construction (PR-080), tuning logs committed |
-| Comment tone alienates contributors | Medium | Community incident | PR-071 copy reviewed by both; contributor text is mechanics only |
-| Scope drift into line-by-line review | Medium | Loses to funded competitors | Listed as a non-goal in `docs/00-concept.md` |
-| No live traffic to validate against | **Certain, already happened** | Every behavioural exit criterion is unmeasurable | Retrospective replay over the 162-PR archive for rule correctness; behavioural gates explicitly deferred rather than faked. Accept that Phase 1+ ships partly unvalidated. |
-| Contributor waves are episodic, not continuous | Unknown [Guessing — one observed wave] | The tool only has value during a wave, which weakens the case for building it | State it plainly at PR-003. One wave is not a pattern; check whether earlier waves exist on other repos before treating it as either a rule or an outlier. |
+| Risk                                           | Likelihood                             | Impact                                                                        | Mitigation                                                                                                                                                                 |
+| ---------------------------------------------- | -------------------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fork tokens cannot write                       | Medium                                 | Kills Surface A                                                               | PR-001, first ticket in the plan                                                                                                                                           |
+| Mergify already does this                      | Medium                                 | Ends the project                                                              | PR-002, timeboxed to an hour                                                                                                                                               |
+| PR-011 churns after tracks start               | Medium                                 | Constant merge conflicts                                                      | Joint design, both review, freeze before PR-020                                                                                                                            |
+| Heuristic thresholds are guesses               | **High**                               | False positives erode trust                                                   | Warn-only by construction (PR-080), tuning logs committed                                                                                                                  |
+| Comment tone alienates contributors            | Medium                                 | Community incident                                                            | PR-071 copy reviewed by both; contributor text is mechanics only                                                                                                           |
+| Scope drift into line-by-line review           | Medium                                 | Loses to funded competitors                                                   | Listed as a non-goal in `docs/00-concept.md`                                                                                                                               |
+| No live traffic to validate against            | **Certain, already happened**          | Every behavioural exit criterion is unmeasurable                              | Retrospective replay over the 162-PR archive for rule correctness; behavioural gates explicitly deferred rather than faked. Accept that Phase 1+ ships partly unvalidated. |
+| Contributor waves are episodic, not continuous | Unknown [Guessing — one observed wave] | The tool only has value during a wave, which weakens the case for building it | State it plainly at PR-003. One wave is not a pattern; check whether earlier waves exist on other repos before treating it as either a rule or an outlier.                 |
 
 ---
 
@@ -276,5 +276,5 @@ infrastructure rather than a weekend Action. Find out in week 1, not month 2.
 
 Notion is the working copy; this file is the record. Refresh it at each retro — the
 sprint tables and point totals, not every status change. If the two disagree about
-scope, Notion wins; if they disagree about *why* a decision was made, the
+scope, Notion wins; if they disagree about _why_ a decision was made, the
 `docs/decisions/` files win.

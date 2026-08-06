@@ -1,1 +1,1 @@
-export default [{ ignores: ["node_modules/", "dist/"] }]
+export default [{ ignores: ["node_modules/", "dist/"] }];

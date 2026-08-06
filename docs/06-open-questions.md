@@ -10,7 +10,7 @@ Changes multi-tenancy, config surface, docs burden, and hosting.
 workflow file. Productise only if other maintainers ask. Building for hypothetical users
 first is the most common way this kind of project stalls [Guessing, but widely observed].
 
-## Q2 — Does the digest survive contact with GitHub search? *(blocks Phase 2)*
+## Q2 — Does the digest survive contact with GitHub search? _(blocks Phase 2)_
 
 `is:pr is:open label:ready-for-review` plus the Phase 1 labels may deliver most of the
 digest's value for none of the work [Certain the search works; Guessing how much value
@@ -27,7 +27,7 @@ issue-resolution doubt reads as an accusation. The test-related checks that were
 promotion candidates are now deterministic Bucket 2 rules, so they reach the comment
 without needing promotion (see `03-review-pipeline.md`).
 
-## Q4 — Should Bucket 3 run on *blocked* PRs? **RESOLVED: no**
+## Q4 — Should Bucket 3 run on _blocked_ PRs? **RESOLVED: no**
 
 The question rested on a stock/flow error — see the corrected F6 in `01-critique.md`.
 The judge fires on a PR's transition into `READY_FOR_REVIEW`, so "most PRs are blocked
@@ -75,13 +75,13 @@ than any amount of triage [Likely].
 
 The first draft said "cheap wins first" (ascending reviewer effort). That was an
 unbacked assertion about your preferences [Guessing — no evidence either way].
-Maintainers may well want the most *important* PR first.
+Maintainers may well want the most _important_ PR first.
 **Recommendation:** don't decide now. Phase 1 labels don't need a sort order; by Phase
 2 you'll have a week of real usage to answer it from.
 
 ## Q10 — Prompt-injection defence **RESOLVED: verifiability, not sanitisation**
 
-Untrusted diff content enters model context and cannot be filtered — the diff *is* the
+Untrusted diff content enters model context and cannot be filtered — the diff _is_ the
 payload, and any filter over it is bypassable [Certain]. Sanitisation is therefore not
 attempted.
 

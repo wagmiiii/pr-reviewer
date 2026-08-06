@@ -50,16 +50,16 @@ A model asked "is this good quality?" returns confident generic prose.
 Resolution: decompose into narrow checkable questions with mandatory file/line
 evidence and a permitted "unknown".
 
-### F6 — Cost and rate limits *(and a measurement error, now corrected)*
+### F6 — Cost and rate limits _(and a measurement error, now corrected)_
 
 The cost controls are: skip the judgment layer on PRs the rules already blocked, cache
 verdicts by head SHA, and cap the diff bytes sent to the model.
 
-An earlier revision of this document claimed those two facts — *skip blocked PRs* and
-*most PRs are blocked* — together meant the judgment layer would rarely run, and
+An earlier revision of this document claimed those two facts — _skip blocked PRs_ and
+_most PRs are blocked_ — together meant the judgment layer would rarely run, and
 therefore that Bucket 3 might be worthless. **That was a stock/flow error.** "Most PRs
 are blocked at any instant" is not "few PRs become ready." The judge fires on a PR's
-*transition* into `READY_FOR_REVIEW`, not on a headcount of the queue, and every PR
+_transition_ into `READY_FOR_REVIEW`, not on a headcount of the queue, and every PR
 that is ever reviewed makes that transition at least once [Certain — it follows from
 the status machine in `03-review-pipeline.md`].
 
@@ -85,7 +85,7 @@ missing checklist items. Never quality, never the person.
 
 ## Part 2 — Flaws found auditing the first draft of this plan
 
-### P1 — The Action cannot write on fork PRs *(most damaging)*
+### P1 — The Action cannot write on fork PRs _(most damaging)_
 
 For `pull_request` events from a forked repo, `GITHUB_TOKEN` is read-only and the
 workflow's `permissions:` block cannot elevate it [Likely — verify with a throwaway
@@ -163,7 +163,7 @@ Resolution: `05-configuration.md` cut to what Phases 0–2 actually consume.
 ### P9 — "Cheap wins first" ranking was an unbacked assertion
 
 The first draft sorted the digest by ascending reviewer effort. Maintainers may well
-want the *important* PR first, not the cheapest [Guessing — no evidence either way].
+want the _important_ PR first, not the cheapest [Guessing — no evidence either way].
 
 Resolution: recorded as an open question; the digest is Phase 2 and can be sorted
 whichever way turns out to be right in practice.
@@ -171,7 +171,7 @@ whichever way turns out to be right in practice.
 ### P10 — `collect` is not cleanly pure
 
 The design says each stage is a pure function of the last, but fetching CI logs for
-*failing* jobs requires knowing which jobs failed — knowledge the gate produces
+_failing_ jobs requires knowing which jobs failed — knowledge the gate produces
 [Certain].
 
 Resolution: `collect` over-fetches (check runs first, then logs for non-success

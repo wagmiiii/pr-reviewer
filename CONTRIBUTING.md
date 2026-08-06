@@ -47,7 +47,7 @@ first contact. Unknown base status now degrades to maintainer-owned.
 Refs PR-031
 ```
 
-Body explains *why*, not *what* — the diff already says what. Reference the ticket.
+Body explains _why_, not _what_ — the diff already says what. Reference the ticket.
 
 Do not add co-author or attribution trailers for AI tools.
 
@@ -80,11 +80,11 @@ until **all** of these hold:
 Fact rules and heuristic rules are held to different standards on purpose. See
 [`docs/00-concept.md`](docs/00-concept.md) for why.
 
-| Bucket | Standard |
-|---|---|
-| **Fact rules** | Zero false positives against the fixture set. The suite fails on any disagreement. |
+| Bucket              | Standard                                                                                                                                      |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Fact rules**      | Zero false positives against the fixture set. The suite fails on any disagreement.                                                            |
 | **Heuristic rules** | Measured on false-positive rate, tuned against real data. Thresholds ship marked as untuned, and every tuning decision gets a written record. |
-| **Judgment checks** | Shadow mode only. Never gate a merge, never block a PR, never reach a contributor. |
+| **Judgment checks** | Shadow mode only. Never gate a merge, never block a PR, never reach a contributor.                                                            |
 
 New rules need a fixture that exercises them. If you cannot construct a fixture, that is
 usually a sign the rule is not deterministic enough for the bucket you put it in.

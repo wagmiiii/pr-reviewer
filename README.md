@@ -40,17 +40,17 @@ around this with `check_suite` and `schedule` triggers — at the cost of latenc
 
 ## Planning docs
 
-| Doc | What's in it |
-|---|---|
-| [00-concept.md](docs/00-concept.md) | Problem, the three-bucket model, users, non-goals |
-| [01-critique.md](docs/01-critique.md) | Flaws in the original idea and in this plan; is it worth building |
-| [02-architecture.md](docs/02-architecture.md) | Pipeline, trigger model, state, stack |
-| [03-review-pipeline.md](docs/03-review-pipeline.md) | Rules, warnings, judgment checks, output formats |
-| [04-roadmap.md](docs/04-roadmap.md) | Phases 0–5, each independently shippable |
-| [05-configuration.md](docs/05-configuration.md) | Minimal config and adoption workflow |
-| [06-open-questions.md](docs/06-open-questions.md) | Unresolved decisions, with recommendations |
-| [PROJECT-MANAGEMENT.md](docs/PROJECT-MANAGEMENT.md) | Team, process, sprint plan, full backlog — backup of the Notion board |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Branches, commits, PRs, Definition of Done, testing standards per bucket |
+| Doc                                                 | What's in it                                                             |
+| --------------------------------------------------- | ------------------------------------------------------------------------ |
+| [00-concept.md](docs/00-concept.md)                 | Problem, the three-bucket model, users, non-goals                        |
+| [01-critique.md](docs/01-critique.md)               | Flaws in the original idea and in this plan; is it worth building        |
+| [02-architecture.md](docs/02-architecture.md)       | Pipeline, trigger model, state, stack                                    |
+| [03-review-pipeline.md](docs/03-review-pipeline.md) | Rules, warnings, judgment checks, output formats                         |
+| [04-roadmap.md](docs/04-roadmap.md)                 | Phases 0–5, each independently shippable                                 |
+| [05-configuration.md](docs/05-configuration.md)     | Minimal config and adoption workflow                                     |
+| [06-open-questions.md](docs/06-open-questions.md)   | Unresolved decisions, with recommendations                               |
+| [PROJECT-MANAGEMENT.md](docs/PROJECT-MANAGEMENT.md) | Team, process, sprint plan, full backlog — backup of the Notion board    |
+| [CONTRIBUTING.md](CONTRIBUTING.md)                  | Branches, commits, PRs, Definition of Done, testing standards per bucket |
 | [spikes/competitors.md](docs/spikes/competitors.md) | PR-002 findings — which differentiators survived contact with the market |
 
 ## Start here

@@ -30,7 +30,7 @@ Both can invalidate the plan. Doing them after building would be expensive.
 1. **Fork-token verification.** Open a PR from a throwaway fork against a test repo.
    Run a workflow on `pull_request` requesting `pull-requests: write` and attempt a
    comment. Then repeat via `check_suite: completed`. Confirm which can write.
-   *If neither can, Surface A is dead and the roadmap restarts at Surface B.*
+   _If neither can, Surface A is dead and the roadmap restarts at Surface B._
 2. ~~**Competitor research (30 min).**~~ **DONE** — `docs/spikes/competitors.md`
    (PR-002, 2026-08-05). One differentiator survived cleanly (blockage ownership), one
    narrowed to a GitHub-Actions implementation gap (actionable CI instructions), one
@@ -52,7 +52,7 @@ Both can invalidate the plan. Doing them after building would be expensive.
    claim outright. [Certain that it is countable; Guessing what the count is]
 
 **Exit:** written answers to all three, committed to this repo. Note that answer 3 is now
-evidence about what the rules *would have* said, not about whether a real week of triage
+evidence about what the rules _would have_ said, not about whether a real week of triage
 got easier. The premise test got stronger on sample size (N=162 rather than a week's
 trickle) and weaker on realism. State both at the go/no-go. [Certain]
 
@@ -70,7 +70,7 @@ touching anyone's repo.
 
 **Exit criteria — measured, not judged (PR-042).** The earlier "matches your own
 judgment" test was circular: if it matches, it taught you nothing. That was fixed. What
-was *not* fixed until now is that the replacement assumed an open queue to classify.
+was _not_ fixed until now is that the replacement assumed an open queue to classify.
 There is none, so the criteria are restated against the archived 162-PR corpus (PR-005).
 The rewrite is recorded here rather than swapped in silently.
 
@@ -86,7 +86,7 @@ with the check-run and base-branch check status as they stood at that time. Then
   wrong is a bug, not a tuning problem. Disagreement here means the derived status
   differs, or a fact rule fired that the PR's state does not support.
 - **Report the `CI_BROKEN_ON_BASE` count over all 162.** How many PRs had a required
-  check failing that was *also* failing on the base branch at that PR's head. This is the
+  check failing that was _also_ failing on the base branch at that PR's head. This is the
   project's lead differentiator and it is directly countable from history. Report it as a
   raw count and a fraction. This is a reported number, not a pass/fail threshold — no
   honest threshold exists before the count is known, and inventing one now would be
@@ -101,7 +101,7 @@ and about an hour of hand classification, which is the most manual effort this g
 worth. If it turns out zero-disagreement is trivially met, widen the sample rather than
 declaring victory.
 
-**Deferred until a wave arrives:** whether the report is *useful* to a maintainer working
+**Deferred until a wave arrives:** whether the report is _useful_ to a maintainer working
 a live queue. A replay proves the rules are correct; it cannot prove the output changes
 what anyone does. Do not let Phase 0 claim otherwise.
 
@@ -130,7 +130,7 @@ existing GitHub PR list usable, and plausibly most of the product's value.
 
 Measurable now, by replay against the corpus:
 
-- Run the label reconciler in dry-run over all 162 replayed PRs. The label set it *would*
+- Run the label reconciler in dry-run over all 162 replayed PRs. The label set it _would_
   have applied is correct on the 40-PR blind sample from PR-042, and reconciliation is
   idempotent: replaying the same fixture twice produces zero label churn.
 - Rendered comment bodies for all 162 are generated without error, and every
@@ -142,7 +142,7 @@ into retrospective proxies, because a retrospective cannot answer them [Certain]
 
 - A week with **zero manual "fix your CI" comments**. This measures maintainer behaviour
   under the bot, which did not exist during the wave. The historical count of such
-  comments is a *baseline* worth extracting from the corpus, but it is not the exit
+  comments is a _baseline_ worth extracting from the corpus, but it is not the exit
   criterion.
 - **≈1 bot comment per PR.** Noise is a property of a live multi-bot setup. A replay
   posts nothing.
@@ -153,7 +153,7 @@ explicitly open. Do not mark it passed.
 
 ---
 
-## Phase 2 — Maintainer digest *(conditional)*
+## Phase 2 — Maintainer digest _(conditional)_
 
 **Do not start this phase without answering:** what does the digest show that
 `is:pr is:open label:ready-for-review` does not? If the honest answer is "it's
@@ -180,7 +180,7 @@ There is nothing to open. No retrospective substitute exists and none should be 
 [Certain]. Phase 2 was already conditional; it is now conditional on traffic as well, and
 the honest position is that it should not start before a wave arrives.
 
-One thing here *is* measurable retrospectively and is worth doing early, because it is
+One thing here _is_ measurable retrospectively and is worth doing early, because it is
 the part a saved search genuinely cannot replace: run **duplicate-PR detection** over the
 PRs that were open concurrently during the wave, reconstructed from open/close timestamps,
 and check the pairs it flags against what the maintainers actually did with them. That
@@ -189,12 +189,12 @@ substitute for the exit criterion.
 
 ---
 
-## Phase 3 — Judgment layer *(two checks, shadow mode)*
+## Phase 3 — Judgment layer _(two checks, shadow mode)_
 
 The blockers that made this phase indefinite are resolved. Recorded here because the
 resolutions are the reason the phase is small:
 
-- **F6 was a measurement error.** The judge fires on a PR's *transition* into
+- **F6 was a measurement error.** The judge fires on a PR's _transition_ into
   `READY_FOR_REVIEW`, not on a sweep of a queue that is mostly blocked. It runs once
   per eventually-reviewable PR. See F6 in `01-critique.md`.
 - **J2 and J3 left.** They were a glob and a regex; they ship in Phase 2 without a
@@ -246,7 +246,7 @@ not the weeks the original scope implied.
 
 ---
 
-## Phase 5 — Hosted GitHub App *(only if demanded)*
+## Phase 5 — Hosted GitHub App _(only if demanded)_
 
 Webhook receiver, installation tokens, Postgres verdict history, cross-repo view.
 Only worth building if multiple maintainers ask, or if Phase −1 shows the Action can't
@@ -292,5 +292,5 @@ than replaced, because no retrospective answers them [Certain]:
   maintainer behaviour under a bot that did not exist at the time.
 - **Bot comments per PR → ≈1.** A replay posts nothing, so noise is unmeasurable.
 - **PRs blocked-on-contributor that self-resolve without a maintainer touch.** The
-  historical rate is measurable, but the number that matters is the rate *under the bot*,
+  historical rate is measurable, but the number that matters is the rate _under the bot_,
   and the bot is the intervention. The historical figure is a baseline, not the metric.

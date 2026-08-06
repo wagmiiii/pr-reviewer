@@ -4,21 +4,21 @@
 
 Structured API fields. Correct by construction. `block` = PR cannot be ready.
 
-| Code | Condition | Owner | Severity |
-|---|---|---|---|
-| `CI_FAILING` | a required check concluded failure/timed_out **and** the same check passes on base | contributor | block |
-| `CI_BROKEN_ON_BASE` | the same required check also fails on base | maintainer | block |
-| `CI_PENDING` | required checks still running | — | wait |
-| `CI_MISSING` | a required check never ran | maintainer | block |
-| `MERGE_CONFLICT` | `mergeable_state` is `dirty` | contributor | block |
-| `BEHIND_BASE` | commits behind base > threshold | contributor | warn |
-| `DRAFT` | PR is a draft | contributor | wait |
-| `CHANGES_REQUESTED` | unresolved requested-changes review | contributor | block |
-| `TOUCHES_PROTECTED` | diff touches configured protected paths (incl. `.github/workflows/**`) | maintainer | block |
-| `HUGE_DIFF` | changed lines above threshold | maintainer | warn |
-| `NO_DCO` | commits unsigned when DCO required | contributor | block |
-| `FIRST_TIME_CONTRIBUTOR` | author has no merged PR here | — | info |
-| `STALE` | no contributor activity in N days (activity = commit, comment, or review reply) | contributor | warn |
+| Code                     | Condition                                                                          | Owner       | Severity |
+| ------------------------ | ---------------------------------------------------------------------------------- | ----------- | -------- |
+| `CI_FAILING`             | a required check concluded failure/timed_out **and** the same check passes on base | contributor | block    |
+| `CI_BROKEN_ON_BASE`      | the same required check also fails on base                                         | maintainer  | block    |
+| `CI_PENDING`             | required checks still running                                                      | —           | wait     |
+| `CI_MISSING`             | a required check never ran                                                         | maintainer  | block    |
+| `MERGE_CONFLICT`         | `mergeable_state` is `dirty`                                                       | contributor | block    |
+| `BEHIND_BASE`            | commits behind base > threshold                                                    | contributor | warn     |
+| `DRAFT`                  | PR is a draft                                                                      | contributor | wait     |
+| `CHANGES_REQUESTED`      | unresolved requested-changes review                                                | contributor | block    |
+| `TOUCHES_PROTECTED`      | diff touches configured protected paths (incl. `.github/workflows/**`)             | maintainer  | block    |
+| `HUGE_DIFF`              | changed lines above threshold                                                      | maintainer  | warn     |
+| `NO_DCO`                 | commits unsigned when DCO required                                                 | contributor | block    |
+| `FIRST_TIME_CONTRIBUTOR` | author has no merged PR here                                                       | —           | info     |
+| `STALE`                  | no contributor activity in N days (activity = commit, comment, or review reply)    | contributor | warn     |
 
 `CI_FAILING` vs `CI_BROKEN_ON_BASE` is the single most trust-critical distinction here.
 Blaming a contributor for a broken main branch destroys the bot's credibility on first
@@ -42,7 +42,7 @@ They were to be corrected "against a real queue". There is no open queue on any 
 team owns [Certain, 2026-08-05 — `docs/spikes/premise-test.md`], so tuning happens against
 the archived 162-PR corpus instead. Two consequences worth stating rather than glossing:
 
-- `DUPLICATE_FILES` and `ISSUE_CLAIMED_ELSEWHERE` compare a PR against *other open PRs*.
+- `DUPLICATE_FILES` and `ISSUE_CLAIMED_ELSEWHERE` compare a PR against _other open PRs_.
   Replaying them requires reconstructing which PRs were open concurrently from open/close
   timestamps. That is doable and the wave was dense enough to make it meaningful, but it
   is a reconstruction, not an observation [Likely].
@@ -50,16 +50,16 @@ the archived 162-PR corpus instead. Two consequences worth stating rather than g
   the PR, which is noisier than a fact rule's ground truth. A tuned threshold from this
   corpus is better than intuition and worse than a live queue. Say so when reporting it.
 
-| Code | Method | Threshold status |
-|---|---|---|
-| `NO_LINKED_ISSUE` | regex for `#N` / closing keywords in title + body | misses prose references entirely |
-| `ISSUE_ALREADY_CLOSED` | linked issue state (only as reliable as the link detection above) | n/a |
-| `ISSUE_CLAIMED_ELSEWHERE` | another open PR links the same issue | n/a |
-| `DUPLICATE_FILES` | file-path overlap between open PRs | **guessed at 70%** — will fire on any two PRs touching a common central file |
-| `NEW_DEPENDENCY` | manifest/lockfile diff parsing | requires a parser per ecosystem; ship npm only, report "unsupported" elsewhere |
-| `POSSIBLE_SECRET` | entropy + known key prefixes in added lines | high false-positive risk; maintainer-facing only |
-| `NO_TEST_CHANGED` | no file under a configured test path glob was modified | glob list is repo-specific and must be configured |
-| `TESTS_REMOVED` | lines matching `assert\|it(\|test(\|def test_` deleted from test files, or `skip`/`xit`/`@Ignore` added | catches most real cases, not all |
+| Code                      | Method                                                                                                  | Threshold status                                                               |
+| ------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `NO_LINKED_ISSUE`         | regex for `#N` / closing keywords in title + body                                                       | misses prose references entirely                                               |
+| `ISSUE_ALREADY_CLOSED`    | linked issue state (only as reliable as the link detection above)                                       | n/a                                                                            |
+| `ISSUE_CLAIMED_ELSEWHERE` | another open PR links the same issue                                                                    | n/a                                                                            |
+| `DUPLICATE_FILES`         | file-path overlap between open PRs                                                                      | **guessed at 70%** — will fire on any two PRs touching a common central file   |
+| `NEW_DEPENDENCY`          | manifest/lockfile diff parsing                                                                          | requires a parser per ecosystem; ship npm only, report "unsupported" elsewhere |
+| `POSSIBLE_SECRET`         | entropy + known key prefixes in added lines                                                             | high false-positive risk; maintainer-facing only                               |
+| `NO_TEST_CHANGED`         | no file under a configured test path glob was modified                                                  | glob list is repo-specific and must be configured                              |
+| `TESTS_REMOVED`           | lines matching `assert\|it(\|test(\|def test_` deleted from test files, or `skip`/`xit`/`@Ignore` added | catches most real cases, not all                                               |
 
 The last two were specified as model calls (J2, J3) in an earlier draft. They are a path
 glob and a regex [Certain / Likely], so they belong here — no model, no eval gate, no
@@ -156,7 +156,7 @@ validated JSON state block. Sections in order, omitted when empty:
 4. **Checklist** — passed checks, collapsed.
 
 Nothing else. No praise, no diff summary, no line comments. Rewritten only when head
-SHA *and* the material verdict both changed.
+SHA _and_ the material verdict both changed.
 
 ### 3. Maintainer digest (Phase 2 — must justify itself)
 

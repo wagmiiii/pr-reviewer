@@ -15,12 +15,12 @@ run for a week, observe. **There is no traffic left to observe.**
 Survey of every repo reachable from the `mallison031` account and its three orgs
 (`Tollcraft`, `accensa`, `Soroban-Cost-Linter`):
 
-| Repo | Total PRs | Open now |
-|---|---|---|
-| `Tollcraft/soroban-cost-linter` | 162 | **0** |
-| `accensa/accensa-app` | 30 | 0 |
-| `accensa/accensa-contracts` | 16 | 0 |
-| everything else | <6 | 0 or 1 |
+| Repo                            | Total PRs | Open now |
+| ------------------------------- | --------- | -------- |
+| `Tollcraft/soroban-cost-linter` | 162       | **0**    |
+| `accensa/accensa-app`           | 30        | 0        |
+| `accensa/accensa-contracts`     | 16        | 0        |
+| everything else                 | <6        | 0 or 1   |
 
 [Certain — queried via the GitHub API on 2026-08-05]
 
