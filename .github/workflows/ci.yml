@@ -1,0 +1,52 @@
+# This project's own CI must be green, always.
+#
+# We are building a bot whose job is to tell contributors their CI is red. A bot
+# that nags people about CI cannot have a red CI — the first person to click
+# through to this repo and find a failing badge has learned everything they need
+# to know about how seriously to take the advice. Treat a red main as a stop-work.
+#
+# Least privilege by default: this workflow only reads the repo.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: lint, typecheck, test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Format
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm run test
+
+      # The bundle is part of the contract for the Action surface, so a build
+      # that no longer produces one is a failure like any other.
+      - name: Build
+        run: npm run build
