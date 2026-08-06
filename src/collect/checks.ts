@@ -36,12 +36,43 @@ export async function collectCheckRuns(
     ref: headSha,
   });
 
-  return checkRuns.map((check: any) => ({
-    name: check.name,
-    status: check.status as any,
-    conclusion: check.conclusion as any,
-    isRequired: requiredContexts.includes(check.name),
-  }));
+  return Promise.all(
+    checkRuns.map(async (check: any) => {
+      let failureExcerpt;
+
+      if (check.conclusion === 'failure' && check.app?.slug === 'github-actions') {
+        try {
+          const logs = await octokit.rest.actions.downloadJobLogsForWorkflowRun({
+            owner,
+            repo,
+            job_id: check.id,
+          });
+          const logText = logs.data as unknown as string;
+          const lines = logText.split('\n');
+          
+          const errorLineIdx = lines.findIndex(l => l.includes('##[error]'));
+          if (errorLineIdx !== -1) {
+            const start = Math.max(0, errorLineIdx - 15);
+            const end = Math.min(lines.length, errorLineIdx + 35);
+            failureExcerpt = lines.slice(start, end).join('\n');
+          } else {
+            failureExcerpt = lines.slice(-50).join('\n');
+          }
+        } catch (err) {
+          // Ignore failures fetching logs
+        }
+      }
+
+      return {
+        name: check.name,
+        status: check.status as any,
+        conclusion: check.conclusion as any,
+        isRequired: requiredContexts.includes(check.name),
+        ...(check.workflow_run_id ? { workflowRunId: String(check.workflow_run_id) } : {}),
+        ...(failureExcerpt ? { failureExcerpt } : {}),
+      };
+    })
+  );
 }
 
 export async function collectBaseCheckRuns(

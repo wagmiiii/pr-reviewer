@@ -101,6 +101,10 @@
         "conclusion": {
           "$ref": "#/definitions/CheckConclusion"
         },
+        "failureExcerpt": {
+          "description": "Excerpt of the failing job log (PR-024).",
+          "type": "string"
+        },
         "isRequired": {
           "description": "Whether this check is a required status check on the base branch.\n\nPresent on base checks as well as head checks: `CI_BROKEN_ON_BASE` compares the two sides, and it can only filter both to required-only if both carry the flag.\n\nOptional because resolving required checks needs branch-protection access the token may not have (PR-022). `undefined` means \"could not determine\".",
           "type": "boolean"
