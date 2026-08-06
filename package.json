@@ -42,5 +42,10 @@
   },
   "engines": {
     "node": ">=24"
+  },
+  "dependencies": {
+    "@octokit/plugin-retry": "^8.1.1",
+    "@octokit/plugin-throttling": "^11.0.5",
+    "octokit": "^5.0.5"
   }
 }
