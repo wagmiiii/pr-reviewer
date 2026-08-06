@@ -146,6 +146,27 @@ Included in this: distinguishing `CI_FAILING` from `CI_BROKEN_ON_BASE`. No surve
 compares a failing check against the base branch before assigning blame. This is the
 sharpest gap and the thing to lead with.
 
+**Measured, 2026-08-06 (PR-004).** Over 159 archived PRs from the repo that motivated
+this project: **71 arrived with a failing check, and 63 of those 71 (88.7%) were failing
+a check that was already failing on their base commit** [Certain]. The contributor had
+broken nothing. Only **8 of 159 PRs** in the whole history had a genuine
+contributor-caused break on a green base.
+
+Two consequences, both binding:
+
+1. **This is not one differentiator of three. It is the reason to build.** The original
+   pitch — *maintainers drown in CI nagging, so automate the nagging* — is not what the
+   history supports. 73 of 78 maintainer comments were manual nags, but nearly nine in ten
+   were **aimed at the wrong person**. The product is not *automate the nag*; it is
+   **don't send the wrong nag**.
+2. **The primary reader is the maintainer, not the contributor.** 63 of 71 findings say
+   "your `main` is broken", which is not a message to a drive-by contributor. The
+   renderers (PR-041, PR-071) are specified against a contributor-facing assumption and
+   must be reviewed against this before they are built.
+
+Full method, counter-evidence, and what the archive could not answer:
+`docs/spikes/premise-test.md` § Findings.
+
 ### 2. Actionable CI instructions on GitHub Actions — an implementation gap
 
 Turning a red CI into a specific instruction in the PR thread. **The concept is proven,

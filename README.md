@@ -52,13 +52,38 @@ around this with `check_suite` and `schedule` triggers — at the cost of latenc
 | [PROJECT-MANAGEMENT.md](docs/PROJECT-MANAGEMENT.md) | Team, process, sprint plan, full backlog — backup of the Notion board |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Branches, commits, PRs, Definition of Done, testing standards per bucket |
 | [spikes/competitors.md](docs/spikes/competitors.md) | PR-002 findings — which differentiators survived contact with the market |
+| [spikes/premise-test.md](docs/spikes/premise-test.md) | PR-004 — is the premise even true? Measured against 159 real PRs |
+| [spikes/fork-token.md](docs/spikes/fork-token.md) | PR-001 — can the Action write on fork PRs, and on which trigger |
+| [decisions/PR-003-go-no-go.md](docs/decisions/PR-003-go-no-go.md) | The go/no-go, its evidence, and the criteria that would reverse it |
+
+## Before you wait for this: you may not need it
+
+If what you want today is conflict labels and linked-issue enforcement, install these and
+stop reading. They work now, they cost no engineering, and a maintainer who just wants a
+tractable queue should try them first:
+
+- **[Mergify](https://docs.mergify.com/)** — labels by condition, `needs-rebase` on
+  conflict, comment the author, remove the label when resolved.
+- **[nearform/github-action-check-linked-issues](https://github.com/nearform-actions/github-action-check-linked-issues)**
+  — linked-issue enforcement, including cross-repo references.
+
+What they do not do is tell you **whose problem a PR is**, or check whether a failing
+check was *already failing on the base commit* before blaming the contributor. Measured
+over 159 real PRs: **63 of the 71 with a failing check were failing a check already
+failing on their base** — the contributor had broken nothing. No surveyed tool catches
+that.
+
+The other reason to want one tool rather than five: five bots post five comments per PR,
+which is the problem this project exists to solve. **The integration is the product.**
 
 ## Start here
 
 Two things, in order:
 
-1. **Verify the fork-token behaviour** (30 minutes, no code). If writes are impossible
-   on the triggers you need, the delivery plan changes before anything is built.
+1. **Confirm the write trigger against a real fork PR.** `check_suite` was the plan and it
+   does not work — it never fires when the check suite is created by GitHub Actions.
+   `workflow_run` is the replacement. See
+   [the trigger model](docs/02-architecture.md#trigger-model--read-this-before-writing-any-code).
 2. **Phase 0** — a read-only CLI that scans a repo and prints the triage report. No
    writes, no AI, no hosting. Success is measured, not vibed: see
    [the roadmap](docs/04-roadmap.md).
