@@ -43,3 +43,22 @@ export async function collectCheckRuns(
     isRequired: requiredContexts.includes(check.name),
   }));
 }
+
+export async function collectBaseCheckRuns(
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  baseSha: string,
+): Promise<PullRequestContext['baseChecks']> {
+  const checkRuns = await octokit.paginate(octokit.rest.checks.listForRef, {
+    owner,
+    repo,
+    ref: baseSha,
+  });
+
+  return checkRuns.map((check: any) => ({
+    name: check.name,
+    status: check.status as any,
+    conclusion: check.conclusion as any,
+  }));
+}
