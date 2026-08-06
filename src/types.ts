@@ -169,6 +169,10 @@ export interface RepoConfig {
   readonly labelPrefix?: string;
   readonly disabledRules?: readonly string[];
   readonly dryRun?: boolean;
+  readonly protectedGlobs?: readonly string[];
+  readonly hugeDiffThresholdLines?: number;
+  readonly staleDays?: number;
+  readonly dcoEnabled?: boolean;
 }
 
 /**

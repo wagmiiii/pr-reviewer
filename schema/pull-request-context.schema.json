@@ -410,6 +410,9 @@
       "additionalProperties": false,
       "description": "Adopter configuration in effect for this scan (PR-040).",
       "properties": {
+        "dcoEnabled": {
+          "type": "boolean"
+        },
         "disabledRules": {
           "items": {
             "type": "string"
@@ -419,8 +422,20 @@
         "dryRun": {
           "type": "boolean"
         },
+        "hugeDiffThresholdLines": {
+          "type": "number"
+        },
         "labelPrefix": {
           "type": "string"
+        },
+        "protectedGlobs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "staleDays": {
+          "type": "number"
         }
       },
       "type": "object"
