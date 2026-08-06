@@ -34,11 +34,11 @@ export function parseMarker(body: string): MarkerState | null {
   const match = body.match(
     /<!-- pr-reviewer:v1 hash:([a-f0-9]+) date:([^ ]+) edits:(\d+) -->/,
   );
-  if (!match) return null;
+  if (!match || !match[1] || !match[2] || !match[3]) return null;
   return {
-    hash: match[1],
-    date: match[2],
-    editsToday: parseInt(match[3], 10),
+    hash: match[1]!,
+    date: match[2]!,
+    editsToday: parseInt(match[3]!, 10),
   };
 }
 

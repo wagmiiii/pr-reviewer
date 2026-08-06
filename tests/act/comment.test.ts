@@ -92,8 +92,10 @@ describe('comment actuation', () => {
       await applyComment(octokit, 'owner', 'repo', 1, [], 'READY_FOR_REVIEW', 'Hello');
 
       expect(createComment).toHaveBeenCalledTimes(1);
-      expect(createComment.mock.calls[0][0].body).toContain('Hello');
-      expect(createComment.mock.calls[0][0].body).toContain('<!-- pr-reviewer:v1 hash:');
+      expect(createComment.mock.calls[0]![0]!.body).toContain('Hello');
+      expect(createComment.mock.calls[0]![0]!.body).toContain(
+        '<!-- pr-reviewer:v1 hash:',
+      );
     });
 
     test('updates comment if hash differs', async () => {
@@ -107,8 +109,8 @@ describe('comment actuation', () => {
       await applyComment(octokit, 'owner', 'repo', 1, [], 'READY_FOR_REVIEW', 'Hello');
 
       expect(updateComment).toHaveBeenCalledTimes(1);
-      expect(updateComment.mock.calls[0][0].comment_id).toEqual(123);
-      expect(updateComment.mock.calls[0][0].body).toContain('edits:2');
+      expect(updateComment.mock.calls[0]![0]!.comment_id).toEqual(123);
+      expect(updateComment.mock.calls[0]![0]!.body).toContain('edits:2');
     });
 
     test('no write if hash is identical', async () => {
