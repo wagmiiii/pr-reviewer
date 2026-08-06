@@ -75,6 +75,14 @@ describe('pipeline stage boundaries', () => {
       .map((entry) => entry.name)
       .sort();
 
-    expect(stages).toEqual(['act', 'collect', 'github', 'judge', 'render', 'rules']);
+    expect(stages).toEqual([
+      'act',
+      'cli',
+      'collect',
+      'github',
+      'judge',
+      'render',
+      'rules',
+    ]);
   });
 });

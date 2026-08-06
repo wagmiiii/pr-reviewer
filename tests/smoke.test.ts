@@ -6,6 +6,7 @@ describe('engine barrel', () => {
   it('exposes every pipeline stage', () => {
     expect(Object.keys(engine).sort()).toEqual([
       'act',
+      'cli',
       'collect',
       'judge',
       'render',

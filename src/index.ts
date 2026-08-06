@@ -22,3 +22,4 @@ export * as rules from './rules/index.js';
 export * as judge from './judge/index.js';
 export * as render from './render/index.js';
 export * as act from './act/index.js';
+export * as cli from './cli/index.js';
