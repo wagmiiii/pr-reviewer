@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:16:54Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 282,
+    "title": "feat: ship a pinned devcontainer and container image for the nightly + dylint toolchain",
+    "body": "## Closes #105\r\n## Summary\r\n\r\nThis PR adds a pinned development container and Docker image to provide a consistent development environment for contributors working on the nightly + Dylint toolchain.\r\n\r\n### Changes\r\n\r\n* Added a `.devcontainer/devcontainer.json` that opens into a fully configured development environment.\r\n* Added a `Dockerfile` that uses the project's existing toolchain source of truth to pin the required nightly version.\r\n* Preinstalled `cargo-dylint` and `dylint-link` in the container image.\r\n* Added CI to build and publish the container image whenever the Dockerfile or toolchain pin changes.\r\n* Added a CI job to build the image and run the UI test suite inside the container.\r\n* Updated the documentation to recommend using the development container as the preferred setup for contributors.\r\n\r\n### Notes\r\n\r\n* The nightly toolchain is sourced from the existing project configuration to avoid introducing another hardcoded version.\r\n* Image size was considered during implementation to help keep download times and storage requirements reasonable.\r\n* Existing CI workflows remain unchanged, with only the additional container image workflow introduced.\r\n\r\n### Testing\r\n\r\n* `cargo fmt --all -- --check`\r\n* `cargo clippy --workspace --all-targets -- -D warnings`\r\n* `cargo test --workspace`\r\n\r\n\r\n",
+    "author": {
+      "login": "Ayomide-257",
+      "id": 237866428,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-27T12:07:01Z",
+    "updated_at": "2026-07-28T13:17:36Z",
+    "merged_at": "2026-07-28T13:17:35Z",
+    "closed_at": "2026-07-28T13:17:36Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "9c8be4a8923535185a20b2101b9f47a7ffc46565",
+    "base": {
+      "ref": "main",
+      "sha": "aa669eff128e7306476b83805a917dabf9ca124c",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feat/devcontainer-toolchain",
+      "sha": "0a3d4be60fc7f12166db04271a71bab293dbc52b",
+      "repo": "Ayomide-257/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 184,
+    "deletions": 1,
+    "changed_files": 7,
+    "commits": 2,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/282"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "db95dc762d2572ee98983a0d1a4a560244816792",
+      "message": "feat: ship a pinned devcontainer and container image for the nightly + dylint toolchain\n\nAdd a Dockerfile and .devcontainer/devcontainer.json that provide a\nzero-setup development environment with the exact nightly toolchain,\ncompiler components (rustc-dev, llvm-tools-preview), and Dylint\nbinaries (cargo-dylint, dylint-link ^6.0.1) preinstalled.\n\nThe Dockerfile reads the nightly channel from ^Grust-toolchain^G at build\ntime using the same strict regex as ^Gvalidate-toolchain-pins.sh^G — no\nfifth hardcoded copy of the nightly string.\n\nSize optimizations:\n- ^G--profile minimal^G at rustup install time (no docs)\n- ^G--no-install-recommends^G for apt packages\n- cargo registry cache and git checkouts removed after install\n\nCI changes:\n- ^Gcontainer-test^G job (lint.yml): builds the image and runs\n  ^Gcargo test --workspace^G inside it on every PR/push\n- ^Gcontainer-publish.yml^G (new workflow): builds and pushes the image\n  to GHCR on push to main, triggered only by changes to\n  ^GDockerfile^G, ^Grust-toolchain^G, or the workflow itself\n\nDocs:\n- CONTRIBUTING.md: dev container documented as recommended setup\n- README.md: quick-start pointer to the container image\n\nCloses #105",
+      "author_name": "Ayomide",
+      "author_email": "salamiolamide525@gmail.com",
+      "authored_at": "2026-07-27T11:39:09Z",
+      "committed_at": "2026-07-27T11:39:09Z",
+      "author": {
+        "login": "Ayomide-257",
+        "id": 237866428,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Ayomide-257",
+        "id": 237866428,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "0a3d4be60fc7f12166db04271a71bab293dbc52b",
+      "message": "Merge branch 'main' into feat/devcontainer-toolchain",
+      "author_name": "Ayomide",
+      "author_email": "salamiolamide525@gmail.com",
+      "authored_at": "2026-07-27T12:09:48Z",
+      "committed_at": "2026-07-27T12:09:48Z",
+      "author": {
+        "login": "Ayomide-257",
+        "id": 237866428,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".devcontainer/devcontainer.json",
+      "status": "added",
+      "additions": 20,
+      "deletions": 0,
+      "changes": 20,
+      "previous_filename": null
+    },
+    {
+      "filename": ".dockerignore",
+      "status": "added",
+      "additions": 5,
+      "deletions": 0,
+      "changes": 5,
+      "previous_filename": null
+    },
+    {
+      "filename": ".github/workflows/container-publish.yml",
+      "status": "added",
+      "additions": 39,
+      "deletions": 0,
+      "changes": 39,
+      "previous_filename": null
+    },
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 21,
+      "deletions": 0,
+      "changes": 21,
+      "previous_filename": null
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 35,
+      "deletions": 1,
+      "changes": 36,
+      "previous_filename": null
+    },
+    {
+      "filename": "Dockerfile",
+      "status": "added",
+      "additions": 47,
+      "deletions": 0,
+      "changes": 47,
+      "previous_filename": null
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 17,
+      "deletions": 0,
+      "changes": 17,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 0,
+    "check_runs": []
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "6f9c057799b9a71286010a2f08e925dabfd61b1b",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 9c8be4a8923535185a20b2101b9f47a7ffc46565 is the main tip at merge time.",
+    "pull_request_base_sha": "aa669eff128e7306476b83805a917dabf9ca124c",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T13:17:40Z",
+          "completed_at": "2026-07-28T13:18:22Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30362805704/job/90286426069",
+          "app": "github-actions",
+          "workflow_run_id": "30362805704"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5091073700,
+        "created_at": "2026-07-27T12:07:09Z",
+        "updated_at": "2026-07-27T12:07:09Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@Ayomide-257 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": false,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

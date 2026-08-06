@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:18:51Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 335,
+    "title": "fix(ci): repair the release workflow so it can publish a binary",
+    "body": "## The release workflow has never worked\n\n```\npublish.yml runs:   0\nreleases:           1  → v0.1.0, assets = (none)\ntag v0.1.1:         exists, no release at all\n```\n\nFour independent defects. **None were introduced by the action bumps in #330** —\nthey all predate it.\n\n## What was wrong\n\n**1. `actions/setup-rust@v2` does not exist.**\n```\n$ gh api repos/actions/setup-rust\n{\"message\":\"Not Found\",\"status\":\"404\"}\n```\nThere is no such official action. The job died at step 2, before building\nanything. Replaced with the same `dtolnay/rust-toolchain` action and pinned SHA\nthe Lint workflow already uses.\n\n**2. The requested toolchain could never have applied.** It asked for\n`rust-version: stable`, but `rust-toolchain` at the repo root pins\n`nightly-2026-04-16` with `rustc-dev`, and that file takes precedence. Now\nstated explicitly to match, with a comment, so a future mismatch is visible.\n\n**3. `::set-output` has been disabled by GitHub.** `steps.tag.outputs.tag_name`\nresolved to an empty string. Replaced with `github.ref_name`, which is already\nthe tag name on a tag push — the step is gone rather than rewritten.\n\n**4. The asset path pointed at a directory that has never existed.** It uploaded\n`cargo-cost-lint/target/release/cargo-cost-lint`, but `cargo-cost-lint` is a\nworkspace member, so artefacts land in the workspace-root `target/`. Combined\nwith `fail_on_unmatched_files` defaulting to **false**, the upload matched\nnothing and still reported success. **That is exactly how v0.1.0 came to be\npublished with no assets** — a green workflow that shipped nothing.\n\n## Also in this change\n\n- Folded the two identical `action-gh-release` invocations into one.\n- `fail_on_unmatched_files: true`, so a missing binary fails loudly instead of\n  silently publishing an empty release.\n- Added the shared rust-cache, replacing the `cache: true` that was being passed\n  to the nonexistent action.\n- `prerelease: ${{ contains(github.ref_name, '-') }}` — any tag with a\n  pre-release suffix is marked as such, so a test tag like `v0.0.0-ci-test`\n  cannot be presented as the latest stable release.\n\n## Verification\n\n```\n$ cargo build --release --package cargo-cost-lint\n$ ls target/release/cargo-cost-lint\n-rwxrwxr-x 1654664  target/release/cargo-cost-lint\n```\n\nNote that CI cannot verify this PR: `publish.yml` only triggers on `v*` tags.\nRecommended validation after merge is a throwaway tag — which the `prerelease`\nrule above now makes safe:\n\n```\ngit tag v0.0.0-ci-test && git push origin v0.0.0-ci-test\ngh run watch\ngh release delete v0.0.0-ci-test --yes --cleanup-tag\n```",
+    "author": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "author_association": "MEMBER",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-08-04T09:28:28Z",
+    "updated_at": "2026-08-04T10:10:50Z",
+    "merged_at": "2026-08-04T10:10:50Z",
+    "closed_at": "2026-08-04T10:10:50Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "50cce44d1471c5af81244e0ea249e9c99da7acc1",
+    "base": {
+      "ref": "main",
+      "sha": "e23a352c914f3d83b5a7426645eabb2d305edc22",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "fix/publish-workflow",
+      "sha": "5854380bd0825a4b6ace7204931ad9a2a9184ee6",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 32,
+    "deletions": 23,
+    "changed_files": 1,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/335"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "5854380bd0825a4b6ace7204931ad9a2a9184ee6",
+      "message": "fix(ci): repair the release workflow so it can publish a binary\n\npublish.yml has never produced a release with an artefact. The v0.1.0 release\nexists with zero assets, the v0.1.1 tag has no release at all, and the workflow\nhas no recorded successful run. Four independent defects, none of them caused\nby the recent action bumps in #330:\n\n- `actions/setup-rust@v2` does not exist (`gh api repos/actions/setup-rust`\n  returns 404), so the job failed at that step on every run. Replaced with the\n  same `dtolnay/rust-toolchain` action and pin the Lint workflow uses.\n- It requested `rust-version: stable`, but `rust-toolchain` at the repository\n  root pins nightly-2026-04-16 and takes precedence, so the requested toolchain\n  could never have applied. The toolchain is now stated to match that file.\n- `::set-output` has been disabled by GitHub, so `steps.tag.outputs.tag_name`\n  resolved to an empty string. Use `github.ref_name`, which is already the tag\n  name on a tag push, and drop the step entirely.\n- The asset path was `cargo-cost-lint/target/release/cargo-cost-lint`, but\n  cargo-cost-lint is a workspace member, so its artefacts land in the\n  workspace-root `target/`. That directory has never existed. Because\n  `fail_on_unmatched_files` defaults to false, the upload matched nothing and\n  still reported success — which is how v0.1.0 was published with no assets.\n\nAlso: fold the two identical action-gh-release invocations into one, add\n`fail_on_unmatched_files: true` so a missing artefact fails loudly, add the\nshared rust-cache, and mark tags carrying a pre-release suffix as pre-releases\nso a test tag such as v0.0.0-ci-test cannot be presented as the latest stable\nrelease.\n\nVerified locally that `cargo build --release --package cargo-cost-lint`\nproduces `target/release/cargo-cost-lint`.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01ToyjQ3F5ogZ4G2C3YRpH4N",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-08-04T09:28:21Z",
+      "committed_at": "2026-08-04T09:28:21Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/publish.yml",
+      "status": "modified",
+      "additions": 32,
+      "deletions": 23,
+      "changes": 55,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 4,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T09:33:58Z",
+        "completed_at": "2026-08-04T09:34:00Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30896473700/job/91951755479",
+        "app": "github-actions",
+        "workflow_run_id": "30896473700"
+      },
+      {
+        "name": "test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T09:28:40Z",
+        "completed_at": "2026-08-04T09:31:15Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30896473700/job/91950455836",
+        "app": "github-actions",
+        "workflow_run_id": "30896473700"
+      },
+      {
+        "name": "test (windows-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T09:28:33Z",
+        "completed_at": "2026-08-04T09:33:56Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30896473700/job/91950455778",
+        "app": "github-actions",
+        "workflow_run_id": "30896473700"
+      },
+      {
+        "name": "dogfood",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T09:28:38Z",
+        "completed_at": "2026-08-04T09:33:13Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30896473633/job/91950455700",
+        "app": "github-actions",
+        "workflow_run_id": "30896473633"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "3133ee5118c0ac530380fa2900fdad2b59e4037f",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 50cce44d1471c5af81244e0ea249e9c99da7acc1 is the main tip at merge time.",
+    "pull_request_base_sha": "e23a352c914f3d83b5a7426645eabb2d305edc22",
+    "check_runs": {
+      "total_count": 4,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T10:13:01Z",
+          "completed_at": "2026-08-04T10:13:04Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30899286360/job/91960852044",
+          "app": "github-actions",
+          "workflow_run_id": "30899286360"
+        },
+        {
+          "name": "test (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T10:07:09Z",
+          "completed_at": "2026-08-04T10:09:48Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30899286360/job/91959525604",
+          "app": "github-actions",
+          "workflow_run_id": "30899286360"
+        },
+        {
+          "name": "test (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T10:07:07Z",
+          "completed_at": "2026-08-04T10:12:55Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30899286360/job/91959525506",
+          "app": "github-actions",
+          "workflow_run_id": "30899286360"
+        },
+        {
+          "name": "dogfood",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T10:07:07Z",
+          "completed_at": "2026-08-04T10:12:33Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30899285850/job/91959523848",
+          "app": "github-actions",
+          "workflow_run_id": "30899285850"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/xCEN1TLK6mZCgufWdn9h/",
+          "created_at": "2026-08-04T10:07:15Z",
+          "updated_at": "2026-08-04T10:07:15Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/xCEN1TLK6mZCgufWdn9h/",
+          "created_at": "2026-08-04T10:07:15Z",
+          "updated_at": "2026-08-04T10:07:15Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30896473633",
+      "30896473700"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

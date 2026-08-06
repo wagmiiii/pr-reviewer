@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:18:02Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 306,
+    "title": "fix: fallback defaults for missing/empty config fields",
+    "body": "## Summary\n\nExtracts configuration parsing into a dedicated module with robust fallback defaults, fixing the ungraceful failure when \budget.toml is empty or missing required fields.\n\n## Changes\n\n- **New file:** \\cargo-cost-lint/src/module_13.rs\\\n  - \\BudgetConfig\\ struct with \\#[derive(Default)]\\ and \\#[serde(default)]\\ so missing fields gracefully fall back to empty defaults\n  - \\parse_config(path)\\ — reads a file and returns \\BudgetConfig::default()\\ on any error (missing file, empty content, invalid TOML, missing \\[budget]\\ table or \\lints\\ field)\n  - \\parse_config_str(raw)\\ — same logic from a raw TOML string\n  - \\BudgetConfigWrapper\\ handles the \\[budget]\\ table nesting\n  - 11 test cases covering all edge cases: empty file, whitespace-only file, missing file, invalid TOML, empty/whitespace/invalid strings, missing \\[budget]\\ table, missing \\lints\\ field, and valid configs (both string and file)\n\n- **Modified:** \\cargo-cost-lint/src/main.rs\\\n  - Added \\mod module_13;\\\n  - Removed inline \\BudgetConfig\\ struct and unused \\serde::Deserialize\\ import\n  - Replaced nested \\if-let\\ config parsing with a single \\module_13::parse_config()\\ call\n\n## Edge cases handled\n\n| Scenario | Behavior |\n|----------|----------|\n| Config file does not exist | Returns empty defaults |\n| Config file is empty | Returns empty defaults |\n| Config file contains only whitespace | Returns empty defaults |\n| Config file contains invalid TOML | Returns empty defaults |\n| \\[budget]\\ table is missing | Returns empty defaults |\n| \\lints\\ field is missing | Returns empty defaults |\n| Valid config with lints | Parses correctly |\n\n## Checks\n\n- \\cargo fmt --all -- --check\\ passes\n- \\cargo clippy -p cargo-cost-lint -- -D warnings\\ passes\n- \\cargo test\\ cannot run in the dev environment (missing \\dlltool.exe\\), but all 11 unit tests are structurally correct\n\nCloses #211\nCloses #13",
+    "author": {
+      "login": "teeschima",
+      "id": 110719318,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-27T22:43:41Z",
+    "updated_at": "2026-07-31T16:25:31Z",
+    "merged_at": "2026-07-31T16:25:31Z",
+    "closed_at": "2026-07-31T16:25:31Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "35da5fcf3cb6dbe268c4b70183852b6613ee5bda",
+    "base": {
+      "ref": "main",
+      "sha": "416300da87d7496cc28ddfbed95a1c74e6b683cf",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "fix/task-13",
+      "sha": "bda331a36897d56f90ee88245c9d2ecab8b220e6",
+      "repo": "teeschima/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 0,
+    "deletions": 0,
+    "changed_files": 0,
+    "commits": 3,
+    "comments": 3,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/306"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "b6832eb7d5f936603a9d74677f616de7baca9aea",
+      "message": "fix: fallback defaults for missing/empty config fields (Closes #211, Closes #13)",
+      "author_name": "AI Builder",
+      "author_email": "bot@example.com",
+      "authored_at": "2026-07-27T22:43:08Z",
+      "committed_at": "2026-07-27T22:43:08Z",
+      "author": {
+        "login": "rhoggs-bot-test-account",
+        "id": 22551806,
+        "type": "User"
+      },
+      "committer": {
+        "login": "rhoggs-bot-test-account",
+        "id": 22551806,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "c8314ae372d0d037c6df89ca569356b6cd1d67bd",
+      "message": "Merge branch 'main' into fix/task-13",
+      "author_name": "Allison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-28T05:30:17Z",
+      "committed_at": "2026-07-28T05:30:17Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "bda331a36897d56f90ee88245c9d2ecab8b220e6",
+      "message": "Merge branch 'main' into fix/task-13",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-31T16:25:15Z",
+      "committed_at": "2026-07-31T16:25:15Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [],
+  "head_check_runs": {
+    "total_count": 3,
+    "check_runs": [
+      {
+        "name": "build-and-test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-31T16:25:24Z",
+        "completed_at": "2026-07-31T16:26:19Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30647047790/job/91210890716",
+        "app": "github-actions",
+        "workflow_run_id": "30647047790"
+      },
+      {
+        "name": "build-and-test (windows-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-31T16:25:24Z",
+        "completed_at": "2026-07-31T16:25:51Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30647047790/job/91210890715",
+        "app": "github-actions",
+        "workflow_run_id": "30647047790"
+      },
+      {
+        "name": "dogfood",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-31T16:25:30Z",
+        "completed_at": "2026-07-31T16:29:48Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30647047752/job/91210890486",
+        "app": "github-actions",
+        "workflow_run_id": "30647047752"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "416300da87d7496cc28ddfbed95a1c74e6b683cf",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 35da5fcf3cb6dbe268c4b70183852b6613ee5bda is the main tip at merge time.",
+    "pull_request_base_sha": "416300da87d7496cc28ddfbed95a1c74e6b683cf",
+    "check_runs": {
+      "total_count": 3,
+      "check_runs": [
+        {
+          "name": "build-and-test (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-31T16:24:53Z",
+          "completed_at": "2026-07-31T16:25:46Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30647011540/job/91210770111",
+          "app": "github-actions",
+          "workflow_run_id": "30647011540"
+        },
+        {
+          "name": "build-and-test (windows-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-31T16:24:54Z",
+          "completed_at": "2026-07-31T16:25:24Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30647011540/job/91210770035",
+          "app": "github-actions",
+          "workflow_run_id": "30647011540"
+        },
+        {
+          "name": "dogfood",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-31T16:24:59Z",
+          "completed_at": "2026-07-31T16:29:01Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30647011537/job/91210769778",
+          "app": "github-actions",
+          "workflow_run_id": "30647011537"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 3,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 2
+      }
+    ],
+    "comments": [
+      {
+        "id": 5100337537,
+        "created_at": "2026-07-28T05:30:25Z",
+        "updated_at": "2026-07-28T05:30:25Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@teeschima Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5129185651,
+        "created_at": "2026-07-30T09:40:53Z",
+        "updated_at": "2026-07-30T09:40:53Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "Hi @teeschima 👋\n\nThis PR currently has **merge conflicts with `main`** and can't be merged as-is. Please resolve them so we can move forward with the review.\n\n```bash\ngit remote add upstream https://github.com/Tollcraft/soroban-cost-linter.git   # if not already added\ngit fetch upstream\ngit checkout <your-branch>\ngit rebase upstream/main      # or: git merge upstream/main\n# resolve the conflicted files, then:\ngit add .\ngit rebase --continue         # or: git commit  (if you merged)\ngit push --force-with-lease    # plain 'git push' if you merged instead of rebased\n```\n\nA couple of reminders while you're at it:\n- Make sure the branch still builds and `cargo test` passes after the rebase.\n- Commit messages must follow [Conventional Commits](https://www.conventionalcommits.org/) — CI enforces this.\n\nPing us here once it's updated and we'll re-review. Thanks for contributing! 🙏"
+      },
+      {
+        "id": 5129400146,
+        "created_at": "2026-07-30T10:03:55Z",
+        "updated_at": "2026-07-30T10:03:55Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "Hi @teeschima 👋\n\nThis PR currently has **merge conflicts with `main`** and can't be merged as-is. Please resolve them so we can move forward with the review.\n\n```bash\ngit remote add upstream https://github.com/Tollcraft/soroban-cost-linter.git   # if not already added\ngit fetch upstream\ngit checkout <your-branch>\ngit rebase upstream/main      # or: git merge upstream/main\n# resolve the conflicted files, then:\ngit add .\ngit rebase --continue         # or: git commit  (if you merged)\ngit push --force-with-lease    # plain 'git push' if you merged instead of rebased\n```\n\nA couple of reminders while you're at it:\n- Make sure the branch still builds and `cargo test` passes after the rebase.\n- Commit messages must follow [Conventional Commits](https://www.conventionalcommits.org/) — CI enforces this.\n\nPing us here once it's updated and we'll re-review. Thanks for contributing! 🙏"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)",
+      "dogfood"
+    ],
+    "base_failing_checks": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)",
+      "dogfood"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)",
+      "dogfood"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30647047752",
+      "30647047790"
+    ],
+    "all_head_workflow_run_ids": [
+      "30647047752",
+      "30647047790"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

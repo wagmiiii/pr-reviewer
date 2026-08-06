@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:16:46Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 279,
+    "title": "refactor: extract try_get_adt_def helper to consolidate duplicated ADT validation logic",
+    "body": "Closes #192 — extracted duplicated ADT validation logic into a shared `try_get_adt_def` helper.\n\n## Changes\n- Added `try_get_adt_def` helper function that extracts an `AdtDef` from a receiver expression's type, peeling references first\n- Added `ty_adt_def` helper for raw `Ty` extraction (used by `is_bytes_type`)\n- Replaced 9 duplicated ADT-type-resolution blocks across all 8 lint implementations\n- Fixed a regression in `RedundantEnvClone` where the original `receiver_ty` was still needed for `peel_and_count_ty_refs`",
+    "author": {
+      "login": "kimmoris12345",
+      "id": 293177486,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-27T09:51:05Z",
+    "updated_at": "2026-07-28T13:19:08Z",
+    "merged_at": "2026-07-28T13:19:08Z",
+    "closed_at": "2026-07-28T13:19:08Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "c1859cacfdca51bb31a99634adde88369fe05aa7",
+    "base": {
+      "ref": "main",
+      "sha": "31470bf5c816aa87b0ef7c3d3b49f4223a5b4e05",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "refactor/task-32",
+      "sha": "408c88cff7332a37fb55b3229840afa29ed7ff97",
+      "repo": "kimmoris12345/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 18,
+    "deletions": 29,
+    "changed_files": 1,
+    "commits": 3,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/279"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "85d62abf0270662fd54ca82468f06c9a47d59520",
+      "message": "refactor: extract try_get_adt_def helper to consolidate duplicated ADT validation logic (Closes #192)",
+      "author_name": "kimmoris12345",
+      "author_email": "kimmoris12345@gmail.com",
+      "authored_at": "2026-07-27T09:37:50Z",
+      "committed_at": "2026-07-27T09:37:50Z",
+      "author": {
+        "login": "kimmoris12345",
+        "id": 293177486,
+        "type": "User"
+      },
+      "committer": {
+        "login": "kimmoris12345",
+        "id": 293177486,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "05c0a2d4f2b8ee95745fdd3270d7124f7d08121f",
+      "message": "Merge branch 'main' into refactor/task-32",
+      "author_name": "Allison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-27T10:05:29Z",
+      "committed_at": "2026-07-27T10:05:29Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "408c88cff7332a37fb55b3229840afa29ed7ff97",
+      "message": "Merge branch 'main' into refactor/task-32",
+      "author_name": "kimmoris12345",
+      "author_email": "kimmoris12345@gmail.com",
+      "authored_at": "2026-07-27T13:57:46Z",
+      "committed_at": "2026-07-27T13:57:46Z",
+      "author": {
+        "login": "kimmoris12345",
+        "id": 293177486,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 18,
+      "deletions": 29,
+      "changes": 47,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-27T13:57:55Z",
+        "completed_at": "2026-07-27T13:58:33Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30272766223/job/89999161077",
+        "app": "github-actions",
+        "workflow_run_id": "30272766223"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "9c8be4a8923535185a20b2101b9f47a7ffc46565",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit c1859cacfdca51bb31a99634adde88369fe05aa7 is the main tip at merge time.",
+    "pull_request_base_sha": "31470bf5c816aa87b0ef7c3d3b49f4223a5b4e05",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "publish",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-28T13:17:41Z",
+          "completed_at": "2026-07-28T13:21:31Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30362807332/job/90286430852",
+          "app": "github-actions",
+          "workflow_run_id": "30362807332"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/i7lkJyb2Lx5Oua4yQOTh/",
+          "created_at": "2026-07-28T13:17:44Z",
+          "updated_at": "2026-07-28T13:17:44Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/i7lkJyb2Lx5Oua4yQOTh/",
+          "created_at": "2026-07-28T13:17:44Z",
+          "updated_at": "2026-07-28T13:17:44Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5089991540,
+        "created_at": "2026-07-27T10:05:37Z",
+        "updated_at": "2026-07-27T10:05:37Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@kimmoris12345 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5089999735,
+        "created_at": "2026-07-27T10:06:31Z",
+        "updated_at": "2026-07-27T10:06:31Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "fix your cl"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30272766223"
+    ],
+    "all_head_workflow_run_ids": [
+      "30272766223"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

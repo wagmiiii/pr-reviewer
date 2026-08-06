@@ -1,0 +1,276 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:18:36Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 332,
+    "title": "perf(ci): compile the corpus dependency tree once, not once per contract",
+    "body": "## The problem\n\nEach of the nine contracts under `tests/corpus/contracts/` is an independent\ncargo workspace, and every one declares the same `soroban-sdk = \"26\"`. The\ncorpus test loops over all nine running `cargo build` in each directory, so the\nSDK dependency tree was compiled nine times per run — and none of it was cached,\nbecause `Swatinem/rust-cache` only covers the root `target/` by default.\n\nThis dominated `Run tests`, the slowest step on both runners:\n\n| Step | ubuntu | windows |\n|---|---|---|\n| **Run tests** | **605s** | **1351s** |\n| Build corpus contracts | 116s | 236s |\n| everything else | ~50s | ~870s |\n\n## The change\n\n- Point every contract build **and its dylint pass** at one shared target\n  directory. Redirecting only the build would leave dylint still writing nine\n  separate `target/dylint/` trees, so half the duplication would survive.\n- Add that directory to the rust-cache config, so it is actually cached.\n- Drop the `Build corpus contracts` step: it pre-built three of the nine into\n  per-contract directories the suite no longer uses.\n- Pin the cache identity with an explicit `shared-key`. The default key embeds\n  the job name, so renaming a job silently discards every cache entry — which is\n  exactly what happened when #328 renamed this job.\n\n`DYLINT_LIBRARY_PATH` is derived from the workspace binary path, not the\ncontract target dir, so it is unaffected.\n\n## Measured locally\n\n- Corpus suite passes against `baseline.json` — lint findings unchanged, this is\n  purely a build-layout change.\n- The nine per-contract target dirs came back **byte-identical** in size after\n  the run: nothing was written to them, confirming the dylint pass honours the\n  inherited `CARGO_TARGET_DIR` too.\n- Disk: **13.4GB across nine dirs → 1.5GB in one**, which is also what makes it\n  cacheable — nine dirs would not fit the 10GB repo cache budget.\n- Suite completes in **114.5s from a cold shared directory**.\n\n## Note on this PR's own CI timings\n\n`shared-key` and `cache-directories` change the cache identity, so **this PR's\nfirst run is cold on both legs** and will not show the improvement. Steady state\nis the run after it.\n\n## Not included\n\nWindows currently spends ~1351s of its ~41min re-deriving lint findings that are\nplatform-independent and already fully verified on ubuntu, while every\nWindows-specific failure this repo has actually hit has been in environment and\npath handling (MAX_PATH, PowerShell, `.stderr` separators, CRLF). Gating the\ncorpus test to non-Windows — as the dylint ui tests already are — would cut most\nof that. Left out here as a deliberate coverage decision for a maintainer.",
+    "author": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "author_association": "MEMBER",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-08-04T08:24:30Z",
+    "updated_at": "2026-08-04T08:45:25Z",
+    "merged_at": "2026-08-04T08:45:25Z",
+    "closed_at": "2026-08-04T08:45:25Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "7288a2876f35f5e61b769442d9a1585ea1a7102e",
+    "base": {
+      "ref": "main",
+      "sha": "c407bc3dd9e1387d2c2de22500c08d9259236016",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "perf/corpus-shared-target",
+      "sha": "13ab5b6f71aabe2def6c82880e0bb1ae6660b785",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 27,
+    "deletions": 6,
+    "changed_files": 3,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/332"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "13ab5b6f71aabe2def6c82880e0bb1ae6660b785",
+      "message": "perf(ci): compile the corpus dependency tree once, not once per contract\n\nEach of the nine contracts under tests/corpus/contracts is an independent\ncargo workspace depending on the same soroban-sdk, and each built into its own\ntarget directory. The SDK dependency tree was therefore compiled nine times per\nrun, and none of it was cached: Swatinem/rust-cache only covers the root\ntarget/. This dominated the `Run tests` step, the slowest step on both runners\nat 605s (ubuntu) and 1351s (windows).\n\nPoint every contract build and its dylint pass at one shared target directory,\nand add that directory to the cache. Locally the nine per-contract target dirs\ntotalled 13.4GB and are now untouched; the shared directory is 1.5GB and the\ncorpus suite completes in 115s from cold.\n\nAlso drop the `Build corpus contracts` step, which pre-built three of the nine\ninto per-contract directories the suite no longer uses, and pin the rust-cache\nidentity with an explicit shared-key: the default key embeds the job name, so\nrenaming a job silently discards every cache entry.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01ToyjQ3F5ogZ4G2C3YRpH4N",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-08-04T07:26:00Z",
+      "committed_at": "2026-08-04T08:12:31Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 12,
+      "deletions": 6,
+      "changes": 18,
+      "previous_filename": null
+    },
+    {
+      "filename": ".gitignore",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 0,
+      "changes": 3,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/tests/real_world_corpus.rs",
+      "status": "modified",
+      "additions": 12,
+      "deletions": 0,
+      "changes": 12,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 4,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T08:38:30Z",
+        "completed_at": "2026-08-04T08:38:34Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30891826141/job/91938623678",
+        "app": "github-actions",
+        "workflow_run_id": "30891826141"
+      },
+      {
+        "name": "test (windows-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T08:24:39Z",
+        "completed_at": "2026-08-04T08:38:27Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30891826141/job/91935444221",
+        "app": "github-actions",
+        "workflow_run_id": "30891826141"
+      },
+      {
+        "name": "test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T08:24:36Z",
+        "completed_at": "2026-08-04T08:32:24Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30891826141/job/91935444183",
+        "app": "github-actions",
+        "workflow_run_id": "30891826141"
+      },
+      {
+        "name": "dogfood",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T08:24:42Z",
+        "completed_at": "2026-08-04T08:30:14Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30891825552/job/91935442529",
+        "app": "github-actions",
+        "workflow_run_id": "30891825552"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "c407bc3dd9e1387d2c2de22500c08d9259236016",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 7288a2876f35f5e61b769442d9a1585ea1a7102e is the main tip at merge time.",
+    "pull_request_base_sha": "c407bc3dd9e1387d2c2de22500c08d9259236016",
+    "check_runs": {
+      "total_count": 6,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T08:47:56Z",
+          "completed_at": "2026-08-04T08:47:59Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30890892644/job/91940772674",
+          "app": "github-actions",
+          "workflow_run_id": "30890892644"
+        },
+        {
+          "name": "Dependabot",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-08-04T08:15:12Z",
+          "completed_at": "2026-08-04T08:16:27Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30891166776/job/91933322789",
+          "app": "github-actions",
+          "workflow_run_id": "30891166776"
+        },
+        {
+          "name": "Dependabot",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T08:15:07Z",
+          "completed_at": "2026-08-04T08:16:35Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30891162841/job/91933304408",
+          "app": "github-actions",
+          "workflow_run_id": "30891162841"
+        },
+        {
+          "name": "test (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T08:11:17Z",
+          "completed_at": "2026-08-04T08:31:18Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30890892644/job/91932435375",
+          "app": "github-actions",
+          "workflow_run_id": "30890892644"
+        },
+        {
+          "name": "test (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T08:11:18Z",
+          "completed_at": "2026-08-04T08:47:53Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30890892644/job/91932435363",
+          "app": "github-actions",
+          "workflow_run_id": "30890892644"
+        },
+        {
+          "name": "dogfood",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T08:11:19Z",
+          "completed_at": "2026-08-04T08:16:36Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30890892533/job/91932434985",
+          "app": "github-actions",
+          "workflow_run_id": "30890892533"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/vOVIdzYy7eog4xde8TZR/",
+          "created_at": "2026-08-04T08:11:26Z",
+          "updated_at": "2026-08-04T08:11:26Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/vOVIdzYy7eog4xde8TZR/",
+          "created_at": "2026-08-04T08:11:26Z",
+          "updated_at": "2026-08-04T08:11:26Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [
+      "Dependabot"
+    ],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30891825552",
+      "30891826141"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

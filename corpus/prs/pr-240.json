@@ -1,0 +1,324 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:21Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 240,
+    "title": "feat(#124): generate lint reference pages from registered lint set",
+    "body": "## Description\n\nThis PR introduces a **single source of truth** for lint metadata by replacing the hand-maintained lint summary in \\docs/lints/README.md\\ with an auto-generated version. A new standalone generator crate (\\\tools/generate-lint-docs\\) parses the authoritative \\declare_lint!\\ blocks and \\LINT_METADATA\\ array in \\soroban_cost_lints/src/lib.rs\\ to produce both:\n\n- **\\docs/lints/README.md\\** — the human-readable lint reference table\n- **\\docs/lints/lint-registry.json\\** — a machine-readable registry consumable by \\#96\\ (\\--list-lints\\) and \\#103\\ (\\--explain\\)\n\n## Key design decisions\n\n- **Generator is a standalone binary** (\\\tools/generate-lint-docs\\) rather than a build script or test, so it can be run on demand and in CI without a full rustc build.\n- **Boundary**: only structured metadata (name, level, description, category) is generated. Per-lint prose pages remain hand-written — the generator reads descriptions from \\declare_lint!\\ blocks but never modifies the \\.md\\ doc pages.\n- **CI drift check**: \\.github/workflows/lint.yml\\ includes \\cargo run -p generate-lint-docs -- --check\\ which fails if the committed output differs from generated output.\n- **Machine-readable output**: \\lint-registry.json\\ exposes the full inventory in a shape that \\#96\\ and \\#103\\ can consume directly.\n\n## Changes\n\n| File | Action |\n|------|--------|\n| \\\tools/generate-lint-docs/Cargo.toml\\ | Created |\n| \\\tools/generate-lint-docs/src/main.rs\\ | Created |\n| \\docs/lints/lint-registry.json\\ | Created |\n| \\Cargo.toml\\ (workspace) | Added \\\tools/generate-lint-docs\\ member |\n| \\.github/workflows/lint.yml\\ | Added CI drift check step |\n| \\CONTRIBUTING.md\\ | Replaced manual doc update instructions with regeneration command |\n| \\docs/lints/README.md\\ | Regenerated (now includes previously-missing \\host_in_loop\\ entry) |\n\n## Regeneration\n\nTo regenerate the docs after adding/modifying a lint:\n\n\\\\\\\bash\ncargo run -p generate-lint-docs\n\\\\\\\n\nCloses #124",
+    "author": {
+      "login": "K1NGD4VID",
+      "id": 173216192,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T00:23:23Z",
+    "updated_at": "2026-07-28T13:34:40Z",
+    "merged_at": "2026-07-28T13:34:40Z",
+    "closed_at": "2026-07-28T13:34:40Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "688ba74d88cdde29ffa8f4dd91e5eadc148a968c",
+    "base": {
+      "ref": "main",
+      "sha": "cc80be7149d813fcf6983f515967d302ad3e0cb6",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feat/generate-lint-reference",
+      "sha": "a75e5e233468a5caa818773357bb8e009c6f3685",
+      "repo": "K1NGD4VID/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 328,
+    "deletions": 59,
+    "changed_files": 8,
+    "commits": 3,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/240"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "8e0b2eb6fef75281122d3eb8e31b9b531dfdf388",
+      "message": "feat(#124): generate lint reference pages from registered lint set",
+      "author_name": "K1NGD4VID",
+      "author_email": "adesanyafuhad5@gmail.com",
+      "authored_at": "2026-07-25T23:54:59Z",
+      "committed_at": "2026-07-25T23:54:59Z",
+      "author": {
+        "login": "K1NGD4VID",
+        "id": 173216192,
+        "type": "User"
+      },
+      "committer": {
+        "login": "K1NGD4VID",
+        "id": 173216192,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "9e6e5b9d0e686374a6cb8b1819224ae439bd48a2",
+      "message": "Merge branch 'main' into feat/generate-lint-reference",
+      "author_name": "Adesanya Fuhad",
+      "author_email": "adesanyafuhad5@gmail.com",
+      "authored_at": "2026-07-26T00:32:27Z",
+      "committed_at": "2026-07-26T00:32:27Z",
+      "author": {
+        "login": "K1NGD4VID",
+        "id": 173216192,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "a75e5e233468a5caa818773357bb8e009c6f3685",
+      "message": "Merge remote-tracking branch 'origin/main' into feat/generate-lint-reference",
+      "author_name": "adajala",
+      "author_email": "ademola2993k@gmail.com",
+      "authored_at": "2026-07-28T13:34:28Z",
+      "committed_at": "2026-07-28T13:34:28Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 31,
+      "changes": 34,
+      "previous_filename": null
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 1,
+      "changes": 3,
+      "previous_filename": null
+    },
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 8,
+      "deletions": 0,
+      "changes": 8,
+      "previous_filename": null
+    },
+    {
+      "filename": "Cargo.toml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 13,
+      "deletions": 26,
+      "changes": 39,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/lint-registry.json",
+      "status": "added",
+      "additions": 37,
+      "deletions": 0,
+      "changes": 37,
+      "previous_filename": null
+    },
+    {
+      "filename": "tools/generate-lint-docs/Cargo.toml",
+      "status": "added",
+      "additions": 8,
+      "deletions": 0,
+      "changes": 8,
+      "previous_filename": null
+    },
+    {
+      "filename": "tools/generate-lint-docs/src/main.rs",
+      "status": "added",
+      "additions": 256,
+      "deletions": 0,
+      "changes": 256,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 3,
+    "check_runs": [
+      {
+        "name": "build-and-test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-28T13:34:50Z",
+        "completed_at": "2026-07-28T13:35:30Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364135883/job/90290906119",
+        "app": "github-actions",
+        "workflow_run_id": "30364135883"
+      },
+      {
+        "name": "build-and-test (windows-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-28T13:34:45Z",
+        "completed_at": "2026-07-28T13:35:05Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364135883/job/90290906051",
+        "app": "github-actions",
+        "workflow_run_id": "30364135883"
+      },
+      {
+        "name": "cargo-deny check",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-28T13:34:41Z",
+        "completed_at": "2026-07-28T13:35:41Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364131485/job/90290890523",
+        "app": "github-actions",
+        "workflow_run_id": "30364131485"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "cc80be7149d813fcf6983f515967d302ad3e0cb6",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 688ba74d88cdde29ffa8f4dd91e5eadc148a968c is the main tip at merge time.",
+    "pull_request_base_sha": "cc80be7149d813fcf6983f515967d302ad3e0cb6",
+    "check_runs": {
+      "total_count": 0,
+      "check_runs": []
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/IKpSGYiKR406jOuuWzAT/",
+          "created_at": "2026-07-28T13:34:33Z",
+          "updated_at": "2026-07-28T13:34:33Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/IKpSGYiKR406jOuuWzAT/",
+          "created_at": "2026-07-28T13:34:33Z",
+          "updated_at": "2026-07-28T13:34:33Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "K1NGD4VID",
+        "count": 1
+      },
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5081219600,
+        "created_at": "2026-07-26T00:32:37Z",
+        "updated_at": "2026-07-26T00:32:37Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@K1NGD4VID Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5083701551,
+        "created_at": "2026-07-26T13:35:02Z",
+        "updated_at": "2026-07-26T13:35:02Z",
+        "user": {
+          "login": "K1NGD4VID",
+          "id": 173216192,
+          "type": "User"
+        },
+        "author_association": "CONTRIBUTOR",
+        "body": "CI is failing on this PR — the `build-and-test` check failed (completed at 2026-07-26). Please investigate the build/test failure and push a fix."
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": false,
+    "head_failing_checks": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)",
+      "cargo-deny check"
+    ],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30364131485",
+      "30364135883"
+    ],
+    "all_head_workflow_run_ids": [
+      "30364131485",
+      "30364135883"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

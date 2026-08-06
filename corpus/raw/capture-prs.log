@@ -1,0 +1,21 @@
+[15:13:11] Enumerating pull requests on Tollcraft/soroban-cost-linter
+[15:13:14] Found 162 pull requests
+[15:13:14] Batch 1 (30 PRs)
+xargs: warning: options --max-args and --replace/-I/-i are mutually exclusive, ignoring previous --max-args value
+[15:14:02] Batch 2 (30 PRs)
+xargs: warning: options --max-args and --replace/-I/-i are mutually exclusive, ignoring previous --max-args value
+environment: line 57: /usr/bin/jq: Argument list too long
+[15:14:44] PR 179: assembly produced empty output
+[15:14:58] Batch 3 (30 PRs)
+xargs: warning: options --max-args and --replace/-I/-i are mutually exclusive, ignoring previous --max-args value
+[15:15:47] Batch 4 (30 PRs)
+xargs: warning: options --max-args and --replace/-I/-i are mutually exclusive, ignoring previous --max-args value
+environment: line 57: /usr/bin/jq: Argument list too long
+[15:16:47] PR 281: assembly produced empty output
+[15:17:18] Batch 5 (30 PRs)
+xargs: warning: options --max-args and --replace/-I/-i are mutually exclusive, ignoring previous --max-args value
+[15:18:08] Batch 6 (12 PRs)
+xargs: warning: options --max-args and --replace/-I/-i are mutually exclusive, ignoring previous --max-args value
+environment: line 57: /usr/bin/jq: Argument list too long
+[15:18:40] PR 328: assembly produced empty output
+[15:19:01] PR capture complete: 159 files

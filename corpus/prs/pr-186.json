@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:39Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 186,
+    "title": "chore: fill in publishable metadata on cargo-cost-lint manifest",
+    "body": "Closes #88\n\nAdds publishable metadata to `cargo-cost-lint/Cargo.toml` so the crate\ncan be published to crates.io without metadata errors.\n\n## Changes\n\n- `description`: `\"A static analysis linter for Soroban smart contracts\"` — a one-line summary of the tool's purpose\n- `repository`: `\"https://github.com/Tollcraft/soroban-cost-linter\"`\n- `readme`: `\"../README.md\"` — points to the workspace README\n- `keywords`: soroban, stellar, wasm, linter, cost, cargo\n- `categories`: development-tools:cargo-plugins\n- `license`: already present (Apache-2.0)\n\n## Verification\n\n```\n$ cargo publish --dry-run --allow-dirty -p cargo-cost-lint --no-verify\n   Packaging cargo-cost-lint v0.1.1 ...\n   Packaged 8 files, 44.7KiB\n   Uploading cargo-cost-lint v0.1.1\nwarning: aborting upload due to dry run\n```\n\nNo metadata warnings are emitted by cargo.\n\nCo-developed-by: Samuel <sojetund8@gmail.com>",
+    "author": {
+      "login": "sojetunde8",
+      "id": 287985093,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-25T11:51:50Z",
+    "updated_at": "2026-07-27T13:48:23Z",
+    "merged_at": "2026-07-27T13:48:23Z",
+    "closed_at": "2026-07-27T13:48:23Z",
+    "merged_by": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "31470bf5c816aa87b0ef7c3d3b49f4223a5b4e05",
+    "base": {
+      "ref": "main",
+      "sha": "5d6039a6d5c886f0b4ac5dde8ade6d6504571dc7",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "chore/cli-crate-metadata",
+      "sha": "795499bb548f951068af615bf987855ff69cd1b6",
+      "repo": "sojetunde8/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 101,
+    "deletions": 4,
+    "changed_files": 6,
+    "commits": 4,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/186"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "53cdd1164dd3857ecf4aa4af0ca982711067c38b",
+      "message": "feat: emit machine-readable lint inventory via --list-lints\n\nAdds a versioned, machine-readable inventory of all registered lints\nthat can be emitted via `cargo cost-lint --list-lints --format json`.\n\nThe inventory is generated at build time by build.rs, which parses\nsoroban_cost_lints/src/lib.rs to extract lint declarations and\nmetadata from LINT_METADATA. It produces a JSON object with:\n\n- version: inventory schema version (\"1.0\")\n- schema: URL pointing to schema documentation\n- lints: array of entries with name, default_level, description,\n  category, and documentation_url\n\nConsumes the registry from register_lints without creating a\ncross-crate dependency cycle. The generated code is emitted into\nOUT_DIR as lint_metadata.rs and include!d by the CLI binary.\n\nAdds unit test lint_metadata_matches_registered_lints verifying\nthe inventory matches all registered lints, plus integration tests\nfor JSON and text output of --list-lints.\n\nCloses #118",
+      "author_name": "Samuel",
+      "author_email": "sojetund8@gmail.com",
+      "authored_at": "2026-07-25T11:27:07Z",
+      "committed_at": "2026-07-25T11:27:07Z",
+      "author": null,
+      "committer": null,
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "00c23ed3db0b35c0c91ce5de137ee6add7da908b",
+      "message": "chore: fill in publishable metadata on cargo-cost-lint manifest\n\nAdds description, repository, readme, keywords, and categories to\ncargo-cost-lint/Cargo.toml so the crate can be published to crates.io\nwithout metadata errors.\n\n- description: a one-line summary of the tool's purpose\n- repository: points to the upstream repo\n- readme: points to the workspace README\n- keywords: soroban, stellar, wasm, linter, cost, cargo\n- categories: development-tools:cargo-plugins\n- license already present (Apache-2.0)\n\nCloses #88",
+      "author_name": "Samuel",
+      "author_email": "sojetund8@gmail.com",
+      "authored_at": "2026-07-25T11:51:40Z",
+      "committed_at": "2026-07-25T11:51:40Z",
+      "author": null,
+      "committer": null,
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "b7ee26d89b5829a0d583432ed6fb088a49fd447c",
+      "message": "Merge branch 'main' into chore/cli-crate-metadata",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-25T15:51:20Z",
+      "committed_at": "2026-07-25T15:51:20Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "795499bb548f951068af615bf987855ff69cd1b6",
+      "message": "Merge branch 'main' into chore/cli-crate-metadata",
+      "author_name": "sojetunde8",
+      "author_email": "sojetunde8@gmail.com",
+      "authored_at": "2026-07-27T12:41:32Z",
+      "committed_at": "2026-07-27T12:41:32Z",
+      "author": {
+        "login": "sojetunde8",
+        "id": 287985093,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/Cargo.toml",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0,
+      "changes": 4,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/build.rs",
+      "status": "modified",
+      "additions": 78,
+      "deletions": 2,
+      "changes": 80,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0,
+      "changes": 4,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/host_in_loop.md",
+      "status": "added",
+      "additions": 13,
+      "deletions": 0,
+      "changes": 13,
+      "previous_filename": null
+    },
+    {
+      "filename": "test_fixtures/smoke_test/Cargo.toml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "test_fixtures/smoke_test/budget.toml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-27T12:41:41Z",
+        "completed_at": "2026-07-27T12:42:21Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30266963434/job/89979860619",
+        "app": "github-actions",
+        "workflow_run_id": "30266963434"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "6ec55ff01f340d7a7e93216ea2901361aaaae4d4",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 31470bf5c816aa87b0ef7c3d3b49f4223a5b4e05 is the main tip at merge time.",
+    "pull_request_base_sha": "5d6039a6d5c886f0b4ac5dde8ade6d6504571dc7",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T13:48:15Z",
+          "completed_at": "2026-07-27T13:48:59Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30271985843/job/89996537353",
+          "app": "github-actions",
+          "workflow_run_id": "30271985843"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "wagmiiii",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5079135822,
+        "created_at": "2026-07-25T15:51:30Z",
+        "updated_at": "2026-07-25T15:51:30Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@sojetunde8 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5079825543,
+        "created_at": "2026-07-25T18:19:50Z",
+        "updated_at": "2026-07-25T18:19:50Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "Hello! 👋 \n\nWe recently optimized and simplified the CI workflows on the `main` branch. \n\nSince this PR is currently failing its CI checks, could you please **rebase your branch onto `main`**? This will pull in the new workflow configurations and might automatically resolve the CI failures. \n\nLet us know if you need any help with the rebase!"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30266963434"
+    ],
+    "all_head_workflow_run_ids": [
+      "30266963434"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

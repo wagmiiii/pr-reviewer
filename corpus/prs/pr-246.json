@@ -1,0 +1,410 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:30Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 246,
+    "title": "feat: add unbounded_input_loop lint for caller-controlled storage write amplification",
+    "body": "…\r\n\r\n## Description\r\n<!-- Describe your changes in detail -->\r\n\r\n## Related Issue\r\n<!-- If this PR addresses an existing issue, please link it here. -->\r\nCloses #139\r\n\r\n## Motivation and Context\r\n<!-- Why is this change required? What problem does it solve? -->\r\n\r\n## How Has This Been Tested?\r\n<!-- Please describe in detail how you tested your changes. -->\r\n- [ ] Added/Updated tests\r\n- [ ] Passed `cargo test`\r\n- [ ] Passed `cargo clippy`\r\n- [ ] Formatted with `cargo fmt`\r\n\r\n## Types of changes\r\n<!-- What types of changes does your code introduce? -->\r\n- [ ] Bug fix (non-breaking change which fixes an issue)\r\n- [ ] New feature (non-breaking change which adds functionality)\r\n- [ ] Breaking change (fix or feature that would cause existing functionality to change)\r\n- [ ] Documentation update\r\n",
+    "author": {
+      "login": "adelekevictor12",
+      "id": 124449439,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T00:49:39Z",
+    "updated_at": "2026-07-27T12:15:00Z",
+    "merged_at": "2026-07-27T12:15:00Z",
+    "closed_at": "2026-07-27T12:15:00Z",
+    "merged_by": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "bb91fd7ac57b7b9223d77eddba787117d4efb997",
+    "base": {
+      "ref": "main",
+      "sha": "b03530b4ed3280a71d45a0e460a4676fe39c82bf",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feat/lint-unbounded-input-loop",
+      "sha": "10e4f2159ed6628b8db8c5115db5b5c4df0b6ba0",
+      "repo": "adelekevictor12/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 279,
+    "deletions": 9,
+    "changed_files": 3,
+    "commits": 11,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/246"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "f57e1161541cbea99887be7a140dc92322f106c3",
+      "message": "feat: add unbounded_input_loop lint for caller-controlled storage write amplification",
+      "author_name": "adelekevictor12",
+      "author_email": "124449439+adelekevictor12@users.noreply.github.com",
+      "authored_at": "2026-07-26T00:48:30Z",
+      "committed_at": "2026-07-26T00:48:30Z",
+      "author": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "committer": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "0acbc4d66e70fdd58dbb3b9a327bd5115590790f",
+      "message": "Merge branch 'main' into feat/lint-unbounded-input-loop",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-26T07:05:46Z",
+      "committed_at": "2026-07-26T07:05:46Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "155ade9ac18c8d69a83396d5904b705de5b988ec",
+      "message": "fix(ui): bless main.stderr to match updated test fixtures\n\nThe stderr reference was out of date after main.rs was updated with new lint\ntest fixtures for unbounded_input_loop, map_insert_in_loop, inefficient_bytes_concat,\nstorage_write_without_read, and existing lints. Updated to reflect 52 warnings\n(was 37), shifted line numbers, and new warning output.",
+      "author_name": "adelekevictor12",
+      "author_email": "124449439+adelekevictor12@users.noreply.github.com",
+      "authored_at": "2026-07-26T10:08:03Z",
+      "committed_at": "2026-07-26T10:08:03Z",
+      "author": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "committer": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "442e7b63ef1996e027a4c1b7322a5d5912a98354",
+      "message": "Merge remote-tracking branch 'upstream/main' into feat/lint-unbounded-input-loop",
+      "author_name": "adelekevictor12",
+      "author_email": "124449439+adelekevictor12@users.noreply.github.com",
+      "authored_at": "2026-07-26T10:19:17Z",
+      "committed_at": "2026-07-26T10:19:17Z",
+      "author": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "committer": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "133ea6232258400c06e3e63d24ecfce8c40a0730",
+      "message": "fix(ui): rebless main.stderr after merging upstream/main lint quality changes\n\nUpstream/main commit db8769d (lint quality bundle) changed lint behaviour:\n- Deduplicated soroban_storage_in_loop spans (1 per site, was 3)\n- Differentiated help text for storage reads vs writes\n- Added closure-invocation unnecessary_host_function_call fixture\nMerged upstream/main and blessed stderr to match: 35 warnings (was 52).",
+      "author_name": "adelekevictor12",
+      "author_email": "124449439+adelekevictor12@users.noreply.github.com",
+      "authored_at": "2026-07-26T10:22:06Z",
+      "committed_at": "2026-07-26T10:22:06Z",
+      "author": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "committer": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "2ca468cdc9ac292b5d1e2ab5d7dbcc8574b3a5c6",
+      "message": "Merge branch 'main' into feat/lint-unbounded-input-loop",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-26T17:15:12Z",
+      "committed_at": "2026-07-26T17:15:12Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "412b0de6ebb3a31015296095e2b4fdfe5b4ac9c5",
+      "message": "Merge branch 'main' into feat/lint-unbounded-input-loop",
+      "author_name": "adelekevictor12",
+      "author_email": "124449439+adelekevictor12@users.noreply.github.com",
+      "authored_at": "2026-07-27T09:49:30Z",
+      "committed_at": "2026-07-27T09:49:30Z",
+      "author": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "ac5494013549072c08c7ce7be3bbde82f53bac16",
+      "message": "fix: resolve 7 compilation errors in cargo-cost-lint SARIF output\n\n- Fix undefined 'diagnostic' variable -> use 'message'\n- Fix undefined 'span_obj' -> use 'primary_span'\n- Fix undefined 'msg_text' -> use 'diagnostic_message'\n- Add missing 'rules' field to SarifToolDriver\n- Fix SarifRun.results type from Vec<Value> to Vec<SarifResult>",
+      "author_name": "adelekevictor12",
+      "author_email": "124449439+adelekevictor12@users.noreply.github.com",
+      "authored_at": "2026-07-27T10:08:06Z",
+      "committed_at": "2026-07-27T10:08:06Z",
+      "author": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "committer": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "eeca359900d0f44520a26d4eecc6a13a95f8297b",
+      "message": "style: fix cargo fmt issue on line 240",
+      "author_name": "adelekevictor12",
+      "author_email": "124449439+adelekevictor12@users.noreply.github.com",
+      "authored_at": "2026-07-27T10:26:49Z",
+      "committed_at": "2026-07-27T10:26:49Z",
+      "author": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "committer": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "1ee40601c7b25c2c191d896923ade668ea5f573c",
+      "message": "style: fix cargo fmt issues in integration tests",
+      "author_name": "adelekevictor12",
+      "author_email": "124449439+adelekevictor12@users.noreply.github.com",
+      "authored_at": "2026-07-27T10:49:54Z",
+      "committed_at": "2026-07-27T10:49:54Z",
+      "author": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "committer": {
+        "login": "adelekevictor12",
+        "id": 124449439,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "10e4f2159ed6628b8db8c5115db5b5c4df0b6ba0",
+      "message": "style: fix cargo fmt line breaks in SARIF integration test",
+      "author_name": "Alaps",
+      "author_email": "qozeemibrahim065@gmail.com",
+      "authored_at": "2026-07-27T11:53:34Z",
+      "committed_at": "2026-07-27T11:53:34Z",
+      "author": null,
+      "committer": null,
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 8,
+      "deletions": 7,
+      "changes": 15,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 223,
+      "deletions": 2,
+      "changes": 225,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 48,
+      "deletions": 0,
+      "changes": 48,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-27T11:59:51Z",
+        "completed_at": "2026-07-27T12:00:40Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30264076028/job/89970525167",
+        "app": "github-actions",
+        "workflow_run_id": "30264076028"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "03bba2a20191ab85f32943d992c1015c92d6c9c6",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit bb91fd7ac57b7b9223d77eddba787117d4efb997 is the main tip at merge time.",
+    "pull_request_base_sha": "b03530b4ed3280a71d45a0e460a4676fe39c82bf",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T12:15:02Z",
+          "completed_at": "2026-07-27T12:15:47Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30265139410/job/89973902382",
+          "app": "github-actions",
+          "workflow_run_id": "30265139410"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5081274100,
+        "created_at": "2026-07-26T00:49:47Z",
+        "updated_at": "2026-07-26T00:49:47Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@adelekevictor12 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5090007323,
+        "created_at": "2026-07-27T10:07:21Z",
+        "updated_at": "2026-07-27T10:07:21Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "fix your cl"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30264076028"
+    ],
+    "all_head_workflow_run_ids": [
+      "30264076028"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

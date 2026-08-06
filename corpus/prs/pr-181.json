@@ -1,0 +1,338 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:29Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 181,
+    "title": "fix: detect storage operations inside iterator closures in storage_in…",
+    "body": "Closes #5\r\n\r\n### Summary\r\nExtends the `soroban_storage_in_loop` lint pass to detect storage operations inside multi-call iterator closures (e.g. `.for_each()`, `.map()`, `.fold()`), resolving an issue where repeated storage accesses slipped through undetected.\r\n\r\n### What Changed\r\n- **`soroban_cost_lints/src/lib.rs`:** Updated `SorobanStorageInLoop::check_expr` to check `get_enclosing_loop_or_multi_call_closure(cx, expr).is_some()`, enabling the lint to trigger for both literal loop blocks and multi-call closures.\r\n- **`soroban_cost_lints/ui/main.rs`:** Added UI test cases covering:\r\n  - `items.iter().for_each(...)` (multi-call closure, triggers lint warning)\r\n  - `items.iter().map(...)` (multi-call closure, triggers lint warning)\r\n  - `opt.map(...)` (single-call closure via `Option::map`, stays clean without false positives)\r\n- **`soroban_cost_lints/ui/main.stderr`:** Updated expected compiler diagnostic snapshots to include the 6 new storage-in-closure warnings.\r\n\r\n### Key Design Decisions\r\n- **Leveraged `get_enclosing_loop_or_multi_call_closure`:** By removing the `let hir::ExprKind::Loop(..) = enclosing_expr.kind` restriction, we lean on `clippy_utils` to automatically filter out single-call closures (such as `Option::map`) while catching all repeatedly-executed iterator closure bodies.\r\n- **Consistent Help Message:** Preserved the standard help recommendation (`\"move storage operations out of the loop or accumulate mutations in memory first\"`).\r\n\r\n### Checklist\r\n- [x] Extends `soroban_storage_in_loop` to multi-call closures.\r\n- [x] No false positives on single-call closures (`Option::map`).\r\n- [x] UI test cases added for `.for_each()`, `.map()`, and `Option::map`.\r\n- [x] `.stderr` UI snapshot updated.\r\n- [x] PR description references issue with `Closes #5`.\r\n\r\n---\r\n\r\n### Reminders After Pushing\r\n1. **Monitor CI Status:** Once the PR is submitted, verify that all automated CI workflow checks turn green.\r\n2. **Infrastructure Failures:** If an infrastructure check fails due to fork permissions (e.g., preview deployment bot), leave a short comment explaining that the failure is unrelated to this change so reviewers don't misread it.\r\n3. **Follow Through to Merge:** Keep an eye on reviewer feedback and respond promptly to ensure merge completion.",
+    "author": {
+      "login": "enny791",
+      "id": 308503335,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": false,
+    "created_at": "2026-07-25T08:30:24Z",
+    "updated_at": "2026-07-26T16:27:59Z",
+    "merged_at": null,
+    "closed_at": "2026-07-26T16:27:59Z",
+    "merged_by": null,
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": null,
+    "base": {
+      "ref": "main",
+      "sha": "76f7e24d49651616d15181240c32568d651f534f",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "fix/storage-in-loop-closures",
+      "sha": "88078c129f1b29bf564df48edc3d675ba973f670",
+      "repo": "enny791/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 80,
+    "deletions": 1,
+    "changed_files": 3,
+    "commits": 2,
+    "comments": 4,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/181"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "ab759e45e25323ea940daed841b41a13b5117038",
+      "message": "fix: detect storage operations inside iterator closures in storage_in_loop (#5)",
+      "author_name": "dillon ofili",
+      "author_email": "dillonofili667@gmail.com",
+      "authored_at": "2026-07-25T08:03:37Z",
+      "committed_at": "2026-07-25T09:32:41Z",
+      "author": {
+        "login": "0dillon",
+        "id": 218941616,
+        "type": "User"
+      },
+      "committer": {
+        "login": "0dillon",
+        "id": 218941616,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "88078c129f1b29bf564df48edc3d675ba973f670",
+      "message": "Merge branch 'main' into fix/storage-in-loop-closures",
+      "author_name": "enny791",
+      "author_email": "fagbamilaeniola@gmail.com",
+      "authored_at": "2026-07-25T11:54:31Z",
+      "committed_at": "2026-07-25T11:54:31Z",
+      "author": {
+        "login": "enny791",
+        "id": 308503335,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 1,
+      "changes": 5,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 28,
+      "deletions": 0,
+      "changes": 28,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 48,
+      "deletions": 0,
+      "changes": 48,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 5,
+    "check_runs": [
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "skipped",
+        "started_at": "2026-07-25T15:55:47Z",
+        "completed_at": "2026-07-25T15:55:47Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30157044783/job/89695347941",
+        "app": "github-actions",
+        "workflow_run_id": "30157044783"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T15:53:47Z",
+        "completed_at": "2026-07-25T15:53:49Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30157044783/job/89695173718",
+        "app": "github-actions",
+        "workflow_run_id": "30157044783"
+      },
+      {
+        "name": "Code Quality (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T15:53:09Z",
+        "completed_at": "2026-07-25T15:53:44Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30157044783/job/89695121508",
+        "app": "github-actions",
+        "workflow_run_id": "30157044783"
+      },
+      {
+        "name": "validate-toolchain-pins",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T15:53:09Z",
+        "completed_at": "2026-07-25T15:53:16Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30157044783/job/89695121505",
+        "app": "github-actions",
+        "workflow_run_id": "30157044783"
+      },
+      {
+        "name": "lint-matrix (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-25T15:53:20Z",
+        "completed_at": "2026-07-25T15:55:47Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30157044783/job/89695121433",
+        "app": "github-actions",
+        "workflow_run_id": "30157044783"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "76f7e24d49651616d15181240c32568d651f534f",
+    "resolution_method": "pull_request_base_sha",
+    "approximate": true,
+    "note": "APPROXIMATE: PR was not merged, so no merge commit exists. .base.sha is the main tip as recorded when the PR was created or last synced.",
+    "pull_request_base_sha": "76f7e24d49651616d15181240c32568d651f534f",
+    "check_runs": {
+      "total_count": 5,
+      "check_runs": [
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:34:13Z",
+          "completed_at": "2026-07-25T11:34:16Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156377335/job/89675099020",
+          "app": "github-actions",
+          "workflow_run_id": "30156377335"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:31:58Z",
+          "completed_at": "2026-07-25T11:32:02Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156377335/job/89674942402",
+          "app": "github-actions",
+          "workflow_run_id": "30156377335"
+        },
+        {
+          "name": "Code Quality (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:31:13Z",
+          "completed_at": "2026-07-25T11:31:56Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156377335/job/89674890629",
+          "app": "github-actions",
+          "workflow_run_id": "30156377335"
+        },
+        {
+          "name": "lint-matrix (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:31:13Z",
+          "completed_at": "2026-07-25T11:34:10Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156377335/job/89674890622",
+          "app": "github-actions",
+          "workflow_run_id": "30156377335"
+        },
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:31:13Z",
+          "completed_at": "2026-07-25T11:31:19Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156377335/job/89674890609",
+          "app": "github-actions",
+          "workflow_run_id": "30156377335"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 4,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 1
+      },
+      {
+        "login": "wagmiiii",
+        "count": 2
+      }
+    ],
+    "comments": [
+      {
+        "id": 5077713857,
+        "created_at": "2026-07-25T08:30:30Z",
+        "updated_at": "2026-07-25T08:30:30Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@enny791 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5077792500,
+        "created_at": "2026-07-25T08:46:15Z",
+        "updated_at": "2026-07-25T08:46:15Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "Please fix the CL"
+      },
+      {
+        "id": 5078313620,
+        "created_at": "2026-07-25T11:27:03Z",
+        "updated_at": "2026-07-25T11:27:03Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "@enny791 resolve conflicts "
+      },
+      {
+        "id": 5079826432,
+        "created_at": "2026-07-25T18:19:56Z",
+        "updated_at": "2026-07-25T18:19:56Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "Hello! 👋 \n\nWe recently optimized and simplified the CI workflows on the `main` branch. \n\nSince this PR is currently failing its CI checks, could you please **rebase your branch onto `main`**? This will pull in the new workflow configurations and might automatically resolve the CI failures. \n\nLet us know if you need any help with the rebase!"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "lint-matrix (nightly-2026-04-16)"
+    ],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30157044783"
+    ],
+    "all_head_workflow_run_ids": [
+      "30157044783"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

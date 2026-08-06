@@ -1,0 +1,279 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:17:45Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 297,
+    "title": "test: add edge-case boundary-condition fixtures for off-by-one, zero-…",
+    "body": "Closes #196 \r\n\r\n…length, and single-iteration inputs\r\n\r\n- Fix LINT_METADATA: separate LOOP_INVARIANT_STORAGE_ACCESS and UNBOUNDED_INPUT_LOOP into their own entries with proper categories\r\n- Add edge-case fixtures: zero-iteration loops, single-iteration loops, single-char symbol, 10-char boundary\r\n- Add zero-iteration storage_key_construction variant\r\n- Regenerate .stderr files to match updated fixture output\r\n\r\nCloses #28\r\n\r\n## Description\r\n<!-- Describe your changes in detail -->\r\n\r\n## Related Issue\r\n<!-- If this PR addresses an existing issue, please link it here. -->\r\nCloses #\r\n\r\n## Motivation and Context\r\n<!-- Why is this change required? What problem does it solve? -->\r\n\r\n## How Has This Been Tested?\r\n<!-- Please describe in detail how you tested your changes. -->\r\n- [ ] Added/Updated tests\r\n- [ ] Passed `cargo test`\r\n- [ ] Passed `cargo clippy`\r\n- [ ] Formatted with `cargo fmt`\r\n\r\n## Types of changes\r\n<!-- What types of changes does your code introduce? -->\r\n- [ ] Bug fix (non-breaking change which fixes an issue)\r\n- [ ] New feature (non-breaking change which adds functionality)\r\n- [ ] Breaking change (fix or feature that would cause existing functionality to change)\r\n- [ ] Documentation update\r\n",
+    "author": {
+      "login": "aigbagbobila",
+      "id": 286679235,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-27T15:10:48Z",
+    "updated_at": "2026-07-28T13:32:32Z",
+    "merged_at": "2026-07-28T13:32:32Z",
+    "closed_at": "2026-07-28T13:32:32Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "ce8655eb21bc00e901e66c022dd447ecb8f8b727",
+    "base": {
+      "ref": "main",
+      "sha": "e736b9ad8397485f908f320d1b3d6586489a6be8",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "test/task-28",
+      "sha": "3050b1c2e5adf522f6e12f53c6e5787c81fb7c50",
+      "repo": "aigbagbobila/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 192,
+    "deletions": 99,
+    "changed_files": 5,
+    "commits": 4,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/297"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "62623eb77ca43700a8ef36b5a9711ce5db82a742",
+      "message": "test: add edge-case boundary-condition fixtures for off-by-one, zero-length, and single-iteration inputs\n\n- Fix LINT_METADATA: separate LOOP_INVARIANT_STORAGE_ACCESS and UNBOUNDED_INPUT_LOOP into their own entries with proper categories\n- Add edge-case fixtures: zero-iteration loops, single-iteration loops, single-char symbol, 10-char boundary\n- Add zero-iteration storage_key_construction variant\n- Regenerate .stderr files to match updated fixture output\n\nCloses #28",
+      "author_name": "DammmyFayo",
+      "author_email": "aigbagbobila34@gmail.com",
+      "authored_at": "2026-07-27T15:08:56Z",
+      "committed_at": "2026-07-27T15:08:56Z",
+      "author": {
+        "login": "aigbagbobila",
+        "id": 286679235,
+        "type": "User"
+      },
+      "committer": {
+        "login": "aigbagbobila",
+        "id": 286679235,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "64f5689c087d7cb79c509a641a35358c853a4548",
+      "message": "Merge branch 'main' into test/task-28",
+      "author_name": "DammmyFayo",
+      "author_email": "aigbagbobila34@gmail.com",
+      "authored_at": "2026-07-27T15:16:28Z",
+      "committed_at": "2026-07-27T15:16:28Z",
+      "author": {
+        "login": "aigbagbobila",
+        "id": 286679235,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "d2ea6fd2b26bdc5c3e5a0d3a0ee49ed58d75c0a7",
+      "message": "fix: resolve CI compilation errors in cargo-cost-lint\n\n- Define missing BudgetConfig struct with Deserialize derive\n- Add missing closing brace to load_budget_config function\n- Add HashMap and Deserialize imports\n- Remove duplicate list_lints field from Cli struct\n- Fix broken match preflight block (remove invalid Option arms)\n- Fix format string escaping ({{{ to {{{{)\n- Fix build.rs to write LINT_INFO to lint_names.rs (was constructed but never written)\n- Collapse nested if-let chains to satisfy clippy::collapsible_if\n- Suppress dead_code warnings for BudgetConfig and parse_budget_config",
+      "author_name": "DammmyFayo",
+      "author_email": "aigbagbobila34@gmail.com",
+      "authored_at": "2026-07-27T15:24:04Z",
+      "committed_at": "2026-07-27T15:25:17Z",
+      "author": {
+        "login": "aigbagbobila",
+        "id": 286679235,
+        "type": "User"
+      },
+      "committer": {
+        "login": "aigbagbobila",
+        "id": 286679235,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "3050b1c2e5adf522f6e12f53c6e5787c81fb7c50",
+      "message": "Merge branch 'main' into test/task-28",
+      "author_name": "DammmyFayo",
+      "author_email": "aigbagbobila34@gmail.com",
+      "authored_at": "2026-07-28T13:28:19Z",
+      "committed_at": "2026-07-28T13:28:19Z",
+      "author": {
+        "login": "aigbagbobila",
+        "id": 286679235,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/build.rs",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 8,
+      "changes": 10,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 32,
+      "changes": 41,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 99,
+      "deletions": 0,
+      "changes": 99,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 73,
+      "deletions": 47,
+      "changes": 120,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/redundant_val_conversion.stderr",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 12,
+      "changes": 21,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 0,
+    "check_runs": []
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "e736b9ad8397485f908f320d1b3d6586489a6be8",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit ce8655eb21bc00e901e66c022dd447ecb8f8b727 is the main tip at merge time.",
+    "pull_request_base_sha": "e736b9ad8397485f908f320d1b3d6586489a6be8",
+    "check_runs": {
+      "total_count": 0,
+      "check_runs": []
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/azKIvABojq4rYFHW7p5c/",
+          "created_at": "2026-07-28T13:19:40Z",
+          "updated_at": "2026-07-28T13:19:40Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/azKIvABojq4rYFHW7p5c/",
+          "created_at": "2026-07-28T13:19:41Z",
+          "updated_at": "2026-07-28T13:19:41Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "aigbagbobila",
+        "count": 1
+      },
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5093091088,
+        "created_at": "2026-07-27T15:10:59Z",
+        "updated_at": "2026-07-27T15:10:59Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@aigbagbobila Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5104767112,
+        "created_at": "2026-07-28T13:28:52Z",
+        "updated_at": "2026-07-28T13:28:52Z",
+        "user": {
+          "login": "aigbagbobila",
+          "id": 286679235,
+          "type": "User"
+        },
+        "author_association": "CONTRIBUTOR",
+        "body": "Kindly review and merge "
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": false,
+    "base_has_ci": false,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

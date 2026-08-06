@@ -1,0 +1,531 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:12Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 162,
+    "title": "feat: add --format json output to cargo-cost-lint for CI integration",
+    "body": "## Description\r\n<!-- Describe your changes in detail -->\r\n\r\n## Related Issue\r\n<!-- If this PR addresses an existing issue, please link it here. -->\r\nCloses #8\r\n\r\n## Motivation and Context\r\n<!-- Why is this change required? What problem does it solve? -->\r\n\r\n## How Has This Been Tested?\r\n<!-- Please describe in detail how you tested your changes. -->\r\n- [ ] Added/Updated tests\r\n- [ ] Passed `cargo test`\r\n- [ ] Passed `cargo clippy`\r\n- [ ] Formatted with `cargo fmt`\r\n\r\n## Types of changes\r\n<!-- What types of changes does your code introduce? -->\r\n- [ ] Bug fix (non-breaking change which fixes an issue)\r\n- [ ] New feature (non-breaking change which adds functionality)\r\n- [ ] Breaking change (fix or feature that would cause existing functionality to change)\r\n- [ ] Documentation update\r\n",
+    "author": {
+      "login": "CHASE3020",
+      "id": 275687370,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-24T13:39:50Z",
+    "updated_at": "2026-07-24T22:11:37Z",
+    "merged_at": "2026-07-24T22:11:37Z",
+    "closed_at": "2026-07-24T22:11:37Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "01196e61295a70155fa44a52c2fc8a8dc29b130f",
+    "base": {
+      "ref": "main",
+      "sha": "415c4462244b8bb0c1ef7c1232a7b74d5d936617",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feature/json-output",
+      "sha": "69dbcf868d17ee9665256870403323b59be49164",
+      "repo": "CHASE3020/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 291,
+    "deletions": 7,
+    "changed_files": 7,
+    "commits": 14,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/162"
+  },
+  "reviews": [
+    {
+      "id": 4775976895,
+      "state": "APPROVED",
+      "submitted_at": "2026-07-24T18:59:06Z",
+      "author_association": "MEMBER",
+      "user": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "body_present": true,
+      "body": "lgtm"
+    }
+  ],
+  "review_states": [
+    {
+      "state": "APPROVED",
+      "count": 1
+    }
+  ],
+  "commits": [
+    {
+      "sha": "1298999631393448059f25f050642cd52e6ed3aa",
+      "message": "feat: add --format json output to cargo-cost-lint for CI integration",
+      "author_name": "Frbello",
+      "author_email": "belloinnocent40@gmail.com",
+      "authored_at": "2026-07-24T13:40:09Z",
+      "committed_at": "2026-07-24T13:40:09Z",
+      "author": null,
+      "committer": null,
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "fe7287b7093360dd04ef8689322f82f39597448c",
+      "message": "Merge branch 'main' into feature/json-output",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T14:18:03Z",
+      "committed_at": "2026-07-24T14:18:03Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "8e51a8d1bdec21fe48f89054c8ffd1b87890b552",
+      "message": "Merge branch 'main' into feature/json-output",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T14:42:24Z",
+      "committed_at": "2026-07-24T14:42:24Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "d1e6a5afb9556c8838c20cd4654797429973dc43",
+      "message": "fix: add rustfmt and clippy to rust-toolchain components to fix CI",
+      "author_name": "Frbello",
+      "author_email": "belloinnocent40@gmail.com",
+      "authored_at": "2026-07-24T14:52:22Z",
+      "committed_at": "2026-07-24T14:52:22Z",
+      "author": null,
+      "committer": null,
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "3e1e58dbca622bd94b87700c5974a3cd128e2dfd",
+      "message": "chore: align CI with toolchain matrix and dummy jobs",
+      "author_name": "Frbello",
+      "author_email": "belloinnocent40@gmail.com",
+      "authored_at": "2026-07-24T15:06:17Z",
+      "committed_at": "2026-07-24T15:06:17Z",
+      "author": null,
+      "committer": null,
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "3801e7324afd9eaa339f6fa4c6dd88a9b525651e",
+      "message": "fix: resolve compilation errors and formatting",
+      "author_name": "Frbello",
+      "author_email": "belloinnocent40@gmail.com",
+      "authored_at": "2026-07-24T15:35:39Z",
+      "committed_at": "2026-07-24T15:35:39Z",
+      "author": null,
+      "committer": null,
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "65c9ce4133c55efa6aba7977043fc6e5867fb1ac",
+      "message": "style: format tests/integration.rs to fix CI",
+      "author_name": "Frbello",
+      "author_email": "belloinnocent40@gmail.com",
+      "authored_at": "2026-07-24T15:40:07Z",
+      "committed_at": "2026-07-24T15:40:07Z",
+      "author": null,
+      "committer": null,
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "b130e03a8c216eb2facd5a404e3216c45ea8e521",
+      "message": "Merge branch 'main' into feature/json-output",
+      "author_name": "Francis Bello",
+      "author_email": "bellofrancis900@gmail.com",
+      "authored_at": "2026-07-24T15:39:41Z",
+      "committed_at": "2026-07-24T15:39:41Z",
+      "author": {
+        "login": "CHASE3020",
+        "id": 275687370,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "289d8375d08111488e4a4a41b3aebcaa440c8e3d",
+      "message": "test: ensure soroban_cost_lints cdylib is built before integration tests",
+      "author_name": "Frbello",
+      "author_email": "belloinnocent40@gmail.com",
+      "authored_at": "2026-07-24T15:48:22Z",
+      "committed_at": "2026-07-24T15:49:17Z",
+      "author": null,
+      "committer": null,
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "ce15dc54fd970a26112f33406250a67200134218",
+      "message": "test: run build from within soroban_cost_lints to use dylint-link config",
+      "author_name": "Frbello",
+      "author_email": "belloinnocent40@gmail.com",
+      "authored_at": "2026-07-24T15:57:52Z",
+      "committed_at": "2026-07-24T15:57:52Z",
+      "author": null,
+      "committer": null,
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "f635c00f484c08fd5bc4ee4d73eb8d257211e6ab",
+      "message": "fix: resolve target dir and cargo executable dynamically in test",
+      "author_name": "Frbello",
+      "author_email": "belloinnocent40@gmail.com",
+      "authored_at": "2026-07-24T16:05:08Z",
+      "committed_at": "2026-07-24T16:05:08Z",
+      "author": null,
+      "committer": null,
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "00e8a90fee10f358f51a0bf13d3575592dd71127",
+      "message": "Merge branch 'main' into feature/json-output",
+      "author_name": "Francis Bello",
+      "author_email": "bellofrancis900@gmail.com",
+      "authored_at": "2026-07-24T16:04:53Z",
+      "committed_at": "2026-07-24T16:04:53Z",
+      "author": {
+        "login": "CHASE3020",
+        "id": 275687370,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "92a5fda818ec977642e08a1e4f5fcc257c94d100",
+      "message": "Merge branch 'main' into feature/json-output",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T18:58:32Z",
+      "committed_at": "2026-07-24T18:58:32Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "69dbcf868d17ee9665256870403323b59be49164",
+      "message": "Merge branch 'main' into feature/json-output",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T22:08:20Z",
+      "committed_at": "2026-07-24T22:08:20Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/Cargo.toml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 159,
+      "deletions": 7,
+      "changes": 166,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/tests/integration.rs",
+      "status": "added",
+      "additions": 85,
+      "deletions": 0,
+      "changes": 85,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 34,
+      "deletions": 0,
+      "changes": 34,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0,
+      "changes": 4,
+      "previous_filename": null
+    },
+    {
+      "filename": "templates/github-action.yml",
+      "status": "modified",
+      "additions": 7,
+      "deletions": 0,
+      "changes": 7,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 5,
+    "check_runs": [
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T22:10:56Z",
+        "completed_at": "2026-07-24T22:10:59Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30130031303/job/89602682729",
+        "app": "github-actions",
+        "workflow_run_id": "30130031303"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T22:09:16Z",
+        "completed_at": "2026-07-24T22:09:20Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30130031303/job/89602407733",
+        "app": "github-actions",
+        "workflow_run_id": "30130031303"
+      },
+      {
+        "name": "lint-matrix (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T22:08:27Z",
+        "completed_at": "2026-07-24T22:10:53Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30130031303/job/89602283380",
+        "app": "github-actions",
+        "workflow_run_id": "30130031303"
+      },
+      {
+        "name": "validate-toolchain-pins",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T22:08:29Z",
+        "completed_at": "2026-07-24T22:08:35Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30130031303/job/89602283319",
+        "app": "github-actions",
+        "workflow_run_id": "30130031303"
+      },
+      {
+        "name": "Code Quality (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T22:08:30Z",
+        "completed_at": "2026-07-24T22:09:14Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30130031303/job/89602283280",
+        "app": "github-actions",
+        "workflow_run_id": "30130031303"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "415c4462244b8bb0c1ef7c1232a7b74d5d936617",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 01196e61295a70155fa44a52c2fc8a8dc29b130f is the main tip at merge time.",
+    "pull_request_base_sha": "415c4462244b8bb0c1ef7c1232a7b74d5d936617",
+    "check_runs": {
+      "total_count": 6,
+      "check_runs": [
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T22:06:43Z",
+          "completed_at": "2026-07-24T22:06:46Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30129642727/job/89601995524",
+          "app": "github-actions",
+          "workflow_run_id": "30129642727"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T22:03:55Z",
+          "completed_at": "2026-07-24T22:03:57Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30129642727/job/89601543090",
+          "app": "github-actions",
+          "workflow_run_id": "30129642727"
+        },
+        {
+          "name": "Dependabot",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T22:02:27Z",
+          "completed_at": "2026-07-24T22:02:50Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30129712562/job/89601301333",
+          "app": "github-actions",
+          "workflow_run_id": "30129712562"
+        },
+        {
+          "name": "lint-matrix (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T22:01:06Z",
+          "completed_at": "2026-07-24T22:06:38Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30129642727/job/89601082852",
+          "app": "github-actions",
+          "workflow_run_id": "30129642727"
+        },
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T22:01:06Z",
+          "completed_at": "2026-07-24T22:01:13Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30129642727/job/89601082803",
+          "app": "github-actions",
+          "workflow_run_id": "30129642727"
+        },
+        {
+          "name": "Code Quality (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T22:01:07Z",
+          "completed_at": "2026-07-24T22:03:53Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30129642727/job/89601082785",
+          "app": "github-actions",
+          "workflow_run_id": "30129642727"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5070848714,
+        "created_at": "2026-07-24T14:18:15Z",
+        "updated_at": "2026-07-24T14:18:15Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@CHASE3020 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30130031303"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

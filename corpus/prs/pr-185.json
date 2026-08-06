@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:38Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 185,
+    "title": "feat: extend unnecessary_host_function_call beyond Ledger to the remaining host object types",
+    "body": "## Description\n\n`unnecessary_host_function_call` matched exactly one receiver type, `soroban_sdk::ledger::Ledger`. Every other metered host accessor reachable from `Env` was invisible to it. This PR widens the scope to the rest of them and adds a loop-dependence check so the wider scope does not turn into false positives.\n\nHost types are now listed once, in a table:\n\n```rust\nconst SOROBAN_HOST_TYPES: &[&[&str]] = &[\n    &[\"soroban_sdk\", \"ledger\", \"Ledger\"],\n    &[\"soroban_sdk\", \"crypto\", \"Crypto\"],\n    &[\"soroban_sdk\", \"crypto\", \"CryptoHazmat\"],\n    &[\"soroban_sdk\", \"crypto\", \"bls12_381\", \"Bls12_381\"],\n    &[\"soroban_sdk\", \"crypto\", \"bn254\", \"Bn254\"],\n    &[\"soroban_sdk\", \"prng\", \"Prng\"],\n    &[\"soroban_sdk\", \"events\", \"Events\"],\n    &[\"soroban_sdk\", \"deploy\", \"Deployer\"],\n    &[\"soroban_sdk\", \"deploy\", \"DeployerWithAddress\"],\n    &[\"soroban_sdk\", \"deploy\", \"DeployerWithAsset\"],\n];\n```\n\n`env.current_contract_address()` is a host call on `Env` itself rather than on an accessor type, so it lives in a separate one-line method list. The storage lint's comparison chain was folded into the same table form, so the `def_path_str` chains no longer grow by hand — a new host type is one line.\n\n`soroban_sdk` has no `Env::auth()` accessor (the issue lists one); the auth-related surface is `Env::authorize_as_current_contract` and `Env::invoke_contract`, both deliberately excluded — see *Deliberately not covered* in the reference page.\n\n### Loop-dependence check\n\nA call is reported only when nothing it reads changes between iterations. It is skipped when the receiver chain or any argument reads a local bound inside the loop (the `for` variable, a per-iteration `let`) or a local the loop mutates, and it is skipped when the mutation analysis returns no verdict at all. `env.crypto().sha256(&data[i])` is real per-iteration work and stays unreported; hoisting it would be wrong.\n\nTwo gaps are documented in the reference page, both erring towards reporting rather than silently skipping: bindings and mutations inside a closure nested in the loop are not seen, and mutation through raw pointers or interior mutability is not tracked.\n\n`prng` and `events` calls with constant arguments are still reported. They are metered host calls with unchanged inputs and the lint cannot read intent; the reference page says so and points at `#[allow(...)]`.\n\n## Related Issue\n\nCloses #94\n\n## Motivation and Context\n\nThe lint's name and its description in `docs/lints/README.md` both promise host function calls in general, while the implementation covered one type. Contracts calling `env.crypto()`, `env.prng()`, `env.events()`, `env.deployer()` or `env.current_contract_address()` in a loop were paying the repeated host cost with no warning.\n\nOut of scope, as stated in the issue: the path-resolution rework tracked in #15. `match_soroban_def_path` still suffix-matches.\n\n## How Has This Been Tested?\n\n- [x] Added/Updated tests\n- [x] Passed `cargo test`\n- [x] Passed `cargo clippy`\n- [x] Formatted with `cargo fmt`\n\nUI fixtures in `soroban_cost_lints/ui/main.rs` cover four newly supported host types, flagged and non-flagged:\n\n| Fixture | Expected |\n| --- | --- |\n| `bad_crypto_call_in_loop` | warns — hashes the same input every iteration |\n| `good_crypto_call_on_loop_variable` | quiet — hashes the loop variable |\n| `good_crypto_call_indexed_by_counter` | quiet — argument indexed by a counter the loop mutates |\n| `bad_prng_call_in_loop` | warns |\n| `bad_current_contract_address_in_loop` | warns |\n| `good_events_publish_of_loop_value` | quiet — publishes this iteration's value |\n| `good_deployer_call_outside_loop` | quiet — called once before the loop |\n\n`main.stderr` regenerated: 11 -> 14 warnings, with the three new ones landing exactly on the `bad_*` fixtures.\n\nLocal run on `nightly-2026-04-16` with `cargo-dylint`/`dylint-link` 6.0.1: `cargo fmt --all -- --check` clean, `cargo clippy --workspace --all-targets -- -D warnings` clean, `cargo test --workspace` all green including the `ui` test and the `cargo-cost-lint` JSON integration test.\n\n## Types of changes\n\n- [x] New feature (non-breaking change which adds functionality)\n- [x] Documentation update\n\nDocs updated: the lint reference page now describes the real scope (covered accessors, what is not reported, what is deliberately excluded), and the `docs/lints/README.md` table, both READMEs and `CHANGELOG.md` match it.",
+    "author": {
+      "login": "Fury03",
+      "id": 98775983,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-25T11:35:36Z",
+    "updated_at": "2026-07-25T15:52:00Z",
+    "merged_at": "2026-07-25T15:52:00Z",
+    "closed_at": "2026-07-25T15:52:00Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "f3107b61cebe18e92cba7386872054dcced3a5a4",
+    "base": {
+      "ref": "main",
+      "sha": "76f7e24d49651616d15181240c32568d651f534f",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feat/host-fn-lint-all-host-types",
+      "sha": "cc6764aecd70b3c1f08ee940ba3352484dd29dd9",
+      "repo": "Fury03/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 334,
+    "deletions": 35,
+    "changed_files": 8,
+    "commits": 1,
+    "comments": 3,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/185"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "cc6764aecd70b3c1f08ee940ba3352484dd29dd9",
+      "message": "feat: extend unnecessary_host_function_call to all host object types\n\nThe lint matched only soroban_sdk::ledger::Ledger, so every other metered\nhost accessor reachable from Env was invisible to it even though the lint\nname and its documentation promise host function calls in general.\n\nHost types are now listed once in a SOROBAN_HOST_TYPES table covering\nLedger, Crypto (including CryptoHazmat, Bls12_381, Bn254), Prng, Events\nand Deployer, plus an Env-method list for current_contract_address. The\nstorage paths get the same treatment so the def_path comparison chains no\nlonger grow by hand.\n\nTo keep the wider scope from producing false positives, a call is only\nreported when nothing it reads changes between iterations: locals bound\ninside the loop and locals the loop mutates both disqualify it, and an\ninconclusive mutation analysis leaves the call unreported.",
+      "author_name": "Fury03",
+      "author_email": "deekhay7534@gmail.com",
+      "authored_at": "2026-07-25T11:16:02Z",
+      "committed_at": "2026-07-25T12:01:21Z",
+      "author": {
+        "login": "Fury03",
+        "id": 98775983,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Fury03",
+        "id": 98775983,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "CHANGELOG.md",
+      "status": "modified",
+      "additions": 7,
+      "deletions": 0,
+      "changes": 7,
+      "previous_filename": null
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/unnecessary_host_function_call.md",
+      "status": "modified",
+      "additions": 56,
+      "deletions": 1,
+      "changes": 57,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/README.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 135,
+      "deletions": 16,
+      "changes": 151,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 94,
+      "deletions": 0,
+      "changes": 94,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 39,
+      "deletions": 15,
+      "changes": 54,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 5,
+    "check_runs": [
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T12:04:24Z",
+        "completed_at": "2026-07-25T12:04:27Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30157263704/job/89677267697",
+        "app": "github-actions",
+        "workflow_run_id": "30157263704"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T12:02:22Z",
+        "completed_at": "2026-07-25T12:02:25Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30157263704/job/89677110884",
+        "app": "github-actions",
+        "workflow_run_id": "30157263704"
+      },
+      {
+        "name": "validate-toolchain-pins",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T12:01:48Z",
+        "completed_at": "2026-07-25T12:01:54Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30157263704/job/89677066105",
+        "app": "github-actions",
+        "workflow_run_id": "30157263704"
+      },
+      {
+        "name": "Code Quality (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T12:01:47Z",
+        "completed_at": "2026-07-25T12:02:20Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30157263704/job/89677066104",
+        "app": "github-actions",
+        "workflow_run_id": "30157263704"
+      },
+      {
+        "name": "lint-matrix (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T12:01:48Z",
+        "completed_at": "2026-07-25T12:04:22Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30157263704/job/89677066103",
+        "app": "github-actions",
+        "workflow_run_id": "30157263704"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "76f7e24d49651616d15181240c32568d651f534f",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit f3107b61cebe18e92cba7386872054dcced3a5a4 is the main tip at merge time.",
+    "pull_request_base_sha": "76f7e24d49651616d15181240c32568d651f534f",
+    "check_runs": {
+      "total_count": 5,
+      "check_runs": [
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:34:13Z",
+          "completed_at": "2026-07-25T11:34:16Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156377335/job/89675099020",
+          "app": "github-actions",
+          "workflow_run_id": "30156377335"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:31:58Z",
+          "completed_at": "2026-07-25T11:32:02Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156377335/job/89674942402",
+          "app": "github-actions",
+          "workflow_run_id": "30156377335"
+        },
+        {
+          "name": "Code Quality (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:31:13Z",
+          "completed_at": "2026-07-25T11:31:56Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156377335/job/89674890629",
+          "app": "github-actions",
+          "workflow_run_id": "30156377335"
+        },
+        {
+          "name": "lint-matrix (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:31:13Z",
+          "completed_at": "2026-07-25T11:34:10Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156377335/job/89674890622",
+          "app": "github-actions",
+          "workflow_run_id": "30156377335"
+        },
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:31:13Z",
+          "completed_at": "2026-07-25T11:31:19Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156377335/job/89674890609",
+          "app": "github-actions",
+          "workflow_run_id": "30156377335"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 3,
+    "authors": [
+      {
+        "login": "Fury03",
+        "count": 1
+      },
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "wagmiiii",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5078353489,
+        "created_at": "2026-07-25T11:42:17Z",
+        "updated_at": "2026-07-25T11:42:17Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "@Fury03 resolve conflicts"
+      },
+      {
+        "id": 5078408400,
+        "created_at": "2026-07-25T12:01:51Z",
+        "updated_at": "2026-07-25T12:01:51Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@Fury03 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5078435601,
+        "created_at": "2026-07-25T12:11:22Z",
+        "updated_at": "2026-07-25T12:11:22Z",
+        "user": {
+          "login": "Fury03",
+          "id": 98775983,
+          "type": "User"
+        },
+        "author_association": "CONTRIBUTOR",
+        "body": "@wagmiiii conflicts resolved\r\n"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30157263704"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

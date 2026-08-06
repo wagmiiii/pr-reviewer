@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:39Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 188,
+    "title": "feat: add lint for inefficient Bytes concatenation",
+    "body": "Closes #51\n\n## Summary\n\nAdds a new lint `soroban_inefficient_bytes_concat` that detects Bytes concatenation operations (`push_back` and `append`) executed inside loop bodies. Every mutation on Soroban `Bytes` crosses the host boundary, making per-iteration calls expensive in CPU instructions and transaction fees.\n\n## Motivation\n\nSoroban `Bytes` is a host-side object — each `push_back(val)` or `append(&other)` call invokes a host function. Placing these in a loop body wastes CPU instructions. The efficient approach is to accumulate bytes in a Rust `Vec<u8>` (cheap, local operations) and convert to `Bytes` once outside the loop via `Bytes::from_slice`.\n\n```rust\n// Bad: host call per iteration\nlet mut bytes = Bytes::new(&env);\nfor i in 0..items.len() {\n    bytes.push_back(items[i]); // host call each iteration!\n}\n\n// Good: build in memory, convert once\nlet mut v: Vec<u8> = Vec::new();\nfor i in 0..items.len() {\n    v.push(items[i]); // cheap Rust operation\n}\nlet bytes = Bytes::from_slice(&env, &v); // single host call\n```\n\n## Implementation Approach\n\nFollows the exact same pattern as the existing `soroban_storage_in_loop` lint:\n\n- Uses `check_expr` with `hir::ExprKind::MethodCall` pattern matching\n- Checks method name is `push_back` or `append`\n- Verifies the receiver type is `soroban_sdk::Bytes` (or `soroban_sdk::bytes::Bytes`) via `match_soroban_def_path`\n- Uses `get_enclosing_loop_or_multi_call_closure` to detect loop context\n- Fires `span_lint_and_help` with actionable guidance to use `Vec<u8>` + `Bytes::from_slice`\n\nCategorized under `LintCategory::Compute` since Bytes host function calls are a CPU cost concern.\n\n## Files Changed\n\n| File | Changes |\n|------|---------|\n| `soroban_cost_lints/src/lib.rs` | +39 lines — Added lint declaration, struct, `impl_lint_pass!`, `check_expr` implementation, registration in `register_lints` and `LINT_METADATA` |\n| `soroban_cost_lints/ui/main.rs` | +50 lines — Added `Bytes` mock type with `push_back` and `append`, plus 7 test fixtures covering for-loop, while-loop, `loop {}`, outside-loop, `Vec<u8>` alternative, and `#[allow]` |\n| `soroban_cost_lints/ui/main.stderr` | +29/-1 lines — Added 4 new warnings, bumping total from 11 → 15 |\n| `soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs` | +25 lines — Added 4 real SDK fixtures: `push_back` in loop, `append` in loop, outside-loop, and `Vec<u8>` alternative |\n| `cargo-cost-lint/tests/integration.rs` | +8 lines — Added assertion verifying `soroban_inefficient_bytes_concat` appears in JSON output |\n| `docs/lints/README.md` | +1 line — Added new lint to the CPU/Compute table |\n| `docs/lints/soroban_inefficient_bytes_concat.md` | New file — Documentation with description, examples, suggested fix, and scope |\n\n## Test Coverage\n\n**UI tests** (`soroban_cost_lints/ui/`):\n- `bad_bytes_push_back_in_loop` — `push_back` in a `for` loop (should warn)\n- `bad_bytes_append_in_loop` — `append` in a `for` loop (should warn)\n- `bad_bytes_push_back_in_while` — `push_back` in a `while` loop (should warn)\n- `bad_bytes_append_in_loop_loop` — `append` in a `loop {}` (should warn)\n- `good_bytes_concat_outside_loop` — `push_back` outside loop (should not warn)\n- `good_vec_build_then_convert` — `Vec<u8>` push in loop (should not warn — not Bytes)\n- `allowed_bytes_concat_in_loop` — `#[allow]` suppresses the lint\n\n**Integration tests** (`cargo-cost-lint/tests/`):\n- Updated `test_json_output` to verify `soroban_inefficient_bytes_concat` in `--format json`\n\n**Real SDK fixtures** (`soroban_cost_lints/test_fixtures/real_sdk/`):\n- 4 fixtures exercising `soroban_sdk::Bytes::new`, `push_back`, `append`, `from_slice` with real SDK types\n\n## Checklist\n\n- [x] Implementation follows existing lint patterns (declare_lint!, impl_lint_pass!, LateLintPass)\n- [x] Lint registered in both `register_lints` and `LINT_METADATA`\n- [x] Categorized under `LintCategory::Compute`\n- [x] UI test fixtures added with expected stderr output (for/while/loop coverage)\n- [x] Real SDK test fixtures added\n- [x] Integration test updated to verify JSON output\n- [x] Documentation created and reference table updated\n- [ ] Run `cargo fmt --all -- --check`\n- [ ] Run `cargo clippy --workspace --all-targets -- -D warnings`\n- [ ] Run `cargo test --workspace`\n",
+    "author": {
+      "login": "MidstCodes",
+      "id": 306365947,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-25T12:19:27Z",
+    "updated_at": "2026-07-28T13:35:49Z",
+    "merged_at": "2026-07-28T13:35:48Z",
+    "closed_at": "2026-07-28T13:35:48Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "818be0ac6670851a821d249311b0e778d8d1ae06",
+    "base": {
+      "ref": "main",
+      "sha": "c78332dcd7995f7f75a32bc6c578bfbb9fac9014",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feat/add-lint-for-inefficient-bytes-concatenation",
+      "sha": "aa681a9aca39f58703d0bfbc92672d6e8bc2642a",
+      "repo": "MidstCodes/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 199,
+    "deletions": 51,
+    "changed_files": 6,
+    "commits": 3,
+    "comments": 3,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/188"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "c7cee2998cc0468bf27b705f04e6763b6023689d",
+      "message": "feat: add lint for inefficient Bytes concatenation\n\nAdds the soroban_inefficient_bytes_concat lint that detects Bytes\npush_back and append calls inside loops. Every Bytes mutation crosses\nthe Soroban host boundary, making per-iteration calls expensive.\n\n- New lint: SOROBAN_INEFFICIENT_BYTES_CONCAT (warn)\n- Detects push_back and append on soroban_sdk::Bytes in loops\n- Suggests accumulating in Vec<u8> and converting via Bytes::from_slice\n- Test fixtures cover for/while/loop, good patterns, and #[allow]\n- Real SDK fixtures and integration test updated\n\nCloses #51",
+      "author_name": "MidstCodes",
+      "author_email": "trentbuzzmedia@gmail.com",
+      "authored_at": "2026-07-25T12:17:36Z",
+      "committed_at": "2026-07-25T12:17:36Z",
+      "author": {
+        "login": "MidstCodes",
+        "id": 306365947,
+        "type": "User"
+      },
+      "committer": {
+        "login": "MidstCodes",
+        "id": 306365947,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "d1c4c05e5291f1a7e6379bdc1806eca9b72b4a24",
+      "message": "Merge branch 'main' into feat/add-lint-for-inefficient-bytes-concatenation",
+      "author_name": "MidstCodes",
+      "author_email": "trentbuzzmedia@gmail.com",
+      "authored_at": "2026-07-25T12:26:57Z",
+      "committed_at": "2026-07-25T12:26:57Z",
+      "author": {
+        "login": "MidstCodes",
+        "id": 306365947,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "aa681a9aca39f58703d0bfbc92672d6e8bc2642a",
+      "message": "Merge remote-tracking branch 'origin/main' into feat/add-lint-for-inefficient-bytes-concatenation",
+      "author_name": "adajala",
+      "author_email": "ademola2993k@gmail.com",
+      "authored_at": "2026-07-28T13:35:29Z",
+      "committed_at": "2026-07-28T13:35:29Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/tests/integration.rs",
+      "status": "modified",
+      "additions": 8,
+      "deletions": 0,
+      "changes": 8,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 2,
+      "changes": 4,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/soroban_inefficient_bytes_concat.md",
+      "status": "added",
+      "additions": 45,
+      "deletions": 0,
+      "changes": 45,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 49,
+      "deletions": 10,
+      "changes": 59,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs",
+      "status": "modified",
+      "additions": 31,
+      "deletions": 9,
+      "changes": 40,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 64,
+      "deletions": 30,
+      "changes": 94,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 0,
+    "check_runs": []
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "c78332dcd7995f7f75a32bc6c578bfbb9fac9014",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 818be0ac6670851a821d249311b0e778d8d1ae06 is the main tip at merge time.",
+    "pull_request_base_sha": "c78332dcd7995f7f75a32bc6c578bfbb9fac9014",
+    "check_runs": {
+      "total_count": 2,
+      "check_runs": [
+        {
+          "name": "build-and-test (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T13:35:27Z",
+          "completed_at": "2026-07-28T13:36:17Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364192864/job/90291094630",
+          "app": "github-actions",
+          "workflow_run_id": "30364192864"
+        },
+        {
+          "name": "build-and-test (windows-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T13:35:49Z",
+          "completed_at": "2026-07-28T13:36:07Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30364192864/job/90291094462",
+          "app": "github-actions",
+          "workflow_run_id": "30364192864"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/BTZwa9qyzV6gnbMcrGFj/",
+          "created_at": "2026-07-28T13:35:36Z",
+          "updated_at": "2026-07-28T13:35:36Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/BTZwa9qyzV6gnbMcrGFj/",
+          "created_at": "2026-07-28T13:35:36Z",
+          "updated_at": "2026-07-28T13:35:36Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 3,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "wagmiiii",
+        "count": 2
+      }
+    ],
+    "comments": [
+      {
+        "id": 5078478927,
+        "created_at": "2026-07-25T12:27:05Z",
+        "updated_at": "2026-07-25T12:27:05Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@MidstCodes Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5079726641,
+        "created_at": "2026-07-25T18:04:41Z",
+        "updated_at": "2026-07-25T18:04:41Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "@MidstCodes This PR currently has failing checks (Lint/lint-matrix). Please fix the failing checks so we can merge this safely!"
+      },
+      {
+        "id": 5079825235,
+        "created_at": "2026-07-25T18:19:47Z",
+        "updated_at": "2026-07-25T18:19:47Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "Hello! 👋 \n\nWe recently optimized and simplified the CI workflows on the `main` branch. \n\nSince this PR is currently failing its CI checks, could you please **rebase your branch onto `main`**? This will pull in the new workflow configurations and might automatically resolve the CI failures. \n\nLet us know if you need any help with the rebase!"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": false,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)"
+    ],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

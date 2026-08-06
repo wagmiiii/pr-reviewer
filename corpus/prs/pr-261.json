@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:58Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 261,
+    "title": "fix",
+    "body": "## Summary\r\n\r\nThis PR standardizes error handling across the affected module by replacing inconsistent patterns with the project's defined custom `Result` type.\r\n\r\n### Changes\r\n\r\n* Replaced inconsistent `unwrap` and `expect` usage where appropriate.\r\n* Standardized error propagation using the project's custom `Result` type.\r\n* Added any required variants to the shared `Error` enum.\r\n* Improved consistency and maintainability of error handling.\r\n\r\n### Validation\r\n\r\n* Ran the full test suite.\r\n* Verified all existing functionality remains unchanged.\r\n* Confirmed the project builds successfully and passes all checks.\r\n\r\nCloses #214\r\n## Summary\r\n\r\nThis PR improves the Windows setup documentation by providing platform-specific instructions for contributors using PowerShell.\r\n\r\n### Changes\r\n\r\n* Added PowerShell equivalents for setup commands.\r\n* Documented Windows PATH configuration where applicable.\r\n* Clarified environment setup steps for Windows users.\r\n* Reviewed documentation for platform-specific assumptions.\r\n\r\n### Validation\r\n\r\n* Reviewed documentation for accuracy and completeness.\r\n* Verified command examples are consistent with the existing setup process.\r\n* Ensured documentation changes do not impact the build.\r\n\r\nCloses #215\r\n## Summary\r\n\r\nThis PR improves code readability by replacing ambiguous variable names with descriptive, domain-specific names.\r\n\r\n### Changes\r\n\r\n* Renamed single-letter and unclear variable names.\r\n* Improved naming consistency throughout the module.\r\n* Preserved existing functionality without changing behavior.\r\n* Reviewed the file for similar naming improvements.\r\n\r\n### Validation\r\n\r\n* Ran the full test suite.\r\n* Verified no behavioral changes were introduced.\r\n* Confirmed the project builds successfully and passes all checks.\r\n\r\nCloses #218\r\n## Summary\r\n\r\nThis PR improves the performance of the internal state tracking implementation by replacing linear lookups with hash-based data structures.\r\n\r\n### Changes\r\n\r\n* Replaced linear state tracking structures with hash-based collections where appropriate.\r\n* Reduced lookup complexity for larger inputs.\r\n* Preserved existing behavior while improving scalability.\r\n* Added benchmark comparisons to measure the performance improvement.\r\n\r\n### Validation\r\n\r\n* Benchmarked performance before and after the optimization.\r\n* Ran the full test suite.\r\n* Verified the project builds successfully and passes all checks.\r\n\r\nCloses #219\r\n",
+    "author": {
+      "login": "amina69",
+      "id": 61979798,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T13:17:03Z",
+    "updated_at": "2026-07-26T16:41:10Z",
+    "merged_at": "2026-07-26T16:41:10Z",
+    "closed_at": "2026-07-26T16:41:10Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "4fd722e29b0413d65d52cb737d776825c7c7ea6d",
+    "base": {
+      "ref": "main",
+      "sha": "e0de3eb0a699451e6abd965444b9f742b7d24cdc",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "refactor/task-10",
+      "sha": "dbd5a99edc58ae6e205f0ba771612d1b95e58e55",
+      "repo": "amina69/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 10,
+    "deletions": 0,
+    "changed_files": 1,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/261"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "dbd5a99edc58ae6e205f0ba771612d1b95e58e55",
+      "message": "fix",
+      "author_name": "Amina Sheriff",
+      "author_email": "61979798+amina69@users.noreply.github.com",
+      "authored_at": "2026-07-26T13:10:39Z",
+      "committed_at": "2026-07-26T13:10:39Z",
+      "author": {
+        "login": "amina69",
+        "id": 61979798,
+        "type": "User"
+      },
+      "committer": {
+        "login": "amina69",
+        "id": 61979798,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs",
+      "status": "modified",
+      "additions": 10,
+      "deletions": 0,
+      "changes": 10,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-26T13:17:09Z",
+        "completed_at": "2026-07-26T13:23:56Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30203734503/job/89798072938",
+        "app": "github-actions",
+        "workflow_run_id": "30203734503"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "ca95253fe6a75190cebe526a53d1a07fe8031a10",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 4fd722e29b0413d65d52cb737d776825c7c7ea6d is the main tip at merge time.",
+    "pull_request_base_sha": "e0de3eb0a699451e6abd965444b9f742b7d24cdc",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-26T16:40:55Z",
+          "completed_at": "2026-07-26T16:41:27Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30210968656/job/89816998818",
+          "app": "github-actions",
+          "workflow_run_id": "30210968656"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30203734503"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

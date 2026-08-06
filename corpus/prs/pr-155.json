@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:13:53Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 155,
+    "title": "fix: resolve budget.toml from workspace root instead of cwd",
+    "body": "Walking up from the current directory to the workspace root ensures cargo cost-lint produces identical lint levels regardless of which member crate it is invoked from.\r\n\r\n- Add find_workspace_root_from() walking up looking for [workspace]\r\n- Change --config to Option<String> (default: None) to distinguish explicit from absent\r\n- Print 'Using config: <path>' when a config is loaded\r\n- Document the lookup rule in docs/integration.md\r\n- Add unit tests for workspace resolution, explicit paths, member dirs\r\n\r\n## Description\r\n<!-- Describe your changes in detail -->\r\n\r\n## Related Issue\r\n<!-- If this PR addresses an existing issue, please link it here. -->\r\n\r\nCloses #93 \r\n\r\n## Motivation and Context\r\n<!-- Why is this change required? What problem does it solve? -->\r\n\r\n## How Has This Been Tested?\r\n<!-- Please describe in detail how you tested your changes. -->\r\n- [ ] Added/Updated tests\r\n- [ ] Passed `cargo test`\r\n- [ ] Passed `cargo clippy`\r\n- [ ] Formatted with `cargo fmt`\r\n\r\n## Types of changes\r\n<!-- What types of changes does your code introduce? -->\r\n- [ ] Bug fix (non-breaking change which fixes an issue)\r\n- [ ] New feature (non-breaking change which adds functionality)\r\n- [ ] Breaking change (fix or feature that would cause existing functionality to change)\r\n- [ ] Documentation update\r\n",
+    "author": {
+      "login": "GdAyo19",
+      "id": 111335900,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-24T08:14:55Z",
+    "updated_at": "2026-07-24T13:25:22Z",
+    "merged_at": "2026-07-24T13:25:00Z",
+    "closed_at": "2026-07-24T13:25:00Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "557b21319ea7aad7045f67dc3831cbc28932dedd",
+    "base": {
+      "ref": "main",
+      "sha": "3311de1b279a3e2e1f809dd58b4071eb4b89e575",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "fix/resolve-budget-toml-from-workspace-root",
+      "sha": "ea569d6bd7ff6775184541d0662e1047fc77f1e7",
+      "repo": "GdAyo19/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 29,
+    "deletions": 12,
+    "changed_files": 3,
+    "commits": 7,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/155"
+  },
+  "reviews": [
+    {
+      "id": 4773428448,
+      "state": "APPROVED",
+      "submitted_at": "2026-07-24T13:09:04Z",
+      "author_association": "MEMBER",
+      "user": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "body_present": false,
+      "body": ""
+    }
+  ],
+  "review_states": [
+    {
+      "state": "APPROVED",
+      "count": 1
+    }
+  ],
+  "commits": [
+    {
+      "sha": "577981805caa85d4768745bfc1e2a01a619ad81a",
+      "message": "fix: resolve budget.toml from workspace root instead of cwd\n\nWalking up from the current directory to the workspace root ensures\ncargo cost-lint produces identical lint levels regardless of which\nmember crate it is invoked from.\n\n- Add find_workspace_root_from() walking up looking for [workspace]\n- Change --config to Option<String> (default: None) to distinguish\n  explicit from absent\n- Print 'Using config: <path>' when a config is loaded\n- Document the lookup rule in docs/integration.md\n- Add unit tests for workspace resolution, explicit paths, member dirs",
+      "author_name": "Ayodeji Olanrewaju",
+      "author_email": "111335900+GdAyo19@users.noreply.github.com",
+      "authored_at": "2026-07-24T08:13:36Z",
+      "committed_at": "2026-07-24T08:13:36Z",
+      "author": {
+        "login": "GdAyo19",
+        "id": 111335900,
+        "type": "User"
+      },
+      "committer": {
+        "login": "GdAyo19",
+        "id": 111335900,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "555816e3ee770c708025a6f44f59f12af390bc8c",
+      "message": "Merge branch 'main' into fix/resolve-budget-toml-from-workspace-root",
+      "author_name": "Ayodeji Olanrewaju",
+      "author_email": "111335900+GdAyo19@users.noreply.github.com",
+      "authored_at": "2026-07-24T09:22:26Z",
+      "committed_at": "2026-07-24T09:22:26Z",
+      "author": {
+        "login": "GdAyo19",
+        "id": 111335900,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "3ba309fc7423aaa82d0265d64d4d7d6abec07f3b",
+      "message": "Merge branch 'main' into fix/resolve-budget-toml-from-workspace-root",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T11:24:37Z",
+      "committed_at": "2026-07-24T11:24:37Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "bdb9514f1ae7e1c6fcbb59f7ea70d16e7eca183f",
+      "message": "Merge branch 'main' into fix/resolve-budget-toml-from-workspace-root",
+      "author_name": "Ayodeji Olanrewaju",
+      "author_email": "111335900+GdAyo19@users.noreply.github.com",
+      "authored_at": "2026-07-24T12:05:23Z",
+      "committed_at": "2026-07-24T12:05:23Z",
+      "author": {
+        "login": "GdAyo19",
+        "id": 111335900,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "5985eb64a9f4b4964d667abd4d2b5fcd251fec78",
+      "message": "Add missing resolve_config function and fix formatting",
+      "author_name": "Ayodeji Olanrewaju",
+      "author_email": "111335900+GdAyo19@users.noreply.github.com",
+      "authored_at": "2026-07-24T12:21:43Z",
+      "committed_at": "2026-07-24T12:21:43Z",
+      "author": {
+        "login": "GdAyo19",
+        "id": 111335900,
+        "type": "User"
+      },
+      "committer": {
+        "login": "GdAyo19",
+        "id": 111335900,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "d6ca7b180b9fda0b53867f02615430dad0806b19",
+      "message": "Remove unused Path import",
+      "author_name": "Ayodeji Olanrewaju",
+      "author_email": "111335900+GdAyo19@users.noreply.github.com",
+      "authored_at": "2026-07-24T12:24:15Z",
+      "committed_at": "2026-07-24T12:24:15Z",
+      "author": {
+        "login": "GdAyo19",
+        "id": 111335900,
+        "type": "User"
+      },
+      "committer": {
+        "login": "GdAyo19",
+        "id": 111335900,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "ea569d6bd7ff6775184541d0662e1047fc77f1e7",
+      "message": "Merge branch 'main' into fix/resolve-budget-toml-from-workspace-root",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T13:09:15Z",
+      "committed_at": "2026-07-24T13:09:15Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/Cargo.toml",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 0,
+      "changes": 3,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 22,
+      "deletions": 12,
+      "changes": 34,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/integration.md",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0,
+      "changes": 4,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 3,
+    "check_runs": [
+      {
+        "name": "validate-toolchain-pins",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T13:09:23Z",
+        "completed_at": "2026-07-24T13:09:26Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30095769298/job/89489345775",
+        "app": "github-actions",
+        "workflow_run_id": "30095769298"
+      },
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T13:09:23Z",
+        "completed_at": "2026-07-24T13:14:10Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30095769298/job/89489345693",
+        "app": "github-actions",
+        "workflow_run_id": "30095769298"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T13:09:23Z",
+        "completed_at": "2026-07-24T13:10:33Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30095769298/job/89489345682",
+        "app": "github-actions",
+        "workflow_run_id": "30095769298"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "3311de1b279a3e2e1f809dd58b4071eb4b89e575",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 557b21319ea7aad7045f67dc3831cbc28932dedd is the main tip at merge time.",
+    "pull_request_base_sha": "3311de1b279a3e2e1f809dd58b4071eb4b89e575",
+    "check_runs": {
+      "total_count": 3,
+      "check_runs": [
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T13:08:05Z",
+          "completed_at": "2026-07-24T13:12:51Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30095687452/job/89489075274",
+          "app": "github-actions",
+          "workflow_run_id": "30095687452"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T13:08:06Z",
+          "completed_at": "2026-07-24T13:09:21Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30095687452/job/89489075266",
+          "app": "github-actions",
+          "workflow_run_id": "30095687452"
+        },
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T13:08:05Z",
+          "completed_at": "2026-07-24T13:08:12Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30095687452/job/89489075245",
+          "app": "github-actions",
+          "workflow_run_id": "30095687452"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "GdAyo19",
+        "count": 1
+      },
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5067664378,
+        "created_at": "2026-07-24T08:15:02Z",
+        "updated_at": "2026-07-24T08:15:02Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@GdAyo19 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5070355921,
+        "created_at": "2026-07-24T13:25:22Z",
+        "updated_at": "2026-07-24T13:25:22Z",
+        "user": {
+          "login": "GdAyo19",
+          "id": 111335900,
+          "type": "User"
+        },
+        "author_association": "CONTRIBUTOR",
+        "body": "thank you brooo"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30095769298"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

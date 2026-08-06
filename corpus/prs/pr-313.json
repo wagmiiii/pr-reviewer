@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-06T07:03:39Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 313,
+    "title": "fix: revert half-implemented nested_storage_collections lint that breaks main",
+    "body": "## Why\n\n`main` is failing the required `lint` check and **no PR in this repo can merge** until this lands. Found while triaging the open PR backlog.\n\n## Root cause\n\n0a3295d (`feat: implement nested_storage_collections lint (#267)`) does not actually implement a lint. Its commit message claims it adds a `NestedStorageCollections` late lint pass, but the merged tree contains **no `declare_lint!`, no `impl LateLintPass`, and no registration** — the squash appears to have dropped them.\n\nWhat actually landed:\n\n- `SOROBAN_NESTABLE_COLLECTION_TYPES`, `is_soroban_collection()` and `has_nested_soroban_collection()` — none of which are reachable from any lint pass.\n- `docs/lints/nested_storage_collections.md` plus README/rationale entries **documenting a lint that does not exist**.\n\nBecause the helpers are unreachable, `-D warnings` fails:\n\n```\nerror: constant `SOROBAN_NESTABLE_COLLECTION_TYPES` is never used\n  --> soroban_cost_lints/src/lib.rs:161:7\n  = note: `-D dead-code` implied by `-D warnings`\n```\n\n## This PR\n\nStraight revert of 0a3295d. `cargo fmt --all -- --check` and `cargo clippy --workspace --all-targets -- -D warnings` both pass locally afterwards.\n\nReverting rather than completing the wiring is deliberate: the lint's detection semantics (which generic positions to flag, how to handle the `#[allow]` suppression case, what the UI fixtures should assert) are a maintainer call, and the shipped docs shouldn't describe behaviour the binary doesn't have.\n\n## Follow-up\n\nThe underlying issue should be reopened and reimplemented with the lint actually declared, registered, and covered by UI fixtures. The reverted `docs/lints/nested_storage_collections.md` is a reasonable starting spec.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nhttps://claude.ai/code/session_01TBuZPYykPjk7Tko2sJ6KHN",
+    "author": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "author_association": "MEMBER",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-28T08:14:36Z",
+    "updated_at": "2026-07-28T10:51:11Z",
+    "merged_at": "2026-07-28T10:51:11Z",
+    "closed_at": "2026-07-28T10:51:11Z",
+    "merged_by": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "58cf0577b3ed10d3b5475983b96c854666b81082",
+    "base": {
+      "ref": "main",
+      "sha": "0a3295df7e0fd4b2e2ef196d53774504fd4edc78",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "fix/revert-broken-267",
+      "sha": "0db36ba563df38aada2b2ffb55336a2008c345eb",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 4,
+    "deletions": 117,
+    "changed_files": 5,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/313"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "0db36ba563df38aada2b2ffb55336a2008c345eb",
+      "message": "Revert \"feat: implement nested_storage_collections lint (#267)\"\n\nThis reverts commit 0a3295df7e0fd4b2e2ef196d53774504fd4edc78.",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-28T08:02:34Z",
+      "committed_at": "2026-07-28T08:02:34Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/cost_rationale.md",
+      "status": "modified",
+      "additions": 0,
+      "deletions": 1,
+      "changes": 1,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 0,
+      "deletions": 1,
+      "changes": 1,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/nested_storage_collections.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 71,
+      "changes": 71,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 0,
+      "deletions": 40,
+      "changes": 40,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 4,
+      "changes": 8,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-28T08:14:42Z",
+        "completed_at": "2026-07-28T08:30:47Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30341595546/job/90218195656",
+        "app": "github-actions",
+        "workflow_run_id": "30341595546"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "success",
+    "total_count": 2,
+    "statuses": [
+      {
+        "context": "GitBook",
+        "state": "success",
+        "description": "Check the changes in the GitBook editor.",
+        "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/OYMFR9g724AbQyZFh7XX/",
+        "created_at": "2026-07-28T08:14:50Z",
+        "updated_at": "2026-07-28T08:14:50Z"
+      },
+      {
+        "context": "GitBook - tollcraft.gitbook.io/docs/",
+        "state": "success",
+        "description": "Check the live preview on your docs site.",
+        "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/OYMFR9g724AbQyZFh7XX/",
+        "created_at": "2026-07-28T08:14:50Z",
+        "updated_at": "2026-07-28T08:14:50Z"
+      }
+    ]
+  },
+  "base_branch_ci": {
+    "resolved_sha": "0a3295df7e0fd4b2e2ef196d53774504fd4edc78",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 58cf0577b3ed10d3b5475983b96c854666b81082 is the main tip at merge time.",
+    "pull_request_base_sha": "0a3295df7e0fd4b2e2ef196d53774504fd4edc78",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T06:29:22Z",
+          "completed_at": "2026-07-28T06:30:09Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30334970740/job/90197802558",
+          "app": "github-actions",
+          "workflow_run_id": "30334970740"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/TNl7DTOH2aUsMMXFJBjt/",
+          "created_at": "2026-07-28T06:29:31Z",
+          "updated_at": "2026-07-28T06:29:31Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/TNl7DTOH2aUsMMXFJBjt/",
+          "created_at": "2026-07-28T06:29:31Z",
+          "updated_at": "2026-07-28T06:29:31Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30341595546"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

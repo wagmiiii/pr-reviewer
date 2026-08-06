@@ -1,0 +1,300 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:11Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 161,
+    "title": "Merge upstream/main into main to sync with upstream",
+    "body": "Closes #121\n\n---\n\nSyncing fork with upstream changes including dependabot config, lint-proposal template, test fixtures for lint suppression, license file, changelog, toolchain pin validation, and removal of stale Cargo.lock from workspace member.\r\n\r\nNo merge conflicts encountered.\r\n\r\n## Description\r\n<!-- Describe your changes in detail -->\r\n\r\n## Related Issue\r\n<!-- If this PR addresses an existing issue, please link it here. -->\r\nCloses #\r\n\r\n## Motivation and Context\r\n<!-- Why is this change required? What problem does it solve? -->\r\n\r\n## How Has This Been Tested?\r\n<!-- Please describe in detail how you tested your changes. -->\r\n- [ ] Added/Updated tests\r\n- [ ] Passed `cargo test`\r\n- [ ] Passed `cargo clippy`\r\n- [ ] Formatted with `cargo fmt`\r\n\r\n## Types of changes\r\n<!-- What types of changes does your code introduce? -->\r\n- [ ] Bug fix (non-breaking change which fixes an issue)\r\n- [ ] New feature (non-breaking change which adds functionality)\r\n- [ ] Breaking change (fix or feature that would cause existing functionality to change)\r\n- [ ] Documentation update\r\n",
+    "author": {
+      "login": "aojomo",
+      "id": 267395325,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-24T11:03:57Z",
+    "updated_at": "2026-07-24T13:08:00Z",
+    "merged_at": "2026-07-24T13:08:00Z",
+    "closed_at": "2026-07-24T13:08:00Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "3311de1b279a3e2e1f809dd58b4071eb4b89e575",
+    "base": {
+      "ref": "main",
+      "sha": "d67fc1eca8ea6e0472697055a02bb448f70f1c21",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "main",
+      "sha": "3cf90dfea890ab053493bfa4bf1796de5f7815d2",
+      "repo": "aojomo/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 0,
+    "deletions": 0,
+    "changed_files": 0,
+    "commits": 5,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/161"
+  },
+  "reviews": [
+    {
+      "id": 4772691747,
+      "state": "APPROVED",
+      "submitted_at": "2026-07-24T11:14:37Z",
+      "author_association": "MEMBER",
+      "user": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "body_present": false,
+      "body": ""
+    }
+  ],
+  "review_states": [
+    {
+      "state": "APPROVED",
+      "count": 1
+    }
+  ],
+  "commits": [
+    {
+      "sha": "c105ec2e8363087c8ac54a785222d425e18906d2",
+      "message": "Merge upstream/main into main to sync with upstream\n\nSyncing fork with upstream changes including dependabot config, lint-proposal template, test fixtures for lint suppression, license file, changelog, toolchain pin validation, and removal of stale Cargo.lock from workspace member.\n\nNo merge conflicts encountered.",
+      "author_name": "aojomo",
+      "author_email": "abiolaojomo7@gmail.com",
+      "authored_at": "2026-07-24T10:33:46Z",
+      "committed_at": "2026-07-24T10:33:46Z",
+      "author": {
+        "login": "aojomo",
+        "id": 267395325,
+        "type": "User"
+      },
+      "committer": {
+        "login": "aojomo",
+        "id": 267395325,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "f5639450b2f2945a01128474a6a3f4f0efba8cf5",
+      "message": "Merge branch 'main' into main",
+      "author_name": "aojomo",
+      "author_email": "abiolaojomo7@gmail.com",
+      "authored_at": "2026-07-24T11:09:51Z",
+      "committed_at": "2026-07-24T11:09:51Z",
+      "author": {
+        "login": "aojomo",
+        "id": 267395325,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "13b22b0463520dd732e63e0f476b8295d32ab564",
+      "message": "Merge branch 'main' into main",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T11:13:36Z",
+      "committed_at": "2026-07-24T11:13:36Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "19ea2c5686d6a829758d19a843f06a3c459dd9df",
+      "message": "Merge branch 'main' into main",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T11:23:23Z",
+      "committed_at": "2026-07-24T11:23:23Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "3cf90dfea890ab053493bfa4bf1796de5f7815d2",
+      "message": "Merge branch 'main' into main",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T11:33:00Z",
+      "committed_at": "2026-07-24T11:33:00Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [],
+  "head_check_runs": {
+    "total_count": 3,
+    "check_runs": [
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T11:33:08Z",
+        "completed_at": "2026-07-24T11:34:20Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30089946247/job/89470726571",
+        "app": "github-actions",
+        "workflow_run_id": "30089946247"
+      },
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T11:33:08Z",
+        "completed_at": "2026-07-24T11:37:26Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30089946247/job/89470726555",
+        "app": "github-actions",
+        "workflow_run_id": "30089946247"
+      },
+      {
+        "name": "validate-toolchain-pins",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T11:33:08Z",
+        "completed_at": "2026-07-24T11:33:11Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30089946247/job/89470726539",
+        "app": "github-actions",
+        "workflow_run_id": "30089946247"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "d67fc1eca8ea6e0472697055a02bb448f70f1c21",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 3311de1b279a3e2e1f809dd58b4071eb4b89e575 is the main tip at merge time.",
+    "pull_request_base_sha": "d67fc1eca8ea6e0472697055a02bb448f70f1c21",
+    "check_runs": {
+      "total_count": 4,
+      "check_runs": [
+        {
+          "name": "Dependabot",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T11:33:58Z",
+          "completed_at": "2026-07-24T11:35:21Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30089993817/job/89470884182",
+          "app": "github-actions",
+          "workflow_run_id": "30089993817"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T11:32:38Z",
+          "completed_at": "2026-07-24T11:33:50Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30089918464/job/89470637203",
+          "app": "github-actions",
+          "workflow_run_id": "30089918464"
+        },
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T11:32:38Z",
+          "completed_at": "2026-07-24T11:37:30Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30089918464/job/89470637178",
+          "app": "github-actions",
+          "workflow_run_id": "30089918464"
+        },
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T11:32:39Z",
+          "completed_at": "2026-07-24T11:32:46Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30089918464/job/89470637173",
+          "app": "github-actions",
+          "workflow_run_id": "30089918464"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30089946247"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

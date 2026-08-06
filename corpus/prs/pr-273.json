@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:16:23Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 273,
+    "title": "docs: Phase 1 reconnaissance for edge case testing coverage ",
+    "body": "# Closes #206\r\n## Overview\r\nThis PR documents the Phase 1 reconnaissance analysis for resolving issue #18 \r\n(increase unit test coverage for edge scenarios).\r\n\r\n## Key Findings\r\n- Identified that the original issue contains template placeholders\r\n- Documented all 9 existing lints and their edge case categories\r\n- Analyzed current testing patterns in the UI test framework\r\n- Highlighted critical clarifications needed from stakeholders\r\n\r\n## Blocking Items\r\nSee `PHASE_1_RECONNAISSANCE_ANALYSIS.md` for the \"Critical Clarification Needed\" section.\r\n\r\n**Stakeholder input required on:**\r\n1. Which lint(s) need edge case testing?\r\n2. What specific boundary conditions should be targeted?\r\n3. Coverage targets and known gaps?\r\n\r\n## Files Changed\r\n- Added: `PHASE_1_RECONNAISSANCE_ANALYSIS.md` (comprehensive analysis document)\r\n\r\n## Checklist\r\n- [x] Code formatted (`cargo fmt`)\r\n- [x] Lints pass (`cargo clippy`)\r\n- [x] Document provides clear next steps\r\n- [ ] Closes #18 (awaiting implementation after clarification)\r\n\r\n",
+    "author": {
+      "login": "jerryjuche",
+      "id": 148966365,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T18:23:53Z",
+    "updated_at": "2026-07-27T12:15:49Z",
+    "merged_at": "2026-07-27T12:15:48Z",
+    "closed_at": "2026-07-27T12:15:48Z",
+    "merged_by": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "2b76f1ad5785b22e9d99ebf6dcbbbb6c4271c63e",
+    "base": {
+      "ref": "main",
+      "sha": "4fd722e29b0413d65d52cb737d776825c7c7ea6d",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "test/task-18",
+      "sha": "5d438dae8afe5555832936355cd5917a9013fcc8",
+      "repo": "jerryjuche/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 241,
+    "deletions": 0,
+    "changed_files": 1,
+    "commits": 1,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/273"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "5d438dae8afe5555832936355cd5917a9013fcc8",
+      "message": "docs: add Phase 1 reconnaissance analysis for edge case testing\n\n- Analyze current lint structure and test patterns\n- Identify placeholder text in issue description (src/module_18.rs)\n- Document all 9 implemented lints and their edge case categories\n- Highlight critical clarifications needed before implementation\n- Provide testing patterns and code quality standards reference\n- List recommended next steps and blocking questions\n\nThis document clarifies that the original issue requires stakeholder\ninput to determine which lints need edge case testing and what\nspecific boundary conditions should be targeted.\n\nContributes to: Closes #18",
+      "author_name": "klamedia620",
+      "author_email": "klamedia620@gmail.com",
+      "authored_at": "2026-07-26T18:16:39Z",
+      "committed_at": "2026-07-26T18:16:39Z",
+      "author": {
+        "login": "klamedia620",
+        "id": 288009862,
+        "type": "User"
+      },
+      "committer": {
+        "login": "klamedia620",
+        "id": 288009862,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "PHASE_1_RECONNAISSANCE_ANALYSIS.md",
+      "status": "added",
+      "additions": 241,
+      "deletions": 0,
+      "changes": 241,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-26T18:24:00Z",
+        "completed_at": "2026-07-26T18:24:36Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30214628491/job/89826519719",
+        "app": "github-actions",
+        "workflow_run_id": "30214628491"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "4053c206796b5054d607e29219ac5cfe7f302547",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 2b76f1ad5785b22e9d99ebf6dcbbbb6c4271c63e is the main tip at merge time.",
+    "pull_request_base_sha": "4fd722e29b0413d65d52cb737d776825c7c7ea6d",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T12:15:49Z",
+          "completed_at": "2026-07-27T12:16:27Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30265193450/job/89974076832",
+          "app": "github-actions",
+          "workflow_run_id": "30265193450"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "mallison031",
+        "count": 2
+      }
+    ],
+    "comments": [
+      {
+        "id": 5089690644,
+        "created_at": "2026-07-27T09:33:54Z",
+        "updated_at": "2026-07-27T09:33:54Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "fix your cl\r\n"
+      },
+      {
+        "id": 5089729859,
+        "created_at": "2026-07-27T09:38:02Z",
+        "updated_at": "2026-07-27T09:38:02Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "fix your check"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30214628491"
+    ],
+    "all_head_workflow_run_ids": [
+      "30214628491"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

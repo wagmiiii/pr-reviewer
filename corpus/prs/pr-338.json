@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:12:42Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 338,
+    "title": "docs(contributing): recommend a blobless clone, and guard against a repeat",
+    "body": "## The problem\n\nCloning this repository transfers **252 MB**. The working tree at `HEAD` is\n**1.1 MB across 152 files**. Over 99% of what a contributor downloads is history.\n\nBuild artefacts were committed early in the repo's life and removed later —\n`.gitignore` and `git rm` stop future commits but do not retract what is already\nin history, and **a clone downloads history**:\n\n| path | blobs ever committed |\n|---|---|\n| `soroban_cost_lints/test_fixtures/**/target/` | **932.6 MB** |\n| `target/debug/` | **640.6 MB** |\n| all actual source | ~10 MB |\n\nWorst single blob: `libstellar_xdr-*.rlib` at **36.1 MB**, committed twice. Added\naround #281, removed in #328 — absent from the tree, still paid for on every clone.\n\nThis is the same root cause as the Windows `MAX_PATH` checkout failures fixed\nearlier: committed build output, different symptom.\n\n## The fix: document a blobless clone\n\n| clone | size | time | history |\n|---|---|---|---|\n| plain `git clone` | 252 MB | minutes | full |\n| `--depth 1` | 432 KB | 2.1 s | 1 commit |\n| **`--filter=blob:none`** | **1.1 MB** | **4.8 s** | **full — all 351 commits** |\n\nA blobless clone keeps complete history and every branch; file contents are\nfetched on demand, which for normal work means never. **99.6% smaller with no\nloss of function.** Updated in all six places a clone is documented\n(`CONTRIBUTING.md` ×2, `docs/windows_setup.md` ×3, `docs/custom_lint_guide.md`),\nwith a short note explaining why so it is not cargo-culted.\n\nCI is already unaffected — `actions/checkout` defaults to depth 1.\n\n## Guarding against a repeat\n\nThere is currently **no pre-commit config and no size check in CI**, which is why\n1.5 GB of `.rlib` files could be committed unnoticed. Adds a `repo-hygiene` job\nfailing on:\n\n- any tracked path under a `target/` directory\n- any tracked file over 5 MB (largest legitimate file today is ~108 KB)\n\nIt is aggregated into `build-and-test` rather than exposed as its own check, so\nbranch protection keeps a single required context.\n\nVerified both directions — passes on the current tree, and catches a planted\n`sub/target/debug/lib.rlib` and a 6 MB file.\n\n## Why not rewrite history\n\n`git-filter-repo` would take the repo to ~10 MB permanently, but it rewrites\nevery commit SHA. That would break all **68 forks**, invalidate SHAs cited across\nopen issues and merged PRs, and require temporarily disabling force-push\nprotection on `main`. For a Wave repo whose purpose is inbound contribution from\nthose forks, that is a steep price when the change above already removes 99.6% of\nthe cost. Deliberately left as an org decision.\n\n**Caveat:** this fixes the documented path, not every path — someone typing plain\n`git clone` still transfers 252 MB.",
+    "author": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "author_association": "MEMBER",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-08-04T11:30:23Z",
+    "updated_at": "2026-08-04T11:38:39Z",
+    "merged_at": "2026-08-04T11:38:39Z",
+    "closed_at": "2026-08-04T11:38:39Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "fcdfcbe176a6335908552efce14d277784060378",
+    "base": {
+      "ref": "main",
+      "sha": "6b53135fbabc2a42b348e25fcb528d247329ab12",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "docs/lighter-clone",
+      "sha": "10eea9b3e410e6caeee4813b179d9e4868315b77",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 49,
+    "deletions": 8,
+    "changed_files": 4,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/338"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "10eea9b3e410e6caeee4813b179d9e4868315b77",
+      "message": "docs(contributing): recommend a blobless clone, and guard against a repeat\n\nCloning this repository transfers 252MB, but the working tree at HEAD is 1.1MB\nacross 152 files. Over 99% of the download is history: build artefacts were\ncommitted early on and removed later, and .gitignore does not retract what is\nalready in history.\n\n  soroban_cost_lints/test_fixtures/**/target/    932.6 MB of blobs\n  target/debug/                                  640.6 MB of blobs\n  all actual source                              ~10 MB\n\nThe largest single blob is a 36.1MB libstellar_xdr rlib, committed twice. The\nfiles were added around #281 and removed in #328, so they are absent from the\ntree yet still paid for on every clone.\n\nDocument `--filter=blob:none` in the six places a clone is described. A blobless\nclone keeps the complete history and every branch, fetching file contents on\ndemand:\n\n  plain clone            252 MB    minutes    full history\n  --depth 1              432 KB    2.1 s      1 commit\n  --filter=blob:none     1.1 MB    4.8 s      full history (351 commits)\n\nNothing prevented the artefacts being committed in the first place — there is no\npre-commit config and no size check in CI — so add a repo-hygiene job that fails\non any tracked path under target/ or any tracked file over 5MB. The largest\nlegitimate tracked file is ~108KB, so that threshold has wide headroom. It is\naggregated into build-and-test rather than exposed separately, to keep a single\nrequired status context.\n\nA history rewrite would take the repository to ~10MB permanently, but it would\nbreak all 68 forks and invalidate commit SHAs cited across open issues, so it is\ndeliberately not attempted here.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01ToyjQ3F5ogZ4G2C3YRpH4N",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-08-04T11:30:14Z",
+      "committed_at": "2026-08-04T11:30:14Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 35,
+      "deletions": 2,
+      "changes": 37,
+      "previous_filename": null
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 10,
+      "deletions": 2,
+      "changes": 12,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/custom_lint_guide.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/windows_setup.md",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 3,
+      "changes": 6,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 5,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T11:35:31Z",
+        "completed_at": "2026-08-04T11:35:35Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30905080478/job/91979303711",
+        "app": "github-actions",
+        "workflow_run_id": "30905080478"
+      },
+      {
+        "name": "dogfood",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T11:30:35Z",
+        "completed_at": "2026-08-04T11:36:05Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30905080615/job/91978187529",
+        "app": "github-actions",
+        "workflow_run_id": "30905080615"
+      },
+      {
+        "name": "test (windows-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T11:30:29Z",
+        "completed_at": "2026-08-04T11:35:28Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30905080478/job/91978187237",
+        "app": "github-actions",
+        "workflow_run_id": "30905080478"
+      },
+      {
+        "name": "repo-hygiene",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T11:30:29Z",
+        "completed_at": "2026-08-04T11:30:33Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30905080478/job/91978187219",
+        "app": "github-actions",
+        "workflow_run_id": "30905080478"
+      },
+      {
+        "name": "test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T11:30:29Z",
+        "completed_at": "2026-08-04T11:32:59Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30905080478/job/91978187152",
+        "app": "github-actions",
+        "workflow_run_id": "30905080478"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "success",
+    "total_count": 2,
+    "statuses": [
+      {
+        "context": "GitBook - tollcraft.gitbook.io/docs/",
+        "state": "success",
+        "description": "Check the live preview on your docs site.",
+        "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/yxULCxOzoW3auGSEuxlv/",
+        "created_at": "2026-08-04T11:30:38Z",
+        "updated_at": "2026-08-04T11:30:38Z"
+      },
+      {
+        "context": "GitBook",
+        "state": "success",
+        "description": "Check the changes in the GitBook editor.",
+        "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/yxULCxOzoW3auGSEuxlv/",
+        "created_at": "2026-08-04T11:30:38Z",
+        "updated_at": "2026-08-04T11:30:38Z"
+      }
+    ]
+  },
+  "base_branch_ci": {
+    "resolved_sha": "8bdfe71ba08f919c4ef55e2466a52844d50e0aff",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit fcdfcbe176a6335908552efce14d277784060378 is the main tip at merge time.",
+    "pull_request_base_sha": "6b53135fbabc2a42b348e25fcb528d247329ab12",
+    "check_runs": {
+      "total_count": 4,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T11:38:01Z",
+          "completed_at": "2026-08-04T11:38:03Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30905168035/job/91979856644",
+          "app": "github-actions",
+          "workflow_run_id": "30905168035"
+        },
+        {
+          "name": "dogfood",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T11:31:50Z",
+          "completed_at": "2026-08-04T11:37:03Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30905168047/job/91978467828",
+          "app": "github-actions",
+          "workflow_run_id": "30905168047"
+        },
+        {
+          "name": "test (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T11:31:45Z",
+          "completed_at": "2026-08-04T11:34:21Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30905168035/job/91978467768",
+          "app": "github-actions",
+          "workflow_run_id": "30905168035"
+        },
+        {
+          "name": "test (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T11:31:44Z",
+          "completed_at": "2026-08-04T11:37:59Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30905168035/job/91978467611",
+          "app": "github-actions",
+          "workflow_run_id": "30905168035"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/xn7UUM4B87R7lWXzWJFc/",
+          "created_at": "2026-08-04T11:31:51Z",
+          "updated_at": "2026-08-04T11:31:51Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/xn7UUM4B87R7lWXzWJFc/",
+          "created_at": "2026-08-04T11:31:51Z",
+          "updated_at": "2026-08-04T11:31:51Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30905080478",
+      "30905080615"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

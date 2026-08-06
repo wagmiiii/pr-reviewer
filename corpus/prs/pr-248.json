@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:31Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 248,
+    "title": "docs: note #207 is invalid - src/module_17.rs does not exist",
+    "body": "## Summary\n\nCloses #207\n\n## Investigation\n\nIssue #207 requested adding inline comments for complex bitwise operations in src/module_17.rs. After a thorough investigation of the entire codebase:\n\n- **src/module_17.rs does not exist** -- the src/ directory itself is absent; all lint logic lives in soroban_cost_lints/src/lib.rs.\n- **No bitwise operations exist anywhere in the codebase.** A regex search for <<, >>, ",
+    "author": {
+      "login": "codenerde",
+      "id": 271341749,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T01:43:57Z",
+    "updated_at": "2026-07-26T06:03:02Z",
+    "merged_at": "2026-07-26T06:03:02Z",
+    "closed_at": "2026-07-26T06:03:02Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "f21a1b0f742cb20fa00b12b09fd33064eebe138c",
+    "base": {
+      "ref": "main",
+      "sha": "9917e9f35219f5c7fb16592ec81ae5dcc8516d0b",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "docs/task-17",
+      "sha": "dd96b84c0b5c47a570c49c57ff2b606af80cfe6f",
+      "repo": "codenerde/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 4,
+    "deletions": 0,
+    "changed_files": 1,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/248"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "dd96b84c0b5c47a570c49c57ff2b606af80cfe6f",
+      "message": "docs: note #207 is invalid — src/module_17.rs does not exist",
+      "author_name": "AI Builder",
+      "author_email": "bot@example.com",
+      "authored_at": "2026-07-26T01:42:59Z",
+      "committed_at": "2026-07-26T01:42:59Z",
+      "author": {
+        "login": "rhoggs-bot-test-account",
+        "id": 22551806,
+        "type": "User"
+      },
+      "committer": {
+        "login": "rhoggs-bot-test-account",
+        "id": 22551806,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "CHANGELOG.md",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0,
+      "changes": 4,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-26T01:44:03Z",
+        "completed_at": "2026-07-26T01:46:19Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30183375440/job/89743726803",
+        "app": "github-actions",
+        "workflow_run_id": "30183375440"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "c2dbc42b9a4a2d6a36ffd750069afe01d278a412",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit f21a1b0f742cb20fa00b12b09fd33064eebe138c is the main tip at merge time.",
+    "pull_request_base_sha": "9917e9f35219f5c7fb16592ec81ae5dcc8516d0b",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-26T06:00:58Z",
+          "completed_at": "2026-07-26T06:03:19Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30190324870/job/89762313954",
+          "app": "github-actions",
+          "workflow_run_id": "30190324870"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/c1JMXUt37iCcCBO38Vwf/",
+          "created_at": "2026-07-26T06:01:10Z",
+          "updated_at": "2026-07-26T06:01:10Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/c1JMXUt37iCcCBO38Vwf/",
+          "created_at": "2026-07-26T06:01:10Z",
+          "updated_at": "2026-07-26T06:01:10Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30183375440"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

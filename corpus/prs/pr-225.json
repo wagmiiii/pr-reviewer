@@ -1,0 +1,447 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:52Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 225,
+    "title": "test: add positive/negative fixtures for storage_write_without_read, inefficient_bytes_concat, map_insert_in_loop + feat: implement --fix",
+    "body": "Closes #65\nCloses #64\nCloses #63\nCloses #58\n\n## Summary\n\nThis PR implements four related improvements to soroban-cost-linter:\n\n### 1. New Lints\n\n- **** - Detects storage  calls where the same key is never subsequently read ( or ) in the same function. This helps developers spot wasteful storage writes that drive up Soroban fees for data that's never used.\n- **** - Detects  concatenation using  inside loops, which creates unnecessary per-iteration allocations. Suggests using a  buffer instead.\n- **** - Detects  calls inside loop bodies. Flags the pattern as expensive and suggests accumulating mutations in memory first.\n\n### 2. --fix Flag (#58)\n\nAdded  CLI flag to  that automatically applies machine-applicable lint suggestions in-place. Currently supports auto-fixing  by replacing  with .\n\n### 3. UI Test Fixtures\n\nAdded positive fixtures (should warn) and negative fixtures (should not warn) for all three new lints in , following the same pattern as existing lints.\n\n### 4. Documentation\n\n- Added per-lint documentation in  for all three new lints\n- Updated  with the new lints in the appropriate tables\n- Updated  with new features list and  usage section\n- Updated  with all additions\n\n## Verification\n\nAll lints follow the existing codebase patterns:\n- Lints are registered in  and \n- Positive fixtures trigger the warning\n- Negative fixtures have  suppression or don't trigger the pattern\n- Each fixture is clearly commented with \"Should Warn\" or \"Good\" markers",
+    "author": {
+      "login": "fadesany",
+      "id": 285033142,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-25T18:57:38Z",
+    "updated_at": "2026-07-26T06:00:54Z",
+    "merged_at": "2026-07-26T06:00:54Z",
+    "closed_at": "2026-07-26T06:00:54Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "c2dbc42b9a4a2d6a36ffd750069afe01d278a412",
+    "base": {
+      "ref": "main",
+      "sha": "9917e9f35219f5c7fb16592ec81ae5dcc8516d0b",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "test/add-positive-negative-fixtures-for-storage_write_without_read",
+      "sha": "4d7ac8ad3560ae890385ae5a7f3e85e76934223f",
+      "repo": "fadesany/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 662,
+    "deletions": 66,
+    "changed_files": 10,
+    "commits": 10,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/225"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "7c514d69f672ec0c693fb49f0538e4704ad63039",
+      "message": "feat: implement --fix, storage_write_without_read, inefficient_bytes_concat, map_insert_in_loop lints\n\nCloses #58 - implement --fix flag for cargo-cost-lint to automatically apply machine-applicable suggestions\nCloses #63 - add positive/negative fixtures for map_insert_in_loop lint\nCloses #64 - add positive/negative fixtures for inefficient_bytes_concat lint\nCloses #65 - add positive/negative fixtures for storage_write_without_read lint\n\n- Add --fix CLI flag to cargo-cost-lint that applies machine-applicable suggestions in-place\n- Add STORAGE_WRITE_WITHOUT_READ lint detecting storage writes without corresponding reads\n- Add INEFFICIENT_BYTES_CONCAT lint detecting Bytes concatenation in loops\n- Add MAP_INSERT_IN_LOOP lint detecting Map::insert inside loops\n- Add UI test fixtures (positive and negative) for all three new lints\n- Add documentation for all new lints\n- Update README.md and CHANGELOG.md",
+      "author_name": "fadesany",
+      "author_email": "fuhadadesanya0@gmail.com",
+      "authored_at": "2026-07-25T18:57:25Z",
+      "committed_at": "2026-07-25T18:57:25Z",
+      "author": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "committer": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "8d6f1f8d608293ecb2e3d39bcff58c4aa6f1d550",
+      "message": "ci: fix rustfmt formatting issues\n\nAlign with rustfmt output for:\n- cargo-cost-lint/src/main.rs: file_edits block\n- soroban_cost_lints/src/lib.rs: check_fn signature, visitor initialization, has_read formatting",
+      "author_name": "fadesany",
+      "author_email": "fuhadadesanya0@gmail.com",
+      "authored_at": "2026-07-25T18:59:23Z",
+      "committed_at": "2026-07-25T18:59:23Z",
+      "author": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "committer": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "dc68df8dda267f5f379f7b3d76ecae79bcb9fdab",
+      "message": "fix: compilation errors from CI\n\n- Fix check_fn signature: add missing FnDecl and LocalDefId parameters\n- Fix self.cx → &self.cx in visitor impls (visitor takes &self)\n- Fix hir::ExprKind::BinaryOp → hir::ExprKind::Binary\n- Fix FnKind from hir::FnKind to rustc_hir::intravisit::FnKind\n- Simplify inefficient_bytes_concat lint logic",
+      "author_name": "fadesany",
+      "author_email": "fuhadadesanya0@gmail.com",
+      "authored_at": "2026-07-25T19:06:05Z",
+      "committed_at": "2026-07-25T19:06:05Z",
+      "author": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "committer": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "07a016fd25c2338c274ae2bda77169f9b6dbce7b",
+      "message": "ci: fix rustfmt formatting for key_snippet lines",
+      "author_name": "fadesany",
+      "author_email": "fuhadadesanya0@gmail.com",
+      "authored_at": "2026-07-25T20:54:09Z",
+      "committed_at": "2026-07-25T20:54:09Z",
+      "author": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "committer": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "8c796eb1293a0841657e4b01088b1766b2b7a656",
+      "message": "fix: visitor cx field should be a reference to LateContext\n\nStorageWriteWithoutRead visitors store cx as &[LateContext] since\ncheck_fn receives cx by reference",
+      "author_name": "fadesany",
+      "author_email": "fuhadadesanya0@gmail.com",
+      "authored_at": "2026-07-25T20:55:56Z",
+      "committed_at": "2026-07-25T20:55:56Z",
+      "author": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "committer": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "6f7a445d857736f8a4ec87034ffc2350f441ce22",
+      "message": "fix: add separate lifetime for visitor cx reference to satisfy invariance",
+      "author_name": "fadesany",
+      "author_email": "fuhadadesanya0@gmail.com",
+      "authored_at": "2026-07-25T21:07:20Z",
+      "committed_at": "2026-07-25T21:07:20Z",
+      "author": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "committer": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "b5be1e8f0ec20d8a77d3a97db4ee1149875df41c",
+      "message": "fix: satisfy rustfmt for storage write lint",
+      "author_name": "fadesany",
+      "author_email": "fuhadadesanya0@gmail.com",
+      "authored_at": "2026-07-25T21:29:31Z",
+      "committed_at": "2026-07-25T21:29:31Z",
+      "author": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "committer": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "80288692e8c76bc4c9f1e04d3624b78137e58d24",
+      "message": "fix: resolve clippy warnings in storage write lint",
+      "author_name": "fadesany",
+      "author_email": "fuhadadesanya0@gmail.com",
+      "authored_at": "2026-07-25T21:43:46Z",
+      "committed_at": "2026-07-25T21:43:46Z",
+      "author": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "committer": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "80e77ab770d45496dbed0d9c2e5c0bc3de1740ab",
+      "message": "test: make ui test compile after adding storage_write_without_read fixtures",
+      "author_name": "fadesany",
+      "author_email": "fuhadadesanya0@gmail.com",
+      "authored_at": "2026-07-25T23:50:19Z",
+      "committed_at": "2026-07-25T23:50:19Z",
+      "author": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "committer": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "4d7ac8ad3560ae890385ae5a7f3e85e76934223f",
+      "message": "merge: integrate upstream bytes_append_in_loop lint (#226); keep all 4 lints and merge related fixtures",
+      "author_name": "fadesany",
+      "author_email": "fuhadadesanya0@gmail.com",
+      "authored_at": "2026-07-26T00:12:15Z",
+      "committed_at": "2026-07-26T00:12:15Z",
+      "author": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "committer": {
+        "login": "fadesany",
+        "id": 285033142,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "CHANGELOG.md",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 0,
+      "changes": 4,
+      "previous_filename": null
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 19,
+      "deletions": 1,
+      "changes": 20,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 100,
+      "deletions": 23,
+      "changes": 123,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 0,
+      "changes": 3,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/inefficient_bytes_concat.md",
+      "status": "added",
+      "additions": 45,
+      "deletions": 0,
+      "changes": 45,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/map_insert_in_loop.md",
+      "status": "added",
+      "additions": 48,
+      "deletions": 0,
+      "changes": 48,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/storage_write_without_read.md",
+      "status": "added",
+      "additions": 40,
+      "deletions": 0,
+      "changes": 40,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 212,
+      "deletions": 0,
+      "changes": 212,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.rs",
+      "status": "modified",
+      "additions": 102,
+      "deletions": 20,
+      "changes": 122,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 89,
+      "deletions": 22,
+      "changes": 111,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-26T00:12:24Z",
+        "completed_at": "2026-07-26T00:14:39Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30180760898/job/89736753809",
+        "app": "github-actions",
+        "workflow_run_id": "30180760898"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "9917e9f35219f5c7fb16592ec81ae5dcc8516d0b",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit c2dbc42b9a4a2d6a36ffd750069afe01d278a412 is the main tip at merge time.",
+    "pull_request_base_sha": "9917e9f35219f5c7fb16592ec81ae5dcc8516d0b",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T23:28:05Z",
+          "completed_at": "2026-07-25T23:30:25Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30179455150/job/89733500490",
+          "app": "github-actions",
+          "workflow_run_id": "30179455150"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/OsYf4L4QC2dJdPNBc8dv/",
+          "created_at": "2026-07-25T23:28:13Z",
+          "updated_at": "2026-07-25T23:28:13Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/OsYf4L4QC2dJdPNBc8dv/",
+          "created_at": "2026-07-25T23:28:13Z",
+          "updated_at": "2026-07-25T23:28:13Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5080136409,
+        "created_at": "2026-07-25T18:57:47Z",
+        "updated_at": "2026-07-25T18:57:47Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@fadesany Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30180760898"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

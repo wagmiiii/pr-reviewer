@@ -1,0 +1,522 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:21Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 170,
+    "title": "Refactor/clean up dylint wrapper error handling",
+    "body": "## Summary\r\n\r\nThis PR cleans up error handling in the Dylint wrapper by replacing panic-based execution with explicit error handling and clearer user-facing error messages.\r\n\r\n### Changes\r\n\r\n* Refactored configuration loading to handle file read and TOML parsing errors using explicit `match` expressions.\r\n* Improved `cargo dylint` execution by replacing `expect()` with graceful error handling and appropriate exit codes.\r\n* Preserved existing behavior while making failures easier to understand and debug.\r\n* Continued to respect `.lintignore` during execution.\r\n\r\n### Testing\r\n\r\n* ✅ `cargo fmt`\r\n* ✅ `cargo build`\r\n* ✅ `cargo clippy --workspace --all-targets -- -D warnings`\r\n\r\n> Note: The existing UI test failure is unrelated to this refactor and is caused by pre-existing UI test state rather than the Dylint wrapper changes introduced in this PR.\r\n\r\n**Closes #67**\r\n",
+    "author": {
+      "login": "ASIDISG",
+      "id": 308025795,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-24T14:51:07Z",
+    "updated_at": "2026-07-25T17:04:01Z",
+    "merged_at": "2026-07-25T17:04:01Z",
+    "closed_at": "2026-07-25T17:04:01Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "01a5dc8dfea2d50a0b53c4cd3eb2f470bc46ac3b",
+    "base": {
+      "ref": "main",
+      "sha": "5d37daba05b4c7eef8c968123146596c428e4d58",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "refactor/clean-up-dylint-wrapper-error-handling",
+      "sha": "0df1bc07c1b695fd1e46c71bbb53dadf5534db1f",
+      "repo": "ASIDISG/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 2,
+    "deletions": 0,
+    "changed_files": 1,
+    "commits": 10,
+    "comments": 7,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/170"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "2ddd69de4a46d6d1ca3ad5f6a56b42ad49c2b670",
+      "message": "feat: support ignoring specific files via .lintignore\n\n- Added ignore crate\n- Respect .lintignore in file walking\n- Closes #57",
+      "author_name": "Larry",
+      "author_email": "odesanyalanre3@gmail.com",
+      "authored_at": "2026-07-24T13:40:29Z",
+      "committed_at": "2026-07-24T13:40:29Z",
+      "author": {
+        "login": "larryjay007",
+        "id": 76393353,
+        "type": "User"
+      },
+      "committer": {
+        "login": "larryjay007",
+        "id": 76393353,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "ea2e0f133739a6332fceb3be151e72f5ba6728d7",
+      "message": "refactor: clean up Dylint wrapper error handling",
+      "author_name": "Larry",
+      "author_email": "odesanyalanre3@gmail.com",
+      "authored_at": "2026-07-24T14:41:39Z",
+      "committed_at": "2026-07-24T14:41:39Z",
+      "author": {
+        "login": "larryjay007",
+        "id": 76393353,
+        "type": "User"
+      },
+      "committer": {
+        "login": "larryjay007",
+        "id": 76393353,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "dde27a0144493cbb9709834b891f70daa92f129f",
+      "message": "Merge branch 'main' into refactor/clean-up-dylint-wrapper-error-handling",
+      "author_name": "ASIDISG",
+      "author_email": "oluwamedrick@gmail.com",
+      "authored_at": "2026-07-24T14:51:43Z",
+      "committed_at": "2026-07-24T14:51:43Z",
+      "author": {
+        "login": "ASIDISG",
+        "id": 308025795,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "1fb07e869cffa6ab33fc6fb43c88347f1150b489",
+      "message": "Merge branch 'main' into refactor/clean-up-dylint-wrapper-error-handling",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T15:51:58Z",
+      "committed_at": "2026-07-24T15:51:58Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "67d59683727916081d1c9d6be113ac502ec52197",
+      "message": "Merge branch 'main' into refactor/clean-up-dylint-wrapper-error-handling",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T22:07:37Z",
+      "committed_at": "2026-07-24T22:07:37Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "f22da1a54b0da6848d83203bfc51aa5318794189",
+      "message": "fix: resolve optional budget config path",
+      "author_name": "Larry",
+      "author_email": "odesanyalanre3@gmail.com",
+      "authored_at": "2026-07-24T22:08:11Z",
+      "committed_at": "2026-07-24T22:20:00Z",
+      "author": {
+        "login": "larryjay007",
+        "id": 76393353,
+        "type": "User"
+      },
+      "committer": {
+        "login": "larryjay007",
+        "id": 76393353,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "0bf05d6ed365840fb13a59bb0c9f6294ce37b449",
+      "message": "Merge branch 'main' into refactor/clean-up-dylint-wrapper-error-handling",
+      "author_name": "ASIDISG",
+      "author_email": "oluwamedrick@gmail.com",
+      "authored_at": "2026-07-24T22:34:03Z",
+      "committed_at": "2026-07-24T22:34:03Z",
+      "author": {
+        "login": "ASIDISG",
+        "id": 308025795,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "a1a5698203f947e167c84cdd7502a15060dc2658",
+      "message": "fix: restore missing brace in cargo-cost-lint",
+      "author_name": "Larry",
+      "author_email": "odesanyalanre3@gmail.com",
+      "authored_at": "2026-07-25T00:06:38Z",
+      "committed_at": "2026-07-25T00:06:38Z",
+      "author": {
+        "login": "larryjay007",
+        "id": 76393353,
+        "type": "User"
+      },
+      "committer": {
+        "login": "larryjay007",
+        "id": 76393353,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "589142e578ceecb86c01a044c4a880f1dcdc45be",
+      "message": "refactor(cargo-cost-lint): clean up config-loading error handling\n\n- Replace nested if-let chains with a single match, so a failed config\n  read now actually surfaces a warning instead of failing silently\n- Restore an explanatory comment and a test (test_unknown_lint_level)\n  that were dropped by an earlier merge on this branch\n- Remove an unused 'ignore' dependency that had leaked in from an\n  unrelated branch via a prior merge\n\nCloses #67",
+      "author_name": "Larry",
+      "author_email": "odesanyalanre3@gmail.com",
+      "authored_at": "2026-07-25T15:08:06Z",
+      "committed_at": "2026-07-25T15:08:06Z",
+      "author": {
+        "login": "larryjay007",
+        "id": 76393353,
+        "type": "User"
+      },
+      "committer": {
+        "login": "larryjay007",
+        "id": 76393353,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "0df1bc07c1b695fd1e46c71bbb53dadf5534db1f",
+      "message": "Merge branch 'main' into refactor/clean-up-dylint-wrapper-error-handling",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-25T15:59:52Z",
+      "committed_at": "2026-07-25T15:59:52Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0,
+      "changes": 2,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 5,
+    "check_runs": [
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T16:02:57Z",
+        "completed_at": "2026-07-25T16:02:59Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30164730147/job/89695971942",
+        "app": "github-actions",
+        "workflow_run_id": "30164730147"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T16:00:36Z",
+        "completed_at": "2026-07-25T16:00:39Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30164730147/job/89695755428",
+        "app": "github-actions",
+        "workflow_run_id": "30164730147"
+      },
+      {
+        "name": "validate-toolchain-pins",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T16:00:00Z",
+        "completed_at": "2026-07-25T16:00:06Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30164730147/job/89695691919",
+        "app": "github-actions",
+        "workflow_run_id": "30164730147"
+      },
+      {
+        "name": "Code Quality (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T16:00:00Z",
+        "completed_at": "2026-07-25T16:00:34Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30164730147/job/89695691901",
+        "app": "github-actions",
+        "workflow_run_id": "30164730147"
+      },
+      {
+        "name": "lint-matrix (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T16:00:00Z",
+        "completed_at": "2026-07-25T16:02:55Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30164730147/job/89695691893",
+        "app": "github-actions",
+        "workflow_run_id": "30164730147"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "5d37daba05b4c7eef8c968123146596c428e4d58",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 01a5dc8dfea2d50a0b53c4cd3eb2f470bc46ac3b is the main tip at merge time.",
+    "pull_request_base_sha": "5d37daba05b4c7eef8c968123146596c428e4d58",
+    "check_runs": {
+      "total_count": 5,
+      "check_runs": [
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T16:01:26Z",
+          "completed_at": "2026-07-25T16:01:29Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30164690363/job/89695833152",
+          "app": "github-actions",
+          "workflow_run_id": "30164690363"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T15:59:27Z",
+          "completed_at": "2026-07-25T15:59:30Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30164690363/job/89695647280",
+          "app": "github-actions",
+          "workflow_run_id": "30164690363"
+        },
+        {
+          "name": "Code Quality (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T15:58:45Z",
+          "completed_at": "2026-07-25T15:59:25Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30164690363/job/89695590891",
+          "app": "github-actions",
+          "workflow_run_id": "30164690363"
+        },
+        {
+          "name": "lint-matrix (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T15:58:46Z",
+          "completed_at": "2026-07-25T16:01:23Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30164690363/job/89695590836",
+          "app": "github-actions",
+          "workflow_run_id": "30164690363"
+        },
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T15:58:45Z",
+          "completed_at": "2026-07-25T15:58:50Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30164690363/job/89695590812",
+          "app": "github-actions",
+          "workflow_run_id": "30164690363"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 7,
+    "authors": [
+      {
+        "login": "ASIDISG",
+        "count": 3
+      },
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 1
+      },
+      {
+        "login": "wagmiiii",
+        "count": 2
+      }
+    ],
+    "comments": [
+      {
+        "id": 5071180372,
+        "created_at": "2026-07-24T14:51:19Z",
+        "updated_at": "2026-07-24T14:51:19Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@ASIDISG Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5071189213,
+        "created_at": "2026-07-24T14:52:18Z",
+        "updated_at": "2026-07-24T14:52:18Z",
+        "user": {
+          "login": "ASIDISG",
+          "id": 308025795,
+          "type": "User"
+        },
+        "author_association": "CONTRIBUTOR",
+        "body": "@mallison031 @wagmiiii ,, please review.\r\n"
+      },
+      {
+        "id": 5071761893,
+        "created_at": "2026-07-24T15:52:58Z",
+        "updated_at": "2026-07-24T15:52:58Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "@ASIDISG fix ci issues"
+      },
+      {
+        "id": 5074923053,
+        "created_at": "2026-07-24T22:09:55Z",
+        "updated_at": "2026-07-24T22:09:55Z",
+        "user": {
+          "login": "ASIDISG",
+          "id": 308025795,
+          "type": "User"
+        },
+        "author_association": "CONTRIBUTOR",
+        "body": "@wagmiiii , i am fixing the cl at the moment"
+      },
+      {
+        "id": 5075170307,
+        "created_at": "2026-07-24T22:42:43Z",
+        "updated_at": "2026-07-24T22:42:43Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": " Hi @ASIDISG, Thanks for your contribution! 🙌\r\n  \r\n  It looks like the CI tests are failing because of a small syntax error in cargo-cost-lint/src/main.rs. The Rust compiler is reporting an \"unclosed delimiter\" (a missing or extra curly brace { / }).\r\n  \r\n  Specifically, it looks like an if block around line 138 (if !lint_flags.is_empty() {) is missing its closing brace }, which is causing the compiler to get confused when it reaches the end of the main() function at line 315.          \r\n  \r\n  If you are using an IDE like VS Code or RustRover with rust-analyzer enabled, it should highlight the exact location with a red squiggle. You can also run this locally to find it:\r\n  \r\n    cargo check -p cargo-cost-lint\r\n  \r\n  Could you double-check your braces in that file and push a fix? Let me know if you need any help finding it!***\r\n"
+      },
+      {
+        "id": 5077677248,
+        "created_at": "2026-07-25T08:20:43Z",
+        "updated_at": "2026-07-25T08:20:43Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "Fix your CI"
+      },
+      {
+        "id": 5079024677,
+        "created_at": "2026-07-25T15:18:54Z",
+        "updated_at": "2026-07-25T15:18:54Z",
+        "user": {
+          "login": "ASIDISG",
+          "id": 308025795,
+          "type": "User"
+        },
+        "author_association": "CONTRIBUTOR",
+        "body": "@wagmiiii @mallison031 ,,, lets try again.\r\n"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30164730147"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

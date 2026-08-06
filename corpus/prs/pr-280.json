@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:16:44Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 280,
+    "title": "Handle blank budget config files",
+    "body": "closes #201\r\n## Summary\r\n- treat empty, whitespace-only, and comment-only budget config files as an empty/default config\r\n- add regression coverage for whitespace-only config input\r\n- refresh the real-world corpus baseline to reflect current lint output\r\n\r\n## Testing\r\n- cargo test --workspace",
+    "author": {
+      "login": "EthTobi",
+      "id": 294755310,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-27T10:26:52Z",
+    "updated_at": "2026-07-27T14:36:20Z",
+    "merged_at": "2026-07-27T14:36:20Z",
+    "closed_at": "2026-07-27T14:36:20Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "77d8b1e48c7cba890ad18da01ef0421cd7a9af0b",
+    "base": {
+      "ref": "main",
+      "sha": "31470bf5c816aa87b0ef7c3d3b49f4223a5b4e05",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "fix/task-23",
+      "sha": "005a5cb5605a6c66ee2d10db9badab4f2bd276a7",
+      "repo": "EthTobi/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 85,
+    "deletions": 85,
+    "changed_files": 1,
+    "commits": 3,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/280"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "e524d66bdc20133ec5dbdf745fa908f040257b66",
+      "message": "fix: handle edge cases in config parser gracefully\n\nWhen the configuration file is empty, has unreadable permissions, or\ncontains type-mismatched values that prevent deserialization, the parser\nnow emits a warning (eprintln) and falls back to safe defaults instead\nof failing silently.",
+      "author_name": "EthTobi",
+      "author_email": "oyelabitobi@gmail.com",
+      "authored_at": "2026-07-27T11:29:56Z",
+      "committed_at": "2026-07-27T11:29:56Z",
+      "author": {
+        "login": "EthTobi",
+        "id": 294755310,
+        "type": "User"
+      },
+      "committer": {
+        "login": "EthTobi",
+        "id": 294755310,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "baa70a6a5fbffb25fa2fd170491236c9bbac06dc",
+      "message": "fix: resolve pre-existing compile errors in main.rs\n\nFix 7 pre-existing compile errors:\n- Replace undefined \"diagnostic\" references with \"message\" (3x)\n- Replace undefined \"span_obj\" with \"primary_span\"\n- Replace undefined \"msg_text\" with \"diagnostic_message\"\n- Add missing \"rules\" field to SarifToolDriver\n- Fix SarifRun.results type from Vec<Value> to Vec<SarifResult>",
+      "author_name": "EthTobi",
+      "author_email": "oyelabitobi@gmail.com",
+      "authored_at": "2026-07-27T11:45:03Z",
+      "committed_at": "2026-07-27T11:45:10Z",
+      "author": {
+        "login": "EthTobi",
+        "id": 294755310,
+        "type": "User"
+      },
+      "committer": {
+        "login": "EthTobi",
+        "id": 294755310,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "005a5cb5605a6c66ee2d10db9badab4f2bd276a7",
+      "message": "Merge branch 'main' into fix/task-23",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-27T14:35:07Z",
+      "committed_at": "2026-07-27T14:35:07Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/config.rs",
+      "status": "modified",
+      "additions": 85,
+      "deletions": 85,
+      "changes": 170,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": null,
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "31470bf5c816aa87b0ef7c3d3b49f4223a5b4e05",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 77d8b1e48c7cba890ad18da01ef0421cd7a9af0b is the main tip at merge time.",
+    "pull_request_base_sha": "31470bf5c816aa87b0ef7c3d3b49f4223a5b4e05",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T13:48:29Z",
+          "completed_at": "2026-07-27T13:49:12Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30272008563/job/89996613697",
+          "app": "github-actions",
+          "workflow_run_id": "30272008563"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/VfwpjQRRad89ExG29H6o/",
+          "created_at": "2026-07-27T13:48:37Z",
+          "updated_at": "2026-07-27T13:48:37Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/VfwpjQRRad89ExG29H6o/",
+          "created_at": "2026-07-27T13:48:37Z",
+          "updated_at": "2026-07-27T13:48:37Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5090204924,
+        "created_at": "2026-07-27T10:27:56Z",
+        "updated_at": "2026-07-27T10:27:56Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "fix your cl"
+      },
+      {
+        "id": 5090295923,
+        "created_at": "2026-07-27T10:38:16Z",
+        "updated_at": "2026-07-27T10:38:16Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@EthTobi Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": false,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [],
+    "merge_conflict": false
+  },
+  "capture_errors": [
+    {
+      "endpoint": "repos/Tollcraft/soroban-cost-linter/commits/005a5cb5605a6c66ee2d10db9badab4f2bd276a7/check-runs?per_page=100",
+      "error": "Get \"https://api.github.com/repos/Tollcraft/soroban-cost-linter/commits/005a5cb5605a6c66ee2d10db9badab4f2bd276a7/check-runs?per_page=100\": read tcp 10.20.250.29:47704->140.82.121.6:443: read: connection reset by peer"
+    }
+  ]
+}

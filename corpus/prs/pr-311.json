@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-06T07:03:39Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 311,
+    "title": "fix: detect storage operations inside iterator closures in storage_in_loop",
+    "body": "Closes #5\n\n## Summary\n\nFixed soroban_storage_in_loop lint to detect storage operations inside iterator-adapter closures (for_each, map, fold) by switching from enclosing_loop to enclosing_loop_or_closure.\n\n## Changes\n\n- Core fix: In SorobanStorageInLoop::check_expr, replaced enclosing_loop(cx, expr) with enclosing_loop_or_closure(cx, expr) so the lint fires on both syntactic loops and multi-call closures (iterator adapters)\n- UI test: Added test cases in soroban_storage_in_loop.rs for for_each, map, fold closures and Option::map negative case\n- Updated soroban_storage_in_loop.stderr snapshot\n\n## Acceptance Criteria\n\n- Storage operations inside for_each closures are detected\n- Storage operations inside map closures are detected\n- Storage operations inside fold closures are detected\n- Option::map closures remain clean (no false positive)\n- Help message consistent with existing one\n- UI tests pass",
+    "author": {
+      "login": "enny791",
+      "id": 308503335,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-28T08:07:03Z",
+    "updated_at": "2026-07-28T13:15:32Z",
+    "merged_at": "2026-07-28T13:15:31Z",
+    "closed_at": "2026-07-28T13:15:31Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "ef4ab6d8061de87e34c5b4910c3579559e7ee4b4",
+    "base": {
+      "ref": "main",
+      "sha": "0a3295df7e0fd4b2e2ef196d53774504fd4edc78",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "fix/storage-in-loop-closures",
+      "sha": "201afcb35779f9711331bd51b7726e159c39017d",
+      "repo": "enny791/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 176,
+    "deletions": 34,
+    "changed_files": 3,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/311"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "201afcb35779f9711331bd51b7726e159c39017d",
+      "message": "fix: detect storage operations inside iterator closures in storage_in_loop\n\nExtend SorobanStorageInLoop to use enclosing_loop_or_closure instead\nof enclosing_loop, so it also fires for multi-call closures such as\niterator adapter closures (for_each, map, fold).\n\nSingle-call closures like Option::map are already excluded by\nget_enclosing_loop_or_multi_call_closure.\n\nCloses #5",
+      "author_name": "Codespace User",
+      "author_email": "codespace@codespace.com",
+      "authored_at": "2026-07-28T08:04:29Z",
+      "committed_at": "2026-07-28T08:04:29Z",
+      "author": null,
+      "committer": null,
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 5,
+      "deletions": 5,
+      "changes": 10,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/soroban_storage_in_loop.rs",
+      "status": "modified",
+      "additions": 24,
+      "deletions": 5,
+      "changes": 29,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/soroban_storage_in_loop.stderr",
+      "status": "modified",
+      "additions": 147,
+      "deletions": 24,
+      "changes": 171,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 0,
+    "check_runs": []
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "8de307a33c913cd68ea10bce6c745973b9a27c93",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit ef4ab6d8061de87e34c5b4910c3579559e7ee4b4 is the main tip at merge time.",
+    "pull_request_base_sha": "0a3295df7e0fd4b2e2ef196d53774504fd4edc78",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T13:13:28Z",
+          "completed_at": "2026-07-28T13:14:15Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30362481608/job/90285343743",
+          "app": "github-actions",
+          "workflow_run_id": "30362481608"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/bfJFulUllSdhEMLm2fGS/",
+          "created_at": "2026-07-28T13:13:28Z",
+          "updated_at": "2026-07-28T13:13:28Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/bfJFulUllSdhEMLm2fGS/",
+          "created_at": "2026-07-28T13:13:28Z",
+          "updated_at": "2026-07-28T13:13:28Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": false,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

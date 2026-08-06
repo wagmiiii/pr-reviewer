@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:18:48Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 334,
+    "title": "docs: restore demo video links in README",
+    "body": "Restored the asciinema demo links that were removed due to being incorrectly identified as broken.",
+    "author": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "author_association": "MEMBER",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-08-04T09:28:10Z",
+    "updated_at": "2026-08-04T10:07:02Z",
+    "merged_at": "2026-08-04T10:07:01Z",
+    "closed_at": "2026-08-04T10:07:01Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "3133ee5118c0ac530380fa2900fdad2b59e4037f",
+    "base": {
+      "ref": "main",
+      "sha": "e23a352c914f3d83b5a7426645eabb2d305edc22",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "restore-demo-video",
+      "sha": "b1c7609ff9bae1ef383af5944ce093b080dca322",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 2,
+    "deletions": 1,
+    "changed_files": 1,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/334"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "b1c7609ff9bae1ef383af5944ce093b080dca322",
+      "message": "docs: restore demo video links in README",
+      "author_name": "adajala",
+      "author_email": "ademola2993k@gmail.com",
+      "authored_at": "2026-08-04T09:24:31Z",
+      "committed_at": "2026-08-04T09:24:31Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 1,
+      "changes": 3,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 4,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T09:33:28Z",
+        "completed_at": "2026-08-04T09:33:31Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30896454048/job/91951633146",
+        "app": "github-actions",
+        "workflow_run_id": "30896454048"
+      },
+      {
+        "name": "dogfood",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T09:28:17Z",
+        "completed_at": "2026-08-04T09:33:34Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30896454454/job/91950392179",
+        "app": "github-actions",
+        "workflow_run_id": "30896454454"
+      },
+      {
+        "name": "test (windows-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T09:28:16Z",
+        "completed_at": "2026-08-04T09:33:26Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30896454048/job/91950391320",
+        "app": "github-actions",
+        "workflow_run_id": "30896454048"
+      },
+      {
+        "name": "test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-08-04T09:28:22Z",
+        "completed_at": "2026-08-04T09:31:01Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30896454048/job/91950391250",
+        "app": "github-actions",
+        "workflow_run_id": "30896454048"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "success",
+    "total_count": 2,
+    "statuses": [
+      {
+        "context": "GitBook - tollcraft.gitbook.io/docs/",
+        "state": "success",
+        "description": "Check the live preview on your docs site.",
+        "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/PIgJg2YAOIndNrLlpRiy/",
+        "created_at": "2026-08-04T09:28:21Z",
+        "updated_at": "2026-08-04T09:28:21Z"
+      },
+      {
+        "context": "GitBook",
+        "state": "success",
+        "description": "Check the changes in the GitBook editor.",
+        "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/PIgJg2YAOIndNrLlpRiy/",
+        "created_at": "2026-08-04T09:28:21Z",
+        "updated_at": "2026-08-04T09:28:21Z"
+      }
+    ]
+  },
+  "base_branch_ci": {
+    "resolved_sha": "051b2f1e5d4a884b376a496d108d9f425cd95ad5",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 3133ee5118c0ac530380fa2900fdad2b59e4037f is the main tip at merge time.",
+    "pull_request_base_sha": "e23a352c914f3d83b5a7426645eabb2d305edc22",
+    "check_runs": {
+      "total_count": 5,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T09:39:26Z",
+          "completed_at": "2026-08-04T09:39:28Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30896833800/job/91953046736",
+          "app": "github-actions",
+          "workflow_run_id": "30896833800"
+        },
+        {
+          "name": "test (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T09:33:28Z",
+          "completed_at": "2026-08-04T09:39:23Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30896833800/job/91951625296",
+          "app": "github-actions",
+          "workflow_run_id": "30896833800"
+        },
+        {
+          "name": "dogfood",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T09:33:26Z",
+          "completed_at": "2026-08-04T09:38:57Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30896833886/job/91951625237",
+          "app": "github-actions",
+          "workflow_run_id": "30896833886"
+        },
+        {
+          "name": "test (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T09:33:26Z",
+          "completed_at": "2026-08-04T09:36:07Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30896833800/job/91951625171",
+          "app": "github-actions",
+          "workflow_run_id": "30896833800"
+        },
+        {
+          "name": "cargo-deny check",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-04T09:33:26Z",
+          "completed_at": "2026-08-04T09:34:49Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30896833887/job/91951625118",
+          "app": "github-actions",
+          "workflow_run_id": "30896833887"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30896454048",
+      "30896454454"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

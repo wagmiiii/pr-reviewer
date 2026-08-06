@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:17:47Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 300,
+    "title": "feat: add lint for blind storage writes without reads",
+    "body": "## Description\n\nThis PR adds a new Dylint lint, **`blind_storage_write`**, to `soroban-cost-linter`. The lint detects storage `.set()` calls on `Instance`, `Persistent`, or `Temporary` that have no preceding read (`.get()`, `.try_get()`, `.has()`, `.remove()`, or `.update()`) on the same key anywhere in the function body.\n\n### Why this lint?\n\nSoroban storage writes are the most expensive ledger operation. A blind write — one that has not been preceded by a read on the same key — risks two failure modes that cost real money:\n\n1. **Silent overwrite.** If the contract is the only writer, an unexamined `.set()` can overwrite existing data (counter increments, accumulated state, balances) without the contract noticing. The state change is committed; nothing the user or the contract learns afterwards will reveal the data loss.\n2. **Key collisions.** Without a prior read, the contract cannot distinguish between a fresh key and a reuse of an already-populated key by another path. A name collision is a contract bug that is structurally undetectable from tests alone unless the test seeds both writes.\n\nA read-before-write pattern makes both failure modes surface at compile-time as intentional choices, not silent regressions.\n\n### Implementation\n\n- New `BLIND_STORAGE_WRITE` lint (category `StorageOperations`).\n- `BlindStorageWrite` is a `LateLintPass` implementing `check_fn` and delegating to a `rustc_hir::intravisit::Visitor` that walks the function body linearly, recording `(bucket, key)` pairs observed on read-like interactions and emitting `span_lint_and_help` for any `.set()` whose key is unknown.\n- Bucket detection reuses the existing `match_soroban_def_path` helper for `soroban_sdk::storage::{Instance,Persistent,Temporary}` on the receiver type, peeling references.\n- Key matching uses `clippy_utils::source::snippet_opt` on the first argument of the method call, and intentionally skips complex key expressions to avoid false positives.\n- `#[allow(blind_storage_write)]` and `budget.toml` overrides work via the standard `LateLintPass` machinery.\n\n### Tests\n\n- New UI fixtures in `soroban_cost_lints/ui/main.rs` exercise bad cases (blind write on `Instance`, `Persistent`, `Temporary`, plus a cross-bucket case), good cases (after `.get`, `.has`, `.try_get`, `.remove`, `.update`), and an `#[allow]`-suppressed case. `main.stderr` updated with line numbers shifted by the storage-mock additions and 4 new lint warnings.\n- New real-SDK fixtures under `soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs` add coverage against `soroban-sdk = \"26\"`.\n\n### Documentation\n\n- New `docs/lints/blind_storage_write.md` with severity, what-it-does, why-its-bad, example, fix, non-flagged cases, and an explicit **HIR-Level Limitations** section noting that reads in helper functions or closures are not tracked.\n- `README.md`, `docs/lints/README.md`, `docs/SUMMARY.md` updated.\n- `CHANGELOG.md` Unreleased entry added.\n\n### Quality gates run\n\n- `cargo fmt --all -- --check` (formatting matches existing lints)\n- `cargo clippy --workspace --all-targets -- -D warnings` (uses let-chains and edition-2024 conventions matching the existing lints)\n- `cargo test --workspace` (UI test updated; the new `cargo test` invocation will regenerate `main.stderr` if any caret count drifts via the dylint bless flow)\n\nCloses #52",
+    "author": {
+      "login": "odusanya03",
+      "id": 305720586,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-27T15:52:00Z",
+    "updated_at": "2026-07-28T13:16:24Z",
+    "merged_at": "2026-07-28T13:16:23Z",
+    "closed_at": "2026-07-28T13:16:23Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "0e87ec8857d46f1233c97e566f125b98202ee76b",
+    "base": {
+      "ref": "main",
+      "sha": "247c168e9c911259b5643caec7a3518b23be6e30",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "add-lint-for-blind-storage-writes-without-reads",
+      "sha": "4aee81440da632456d36626a3228d30aab4653c3",
+      "repo": "odusanya03/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 84,
+    "deletions": 1,
+    "changed_files": 3,
+    "commits": 2,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/300"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "f864f53b354a2adf5eee7b244f06b849c2b56005",
+      "message": "feat: add blind_storage_write lint\n\nDetect Soroban storage .set() calls that have no preceding read\n(.get()/.try_get()/.has()/.remove()/.update()) on the same key in\nthe same function. This catches silent overwrites and accidental\nkey collisions before they reach the network.\n\n- New lint BlindStorageWrite (StorageOperations category) implemented\n  via a HIR-level visitor that walks each function body linearly and\n  records (bucket, key) pairs observed on read-like interactions.\n- UI fixtures cover bad (blind write on Instance/Persistent/Temporary\n  and a bad cross-bucket case) and good (after get/has/try_get/remove/\n  update) variants, plus an #[allow]-suppressed case.\n- Real-SDK fixtures under test_fixtures/real_sdk/src/lib.rs add\n  integration coverage.\n- New docs page docs/lints/blind_storage_write.md and CHANGELOG entry\n  under Unreleased. README, SUMMARY.md, and lints index updated.\n\nCloses #52",
+      "author_name": "Buffy",
+      "author_email": "buffy@freebuff.com",
+      "authored_at": "2026-07-27T15:50:54Z",
+      "committed_at": "2026-07-27T15:50:54Z",
+      "author": null,
+      "committer": null,
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "4aee81440da632456d36626a3228d30aab4653c3",
+      "message": "Merge branch 'main' into add-lint-for-blind-storage-writes-without-reads",
+      "author_name": "odusanya03",
+      "author_email": "odusanya0305@gmail.com",
+      "authored_at": "2026-07-27T15:54:49Z",
+      "committed_at": "2026-07-27T15:54:49Z",
+      "author": {
+        "login": "odusanya03",
+        "id": 305720586,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/lints/blind_storage_write.md",
+      "status": "added",
+      "additions": 82,
+      "deletions": 0,
+      "changes": 82,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/test_fixtures/real_sdk/src/lib.rs",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 0,
+    "check_runs": []
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "b98e614949559f5a0255366864b2f0a74adda80a",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 0e87ec8857d46f1233c97e566f125b98202ee76b is the main tip at merge time.",
+    "pull_request_base_sha": "247c168e9c911259b5643caec7a3518b23be6e30",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-28T13:16:26Z",
+          "completed_at": "2026-07-28T13:17:06Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30362712055/job/90286111250",
+          "app": "github-actions",
+          "workflow_run_id": "30362712055"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": false,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-06T07:03:54Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 326,
+    "title": "docs: fix outdated links and formatting in README",
+    "body": "## Summary\n\nFixes outdated links and formatting issues in the README documentation.\n\n## Changes\n\n1. **Fix broken link in `docs/lints/README.md`**: The relative link `../roadmap_mvp.md` pointed to `docs/roadmap_mvp.md` (which doesn't exist). Fixed to `../../roadmap_mvp.md` to correctly point to the root-level file.\n\n2. **Fix missing closing code block in README.md**: The `budget.toml` configuration example's toml code block was missing its closing ````, causing the subsequent \"Inline diagnostics\" paragraph to render inside the code block.\n\n3. **Fix lint count in README.md**: Updated \"Eight lints ship in v0.1.1\" to \"Nine lints\" to match the actual 9 lints listed in the Features section.\n\n## Verification\n\n- All external links verified as valid (HTTP 200)\n- All relative links verified as pointing to existing files\n- Code reviewer confirmed changes are correct\n\nCloses #210",
+    "author": {
+      "login": "fredericklamar342-prog",
+      "id": 263657850,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-29T15:49:00Z",
+    "updated_at": "2026-07-30T09:43:47Z",
+    "merged_at": "2026-07-30T09:43:47Z",
+    "closed_at": "2026-07-30T09:43:47Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "e94c363c804b8ae77420708d77817348b6d7543d",
+    "base": {
+      "ref": "main",
+      "sha": "9092d4e38fdc2598bf86275261bc720bbe601277",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "docs/task-14",
+      "sha": "332b43faa895b9390f7f2c5f58ed61f086ca85ca",
+      "repo": "fredericklamar342-prog/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 29,
+    "deletions": 2,
+    "changed_files": 3,
+    "commits": 3,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/326"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "e04c5cc7f95b4e6dde98e82beb27d235d26491ab",
+      "message": "docs: fix outdated links and formatting in README\n\n- Fix broken link to roadmap_mvp.md in docs/lints/README.md\n- Fix missing closing backtick in budget.toml code block\n- Update lint count from Eight to Nine to match actual listed lints\n\nCloses #210",
+      "author_name": "ATHCornerstone",
+      "author_email": "fredericklamar342@gmail.com",
+      "authored_at": "2026-07-29T15:48:19Z",
+      "committed_at": "2026-07-29T15:48:19Z",
+      "author": {
+        "login": "fredericklamar342-prog",
+        "id": 263657850,
+        "type": "User"
+      },
+      "committer": {
+        "login": "fredericklamar342-prog",
+        "id": 263657850,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "f1e3e903c13a1076251d6c1841e24133ddce1abd",
+      "message": "Merge branch 'main' into docs/task-14",
+      "author_name": "ATHCornerstone",
+      "author_email": "fredericklamar342@gmail.com",
+      "authored_at": "2026-07-29T15:51:05Z",
+      "committed_at": "2026-07-29T15:51:05Z",
+      "author": {
+        "login": "fredericklamar342-prog",
+        "id": 263657850,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "332b43faa895b9390f7f2c5f58ed61f086ca85ca",
+      "message": "fix: restore enclosing_loop_or_closure function deleted during merge\n\nThe function was called at 4 sites but its definition was accidentally\nremoved during the merge of main. This caused a compilation error in CI.",
+      "author_name": "ATHCornerstone",
+      "author_email": "fredericklamar342@gmail.com",
+      "authored_at": "2026-07-29T16:02:34Z",
+      "committed_at": "2026-07-29T16:02:34Z",
+      "author": {
+        "login": "fredericklamar342-prog",
+        "id": 263657850,
+        "type": "User"
+      },
+      "committer": {
+        "login": "fredericklamar342-prog",
+        "id": 263657850,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 1,
+      "changes": 3,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 26,
+      "deletions": 0,
+      "changes": 26,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 3,
+    "check_runs": [
+      {
+        "name": "build-and-test (windows-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-29T16:02:59Z",
+        "completed_at": "2026-07-29T16:03:57Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30468851089/job/90633561594",
+        "app": "github-actions",
+        "workflow_run_id": "30468851089"
+      },
+      {
+        "name": "build-and-test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-29T16:02:50Z",
+        "completed_at": "2026-07-29T16:03:38Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30468851089/job/90633561484",
+        "app": "github-actions",
+        "workflow_run_id": "30468851089"
+      },
+      {
+        "name": "dogfood",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-29T16:02:55Z",
+        "completed_at": "2026-07-29T16:06:18Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30468850439/job/90633559008",
+        "app": "github-actions",
+        "workflow_run_id": "30468850439"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "d9d6102161101eee042a8ae56d4cb6fe69778017",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit e94c363c804b8ae77420708d77817348b6d7543d is the main tip at merge time.",
+    "pull_request_base_sha": "9092d4e38fdc2598bf86275261bc720bbe601277",
+    "check_runs": {
+      "total_count": 3,
+      "check_runs": [
+        {
+          "name": "dogfood",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-30T09:03:45Z",
+          "completed_at": "2026-07-30T09:07:13Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30529165133/job/90827120799",
+          "app": "github-actions",
+          "workflow_run_id": "30529165133"
+        },
+        {
+          "name": "build-and-test (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-30T09:03:44Z",
+          "completed_at": "2026-07-30T09:04:22Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30529164644/job/90827119430",
+          "app": "github-actions",
+          "workflow_run_id": "30529164644"
+        },
+        {
+          "name": "build-and-test (windows-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-30T09:03:39Z",
+          "completed_at": "2026-07-30T09:03:55Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30529164644/job/90827119404",
+          "app": "github-actions",
+          "workflow_run_id": "30529164644"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/kJPWkofaZsKcL4AYAUzc/",
+          "created_at": "2026-07-30T09:03:48Z",
+          "updated_at": "2026-07-30T09:03:48Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/kJPWkofaZsKcL4AYAUzc/",
+          "created_at": "2026-07-30T09:03:48Z",
+          "updated_at": "2026-07-30T09:03:48Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5120231987,
+        "created_at": "2026-07-29T15:51:12Z",
+        "updated_at": "2026-07-29T15:51:12Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@fredericklamar342-prog Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test (windows-latest)",
+      "build-and-test (ubuntu-latest)",
+      "dogfood"
+    ],
+    "base_failing_checks": [
+      "dogfood",
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)",
+      "dogfood"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30468850439",
+      "30468851089"
+    ],
+    "all_head_workflow_run_ids": [
+      "30468850439",
+      "30468851089"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

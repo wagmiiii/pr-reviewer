@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:13:42Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 145,
+    "title": "chore: add a lint-proposal issue template",
+    "body": "## Description\r\n<!-- Describe your changes in detail -->\r\n\r\n## Related Issue\r\n<!-- If this PR addresses an existing issue, please link it here. -->\r\nCloses #\r\n\r\n## Motivation and Context\r\n<!-- Why is this change required? What problem does it solve? -->\r\n\r\n## How Has This Been Tested?\r\n<!-- Please describe in detail how you tested your changes. -->\r\n- [ ] Added/Updated tests\r\n- [ ] Passed `cargo test`\r\n- [ ] Passed `cargo clippy`\r\n- [ ] Formatted with `cargo fmt`\r\n\r\n## Types of changes\r\n<!-- What types of changes does your code introduce? -->\r\n- [ ] Bug fix (non-breaking change which fixes an issue)\r\n- [ ] New feature (non-breaking change which adds functionality)\r\n- [ ] Breaking change (fix or feature that would cause existing functionality to change)\r\n- [ ] Documentation update\r\n\r\n\r\nclose #112 ",
+    "author": {
+      "login": "lekanay2005-coder",
+      "id": 236175080,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-23T15:47:20Z",
+    "updated_at": "2026-07-24T09:51:54Z",
+    "merged_at": "2026-07-24T09:51:54Z",
+    "closed_at": "2026-07-24T09:51:54Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "328d877ab5f6c8981f4c9a036085fd4c2c2afa74",
+    "base": {
+      "ref": "main",
+      "sha": "6b1da56dbe12635e722699ea0b0fc429db1da14a",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "chore/lint-proposal-template",
+      "sha": "39667b54fff89859a023334a381f76dbf1ea0963",
+      "repo": "lekanay2005-coder/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [
+      {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      }
+    ],
+    "assignees": [],
+    "additions": 74,
+    "deletions": 0,
+    "changed_files": 1,
+    "commits": 1,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/145"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "39667b54fff89859a023334a381f76dbf1ea0963",
+      "message": "chore: add a lint-proposal issue template",
+      "author_name": "lekanay2005-coder",
+      "author_email": "lekanay2005@gmail.com",
+      "authored_at": "2026-07-23T15:45:58Z",
+      "committed_at": "2026-07-23T15:45:58Z",
+      "author": {
+        "login": "lekanay2005-coder",
+        "id": 236175080,
+        "type": "User"
+      },
+      "committer": {
+        "login": "lekanay2005-coder",
+        "id": 236175080,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/ISSUE_TEMPLATE/lint-proposal.yml",
+      "status": "added",
+      "additions": 74,
+      "deletions": 0,
+      "changes": 74,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 2,
+    "check_runs": [
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-23T16:05:11Z",
+        "completed_at": "2026-07-23T16:10:00Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30022158727/job/89262038554",
+        "app": "github-actions",
+        "workflow_run_id": "30022158727"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-23T16:05:10Z",
+        "completed_at": "2026-07-23T16:06:19Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30022158727/job/89262038498",
+        "app": "github-actions",
+        "workflow_run_id": "30022158727"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "1b11e448dec2ae702824e75c59bbdce02a885270",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 328d877ab5f6c8981f4c9a036085fd4c2c2afa74 is the main tip at merge time.",
+    "pull_request_base_sha": "6b1da56dbe12635e722699ea0b0fc429db1da14a",
+    "check_runs": {
+      "total_count": 3,
+      "check_runs": [
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:51:55Z",
+          "completed_at": "2026-07-24T09:56:45Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30084112074/job/89452176330",
+          "app": "github-actions",
+          "workflow_run_id": "30084112074"
+        },
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:51:55Z",
+          "completed_at": "2026-07-24T09:51:59Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30084112074/job/89452176314",
+          "app": "github-actions",
+          "workflow_run_id": "30084112074"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:51:55Z",
+          "completed_at": "2026-07-24T09:53:12Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30084112074/job/89452176249",
+          "app": "github-actions",
+          "workflow_run_id": "30084112074"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5060456517,
+        "created_at": "2026-07-23T15:47:28Z",
+        "updated_at": "2026-07-23T15:47:28Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@lekanay2005-coder Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30022158727"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

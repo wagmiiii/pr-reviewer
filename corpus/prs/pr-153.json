@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:13:52Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 153,
+    "title": "ci: unify nightly toolchain pin behind rust-toolchain and add drift guard",
+    "body": "closes #104\n\n## Summary\n\nThe nightly version string `nightly-2026-04-16` was hardcoded in four places with no automated enforcement, causing a high-friction failure mode when pins drifted apart. This PR introduces a single source of truth and a CI drift guard to catch mismatches.\n\n### Changes\n\n- **`rust-toolchain`** — remains the single source of truth for the nightly channel version (standard Rust convention).\n- **`.github/scripts/validate-toolchain-pins.sh`** — new drift-guard script that:\n  - Parses the canonical nightly from `rust-toolchain`.\n  - Checks every hardcoded copy in `.github/workflows/lint.yml`, `templates/github-action.yml`, and `docs/integration.md` against the canonical value.\n  - Validates the `clippy_utils` git rev in `soroban_cost_lints/Cargo.toml` by fetching its commit date from the rust-clippy repository and comparing it to the nightly date (fails if >3 days apart).\n  - Prints a `::error` message naming the file, the found value, and the expected value on mismatch.\n- **`.github/workflows/lint.yml`** — new `validate-toolchain-pins` job that runs the script before other jobs.\n- **`CONTRIBUTING.md`** — added section \"Upgrading the Nightly Toolchain\" with the step-by-step procedure (which file to change first, what to re-run).\n\n### Design decisions\n\n- `rust-toolchain` stays as the canonical source because it is the standard Rust convention and developers already look there.\n- The user-facing YAML copies in `templates/github-action.yml` and `docs/integration.md` are kept as literal YAML that users can paste; the drift guard checks them rather than templating them away.\n\nSigned-off-by: Samuel Ojetunde <samuelojetunde898@gmail.com>",
+    "author": {
+      "login": "samjay8",
+      "id": 197444055,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-23T22:29:19Z",
+    "updated_at": "2026-07-24T09:38:21Z",
+    "merged_at": "2026-07-24T09:38:21Z",
+    "closed_at": "2026-07-24T09:38:21Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "446feb6e9d955e0dfc00636b7b32f596e4e31f94",
+    "base": {
+      "ref": "main",
+      "sha": "9afe48ccf52e3c6934837dc8c1e3efa779c72a82",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "ci/toolchain-pin-single-source",
+      "sha": "bc9c36d8402f046cec7623fefe6f56f3070e7980",
+      "repo": "samjay8/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [
+      {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      }
+    ],
+    "assignees": [],
+    "additions": 126,
+    "deletions": 1,
+    "changed_files": 3,
+    "commits": 3,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/153"
+  },
+  "reviews": [
+    {
+      "id": 4771922061,
+      "state": "APPROVED",
+      "submitted_at": "2026-07-24T09:20:58Z",
+      "author_association": "MEMBER",
+      "user": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "body_present": false,
+      "body": ""
+    }
+  ],
+  "review_states": [
+    {
+      "state": "APPROVED",
+      "count": 1
+    }
+  ],
+  "commits": [
+    {
+      "sha": "b3d2bacd69a63ecba3333e46242500b36ffb58b9",
+      "message": "ci: unify nightly toolchain pin behind rust-toolchain and add drift guard\n\nThe nightly version string nightly-2026-04-16 was hardcoded in four\nplaces with no automated enforcement, causing a high-friction failure\nmode when pins drifted apart.\n\n- Declare rust-toolchain as the single source of truth for the\n  nightly channel version.\n- Add validate-toolchain-pins.sh — a drift-guard script that checks\n  every file's pin matches the canonical version and validates the\n  clippy_utils git rev date against the nightly date.\n- Wire the script into CI as a new validate-toolchain-pins job.\n- Document the upgrade procedure in CONTRIBUTING.md with step-by-step\n  instructions and which file to edit first.",
+      "author_name": "Samuel Ojetunde",
+      "author_email": "samuelojetunde898@gmail.com",
+      "authored_at": "2026-07-23T22:14:45Z",
+      "committed_at": "2026-07-23T22:14:45Z",
+      "author": {
+        "login": "samjay8",
+        "id": 197444055,
+        "type": "User"
+      },
+      "committer": {
+        "login": "samjay8",
+        "id": 197444055,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "3df2dcaf29de96937febb77c926f46f447a56152",
+      "message": "Merge branch 'main' into ci/toolchain-pin-single-source",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T09:20:43Z",
+      "committed_at": "2026-07-24T09:20:43Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "bc9c36d8402f046cec7623fefe6f56f3070e7980",
+      "message": "Merge branch 'main' into ci/toolchain-pin-single-source",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T09:32:11Z",
+      "committed_at": "2026-07-24T09:32:11Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/scripts/validate-toolchain-pins.sh",
+      "status": "added",
+      "additions": 98,
+      "deletions": 0,
+      "changes": 98,
+      "previous_filename": null
+    },
+    {
+      "filename": ".github/workflows/lint.yml",
+      "status": "modified",
+      "additions": 7,
+      "deletions": 0,
+      "changes": 7,
+      "previous_filename": null
+    },
+    {
+      "filename": "CONTRIBUTING.md",
+      "status": "modified",
+      "additions": 21,
+      "deletions": 1,
+      "changes": 22,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 3,
+    "check_runs": [
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T09:33:06Z",
+        "completed_at": "2026-07-24T09:38:01Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30082933488/job/89448585560",
+        "app": "github-actions",
+        "workflow_run_id": "30082933488"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T09:33:06Z",
+        "completed_at": "2026-07-24T09:34:26Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30082933488/job/89448585450",
+        "app": "github-actions",
+        "workflow_run_id": "30082933488"
+      },
+      {
+        "name": "validate-toolchain-pins",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T09:33:06Z",
+        "completed_at": "2026-07-24T09:33:10Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30082933488/job/89448585433",
+        "app": "github-actions",
+        "workflow_run_id": "30082933488"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "9afe48ccf52e3c6934837dc8c1e3efa779c72a82",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 446feb6e9d955e0dfc00636b7b32f596e4e31f94 is the main tip at merge time.",
+    "pull_request_base_sha": "9afe48ccf52e3c6934837dc8c1e3efa779c72a82",
+    "check_runs": {
+      "total_count": 2,
+      "check_runs": [
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:31:59Z",
+          "completed_at": "2026-07-24T09:33:12Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30082914537/job/89448374446",
+          "app": "github-actions",
+          "workflow_run_id": "30082914537"
+        },
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:32:00Z",
+          "completed_at": "2026-07-24T09:36:59Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30082914537/job/89448374395",
+          "app": "github-actions",
+          "workflow_run_id": "30082914537"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5064164616,
+        "created_at": "2026-07-23T22:29:27Z",
+        "updated_at": "2026-07-23T22:29:27Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@samjay8 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30082933488"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:11:54Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 329,
+    "title": "chore(deps): bump toml from 1.1.2+spec-1.1.0 to 1.1.4+spec-1.1.0 in the cargo-dependencies group",
+    "body": "Bumps the cargo-dependencies group with 1 update: [toml](https://github.com/toml-rs/toml).\n\nUpdates `toml` from 1.1.2+spec-1.1.0 to 1.1.4+spec-1.1.0\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a href=\"https://github.com/toml-rs/toml/commit/beee9fe5a93347722335e1b99a693f3216986132\"><code>beee9fe</code></a> chore: Release</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/16e2ac15983e8bf9389fc0cdb9ae0f8452973794\"><code>16e2ac1</code></a> docs: Update changelog</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/89f55411d47ee9fb349ab0704f287aa82aa12258\"><code>89f5541</code></a> fix(toml): preserve datetimes when deserializing Value (<a href=\"https://redirect.github.com/toml-rs/toml/issues/1194\">#1194</a>)</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/534039ccff11412422b3d365d092ef2ed43df2ac\"><code>534039c</code></a> fix(serde): Deserialize Value datetimes into typed targets</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/6e45cef5d5061fee00fe43cb6b52c3126e05d57a\"><code>6e45cef</code></a> test(serde): Reproduce Value datetime deserialization error</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/4ec099fed591a172f82007cb2f9d605985bbecee\"><code>4ec099f</code></a> chore: Release</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/5a47a5180e8acd71ca17e14be75081041e457051\"><code>5a47a51</code></a> docs: Update changelog</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/da0911f7e79a928e2f0f3efe8e30b5bbeb3430d5\"><code>da0911f</code></a> perf(parser): Reduce over allocation by better tokens/byte ratio (<a href=\"https://redirect.github.com/toml-rs/toml/issues/1193\">#1193</a>)</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/26eb1571f266a72813df4e02367213bd76f68624\"><code>26eb157</code></a> perf(parser): Reduce over allocation by better tokens/byte ratio</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/ca4c7bf420ad3aa5d318156de483e86ec5c632fe\"><code>ca4c7bf</code></a> chore(deps): Update Prek to v0.4.11 (<a href=\"https://redirect.github.com/toml-rs/toml/issues/1191\">#1191</a>)</li>\n<li>Additional commits viewable in <a href=\"https://github.com/toml-rs/toml/compare/toml-v1.1.2...toml-v1.1.4\">compare view</a></li>\n</ul>\n</details>\n<br />\n\n\n[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=toml&package-manager=cargo&previous-version=1.1.2+spec-1.1.0&new-version=1.1.4+spec-1.1.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency\n- `@dependabot ignore <dependency name> major version` will close this group update PR and stop Dependabot creating any more for the specific dependency's major version (unless you unignore this specific dependency's major version or upgrade to it yourself)\n- `@dependabot ignore <dependency name> minor version` will close this group update PR and stop Dependabot creating any more for the specific dependency's minor version (unless you unignore this specific dependency's minor version or upgrade to it yourself)\n- `@dependabot ignore <dependency name>` will close this group update PR and stop Dependabot creating any more for the specific dependency (unless you unignore this specific dependency or upgrade to it yourself)\n- `@dependabot unignore <dependency name>` will remove all of the ignore conditions of the specified dependency\n- `@dependabot unignore <dependency name> <ignore condition>` will remove the ignore condition of the specified dependency and ignore conditions\n\n\n</details>",
+    "author": {
+      "login": "dependabot[bot]",
+      "id": 49699333,
+      "type": "Bot"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": false,
+    "created_at": "2026-08-03T13:27:05Z",
+    "updated_at": "2026-08-04T08:16:28Z",
+    "merged_at": null,
+    "closed_at": "2026-08-04T08:16:26Z",
+    "merged_by": null,
+    "mergeable": true,
+    "mergeable_state": "blocked",
+    "rebaseable": false,
+    "merge_commit_sha": "2c9603d1a4a17f0f7059b40dcf07d460745802b4",
+    "base": {
+      "ref": "main",
+      "sha": "35da5fcf3cb6dbe268c4b70183852b6613ee5bda",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "dependabot/cargo/cargo-dependencies-ff1a6d245f",
+      "sha": "afac2be4871752f81a2d135413c81dbc30730148",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [
+      "dependencies",
+      "rust"
+    ],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 6,
+    "deletions": 6,
+    "changed_files": 1,
+    "commits": 1,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/329"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "afac2be4871752f81a2d135413c81dbc30730148",
+      "message": "chore(deps): bump toml in the cargo-dependencies group\n\nBumps the cargo-dependencies group with 1 update: [toml](https://github.com/toml-rs/toml).\n\n\nUpdates `toml` from 1.1.2+spec-1.1.0 to 1.1.4+spec-1.1.0\n- [Commits](https://github.com/toml-rs/toml/compare/toml-v1.1.2...toml-v1.1.4)\n\n---\nupdated-dependencies:\n- dependency-name: toml\n  dependency-version: 1.1.4+spec-1.1.0\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n  dependency-group: cargo-dependencies\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>",
+      "author_name": "dependabot[bot]",
+      "author_email": "49699333+dependabot[bot]@users.noreply.github.com",
+      "authored_at": "2026-08-03T13:27:04Z",
+      "committed_at": "2026-08-03T13:27:04Z",
+      "author": {
+        "login": "dependabot[bot]",
+        "id": 49699333,
+        "type": "Bot"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": true
+    }
+  ],
+  "files": [
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 6,
+      "deletions": 6,
+      "changes": 12,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 4,
+    "check_runs": [
+      {
+        "name": "dogfood",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-08-03T13:27:19Z",
+        "completed_at": "2026-08-03T13:31:00Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30818016717/job/91700499180",
+        "app": "github-actions",
+        "workflow_run_id": "30818016717"
+      },
+      {
+        "name": "cargo-deny check",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-08-03T13:27:12Z",
+        "completed_at": "2026-08-03T13:28:50Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30818016389/job/91700498064",
+        "app": "github-actions",
+        "workflow_run_id": "30818016389"
+      },
+      {
+        "name": "build-and-test (windows-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-08-03T13:27:15Z",
+        "completed_at": "2026-08-03T13:27:49Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30818016106/job/91700497185",
+        "app": "github-actions",
+        "workflow_run_id": "30818016106"
+      },
+      {
+        "name": "build-and-test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-08-03T13:27:12Z",
+        "completed_at": "2026-08-03T13:28:09Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30818016106/job/91700497182",
+        "app": "github-actions",
+        "workflow_run_id": "30818016106"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "35da5fcf3cb6dbe268c4b70183852b6613ee5bda",
+    "resolution_method": "pull_request_base_sha",
+    "approximate": true,
+    "note": "APPROXIMATE: PR was not merged, so no merge commit exists. .base.sha is the main tip as recorded when the PR was created or last synced.",
+    "pull_request_base_sha": "35da5fcf3cb6dbe268c4b70183852b6613ee5bda",
+    "check_runs": {
+      "total_count": 5,
+      "check_runs": [
+        {
+          "name": "Dependabot",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-08-03T13:25:34Z",
+          "completed_at": "2026-08-03T13:27:56Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30817878754/job/91700033438",
+          "app": "github-actions",
+          "workflow_run_id": "30817878754"
+        },
+        {
+          "name": "Dependabot",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-08-03T13:25:24Z",
+          "completed_at": "2026-08-03T13:27:07Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30817876582/job/91700028141",
+          "app": "github-actions",
+          "workflow_run_id": "30817876582"
+        },
+        {
+          "name": "build-and-test (windows-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-31T16:25:38Z",
+          "completed_at": "2026-07-31T16:26:21Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30647061538/job/91210934819",
+          "app": "github-actions",
+          "workflow_run_id": "30647061538"
+        },
+        {
+          "name": "build-and-test (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-31T16:25:42Z",
+          "completed_at": "2026-07-31T16:27:44Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30647061538/job/91210934778",
+          "app": "github-actions",
+          "workflow_run_id": "30647061538"
+        },
+        {
+          "name": "dogfood",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-31T16:25:35Z",
+          "completed_at": "2026-07-31T16:29:16Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30647061213/job/91210933641",
+          "app": "github-actions",
+          "workflow_run_id": "30647061213"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "dependabot[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5176356315,
+        "created_at": "2026-08-04T08:14:57Z",
+        "updated_at": "2026-08-04T08:14:57Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "@dependabot rebase"
+      },
+      {
+        "id": 5176370059,
+        "created_at": "2026-08-04T08:16:25Z",
+        "updated_at": "2026-08-04T08:16:25Z",
+        "user": {
+          "login": "dependabot[bot]",
+          "id": 49699333,
+          "type": "Bot"
+        },
+        "author_association": "CONTRIBUTOR",
+        "body": "Looks like toml is updatable in another way, so this is no longer needed."
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "dogfood",
+      "cargo-deny check",
+      "build-and-test (windows-latest)",
+      "build-and-test (ubuntu-latest)"
+    ],
+    "base_failing_checks": [
+      "Dependabot",
+      "build-and-test (windows-latest)",
+      "build-and-test (ubuntu-latest)",
+      "dogfood"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)",
+      "dogfood"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30818016106",
+      "30818016389",
+      "30818016717"
+    ],
+    "all_head_workflow_run_ids": [
+      "30818016106",
+      "30818016389",
+      "30818016717"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

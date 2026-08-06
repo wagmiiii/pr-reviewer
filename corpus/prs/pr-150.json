@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:13:43Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 150,
+    "title": "docs: fix the invalid #[allow] suppression example in roadmap_mvp.md",
+    "body": "Closes #81\r\ncloses #81 \r\n\r\n## Description\r\n<!-- Describe your changes in detail -->\r\n\r\n## Related Issue\r\n<!-- If this PR addresses an existing issue, please link it here. -->\r\nCloses #\r\n\r\n## Motivation and Context\r\n<!-- Why is this change required? What problem does it solve? -->\r\n\r\n## How Has This Been Tested?\r\n<!-- Please describe in detail how you tested your changes. -->\r\n- [ ] Added/Updated tests\r\n- [ ] Passed `cargo test`\r\n- [ ] Passed `cargo clippy`\r\n- [ ] Formatted with `cargo fmt`\r\n\r\n## Types of changes\r\n<!-- What types of changes does your code introduce? -->\r\n- [ ] Bug fix (non-breaking change which fixes an issue)\r\n- [ ] New feature (non-breaking change which adds functionality)\r\n- [ ] Breaking change (fix or feature that would cause existing functionality to change)\r\n- [ ] Documentation update\r\n",
+    "author": {
+      "login": "samlogy1",
+      "id": 206128481,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-23T19:56:57Z",
+    "updated_at": "2026-07-24T09:51:41Z",
+    "merged_at": "2026-07-24T09:51:41Z",
+    "closed_at": "2026-07-24T09:51:41Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "28a6c81f075ad372c2ce269c3ba829052c4be166",
+    "base": {
+      "ref": "main",
+      "sha": "9afe48ccf52e3c6934837dc8c1e3efa779c72a82",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "docs/fix-roadmap-allow-example",
+      "sha": "bfe57b80415c8b6846459edcc5a0caaba0902948",
+      "repo": "samlogy1/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 5,
+    "deletions": 3,
+    "changed_files": 1,
+    "commits": 3,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/150"
+  },
+  "reviews": [
+    {
+      "id": 4771954338,
+      "state": "APPROVED",
+      "submitted_at": "2026-07-24T09:25:51Z",
+      "author_association": "MEMBER",
+      "user": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "body_present": false,
+      "body": ""
+    }
+  ],
+  "review_states": [
+    {
+      "state": "APPROVED",
+      "count": 1
+    }
+  ],
+  "commits": [
+    {
+      "sha": "6fe6e62b78b4c223631744457736b1beb8610766",
+      "message": "docs: fix the invalid #[allow] suppression example in roadmap_mvp.md\n\nCloses #81",
+      "author_name": "samlogy1",
+      "author_email": "akejusamuel0@gmail.com",
+      "authored_at": "2026-07-23T19:54:54Z",
+      "committed_at": "2026-07-23T19:54:54Z",
+      "author": {
+        "login": "samlogy1",
+        "id": 206128481,
+        "type": "User"
+      },
+      "committer": {
+        "login": "samlogy1",
+        "id": 206128481,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "70a3b003abcffb744594c6c79e1a9310bca4de62",
+      "message": "Merge branch 'main' into docs/fix-roadmap-allow-example",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T09:25:11Z",
+      "committed_at": "2026-07-24T09:25:11Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "bfe57b80415c8b6846459edcc5a0caaba0902948",
+      "message": "Merge branch 'main' into docs/fix-roadmap-allow-example",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T09:36:30Z",
+      "committed_at": "2026-07-24T09:36:30Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "roadmap_mvp.md",
+      "status": "modified",
+      "additions": 5,
+      "deletions": 3,
+      "changes": 8,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 2,
+    "check_runs": [
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T09:36:37Z",
+        "completed_at": "2026-07-24T09:37:57Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30083195492/job/89449255020",
+        "app": "github-actions",
+        "workflow_run_id": "30083195492"
+      },
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T09:36:37Z",
+        "completed_at": "2026-07-24T09:41:21Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30083195492/job/89449254982",
+        "app": "github-actions",
+        "workflow_run_id": "30083195492"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "cdb281e32048a32332877e8fa3aa31f3fb500987",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 28a6c81f075ad372c2ce269c3ba829052c4be166 is the main tip at merge time.",
+    "pull_request_base_sha": "9afe48ccf52e3c6934837dc8c1e3efa779c72a82",
+    "check_runs": {
+      "total_count": 3,
+      "check_runs": [
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:51:43Z",
+          "completed_at": "2026-07-24T09:52:56Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30084099220/job/89452134516",
+          "app": "github-actions",
+          "workflow_run_id": "30084099220"
+        },
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:51:42Z",
+          "completed_at": "2026-07-24T09:51:48Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30084099220/job/89452134485",
+          "app": "github-actions",
+          "workflow_run_id": "30084099220"
+        },
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T09:51:42Z",
+          "completed_at": "2026-07-24T09:56:22Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30084099220/job/89452134455",
+          "app": "github-actions",
+          "workflow_run_id": "30084099220"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5062751561,
+        "created_at": "2026-07-23T19:57:04Z",
+        "updated_at": "2026-07-23T19:57:04Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@samlogy1 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30083195492"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

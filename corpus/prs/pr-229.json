@@ -1,0 +1,486 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:15:01Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 229,
+    "title": "Add while and loop UI coverage for unnecessary_host_function_call",
+    "body": "## close #133 \r\n\r\n## Summary\r\n\r\nThis PR expands the UI test corpus for `unnecessary_host_function_call` by adding coverage for `while` and `loop` constructs, matching the existing loop-kind coverage already present for `soroban_storage_in_loop`.\r\n\r\n## Changes\r\n\r\n- Added a `while` loop fixture that triggers `unnecessary_host_function_call`.\r\n- Added a `loop {}` fixture that triggers `unnecessary_host_function_call`.\r\n- Updated `soroban_cost_lints/ui/main.stderr` with the expected diagnostics.\r\n- No lint logic or diagnostic behaviour was modified.\r\n\r\n## Testing\r\n\r\nVerified with:\r\n\r\n- ✅ `cargo fmt --all -- --check`\r\n- ✅ `cargo clippy --workspace --all-targets -- -D warnings`\r\n- ✅ `cargo test --workspace`\r\n\r\n## Notes\r\n\r\nThis PR is intentionally limited to UI fixture coverage for different loop kinds. It does not introduce new lint behaviour or alter existing diagnostics.\r\n\r\nCloses #<issue-number>\r\n\r\n---\r\n\r\n### Local Test Output\r\n\r\nPaste the full output of:\r\n\r\n```bash\r\ncargo fmt --all -- --check\r\ncargo clippy --workspace --all-targets -- -D warnings\r\ncargo test --workspace\r\n```\r\n\r\nbefore submitting the PR.",
+    "author": {
+      "login": "afeezorobsco-cyber",
+      "id": 264775899,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-25T22:18:10Z",
+    "updated_at": "2026-07-27T15:14:33Z",
+    "merged_at": "2026-07-27T15:14:32Z",
+    "closed_at": "2026-07-27T15:14:32Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "35874f2122c70584074ddb0de366c2edb9ef60b0",
+    "base": {
+      "ref": "main",
+      "sha": "d0de4d4c3d3660d4188dcc3c321e35429eebc96d",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "test/loop-kind-fixtures",
+      "sha": "45f50b0ed45c41b685d9a1dcf9f335226da9077c",
+      "repo": "afeezorobsco-cyber/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 106,
+    "deletions": 96,
+    "changed_files": 7,
+    "commits": 12,
+    "comments": 3,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/229"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "02e4af4e9ab7e3289f67f0ddcc6151c6e38a2403",
+      "message": "feat: implement bytes_append_in_loop lint",
+      "author_name": "afeez",
+      "author_email": "afeezorobsco@gmail.com",
+      "authored_at": "2026-07-25T21:18:28Z",
+      "committed_at": "2026-07-25T21:18:28Z",
+      "author": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "committer": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "9ef1d560379ef667f57c4ffa25bc40244f4111a2",
+      "message": "fix: update stderr line numbers after test fixture expansion",
+      "author_name": "afeez",
+      "author_email": "afeezorobsco@gmail.com",
+      "authored_at": "2026-07-25T22:00:00Z",
+      "committed_at": "2026-07-25T22:00:00Z",
+      "author": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "committer": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "3ca8db5ceddec897ca3b6304dc7eaf8d36838e31",
+      "message": "feat: implement lint confidence-based default severities",
+      "author_name": "afeez",
+      "author_email": "afeezorobsco@gmail.com",
+      "authored_at": "2026-07-25T22:09:05Z",
+      "committed_at": "2026-07-25T22:09:05Z",
+      "author": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "committer": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "2f9cc889228c1522e4e7bcaa11fc2f672c5c1905",
+      "message": "test: add loop-kind coverage for unnecessary_host_function_call",
+      "author_name": "afeez",
+      "author_email": "afeezorobsco@gmail.com",
+      "authored_at": "2026-07-25T22:16:50Z",
+      "committed_at": "2026-07-25T22:16:50Z",
+      "author": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "committer": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "25936538aeef6977e1c32092a6280843449507e7",
+      "message": "Merge branch 'main' into test/loop-kind-fixtures",
+      "author_name": "Pheelz",
+      "author_email": "afeezorobsco@gmail.com",
+      "authored_at": "2026-07-26T07:29:53Z",
+      "committed_at": "2026-07-26T07:29:53Z",
+      "author": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "64f6eb8f0f160ad31c7344b13836ea88222069ba",
+      "message": "Merge branch 'main' into test/loop-kind-fixtures",
+      "author_name": "Pheelz",
+      "author_email": "afeezorobsco@gmail.com",
+      "authored_at": "2026-07-26T16:30:10Z",
+      "committed_at": "2026-07-26T16:30:10Z",
+      "author": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "dbf27ed9e9e9100bb8317d97ef001c20466df7e6",
+      "message": "Merge branch 'main' into test/loop-kind-fixtures",
+      "author_name": "Pheelz",
+      "author_email": "afeezorobsco@gmail.com",
+      "authored_at": "2026-07-26T18:12:22Z",
+      "committed_at": "2026-07-26T18:12:22Z",
+      "author": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "e46abbef13f450dedb011d464ad2870571878d51",
+      "message": "style: format code with cargo fmt",
+      "author_name": "afeez",
+      "author_email": "afeezorobsco@gmail.com",
+      "authored_at": "2026-07-26T19:12:37Z",
+      "committed_at": "2026-07-26T19:12:37Z",
+      "author": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "committer": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "aa6667f4cff4c041b79186d60b72bf49a64ca6ed",
+      "message": "fix: update main.stderr to match actual UI test output",
+      "author_name": "afeez",
+      "author_email": "afeezorobsco@gmail.com",
+      "authored_at": "2026-07-26T19:27:02Z",
+      "committed_at": "2026-07-26T19:27:02Z",
+      "author": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "committer": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "18a885d6d11f26b00ae980287dc7fda272489597",
+      "message": "fix: resolve type errors and clippy warnings",
+      "author_name": "afeez",
+      "author_email": "afeezorobsco@gmail.com",
+      "authored_at": "2026-07-26T19:35:50Z",
+      "committed_at": "2026-07-26T19:35:50Z",
+      "author": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "committer": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "6971b3281f72a80bf17114b689bae626c396ab95",
+      "message": "fix: add missing Vec/vec imports in no_std corpus contracts",
+      "author_name": "afeez",
+      "author_email": "afeezorobsco@gmail.com",
+      "authored_at": "2026-07-26T20:50:50Z",
+      "committed_at": "2026-07-26T20:50:50Z",
+      "author": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "committer": {
+        "login": "afeezorobsco-cyber",
+        "id": 264775899,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "45f50b0ed45c41b685d9a1dcf9f335226da9077c",
+      "message": "Merge branch 'main' into test/loop-kind-fixtures",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-27T15:13:49Z",
+      "committed_at": "2026-07-27T15:13:49Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 7,
+      "deletions": 6,
+      "changes": 13,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/src/config.rs",
+      "status": "modified",
+      "additions": 85,
+      "deletions": 85,
+      "changes": 170,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 10,
+      "deletions": 1,
+      "changes": 11,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/soroban_storage_in_loop.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-27T15:14:01Z",
+        "completed_at": "2026-07-27T15:14:46Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30278987269/job/90020226643",
+        "app": "github-actions",
+        "workflow_run_id": "30278987269"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "d0de4d4c3d3660d4188dcc3c321e35429eebc96d",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 35874f2122c70584074ddb0de366c2edb9ef60b0 is the main tip at merge time.",
+    "pull_request_base_sha": "d0de4d4c3d3660d4188dcc3c321e35429eebc96d",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T14:41:12Z",
+          "completed_at": "2026-07-27T14:42:18Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30276267681/job/90011019443",
+          "app": "github-actions",
+          "workflow_run_id": "30276267681"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 3,
+    "authors": [
+      {
+        "login": "afeezorobsco-cyber",
+        "count": 1
+      },
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "wagmiiii",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5080807989,
+        "created_at": "2026-07-25T22:18:23Z",
+        "updated_at": "2026-07-25T22:18:23Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@afeezorobsco-cyber Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5080841232,
+        "created_at": "2026-07-25T22:28:27Z",
+        "updated_at": "2026-07-25T22:28:27Z",
+        "user": {
+          "login": "afeezorobsco-cyber",
+          "id": 264775899,
+          "type": "User"
+        },
+        "author_association": "CONTRIBUTOR",
+        "body": "@wagmiiii pls review and merge"
+      },
+      {
+        "id": 5081024024,
+        "created_at": "2026-07-25T23:27:07Z",
+        "updated_at": "2026-07-25T23:27:07Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "@afeezorobsco-cyber resolve conflicts"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30278987269"
+    ],
+    "all_head_workflow_run_ids": [
+      "30278987269"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

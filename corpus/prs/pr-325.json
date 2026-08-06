@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-06T07:03:54Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 325,
+    "title": "chore: add .editorconfig, link CHANGELOG in README, verify no bare un…",
+    "body": "## Summary                                                                                                                                                                                                   \r\n                                                                                                                                                                                                               \r\n  This PR addresses three issues:                                                                                                                                                                              \r\n                                                                                                                                                                                                               \r\n  ### Closes #319 — Add .editorconfig                                                                                                                                                                          \r\n  - Adds a `.editorconfig` at the repository root to enforce consistent whitespace, indentation, and line endings across editors.                                                                              \r\n  - Configures rules for `*.rs`, `*.toml`, `*.md`, `*.yml`, and `Makefile` files.                                                                                                                              \r\n  - No existing files modified — config-only change.                                                                                                                                                           \r\n                                                                                                                                                                                                               \r\n  ### Closes #321 — Add CHANGELOG.md link to README                                                                                                                                                            \r\n  - `CHANGELOG.md` already existed and follows Keep a Changelog format with `[Unreleased]`, `[0.1.1]`, and `[0.1.0]` sections.                                                                                 \r\n  - Adds a one-line link from `README.md` (Contributing section) to `CHANGELOG.md` so users can discover the release history.                                                                                  \r\n                                                                                                                                                                                                               \r\n  ### Closes #322 — Replace .unwrap() calls                                                                                                                                                                    \r\n  - `soroban_cost_lints/src/lib.rs` was inspected and contains **zero bare `.unwrap()` calls** — only safe `unwrap_or_default()` calls are present.                                                            \r\n  - No changes needed; the file is already compliant.  ",
+    "author": {
+      "login": "Gabbydunkk",
+      "id": 121898101,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-29T11:26:01Z",
+    "updated_at": "2026-07-29T11:37:32Z",
+    "merged_at": "2026-07-29T11:37:31Z",
+    "closed_at": "2026-07-29T11:37:31Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "e6664e80af38adec6832f30c72a8ad21d175891f",
+    "base": {
+      "ref": "main",
+      "sha": "ccebde94f9ab9713176420df734adef10914fda8",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "chore/editorconfig-changelog-unwrap",
+      "sha": "9c84012d3b69f2430de39eb4d33860bb004ab685",
+      "repo": "Gabbydunkk/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 152,
+    "deletions": 326,
+    "changed_files": 8,
+    "commits": 2,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/325"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "f73e25eed1637e17a404f9f1f13b013cc09ec813",
+      "message": "chore: add .editorconfig, link CHANGELOG in README, verify no bare unwrap in lint lib\n\nCloses #319, Closes #321, Closes #322",
+      "author_name": "Gabriel Onwachie",
+      "author_email": "121898101+Gabbydunkk@users.noreply.github.com",
+      "authored_at": "2026-07-29T11:24:00Z",
+      "committed_at": "2026-07-29T11:24:00Z",
+      "author": {
+        "login": "Gabbydunkk",
+        "id": 121898101,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Gabbydunkk",
+        "id": 121898101,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "9c84012d3b69f2430de39eb4d33860bb004ab685",
+      "message": "fix: apply cargo fmt and fix build.rs unclosed delimiter\n\n- Fix stray incomplete main() in cargo-cost-lint/build.rs that blocked rustfmt\n- Apply cargo fmt --all to fix pre-existing formatting issues across the workspace",
+      "author_name": "Gabriel Onwachie",
+      "author_email": "121898101+Gabbydunkk@users.noreply.github.com",
+      "authored_at": "2026-07-29T11:29:30Z",
+      "committed_at": "2026-07-29T11:29:30Z",
+      "author": {
+        "login": "Gabbydunkk",
+        "id": 121898101,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Gabbydunkk",
+        "id": 121898101,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": ".editorconfig",
+      "status": "added",
+      "additions": 27,
+      "deletions": 0,
+      "changes": 27,
+      "previous_filename": null
+    },
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 276,
+      "changes": 285,
+      "previous_filename": null
+    },
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0,
+      "changes": 2,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/build.rs",
+      "status": "modified",
+      "additions": 28,
+      "deletions": 13,
+      "changes": 41,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 31,
+      "deletions": 21,
+      "changes": 52,
+      "previous_filename": null
+    },
+    {
+      "filename": "cargo-cost-lint/tests/integration.rs",
+      "status": "modified",
+      "additions": 27,
+      "deletions": 7,
+      "changes": 34,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 12,
+      "deletions": 3,
+      "changes": 15,
+      "previous_filename": null
+    },
+    {
+      "filename": "tools/generate-lint-docs/src/main.rs",
+      "status": "modified",
+      "additions": 16,
+      "deletions": 6,
+      "changes": 22,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 3,
+    "check_runs": [
+      {
+        "name": "build-and-test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-29T11:33:25Z",
+        "completed_at": "2026-07-29T11:34:04Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30448010725/job/90563036457",
+        "app": "github-actions",
+        "workflow_run_id": "30448010725"
+      },
+      {
+        "name": "build-and-test (windows-latest)",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-29T11:33:23Z",
+        "completed_at": "2026-07-29T11:33:41Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30448010725/job/90563036394",
+        "app": "github-actions",
+        "workflow_run_id": "30448010725"
+      },
+      {
+        "name": "cargo-deny check",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-29T11:33:18Z",
+        "completed_at": "2026-07-29T11:35:05Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30448010702/job/90563036275",
+        "app": "github-actions",
+        "workflow_run_id": "30448010702"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "ccebde94f9ab9713176420df734adef10914fda8",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit e6664e80af38adec6832f30c72a8ad21d175891f is the main tip at merge time.",
+    "pull_request_base_sha": "ccebde94f9ab9713176420df734adef10914fda8",
+    "check_runs": {
+      "total_count": 2,
+      "check_runs": [
+        {
+          "name": "build-and-test (windows-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-29T09:29:22Z",
+          "completed_at": "2026-07-29T09:29:39Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30439830280/job/90536213373",
+          "app": "github-actions",
+          "workflow_run_id": "30439830280"
+        },
+        {
+          "name": "build-and-test (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-29T09:29:21Z",
+          "completed_at": "2026-07-29T09:30:13Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30439830280/job/90536213221",
+          "app": "github-actions",
+          "workflow_run_id": "30439830280"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/23Px8xDNXcGxwwbuTRhh/",
+          "created_at": "2026-07-29T09:29:30Z",
+          "updated_at": "2026-07-29T09:29:30Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/23Px8xDNXcGxwwbuTRhh/",
+          "created_at": "2026-07-29T09:29:30Z",
+          "updated_at": "2026-07-29T09:29:30Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5117099822,
+        "created_at": "2026-07-29T11:26:08Z",
+        "updated_at": "2026-07-29T11:26:08Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@Gabbydunkk Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)",
+      "cargo-deny check"
+    ],
+    "base_failing_checks": [
+      "build-and-test (windows-latest)",
+      "build-and-test (ubuntu-latest)"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test (ubuntu-latest)",
+      "build-and-test (windows-latest)"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30448010702",
+      "30448010725"
+    ],
+    "all_head_workflow_run_ids": [
+      "30448010702",
+      "30448010725"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

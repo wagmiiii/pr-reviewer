@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:01Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 160,
+    "title": "chore(deps): bump the cargo-dependencies group across 1 directory with 3 updates",
+    "body": "Bumps the cargo-dependencies group with 3 updates in the / directory: [serde](https://github.com/serde-rs/serde), [toml](https://github.com/toml-rs/toml) and [clap](https://github.com/clap-rs/clap).\n\nUpdates `serde` from 1.0.228 to 1.0.229\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a href=\"https://github.com/serde-rs/serde/releases\">serde's releases</a>.</em></p>\n<blockquote>\n<h2>v1.0.229</h2>\n<ul>\n<li>Update to syn 3</li>\n</ul>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a href=\"https://github.com/serde-rs/serde/commit/7fc3b4c30c94f73a96ebd1553f2b090d928fc3a8\"><code>7fc3b4c</code></a> Release 1.0.229</li>\n<li><a href=\"https://github.com/serde-rs/serde/commit/6d6e9a11101354ce769a3438a088b6b9305c1863\"><code>6d6e9a1</code></a> Merge pull request <a href=\"https://redirect.github.com/serde-rs/serde/issues/3085\">#3085</a> from dtolnay/syn3</li>\n<li><a href=\"https://github.com/serde-rs/serde/commit/6dec3b751126c8338cac0fe8085612d695e4ecf3\"><code>6dec3b7</code></a> Update to syn 3</li>\n<li><a href=\"https://github.com/serde-rs/serde/commit/cfe669241065984177ff63af8b45058e6e9b499d\"><code>cfe6692</code></a> Resolve mut_mut pedantic clippy lint</li>\n<li><a href=\"https://github.com/serde-rs/serde/commit/1023d077510b4aef36a41ef56fdb7798568a2654\"><code>1023d07</code></a> Update actions/upload-artifact@v6 -&gt; v7</li>\n<li><a href=\"https://github.com/serde-rs/serde/commit/dd682c2c86aa7629e77c1ccd93212d3729f4c66d\"><code>dd682c2</code></a> Update actions/checkout@v6 -&gt; v7</li>\n<li><a href=\"https://github.com/serde-rs/serde/commit/5f0f18b9211732f2d82f73b5a43e4f5ff3701251\"><code>5f0f18b</code></a> Update ui test suite to nightly-2026-06-01</li>\n<li><a href=\"https://github.com/serde-rs/serde/commit/63a1498f0e7be991ffac5939bdd202ca16e9a23f\"><code>63a1498</code></a> Regenerate stderr with trybuild normalization fixes</li>\n<li><a href=\"https://github.com/serde-rs/serde/commit/fa7da4a93567ed347ad0735c28e439fca688ef26\"><code>fa7da4a</code></a> Fix unused_features warning</li>\n<li><a href=\"https://github.com/serde-rs/serde/commit/6b1a17851ea3d86a56aa116ca1cbf428f8d5f22d\"><code>6b1a178</code></a> Unpin CI miri toolchain</li>\n<li>Additional commits viewable in <a href=\"https://github.com/serde-rs/serde/compare/v1.0.228...v1.0.229\">compare view</a></li>\n</ul>\n</details>\n<br />\n\nUpdates `toml` from 0.8.23 to 1.1.2+spec-1.1.0\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a href=\"https://github.com/toml-rs/toml/commit/a3d0047c95dfc6e82997d508dd93c9908650a418\"><code>a3d0047</code></a> chore: Release</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/cc37615fc8d9213594250043e0e3b6cf73ed1e69\"><code>cc37615</code></a> docs: Update changelog</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/7f5e9e130ae2cb17497cd7811a4a1e78fb5715d7\"><code>7f5e9e1</code></a> fix(parser): Consolidate invalid unquoted key into one error (<a href=\"https://redirect.github.com/toml-rs/toml/issues/1138\">#1138</a>)</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/52feb9070cca1734db13d22796efd1115835881b\"><code>52feb90</code></a> fix(parser): Consolidate invalid unquoted key into one error</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/aad85d4921e8eb500cc7a26ac1165f111a59c433\"><code>aad85d4</code></a> chore(deps): Update j178/prek-action action to v2 (<a href=\"https://redirect.github.com/toml-rs/toml/issues/1136\">#1136</a>)</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/8b1ac44bcae5ffc4e58e8809a031ab05f486ccbe\"><code>8b1ac44</code></a> chore(deps): Update compatible (dev) (<a href=\"https://redirect.github.com/toml-rs/toml/issues/1135\">#1135</a>)</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/9effd79ff2ea692420931e2e4d58969525e6c398\"><code>9effd79</code></a> chore(deps): Update j178/prek-action action to v2</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/9db8aad6eafbc62f6b9d1950117649cc41eaf695\"><code>9db8aad</code></a> chore: Release</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/e55a6633d9e16e4406db8a9fb8ce26fa84fb1553\"><code>e55a663</code></a> docs: Update changelog</li>\n<li><a href=\"https://github.com/toml-rs/toml/commit/c11d7d7ad38781b66e7df34371ce3969677bc62d\"><code>c11d7d7</code></a> Optimisations (<a href=\"https://redirect.github.com/toml-rs/toml/issues/1133\">#1133</a>)</li>\n<li>Additional commits viewable in <a href=\"https://github.com/toml-rs/toml/compare/toml-v0.8.23...toml-v1.1.2\">compare view</a></li>\n</ul>\n</details>\n<br />\n\nUpdates `clap` from 4.6.1 to 4.6.4\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a href=\"https://github.com/clap-rs/clap/releases\">clap's releases</a>.</em></p>\n<blockquote>\n<h2>v4.6.4</h2>\n<h2>[4.6.4] - 2026-07-21</h2>\n<h3>Internal</h3>\n<ul>\n<li>Update to syn v3</li>\n</ul>\n<h2>v4.6.3</h2>\n<h2>[4.6.3] - 2026-07-20</h2>\n<h3>Fixes</h3>\n<ul>\n<li><em>(derive)</em> Allow <code>&quot;literal&quot;.function()</code> as attribute values</li>\n</ul>\n<h2>v4.6.2</h2>\n<h2>[4.6.2] - 2026-07-15</h2>\n<h3>Fixes</h3>\n<ul>\n<li><em>(help)</em> Say <code>alias</code> when there is only one</li>\n</ul>\n</blockquote>\n</details>\n<details>\n<summary>Changelog</summary>\n<p><em>Sourced from <a href=\"https://github.com/clap-rs/clap/blob/master/CHANGELOG.md\">clap's changelog</a>.</em></p>\n<blockquote>\n<h2>[4.6.4] - 2026-07-21</h2>\n<h3>Internal</h3>\n<ul>\n<li>Update to syn v3</li>\n</ul>\n<h2>[4.6.3] - 2026-07-20</h2>\n<h3>Fixes</h3>\n<ul>\n<li><em>(derive)</em> Allow <code>&quot;literal&quot;.function()</code> as attribute values</li>\n</ul>\n<h2>[4.6.2] - 2026-07-15</h2>\n<h3>Fixes</h3>\n<ul>\n<li><em>(help)</em> Say <code>alias</code> when there is only one</li>\n</ul>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a href=\"https://github.com/clap-rs/clap/commit/87ec1ad80dc174563cba130772823562e4427560\"><code>87ec1ad</code></a> chore: Release</li>\n<li><a href=\"https://github.com/clap-rs/clap/commit/78f2529351ad2133c453005e54f6b35ce3ae800b\"><code>78f2529</code></a> docs: Update changelog</li>\n<li><a href=\"https://github.com/clap-rs/clap/commit/b61f270930e60ee4968dfed7dc81eef51232f22b\"><code>b61f270</code></a> Merge pull request <a href=\"https://redirect.github.com/clap-rs/clap/issues/6369\">#6369</a> from Metbcy/fix/zsh-completion-ordering</li>\n<li><a href=\"https://github.com/clap-rs/clap/commit/74c6666698e90ff0141eb50dd169915f59fa7bcf\"><code>74c6666</code></a> fix(complete): Keep zsh candidate order</li>\n<li><a href=\"https://github.com/clap-rs/clap/commit/d142d8f96650c49302aeab87814d5bf352dbf4db\"><code>d142d8f</code></a> Merge pull request <a href=\"https://redirect.github.com/clap-rs/clap/issues/6360\">#6360</a> from epage/string</li>\n<li><a href=\"https://github.com/clap-rs/clap/commit/ba89563c9d4c806afba2002c345b7108b64f1a1e\"><code>ba89563</code></a> style: Prefer explicit string operations</li>\n<li><a href=\"https://github.com/clap-rs/clap/commit/bea966e84a50dc375d75baecbd469362b4f66281\"><code>bea966e</code></a> Merge pull request <a href=\"https://redirect.github.com/clap-rs/clap/issues/6359\">#6359</a> from epage/man</li>\n<li><a href=\"https://github.com/clap-rs/clap/commit/b811986e6d8eeeba679e43ddc07bcd06ee6da17b\"><code>b811986</code></a> chore(man):Remove unused required-features</li>\n<li><a href=\"https://github.com/clap-rs/clap/commit/0010bf290aae52b827134d7a88ecb58a8e3e88aa\"><code>0010bf2</code></a> Merge pull request <a href=\"https://redirect.github.com/clap-rs/clap/issues/6358\">#6358</a> from clap-rs/renovate/crate-ci-typos-1.x</li>\n<li><a href=\"https://github.com/clap-rs/clap/commit/bab9b24b129f5bfd6f5680cd5273d4d6be7cb37d\"><code>bab9b24</code></a> chore(deps): Update compatible (dev) (<a href=\"https://redirect.github.com/clap-rs/clap/issues/6357\">#6357</a>)</li>\n<li>Additional commits viewable in <a href=\"https://github.com/clap-rs/clap/compare/clap_complete-v4.6.1...clap_complete-v4.6.4\">compare view</a></li>\n</ul>\n</details>\n<br />\n",
+    "author": {
+      "login": "dependabot[bot]",
+      "id": 49699333,
+      "type": "Bot"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-24T09:52:51Z",
+    "updated_at": "2026-07-25T11:31:16Z",
+    "merged_at": "2026-07-25T11:31:08Z",
+    "closed_at": "2026-07-25T11:31:08Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "76f7e24d49651616d15181240c32568d651f534f",
+    "base": {
+      "ref": "main",
+      "sha": "3bfa9dfb85d162527d955f7aae899aec9edf2217",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "dependabot/cargo/cargo-dependencies-e846a7e843",
+      "sha": "879584d6301e14c060a3ece81a169c3329cf905e",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [
+      "dependencies",
+      "rust"
+    ],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 43,
+    "deletions": 91,
+    "changed_files": 1,
+    "commits": 3,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/160"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "413abcf12883332c7e502e52431e9dcd15782d86",
+      "message": "chore(deps): bump the cargo-dependencies group across 1 directory with 3 updates\n\nBumps the cargo-dependencies group with 3 updates in the / directory: [serde](https://github.com/serde-rs/serde), [toml](https://github.com/toml-rs/toml) and [clap](https://github.com/clap-rs/clap).\n\n\nUpdates `serde` from 1.0.228 to 1.0.229\n- [Release notes](https://github.com/serde-rs/serde/releases)\n- [Commits](https://github.com/serde-rs/serde/compare/v1.0.228...v1.0.229)\n\nUpdates `toml` from 0.8.23 to 1.1.2+spec-1.1.0\n- [Commits](https://github.com/toml-rs/toml/compare/toml-v0.8.23...toml-v1.1.2)\n\nUpdates `clap` from 4.6.1 to 4.6.4\n- [Release notes](https://github.com/clap-rs/clap/releases)\n- [Changelog](https://github.com/clap-rs/clap/blob/master/CHANGELOG.md)\n- [Commits](https://github.com/clap-rs/clap/compare/clap_complete-v4.6.1...clap_complete-v4.6.4)\n\n---\nupdated-dependencies:\n- dependency-name: clap\n  dependency-version: 4.6.4\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n  dependency-group: cargo-dependencies\n- dependency-name: serde\n  dependency-version: 1.0.229\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n  dependency-group: cargo-dependencies\n- dependency-name: toml\n  dependency-version: 1.1.2+spec-1.1.0\n  dependency-type: direct:production\n  update-type: version-update:semver-major\n  dependency-group: cargo-dependencies\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>",
+      "author_name": "dependabot[bot]",
+      "author_email": "49699333+dependabot[bot]@users.noreply.github.com",
+      "authored_at": "2026-07-24T15:56:18Z",
+      "committed_at": "2026-07-24T15:56:18Z",
+      "author": {
+        "login": "dependabot[bot]",
+        "id": 49699333,
+        "type": "Bot"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": true
+    },
+    {
+      "sha": "4dc2c6b7de1d97b09910d4971ee9be10a6a3b6fe",
+      "message": "Merge branch 'main' into dependabot/cargo/cargo-dependencies-e846a7e843",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-24T22:08:59Z",
+      "committed_at": "2026-07-24T22:08:59Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    },
+    {
+      "sha": "879584d6301e14c060a3ece81a169c3329cf905e",
+      "message": "Merge branch 'main' into dependabot/cargo/cargo-dependencies-e846a7e843",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-25T11:25:30Z",
+      "committed_at": "2026-07-25T11:25:30Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "Cargo.lock",
+      "status": "modified",
+      "additions": 43,
+      "deletions": 91,
+      "changes": 134,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 5,
+    "check_runs": [
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T11:28:14Z",
+        "completed_at": "2026-07-25T11:28:17Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156217151/job/89674664324",
+        "app": "github-actions",
+        "workflow_run_id": "30156217151"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T11:26:24Z",
+        "completed_at": "2026-07-25T11:26:26Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156217151/job/89674534447",
+        "app": "github-actions",
+        "workflow_run_id": "30156217151"
+      },
+      {
+        "name": "lint-matrix (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T11:25:38Z",
+        "completed_at": "2026-07-25T11:28:12Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156217151/job/89674479120",
+        "app": "github-actions",
+        "workflow_run_id": "30156217151"
+      },
+      {
+        "name": "Code Quality (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T11:25:39Z",
+        "completed_at": "2026-07-25T11:26:21Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156217151/job/89674479090",
+        "app": "github-actions",
+        "workflow_run_id": "30156217151"
+      },
+      {
+        "name": "validate-toolchain-pins",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-25T11:25:38Z",
+        "completed_at": "2026-07-25T11:25:44Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156217151/job/89674479086",
+        "app": "github-actions",
+        "workflow_run_id": "30156217151"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "3bfa9dfb85d162527d955f7aae899aec9edf2217",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 76f7e24d49651616d15181240c32568d651f534f is the main tip at merge time.",
+    "pull_request_base_sha": "3bfa9dfb85d162527d955f7aae899aec9edf2217",
+    "check_runs": {
+      "total_count": 5,
+      "check_runs": [
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:27:19Z",
+          "completed_at": "2026-07-25T11:27:21Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156198074/job/89674600774",
+          "app": "github-actions",
+          "workflow_run_id": "30156198074"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:25:33Z",
+          "completed_at": "2026-07-25T11:25:35Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156198074/job/89674473399",
+          "app": "github-actions",
+          "workflow_run_id": "30156198074"
+        },
+        {
+          "name": "Code Quality (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:24:58Z",
+          "completed_at": "2026-07-25T11:25:31Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156198074/job/89674430606",
+          "app": "github-actions",
+          "workflow_run_id": "30156198074"
+        },
+        {
+          "name": "lint-matrix (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:24:57Z",
+          "completed_at": "2026-07-25T11:27:16Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156198074/job/89674430601",
+          "app": "github-actions",
+          "workflow_run_id": "30156198074"
+        },
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-25T11:24:57Z",
+          "completed_at": "2026-07-25T11:25:03Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30156198074/job/89674430587",
+          "app": "github-actions",
+          "workflow_run_id": "30156198074"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30156217151"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

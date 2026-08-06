@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-06T07:03:54Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 317,
+    "title": "docs(lints): add comprehensive rustdoc to soroban_cost_lints core module",
+    "body": "Closes #193\n\n## Summary\n\nAdds comprehensive rustdoc to `soroban_cost_lints/src/lib.rs` — the crate's\ncore module — where every `LateLintPass` and `Visitor` trait implementation\nlives. The public API surface and every lint's detection strategy are now\ndocumented directly on the items they describe.\n\nThis addresses the gap in #193 where the trait implementations in the\ncore module lacked comprehensive documentation.\n\n## Coverage\n\n- **Module-level `//!`** — explains the crate's role within the workspace,\n  the input-independent detection philosophy (false positives must collapse\n  to \"almost certainly a bug\"), and the cross-crate contract with\n  `cargo-cost-lint` (it reads `LINT_METADATA`).\n- **`LintCategory` enum** — top-level doc plus per-variant docs (`Cpu`,\n  `Memory`, `SymbolOperations`, `Io`, `Storage`, `Other`).\n- **`LintMetadata` struct & fields** (`name`, `category`, `description`,\n  `version`) plus the `LINT_METADATA` registry const.\n- **`register_lints`** entry point — explains how new lints hook into the\n  dylint `LintStore`.\n- **All six lint pass structs** — `SorobanStorageInLoop`,\n  `RedundantEnvClone`, `UnnecessaryHostFunctionCall`, `HostInLoop`,\n  `SymbolNewForShortLiteral`, `BytesAppendInLoop` — each pair of `///` docs\n  on the struct *and* its `impl LateLintPass` block describes what the\n  lint flags, the structural pattern it matches, and how the helpers\n  (`enclosing_loop`, `depends_on_loop_state`, `is_valid_short_symbol`,\n  the `SOROBAN_*` const arrays) compose into the final decision.\n\n## Decisions taken\n\n- Added `#![allow(rustdoc::private_intra_doc_links)]` at file scope so\n  intra-doc links to helper functions, the `SOROBAN_*` const arrays, and\n  the trait impls (`enclosing_loop`, `depends_on_loop_state`,\n  `is_valid_short_symbol`, `SOROBAN_HOST_TYPES`, etc.) build without\n  spurious warnings.\n- Plain backticks (not bracket-links) are used for any symbol that lives\n  outside this crate's `[dependencies]` (`soroban_sdk::*`, `symbol_short!`\n  in user code) to avoid `rustdoc::broken_intra_doc_links` warnings.\n- Doc phrasing avoids asserting unverified CLI behaviour: categories are\n  described as \"surfaced by `cargo-cost-lint`\" without claims about\n  rendering, colours, or imperative tool behaviour.\n\n## Quality gates\n\nThe diffusion before this PR is +119 lines, doc-only — no behavioural\ncode changes, no new public API, no new dependencies.\n\nRequired quality gates per `CONTRIBUTING.md`:\n\n    cargo fmt --all -- --check\n    cargo clippy --workspace --all-targets -- -D warnings\n    cargo test --workspace\n\nThese could **not** be executed in the sandbox used to author the\nchange. The pinned `nightly-2026-04-16` toolchain with `rustc-dev` /\n`llvm-tools-preview` / `clippy` components is not installed there\n(`cargo`/`rustup` not available). They will need to be run on a host\nwith the pinned toolchain before merge — flagging this explicitly so\nit's not a surprise to reviewers.\n\n## Notes for reviewers\n\n- Single-file diff: `soroban_cost_lints/src/lib.rs` (+119 / -0).\n- No public API changes — `cargo doc --no-deps` output will gain ~119\n  lines of explanatory text and zero new symbols.\n- Existing tests / fixtures / `Cargo.toml` / CI are untouched; the\n  branch sits on top of `main` at `9917e9f` (the HEAD before this\n  commit) with a single-file diff, so no other files are in conflict.\n",
+    "author": {
+      "login": "chiprime",
+      "id": 302243607,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-28T09:09:21Z",
+    "updated_at": "2026-07-28T13:13:05Z",
+    "merged_at": "2026-07-28T13:13:05Z",
+    "closed_at": "2026-07-28T13:13:05Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "c55f36036bfc7bd82476944c7e987e1c9fe4a8eb",
+    "base": {
+      "ref": "main",
+      "sha": "0a3295df7e0fd4b2e2ef196d53774504fd4edc78",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "docs/task-31",
+      "sha": "f1d41c8c756f4a2c9fd67f95f85f03afb8d747c6",
+      "repo": "chiprime/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 117,
+    "deletions": 79,
+    "changed_files": 1,
+    "commits": 2,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/317"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "12762c233a0900a7da7079ed94d9e50dce62cbdc",
+      "message": "docs(lints): add comprehensive rustdoc to core module\n\nAdds rustdoc to the entire public surface of soroban_cost_lints/src/lib.rs,\nthe crate core module that defines every LateLintPass and Visitor\nimplementation. Coverage:\n\n- Module-level //! documentation\n- LintCategory enum and variants\n- LintMetadata struct + fields + the LINT_METADATA registry const\n- register_lints entry point\n- All six lint pass structs (SorobanStorageInLoop, RedundantEnvClone,\n  UnnecessaryHostFunctionCall, HostInLoop, SymbolNewForShortLiteral,\n  BytesAppendInLoop) plus their impl LateLintPass blocks\n- Allow rustdoc::private_intra_doc_links so intra-doc references to\n  helpers and const arrays build without warnings\n\nRefs #193.",
+      "author_name": "chiprime",
+      "author_email": "marvellousebuka21@gmail.com",
+      "authored_at": "2026-07-28T09:08:30Z",
+      "committed_at": "2026-07-28T09:08:30Z",
+      "author": {
+        "login": "chiprime",
+        "id": 302243607,
+        "type": "User"
+      },
+      "committer": {
+        "login": "chiprime",
+        "id": 302243607,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "f1d41c8c756f4a2c9fd67f95f85f03afb8d747c6",
+      "message": "Merge branch 'main' into docs/task-31",
+      "author_name": "chiprime",
+      "author_email": "marvellousebuka21@gmail.com",
+      "authored_at": "2026-07-28T09:24:33Z",
+      "committed_at": "2026-07-28T09:24:33Z",
+      "author": {
+        "login": "chiprime",
+        "id": 302243607,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "soroban_cost_lints/src/lib.rs",
+      "status": "modified",
+      "additions": 117,
+      "deletions": 79,
+      "changes": 196,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 0,
+    "check_runs": []
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "1d701fb6703ed0fd24e1a86cb293e309505de1a5",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit c55f36036bfc7bd82476944c7e987e1c9fe4a8eb is the main tip at merge time.",
+    "pull_request_base_sha": "0a3295df7e0fd4b2e2ef196d53774504fd4edc78",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-28T11:37:06Z",
+          "completed_at": "2026-07-28T11:53:41Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30355498925/job/90262605155",
+          "app": "github-actions",
+          "workflow_run_id": "30355498925"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5102320258,
+        "created_at": "2026-07-28T09:24:41Z",
+        "updated_at": "2026-07-28T09:24:41Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@chiprime Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": false,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

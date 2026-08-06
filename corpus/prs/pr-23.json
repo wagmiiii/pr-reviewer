@@ -1,0 +1,344 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:13:24Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 23,
+    "title": "chore: remove Drips Wave references, add launch checklist and docs link",
+    "body": "Makes the project independent of the Drips Wave program.\n\n- **Remove Drips Wave program artifacts** — drops the \"funded by Drips Wave 7\" claim from the README (the project is not funded by the program) and deletes the program-specific docs: `submission.md`, `submission_checklist.md`, `audit_and_roadmap.md`, `github_publish_steps.md`, and the master prompt PDF. All were stale; every actionable step in them has been verified complete against the live repo.\n- **Add `launch_checklist.md`** — a program-neutral checklist of the remaining v0.1.x launch work (demo video, optional crates.io publish), with the already-done items recorded as verified on 2026-07-14.\n- **Link the GitBook docs site from the README header** — the canonical documentation lives at https://tollcraft.gitbook.io/docs; the README previously only linked individual lint pages.",
+    "author": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "author_association": "MEMBER",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-14T07:23:34Z",
+    "updated_at": "2026-07-14T08:02:39Z",
+    "merged_at": "2026-07-14T08:02:39Z",
+    "closed_at": "2026-07-14T08:02:39Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "c93369e065e9b64ecbf96f7de9e0bd584bbf9882",
+    "base": {
+      "ref": "main",
+      "sha": "36882b1f513f4dc252655ed9306ba4deda6c7096",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "chore/remove-drips-references",
+      "sha": "abfd177bd19c774f88f60c247572e8c3d5fdc345",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 32,
+    "deletions": 221,
+    "changed_files": 7,
+    "commits": 5,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/23"
+  },
+  "reviews": [
+    {
+      "id": 4692097268,
+      "state": "APPROVED",
+      "submitted_at": "2026-07-14T08:02:27Z",
+      "author_association": "MEMBER",
+      "user": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "body_present": true,
+      "body": "lgtm"
+    }
+  ],
+  "review_states": [
+    {
+      "state": "APPROVED",
+      "count": 1
+    }
+  ],
+  "commits": [
+    {
+      "sha": "c324e3afd23e008079a56dd9295134aeccb36a99",
+      "message": "chore: remove Drips Wave program artifacts\n\nThe project is independent of the Drips Wave program. Drop the funding\nclaim from the README and delete the program-specific submission docs,\nplanning notes, and master prompt PDF.",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-14T07:22:54Z",
+      "committed_at": "2026-07-14T07:22:54Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "1333e758798a2822a6db804a00b57059c5db016a",
+      "message": "docs: add launch checklist for remaining v0.1.x work\n\nReplaces the deleted submission checklist with a program-neutral list.\nLive repo state (release, issues, topics, branch protection) verified\nvia the GitHub API on 2026-07-14.",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-14T07:23:00Z",
+      "committed_at": "2026-07-14T07:23:00Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "f342e5b9c3f7fc3827f25bcdd449ae229ca4061a",
+      "message": "docs(readme): link the GitBook documentation site\n\nThe README linked individual lint docs but never the docs site itself.\nPoint readers at https://tollcraft.gitbook.io/docs from the header.",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-14T07:23:17Z",
+      "committed_at": "2026-07-14T07:23:17Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "7eb671693632aedd347051bfc3e9f67291ac9177",
+      "message": "docs: link the demo recording, check off completed launch items\n\nDemo recorded per demo_script.md and uploaded to\nhttps://asciinema.org/a/1DpqHMqqOOXoZzMI; linked from the README header.\nThe lint status check is now required on main, and the workspace test\nsuite passes locally, leaving only the optional crates.io publish.",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-14T07:51:07Z",
+      "committed_at": "2026-07-14T07:51:07Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "abfd177bd19c774f88f60c247572e8c3d5fdc345",
+      "message": "Merge branch 'main' into chore/remove-drips-references",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-14T07:55:43Z",
+      "committed_at": "2026-07-14T07:55:43Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 5,
+      "deletions": 1,
+      "changes": 6,
+      "previous_filename": null
+    },
+    {
+      "filename": "audit_and_roadmap.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 72,
+      "changes": 72,
+      "previous_filename": null
+    },
+    {
+      "filename": "github_publish_steps.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 82,
+      "changes": 82,
+      "previous_filename": null
+    },
+    {
+      "filename": "launch_checklist.md",
+      "status": "added",
+      "additions": 27,
+      "deletions": 0,
+      "changes": 27,
+      "previous_filename": null
+    },
+    {
+      "filename": "stellar_wave_builder_master_prompt.md.pdf",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 0,
+      "changes": 0,
+      "previous_filename": null
+    },
+    {
+      "filename": "submission.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 13,
+      "changes": 13,
+      "previous_filename": null
+    },
+    {
+      "filename": "submission_checklist.md",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 53,
+      "changes": 53,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 2,
+    "check_runs": [
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-14T07:55:52Z",
+        "completed_at": "2026-07-14T07:57:00Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/29316223551/job/87030773597",
+        "app": "github-actions",
+        "workflow_run_id": "29316223551"
+      },
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-14T07:55:52Z",
+        "completed_at": "2026-07-14T08:00:30Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/29316223551/job/87030773546",
+        "app": "github-actions",
+        "workflow_run_id": "29316223551"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "success",
+    "total_count": 2,
+    "statuses": [
+      {
+        "context": "GitBook - tollcraft.gitbook.io/docs/",
+        "state": "success",
+        "description": "Check the live preview on your docs site.",
+        "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/U1sIWIf60MiM3Zfymy0T/",
+        "created_at": "2026-07-14T07:55:58Z",
+        "updated_at": "2026-07-14T07:55:58Z"
+      },
+      {
+        "context": "GitBook",
+        "state": "success",
+        "description": "Check the changes in the GitBook editor.",
+        "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/U1sIWIf60MiM3Zfymy0T/",
+        "created_at": "2026-07-14T07:55:58Z",
+        "updated_at": "2026-07-14T07:55:58Z"
+      }
+    ]
+  },
+  "base_branch_ci": {
+    "resolved_sha": "36882b1f513f4dc252655ed9306ba4deda6c7096",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit c93369e065e9b64ecbf96f7de9e0bd584bbf9882 is the main tip at merge time.",
+    "pull_request_base_sha": "36882b1f513f4dc252655ed9306ba4deda6c7096",
+    "check_runs": {
+      "total_count": 2,
+      "check_runs": [
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-14T07:55:28Z",
+          "completed_at": "2026-07-14T07:56:39Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/29316201840/job/87030703724",
+          "app": "github-actions",
+          "workflow_run_id": "29316201840"
+        },
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-14T07:55:29Z",
+          "completed_at": "2026-07-14T08:00:22Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/29316201840/job/87030703720",
+          "app": "github-actions",
+          "workflow_run_id": "29316201840"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "29316223551"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

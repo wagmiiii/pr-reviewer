@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:30Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 177,
+    "title": "Feat/lint discarded storage read",
+    "body": "Closes #116 \r\n\r\n## Description\r\n<!-- Describe your changes in detail -->\r\n\r\n## Related Issue\r\n<!-- If this PR addresses an existing issue, please link it here. -->\r\n\r\n\r\n## Motivation and Context\r\n<!-- Why is this change required? What problem does it solve? -->\r\n\r\n## How Has This Been Tested?\r\n<!-- Please describe in detail how you tested your changes. -->\r\n- [ ] Added/Updated tests\r\n- [ ] Passed `cargo test`\r\n- [ ] Passed `cargo clippy`\r\n- [ ] Formatted with `cargo fmt`\r\n\r\n## Types of changes\r\n<!-- What types of changes does your code introduce? -->\r\n- [x] Bug fix (non-breaking change which fixes an issue)\r\n- [ ] New feature (non-breaking change which adds functionality)\r\n- [ ] Breaking change (fix or feature that would cause existing functionality to change)\r\n- [ ] Documentation update\r\n",
+    "author": {
+      "login": "baedboibidex-cmyk",
+      "id": 254755326,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-25T07:28:10Z",
+    "updated_at": "2026-07-27T11:59:07Z",
+    "merged_at": "2026-07-27T11:59:07Z",
+    "closed_at": "2026-07-27T11:59:07Z",
+    "merged_by": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "899d01a1324f2692e41db55e3f1c9e2542d15667",
+    "base": {
+      "ref": "main",
+      "sha": "4fd722e29b0413d65d52cb737d776825c7c7ea6d",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feat/lint-discarded-storage-read",
+      "sha": "b72888114a6e34a7650ca541e69fb72b75b9cac0",
+      "repo": "baedboibidex-cmyk/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 67,
+    "deletions": 0,
+    "changed_files": 2,
+    "commits": 4,
+    "comments": 3,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/177"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "c9dc4353e00e334a995dbe5f41a0f295e9ea5c75",
+      "message": "feat: add discarded_storage_read lint for unused storage gets\n\nDetects get() calls on Instance/Persistent/Temporary storage whose\nresult is discarded (statement expression) or bound to wildcard (_).\n\nDoes not fire on has() checks or reads used in subsequent expressions.\nSuggests has() as a cheaper alternative for existence checks.\n\nCovers #116.",
+      "author_name": "boludev",
+      "author_email": "rhemaolamiju295@gmail.com",
+      "authored_at": "2026-07-25T06:12:18Z",
+      "committed_at": "2026-07-25T06:12:18Z",
+      "author": {
+        "login": "rhemaolamiju295-sudo",
+        "id": 267003803,
+        "type": "User"
+      },
+      "committer": {
+        "login": "rhemaolamiju295-sudo",
+        "id": 267003803,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "ad508c4284c85e8c4f6eb99f0698f994da4f09c0",
+      "message": "fix: collapse if and fmt check_get_discarded signature",
+      "author_name": "boludev",
+      "author_email": "rhemaolamiju295@gmail.com",
+      "authored_at": "2026-07-25T07:02:06Z",
+      "committed_at": "2026-07-25T07:02:06Z",
+      "author": {
+        "login": "rhemaolamiju295-sudo",
+        "id": 267003803,
+        "type": "User"
+      },
+      "committer": {
+        "login": "rhemaolamiju295-sudo",
+        "id": 267003803,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "06d4e5c5090cba2a5f888d82634cff7cd356b27a",
+      "message": "chore: regenerate main.stderr for discarded_storage_read",
+      "author_name": "Promise Olubudo",
+      "author_email": "254755326+baedboibidex-cmyk@users.noreply.github.com",
+      "authored_at": "2026-07-25T07:25:28Z",
+      "committed_at": "2026-07-25T07:25:28Z",
+      "author": {
+        "login": "baedboibidex-cmyk",
+        "id": 254755326,
+        "type": "User"
+      },
+      "committer": {
+        "login": "baedboibidex-cmyk",
+        "id": 254755326,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "b72888114a6e34a7650ca541e69fb72b75b9cac0",
+      "message": "Merge branch 'main' into feat/lint-discarded-storage-read",
+      "author_name": "WAGMI",
+      "author_email": "130152505+wagmiiii@users.noreply.github.com",
+      "authored_at": "2026-07-26T17:16:54Z",
+      "committed_at": "2026-07-26T17:16:54Z",
+      "author": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/lints/discarded_storage_read.md",
+      "status": "added",
+      "additions": 58,
+      "deletions": 0,
+      "changes": 58,
+      "previous_filename": null
+    },
+    {
+      "filename": "soroban_cost_lints/ui/main.stderr",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 0,
+      "changes": 9,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-26T17:17:02Z",
+        "completed_at": "2026-07-26T17:17:36Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30212245342/job/89820333503",
+        "app": "github-actions",
+        "workflow_run_id": "30212245342"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "b957756a5d9042e4e3295bd3c446d8feaddb66e0",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 899d01a1324f2692e41db55e3f1c9e2542d15667 is the main tip at merge time.",
+    "pull_request_base_sha": "4fd722e29b0413d65d52cb737d776825c7c7ea6d",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T11:58:47Z",
+          "completed_at": "2026-07-27T11:59:34Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30264007989/job/89970301802",
+          "app": "github-actions",
+          "workflow_run_id": "30264007989"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/8HDgtjWVVr348YhC4Kl0/",
+          "created_at": "2026-07-27T11:58:55Z",
+          "updated_at": "2026-07-27T11:58:55Z"
+        },
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/8HDgtjWVVr348YhC4Kl0/",
+          "created_at": "2026-07-27T11:58:55Z",
+          "updated_at": "2026-07-27T11:58:55Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 3,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "wagmiiii",
+        "count": 2
+      }
+    ],
+    "comments": [
+      {
+        "id": 5077512713,
+        "created_at": "2026-07-25T07:29:56Z",
+        "updated_at": "2026-07-25T07:29:56Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@baedboibidex-cmyk Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5078316087,
+        "created_at": "2026-07-25T11:28:00Z",
+        "updated_at": "2026-07-25T11:28:00Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "@baedboibidex-cmyk resolve conflicts"
+      },
+      {
+        "id": 5079827557,
+        "created_at": "2026-07-25T18:20:03Z",
+        "updated_at": "2026-07-25T18:20:03Z",
+        "user": {
+          "login": "wagmiiii",
+          "id": 130152505,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "Hello! 👋 \n\nWe recently optimized and simplified the CI workflows on the `main` branch. \n\nSince this PR is currently failing its CI checks, could you please **rebase your branch onto `main`**? This will pull in the new workflow configurations and might automatically resolve the CI failures. \n\nLet us know if you need any help with the rebase!"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30212245342"
+    ],
+    "all_head_workflow_run_ids": [
+      "30212245342"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

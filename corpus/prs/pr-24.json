@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:13:24Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 24,
+    "title": "fix(cli): budget.toml lint levels broke cargo cost-lint",
+    "body": "`cargo cost-lint` passed the lint-level flags from `budget.toml` as trailing args to `cargo dylint`, which forwards them to `cargo check` — and cargo rejects them:\n\n```\nerror: unexpected argument '-W' found\n```\n\nSo the documented `budget.toml` workflow failed before linting even started. This routes the levels through `DYLINT_RUSTFLAGS` (appending to any existing value) so they reach rustc, where the dylint driver registers the lints.\n\nVerified end to end against a real soroban-sdk contract while recording the demo: with `soroban_storage_in_loop = \"deny\"`, a storage write inside a loop fails the build with exit code 1, and the corrected contract passes with exit code 0.",
+    "author": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "author_association": "MEMBER",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-14T07:41:48Z",
+    "updated_at": "2026-07-14T07:55:23Z",
+    "merged_at": "2026-07-14T07:55:23Z",
+    "closed_at": "2026-07-14T07:55:23Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "36882b1f513f4dc252655ed9306ba4deda6c7096",
+    "base": {
+      "ref": "main",
+      "sha": "0878ab0f13fc217f0d67fac323cd6e8dad940087",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "fix/budget-toml-lint-levels",
+      "sha": "f7df40db5fb429e10ef0a8bdc19e150bd6c2bd72",
+      "repo": "Tollcraft/soroban-cost-linter",
+      "fork": false
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 9,
+    "deletions": 7,
+    "changed_files": 1,
+    "commits": 1,
+    "comments": 0,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/24"
+  },
+  "reviews": [
+    {
+      "id": 4692045813,
+      "state": "APPROVED",
+      "submitted_at": "2026-07-14T07:55:10Z",
+      "author_association": "MEMBER",
+      "user": {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      },
+      "body_present": true,
+      "body": "lgtm"
+    }
+  ],
+  "review_states": [
+    {
+      "state": "APPROVED",
+      "count": 1
+    }
+  ],
+  "commits": [
+    {
+      "sha": "f7df40db5fb429e10ef0a8bdc19e150bd6c2bd72",
+      "message": "fix(cli): pass budget.toml lint levels via DYLINT_RUSTFLAGS\n\nTrailing args to `cargo dylint` are forwarded to `cargo check`, which\nrejects lint-level flags, so any project with a budget.toml failed with\n\"unexpected argument '-W' found\" before linting even started. Route the\nlevels through DYLINT_RUSTFLAGS (appending to any existing value) so\nthey reach rustc.\n\nVerified end to end against a soroban-sdk contract: with\nsoroban_storage_in_loop = \"deny\", a storage write inside a loop now\nfails the build with exit code 1, and the fixed contract passes.",
+      "author_name": "mallison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-14T07:41:44Z",
+      "committed_at": "2026-07-14T07:41:44Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "cargo-cost-lint/src/main.rs",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 7,
+      "changes": 16,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 2,
+    "check_runs": [
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-14T07:41:54Z",
+        "completed_at": "2026-07-14T07:43:04Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/29315428100/job/87028251877",
+        "app": "github-actions",
+        "workflow_run_id": "29315428100"
+      },
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-14T07:41:53Z",
+        "completed_at": "2026-07-14T07:45:55Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/29315428100/job/87028251850",
+        "app": "github-actions",
+        "workflow_run_id": "29315428100"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "0878ab0f13fc217f0d67fac323cd6e8dad940087",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 36882b1f513f4dc252655ed9306ba4deda6c7096 is the main tip at merge time.",
+    "pull_request_base_sha": "0878ab0f13fc217f0d67fac323cd6e8dad940087",
+    "check_runs": {
+      "total_count": 2,
+      "check_runs": [
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-08T13:28:24Z",
+          "completed_at": "2026-07-08T13:29:35Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/28946344986/job/85881101165",
+          "app": "github-actions",
+          "workflow_run_id": "28946344986"
+        },
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-08T13:28:24Z",
+          "completed_at": "2026-07-08T13:33:11Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/28946344986/job/85881101145",
+          "app": "github-actions",
+          "workflow_run_id": "28946344986"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "total_count": 2,
+      "statuses": [
+        {
+          "context": "GitBook - tollcraft.gitbook.io/docs/",
+          "state": "success",
+          "description": "Check the live preview on your docs site.",
+          "target_url": "https://tollcraft.gitbook.io/docs/~/revisions/J1unOWN2g74aWumLM6yw/",
+          "created_at": "2026-07-08T13:28:29Z",
+          "updated_at": "2026-07-08T13:28:29Z"
+        },
+        {
+          "context": "GitBook",
+          "state": "success",
+          "description": "Check the changes in the GitBook editor.",
+          "target_url": "https://app.gitbook.com/s/JJmRVp1TqqDciDTbktDG/~/diff/~/revisions/J1unOWN2g74aWumLM6yw/",
+          "created_at": "2026-07-08T13:28:29Z",
+          "updated_at": "2026-07-08T13:28:29Z"
+        }
+      ]
+    }
+  },
+  "issue_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "29315428100"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

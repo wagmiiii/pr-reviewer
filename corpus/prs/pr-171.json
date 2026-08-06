@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:14:21Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 171,
+    "title": "docs: add usage examples to cargo-cost-lint README",
+    "body": "## Summary\n\nAdds practical usage examples to the README, making it easier for developers to get started with `cargo-cost-lint` and interpret its output.\n\n## Changes\n\n### Quick Start section\nTwo-line copy-paste workflow: install the tool, then run it on your project.\n\n### Expanded Usage section\n- Full linter output example showing all three lint warnings with file/line annotations\n- **Storage in a loop** — bad code, linter output, and the fix (accumulate in memory)\n- **Redundant `Env` clone** — bad code and fix (pass by reference)\n- **Host function call in a loop** — bad code and fix (call once, reuse)\n- **Suppressing false positives** — how to use `#[allow(...)]`\n\n### Markdown formatting\nAll code blocks use correctly fenced language tags, headings follow a consistent hierarchy, and rendered output is clean.\n\nCloses #36",
+    "author": {
+      "login": "Adediwura-dev",
+      "id": 252383613,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-24T15:53:46Z",
+    "updated_at": "2026-07-24T18:57:21Z",
+    "merged_at": "2026-07-24T18:57:13Z",
+    "closed_at": "2026-07-24T18:57:13Z",
+    "merged_by": {
+      "login": "wagmiiii",
+      "id": 130152505,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "7e842c78e19468c446a38c936c172e2e463e8a6b",
+    "base": {
+      "ref": "main",
+      "sha": "82989afb445711e1e61fb5cdbce9c31eeaa2e466",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "docs/cargo-cost-lint-examples",
+      "sha": "a776a274a937a410616347906dced2b61b953d4d",
+      "repo": "Adediwura-dev/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [
+      {
+        "login": "wagmiiii",
+        "id": 130152505,
+        "type": "User"
+      }
+    ],
+    "assignees": [],
+    "additions": 122,
+    "deletions": 5,
+    "changed_files": 1,
+    "commits": 2,
+    "comments": 1,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/171"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "7e9cdc33b4e28bbacb5d3852e55cc1e9141de791",
+      "message": "docs: add usage examples to cargo-cost-lint README\n\nAdds quick-start commands, detailed usage examples for all three lints\n(storage in loop, redundant env clone, unnecessary host function call),\nand linter output examples showing how to interpret and fix warnings.\n\nCloses #36",
+      "author_name": "bywura",
+      "author_email": "bushragbadegesin@gmail.com",
+      "authored_at": "2026-07-24T15:53:06Z",
+      "committed_at": "2026-07-24T15:53:06Z",
+      "author": {
+        "login": "Adediwura-dev",
+        "id": 252383613,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Adediwura-dev",
+        "id": 252383613,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "a776a274a937a410616347906dced2b61b953d4d",
+      "message": "Merge branch 'main' into docs/cargo-cost-lint-examples",
+      "author_name": "bywura",
+      "author_email": "bushragbadegesin@gmail.com",
+      "authored_at": "2026-07-24T15:55:56Z",
+      "committed_at": "2026-07-24T15:55:56Z",
+      "author": {
+        "login": "Adediwura-dev",
+        "id": 252383613,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 122,
+      "deletions": 5,
+      "changes": 127,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 5,
+    "check_runs": [
+      {
+        "name": "lint",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T16:03:35Z",
+        "completed_at": "2026-07-24T16:03:39Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30107384696/job/89529391930",
+        "app": "github-actions",
+        "workflow_run_id": "30107384696"
+      },
+      {
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T15:58:48Z",
+        "completed_at": "2026-07-24T15:58:50Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30107384696/job/89528500917",
+        "app": "github-actions",
+        "workflow_run_id": "30107384696"
+      },
+      {
+        "name": "Code Quality (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T15:56:05Z",
+        "completed_at": "2026-07-24T15:58:46Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30107384696/job/89528005619",
+        "app": "github-actions",
+        "workflow_run_id": "30107384696"
+      },
+      {
+        "name": "validate-toolchain-pins",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T15:56:05Z",
+        "completed_at": "2026-07-24T15:56:12Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30107384696/job/89528005614",
+        "app": "github-actions",
+        "workflow_run_id": "30107384696"
+      },
+      {
+        "name": "lint-matrix (nightly-2026-04-16)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-07-24T15:56:04Z",
+        "completed_at": "2026-07-24T16:03:25Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30107384696/job/89528005587",
+        "app": "github-actions",
+        "workflow_run_id": "30107384696"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "82989afb445711e1e61fb5cdbce9c31eeaa2e466",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit 7e842c78e19468c446a38c936c172e2e463e8a6b is the main tip at merge time.",
+    "pull_request_base_sha": "82989afb445711e1e61fb5cdbce9c31eeaa2e466",
+    "check_runs": {
+      "total_count": 6,
+      "check_runs": [
+        {
+          "name": "lint",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T16:00:36Z",
+          "completed_at": "2026-07-24T16:00:41Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30107199450/job/89528836794",
+          "app": "github-actions",
+          "workflow_run_id": "30107199450"
+        },
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T15:55:34Z",
+          "completed_at": "2026-07-24T15:55:37Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30107199450/job/89527894617",
+          "app": "github-actions",
+          "workflow_run_id": "30107199450"
+        },
+        {
+          "name": "Dependabot",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T15:54:45Z",
+          "completed_at": "2026-07-24T15:56:20Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30107289536/job/89527699170",
+          "app": "github-actions",
+          "workflow_run_id": "30107289536"
+        },
+        {
+          "name": "validate-toolchain-pins",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T15:53:24Z",
+          "completed_at": "2026-07-24T15:53:30Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30107199450/job/89527397135",
+          "app": "github-actions",
+          "workflow_run_id": "30107199450"
+        },
+        {
+          "name": "Code Quality (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T15:53:24Z",
+          "completed_at": "2026-07-24T15:55:32Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30107199450/job/89527397134",
+          "app": "github-actions",
+          "workflow_run_id": "30107199450"
+        },
+        {
+          "name": "lint-matrix (nightly-2026-04-16)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-07-24T15:53:24Z",
+          "completed_at": "2026-07-24T16:00:33Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30107199450/job/89527397116",
+          "app": "github-actions",
+          "workflow_run_id": "30107199450"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 1,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5071770096,
+        "created_at": "2026-07-24T15:53:54Z",
+        "updated_at": "2026-07-24T15:53:54Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@Adediwura-dev Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [],
+    "base_failing_checks": [],
+    "failing_also_failing_on_base": [],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [],
+    "all_head_workflow_run_ids": [
+      "30107384696"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}

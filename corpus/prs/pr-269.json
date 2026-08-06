@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-05T15:16:07Z",
+  "repo": "Tollcraft/soroban-cost-linter",
+  "pull_request": {
+    "number": 269,
+    "title": "feat: implement excessive_vec_capacity lint",
+    "body": "Closes #46\n\n## Summary\n\nAdds a lint that flags `Vec::with_capacity(N)`, `.reserve(N)`, and `.reserve_exact(N)` calls where `N` is a hard-coded integer literal above `1024`.\n\nThe Soroban SDK's own `Map`/`Vec`/`Bytes` don't expose a capacity-reservation API, so this targets plain Rust `Vec` (`std`/`alloc`) used for local scratch computation inside a contract. Unlike a long-running server process, a Soroban guest Wasm instance runs against a small, hard-capped linear memory budget (see [Cost Rationale — Memory](docs/cost_rationale.md#2-memory-ram)): the allocation is charged the moment it's made, regardless of whether the capacity is ever filled. A large, hard-coded literal that isn't tied to a known input bound is a structural sign of over-allocation.\n\nNon-literal arguments (e.g. `Vec::with_capacity(input.len())`) are intentionally **not** flagged — they're already tied to a runtime-computed bound, which is exactly the fix this lint suggests.\n\n## Implementation details\n\n- `ExcessiveVecCapacity` is a `check_expr` pass matching two call shapes:\n  - `Vec::with_capacity(N)` — an `ExprKind::Call` whose callee resolves (via `cx.qpath_res(...).opt_def_id()`) to a function ending in `vec::Vec::with_capacity`.\n  - `v.reserve(N)` / `v.reserve_exact(N)` — an `ExprKind::MethodCall` whose receiver type (via `cx.typeck_results()`) is an ADT ending in `vec::Vec`.\n- The literal argument is extracted via `LitKind::Int(value, _) => value.get()` (same pattern `clippy_utils::consts` uses), so `1024`, `1024usize`, and `1_024` all resolve to the same numeric value regardless of suffix/underscores.\n- **Non-obvious bug I hit and fixed along the way:** `rustc_middle::ty::TyCtxt::def_path_str` embeds the enclosing impl block's generic parameter list for associated functions on generic types — `Vec::with_capacity` prints as `alloc::vec::Vec::<T>::with_capacity`, not `alloc::vec::Vec::with_capacity`. The existing `match_soroban_def_path` helper's plain suffix match can't see through that (it's only ever been used against ADT type paths and non-generic-impl functions before now, so this never came up). Rather than change that shared, already-relied-upon helper, I added `strip_generic_segments` (removes bracketed `<...>` segments and collapses the resulting empty path segment) plus a `match_generic_fn_path` wrapper, used only by this new lint's `Call` arm.\n- `EXCESSIVE_VEC_CAPACITY_THRESHOLD` is a `u128` constant (`1024`) so it composes with `LitKind::Int`'s `u128` value type without truncation concerns.\n\n## Files\n\n**New:**\n- `docs/lints/excessive_vec_capacity.md` — lint reference page.\n\n**Modified:**\n- `soroban_cost_lints/src/lib.rs` — `ExcessiveVecCapacity` late lint pass, `strip_generic_segments`/`match_generic_fn_path` helpers, `LINT_METADATA`/`register_lints` wiring (category: `Memory`).\n- `soroban_cost_lints/ui/main.rs` / `ui/main.stderr` — new UI fixtures (see Tests below).\n- `README.md`, `docs/lints/README.md`, `docs/cost_rationale.md`, `CHANGELOG.md` — lint listed under Memory with rationale and target-resource summary.\n\n**Test files:** all under `soroban_cost_lints/ui/main.rs` (fixtures) / `soroban_cost_lints/ui/main.stderr` (expected diagnostics), following this repo's existing UI-test convention.\n\n## Tests added\n\nAll in the new `excessive_vec_capacity — Fixtures` section of `ui/main.rs`:\n\n- `bad_vec_with_capacity_literal` — `Vec::with_capacity(10_000)` → **warns**.\n- `bad_vec_reserve_literal` — `.reserve(5000)` → **warns**.\n- `bad_vec_reserve_exact_literal` — `.reserve_exact(2048)` → **warns**.\n- `good_vec_with_capacity_small_literal` — `Vec::with_capacity(16)` (below threshold) → no warning.\n- `good_vec_with_capacity_from_input_len` — `Vec::with_capacity(input.len())` (non-literal) → no warning.\n- `good_vec_new_grows_incrementally` — `Vec::new()` + `.push()` in a loop (no reservation at all) → no warning.\n- `allowed_vec_with_capacity_literal` — same over-capacity case suppressed via `#[allow(excessive_vec_capacity)]` → no warning.\n\n## How to test\n\n```bash\ncargo fmt --all -- --check\ncargo clippy --workspace --all-targets -- -D warnings\ncargo test --workspace\n```\n\nAll three pass locally. The UI test (`cargo test -p soroban_cost_lints`) exercises the new fixtures against the bundled `ui/main.stderr` expectations.",
+    "author": {
+      "login": "Rafiat30",
+      "id": 305820146,
+      "type": "User"
+    },
+    "author_association": "CONTRIBUTOR",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "created_at": "2026-07-26T15:06:59Z",
+    "updated_at": "2026-07-27T12:15:37Z",
+    "merged_at": "2026-07-27T12:15:36Z",
+    "closed_at": "2026-07-27T12:15:36Z",
+    "merged_by": {
+      "login": "mallison031",
+      "id": 270941599,
+      "type": "User"
+    },
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "rebaseable": null,
+    "merge_commit_sha": "fec52a16012151956bb62f6b1cfd40705ac1e429",
+    "base": {
+      "ref": "main",
+      "sha": "a5949a94cddf319ae42e79b8af5fd17b16eb8d88",
+      "repo": "Tollcraft/soroban-cost-linter"
+    },
+    "head": {
+      "ref": "feat/excessive-vec-capacity",
+      "sha": "673f1f4e167afd585ca60fd40d54c7e1ecf36b14",
+      "repo": "Rafiat30/soroban-cost-linter",
+      "fork": true
+    },
+    "labels": [],
+    "milestone": null,
+    "requested_reviewers": [],
+    "assignees": [],
+    "additions": 77,
+    "deletions": 0,
+    "changed_files": 3,
+    "commits": 4,
+    "comments": 2,
+    "review_comments": 0,
+    "html_url": "https://github.com/Tollcraft/soroban-cost-linter/pull/269"
+  },
+  "reviews": [],
+  "review_states": [],
+  "commits": [
+    {
+      "sha": "5f68b831565a2e4d1d68b19385149dd201759da0",
+      "message": "feat: implement excessive_vec_capacity lint\n\nFlag Vec::with_capacity(N), .reserve(N), and .reserve_exact(N) calls\nwhere N is a hard-coded integer literal above 1024. Soroban's guest Wasm\ninstance runs against a small, hard-capped linear memory budget, so a\nlarge capacity reservation is charged the moment it's made regardless of\nwhether it's ever filled — unlike a long-running server process where\nover-reserving is cheap. Non-literal arguments (e.g. input.len()) are\nleft alone since they're already tied to a runtime-computed bound.\n\n- Add ExcessiveVecCapacity late lint pass matching both the free-function\n  call form (Vec::with_capacity) and the method-call form (.reserve/\n  .reserve_exact), using typeck results to confirm the receiver/return\n  type is std/alloc's Vec.\n- Add strip_generic_segments/match_generic_fn_path helpers: rustc's\n  def_path_str embeds the enclosing impl's generic parameter list for\n  associated functions on generic types (e.g. `Vec::<T>::with_capacity`),\n  which a plain suffix match against the existing match_soroban_def_path\n  helper can't see through.\n- Add UI fixtures covering all three flagged call forms, a small literal,\n  a non-literal (input-derived) capacity, incremental growth via\n  Vec::new(), and an #[allow] suppression case.\n- Document the lint in docs/lints/excessive_vec_capacity.md, the README\n  feature list, docs/lints/README.md, docs/cost_rationale.md, and\n  CHANGELOG.md.\n\nCloses #46",
+      "author_name": "Ajibose",
+      "author_email": "ajiboseibrahim12@gmail.com",
+      "authored_at": "2026-07-26T15:05:05Z",
+      "committed_at": "2026-07-26T15:05:05Z",
+      "author": {
+        "login": "Ajibose",
+        "id": 99620327,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Ajibose",
+        "id": 99620327,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "5e9e9251d4c9aa1fb070d65263b5308709cfad42",
+      "message": "Merge remote-tracking branch 'upstream/main' into feat/excessive-vec-capacity\n\n# Conflicts:\n#\tsoroban_cost_lints/ui/main.stderr",
+      "author_name": "Ajibose",
+      "author_email": "ajiboseibrahim12@gmail.com",
+      "authored_at": "2026-07-26T15:50:24Z",
+      "committed_at": "2026-07-26T15:50:24Z",
+      "author": {
+        "login": "Ajibose",
+        "id": 99620327,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Ajibose",
+        "id": 99620327,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "cab2395c52f88d551fa181c6ae6c19aea07fdd6e",
+      "message": "fix: resolve CI build failures in SARIF output and fixture workspace\n\n- SarifRun.results was typed Vec<SarifResult> while the SARIF result\n  builder constructed plain serde_json::Value objects via json!(),\n  a leftover mismatch from a prior merge that broke compilation.\n  Retype results as Vec<serde_json::Value>, drop the now-dead typed\n  Sarif* structs, and wire the already-collected rule descriptors\n  into tool.driver.rules.\n- integration.rs used HashSet<String> but inserted &str literals;\n  fix the declared type.\n- alpha/beta fixture crates each declared their own [workspace]\n  while also being listed as members of the parent workspace,\n  causing cargo metadata to fail with \"multiple workspace roots\n  found\". Drop the redundant per-crate [workspace] tables.\n\nThese were the actual cause of the \"SARIF result missing level\"\nCI failures reported on PRs #232, #267, #269, #270 (all inherited\nthe same broken merge state) — the binary failed to compile, it\nwas not a runtime field-mapping bug.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+      "author_name": "Ajibose",
+      "author_email": "ajiboseibrahim12@gmail.com",
+      "authored_at": "2026-07-26T20:14:29Z",
+      "committed_at": "2026-07-26T20:15:59Z",
+      "author": {
+        "login": "Ajibose",
+        "id": 99620327,
+        "type": "User"
+      },
+      "committer": {
+        "login": "Ajibose",
+        "id": 99620327,
+        "type": "User"
+      },
+      "verified": false,
+      "signed_off": false
+    },
+    {
+      "sha": "673f1f4e167afd585ca60fd40d54c7e1ecf36b14",
+      "message": "Merge branch 'main' into feat/excessive-vec-capacity",
+      "author_name": "Allison",
+      "author_email": "muyideenallison@gmail.com",
+      "authored_at": "2026-07-27T09:41:49Z",
+      "committed_at": "2026-07-27T09:41:49Z",
+      "author": {
+        "login": "mallison031",
+        "id": 270941599,
+        "type": "User"
+      },
+      "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "type": "User"
+      },
+      "verified": true,
+      "signed_off": false
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/cost_rationale.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/README.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "previous_filename": null
+    },
+    {
+      "filename": "docs/lints/excessive_vec_capacity.md",
+      "status": "added",
+      "additions": 75,
+      "deletions": 0,
+      "changes": 75,
+      "previous_filename": null
+    }
+  ],
+  "head_check_runs": {
+    "total_count": 1,
+    "check_runs": [
+      {
+        "name": "build-and-test",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-07-27T09:41:56Z",
+        "completed_at": "2026-07-27T09:42:32Z",
+        "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30255040617/job/89941550168",
+        "app": "github-actions",
+        "workflow_run_id": "30255040617"
+      }
+    ]
+  },
+  "head_statuses": {
+    "state": "pending",
+    "total_count": 0,
+    "statuses": []
+  },
+  "base_branch_ci": {
+    "resolved_sha": "ef24f6d77d40ec6392602436bb66e896543ccb77",
+    "resolution_method": "merge_commit_first_parent",
+    "approximate": false,
+    "note": "Exact: first parent of merge commit fec52a16012151956bb62f6b1cfd40705ac1e429 is the main tip at merge time.",
+    "pull_request_base_sha": "a5949a94cddf319ae42e79b8af5fd17b16eb8d88",
+    "check_runs": {
+      "total_count": 1,
+      "check_runs": [
+        {
+          "name": "build-and-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-07-27T12:15:35Z",
+          "completed_at": "2026-07-27T12:16:19Z",
+          "details_url": "https://github.com/Tollcraft/soroban-cost-linter/actions/runs/30265179385/job/89974029994",
+          "app": "github-actions",
+          "workflow_run_id": "30265179385"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "pending",
+      "total_count": 0,
+      "statuses": []
+    }
+  },
+  "issue_comments": {
+    "count": 2,
+    "authors": [
+      {
+        "login": "drips-wave[bot]",
+        "count": 1
+      },
+      {
+        "login": "mallison031",
+        "count": 1
+      }
+    ],
+    "comments": [
+      {
+        "id": 5084216475,
+        "created_at": "2026-07-26T15:50:33Z",
+        "updated_at": "2026-07-26T15:50:33Z",
+        "user": {
+          "login": "drips-wave[bot]",
+          "id": 253720017,
+          "type": "Bot"
+        },
+        "author_association": "NONE",
+        "body": "@Rafiat30 Great news! 🎉 Based on an automated assessment of this PR, the linked Wave issue(s) **no longer count against your application limits**.\n\nYou can now already apply to more issues while waiting for a review of this PR. Keep up the great work! 🚀\n\n[Learn more about application limits](https://docs.drips.network/wave/contributors/solving-issues-and-earning-rewards#application-limits)"
+      },
+      {
+        "id": 5089817939,
+        "created_at": "2026-07-27T09:47:06Z",
+        "updated_at": "2026-07-27T09:47:06Z",
+        "user": {
+          "login": "mallison031",
+          "id": 270941599,
+          "type": "User"
+        },
+        "author_association": "MEMBER",
+        "body": "fix your cl"
+      }
+    ]
+  },
+  "review_comments": {
+    "count": 0,
+    "authors": [],
+    "comments": []
+  },
+  "analysis": {
+    "head_has_ci": true,
+    "base_has_ci": true,
+    "head_failing_checks": [
+      "build-and-test"
+    ],
+    "base_failing_checks": [
+      "build-and-test"
+    ],
+    "failing_also_failing_on_base": [
+      "build-and-test"
+    ],
+    "head_failing_statuses": [],
+    "base_failing_statuses": [],
+    "workflow_run_ids_for_failures": [
+      "30255040617"
+    ],
+    "all_head_workflow_run_ids": [
+      "30255040617"
+    ],
+    "merge_conflict": false
+  },
+  "capture_errors": []
+}
