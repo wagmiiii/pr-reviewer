@@ -4,8 +4,8 @@ import { throttling } from '@octokit/plugin-throttling';
 
 const CustomOctokit = Octokit.plugin(retry, throttling);
 
-export function createGitHubClient(token: string) {
-  return new CustomOctokit({
+export function createGitHubClient(token: string, dryRun: boolean = false) {
+  const octokit = new CustomOctokit({
     auth: token,
     throttle: {
       onRateLimit: (
@@ -29,4 +29,17 @@ export function createGitHubClient(token: string) {
       },
     },
   });
+
+  if (dryRun) {
+    octokit.hook.wrap('request', async (request, options) => {
+      if (options.method !== 'GET' && options.method !== 'HEAD') {
+        throw new Error(
+          `Write API reachable in dry-run mode: ${options.method} ${options.url}`,
+        );
+      }
+      return request(options);
+    });
+  }
+
+  return octokit;
 }

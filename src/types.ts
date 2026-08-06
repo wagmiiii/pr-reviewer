@@ -168,6 +168,11 @@ export interface CappedDiff {
 export interface RepoConfig {
   readonly labelPrefix?: string;
   readonly disabledRules?: readonly string[];
+  /**
+   * Run without making any changes to the PR (zero write API calls).
+   * `dry_run: true` is the documented default for first adoption.
+   * @default true
+   */
   readonly dryRun?: boolean;
   readonly protectedGlobs?: readonly string[];
   readonly hugeDiffThresholdLines?: number;

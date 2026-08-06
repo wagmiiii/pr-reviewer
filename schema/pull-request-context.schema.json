@@ -423,6 +423,8 @@
           "type": "array"
         },
         "dryRun": {
+          "default": true,
+          "description": "Run without making any changes to the PR (zero write API calls). `dry_run: true` is the documented default for first adoption.",
           "type": "boolean"
         },
         "hugeDiffThresholdLines": {
