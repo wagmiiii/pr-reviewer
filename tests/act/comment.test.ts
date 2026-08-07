@@ -74,9 +74,9 @@ describe('comment actuation', () => {
 
   describe('markers', () => {
     test('creates and parses marker correctly', () => {
-      const marker = createMarker('abc123hash', 5);
+      const marker = createMarker('abc123feed', 5);
       const parsed = parseMarker(marker);
-      expect(parsed?.hash).toEqual('abc123hash');
+      expect(parsed?.hash).toEqual('abc123feed');
       expect(parsed?.editsToday).toEqual(5);
     });
   });
@@ -100,7 +100,7 @@ describe('comment actuation', () => {
 
     test('updates comment if hash differs', async () => {
       const updateComment = vi.fn();
-      const oldMarker = createMarker('oldhash', 1);
+      const oldMarker = createMarker('deadbeef', 1);
       const octokit: any = {
         paginate: vi.fn().mockResolvedValue([{ id: 123, body: oldMarker }]),
         rest: { issues: { updateComment } },
@@ -130,7 +130,7 @@ describe('comment actuation', () => {
 
     test('skips update if edit cap reached', async () => {
       const updateComment = vi.fn();
-      const oldMarker = createMarker('oldhash', 10);
+      const oldMarker = createMarker('deadbeef', 10);
       const octokit: any = {
         paginate: vi.fn().mockResolvedValue([{ id: 123, body: oldMarker }]),
         rest: { issues: { updateComment } },
