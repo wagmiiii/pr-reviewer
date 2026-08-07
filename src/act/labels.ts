@@ -1,4 +1,4 @@
-import type { RuleResult, TriageStatus } from '../types.js';
+import type { RuleResult, TriageStatus, RepoConfig } from '../types.js';
 
 export const MANAGED_LABELS = {
   'needs-ci-fix': { color: 'e99695', description: 'PR is blocked by failing CI checks' },
@@ -54,20 +54,30 @@ export function deriveDesiredLabels(
 export function reconcileLabels(
   desired: Set<ManagedLabel>,
   actual: readonly string[],
-): { add: ManagedLabel[]; remove: ManagedLabel[] } {
+  config?: RepoConfig,
+): { add: { id: ManagedLabel; name: string }[]; remove: string[] } {
+  const prefix = config?.labelPrefix ?? '';
+  const mapping = config?.labelMapping ?? {};
+
+  function getLabelName(label: ManagedLabel): string {
+    const mapped = mapping[label as string] ?? label;
+    return `${prefix}${mapped}`;
+  }
+
   const actualSet = new Set(actual);
 
-  const add: ManagedLabel[] = [];
-  const remove: ManagedLabel[] = [];
+  const add: { id: ManagedLabel; name: string }[] = [];
+  const remove: string[] = [];
 
-  for (const label of MANAGED_LABEL_NAMES) {
-    const isDesired = desired.has(label);
-    const isActual = actualSet.has(label);
+  for (const id of MANAGED_LABEL_NAMES) {
+    const name = getLabelName(id);
+    const isDesired = desired.has(id);
+    const isActual = actualSet.has(name);
 
     if (isDesired && !isActual) {
-      add.push(label);
+      add.push({ id, name });
     } else if (!isDesired && isActual) {
-      remove.push(label);
+      remove.push(name);
     }
   }
 
@@ -87,11 +97,16 @@ export async function applyLabels(
   pullNumber: number,
   desired: Set<ManagedLabel>,
   dryRun: boolean = false,
+  config?: RepoConfig,
 ): Promise<void> {
+  if (config?.labelsEnabled === false) {
+    return;
+  }
+
   const pr = await octokit.rest.pulls.get({ owner, repo, pull_number: pullNumber });
   const actual = pr.data.labels.map((l: any) => l.name);
 
-  const { add, remove } = reconcileLabels(desired, actual);
+  const { add, remove } = reconcileLabels(desired, actual, config);
 
   if (add.length === 0 && remove.length === 0) {
     return;
@@ -99,22 +114,22 @@ export async function applyLabels(
 
   if (dryRun) {
     console.log(`[DRY RUN] Label reconciliation for #${pullNumber}:`);
-    if (add.length > 0) console.log(`  + Add: ${add.join(', ')}`);
+    if (add.length > 0) console.log(`  + Add: ${add.map((a) => a.name).join(', ')}`);
     if (remove.length > 0) console.log(`  - Remove: ${remove.join(', ')}`);
     return;
   }
 
-  for (const label of add) {
+  for (const { id, name } of add) {
     try {
-      await octokit.rest.issues.getLabel({ owner, repo, name: label });
+      await octokit.rest.issues.getLabel({ owner, repo, name });
     } catch (e: any) {
       if (e.status === 404) {
         await octokit.rest.issues.createLabel({
           owner,
           repo,
-          name: label,
-          color: MANAGED_LABELS[label].color,
-          description: MANAGED_LABELS[label].description,
+          name,
+          color: MANAGED_LABELS[id].color,
+          description: MANAGED_LABELS[id].description,
         });
       } else {
         throw e;
@@ -127,17 +142,17 @@ export async function applyLabels(
       owner,
       repo,
       issue_number: pullNumber,
-      labels: add,
+      labels: add.map((a) => a.name),
     });
   }
 
-  for (const label of remove) {
+  for (const name of remove) {
     try {
       await octokit.rest.issues.removeLabel({
         owner,
         repo,
         issue_number: pullNumber,
-        name: label,
+        name,
       });
     } catch (e: any) {
       if (e.status !== 404) throw e;
