@@ -49,13 +49,36 @@ export async function applyComment(
     issue_number: pullNumber,
   });
 
-  const existing = comments.find((c: any) => c.body?.includes(MARKER_PREFIX));
+  const existingComments = comments.filter((c: any) => c.body?.includes(MARKER_PREFIX));
+
+  // Keep the oldest comment (sort by created_at ascending)
+  existingComments.sort((a: any, b: any) => {
+    const timeA = a.created_at ? new Date(a.created_at).getTime() : a.id;
+    const timeB = b.created_at ? new Date(b.created_at).getTime() : b.id;
+    return timeA - timeB;
+  });
+
+  const existing = existingComments.length > 0 ? existingComments[0] : undefined;
+  const duplicates = existingComments.slice(1);
+
+  if (!dryRun) {
+    for (const dup of duplicates) {
+      await octokit.rest.issues.deleteComment({
+        owner,
+        repo,
+        comment_id: dup.id,
+      });
+    }
+  }
+
   const today = new Date().toISOString().split('T')[0]!;
 
   const marker = await readState(owner, repo, pullNumber, existing?.body);
 
-  if (marker && marker.hash === hash) {
-    // Identical hash to last run produces no write at all
+  if (marker && marker.hash === hash && duplicates.length === 0) {
+    // Identical hash to last run produces no write at all (unless we had duplicates to delete)
+    // Wait, if duplicates.length > 0, we deleted them but we still don't need to rewrite the main comment if the hash is identical.
+    // So we can return here regardless, since duplicates were deleted above.
     return;
   }
 
@@ -69,7 +92,18 @@ export async function applyComment(
   const newState: MarkerState = { hash, date: today, editsToday };
 
   if (!dryRun) {
-    const newBody = `${createMarker(newState)}\n${reportMarkdown}`;
+    const markerStr = createMarker(newState);
+    let finalMarkdown = reportMarkdown;
+    const MAX_LENGTH = 65536;
+    const ellipsis = '\n... (truncated)';
+
+    if (markerStr.length + 1 + finalMarkdown.length > MAX_LENGTH) {
+      const allowedLength = MAX_LENGTH - markerStr.length - 1 - ellipsis.length;
+      finalMarkdown = finalMarkdown.slice(0, Math.max(0, allowedLength)) + ellipsis;
+    }
+
+    const newBody = `${markerStr}\n${finalMarkdown}`;
+
     if (existing) {
       await octokit.rest.issues.updateComment({
         owner,
