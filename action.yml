@@ -1,0 +1,37 @@
+name: 'PR Reviewer'
+description: 'A PR triage bot for maintainers drowning in contributor pull requests.'
+inputs:
+  github-token:
+    description: 'GitHub token for API access. Defaults to github.token.'
+    default: ${{ github.token }}
+    required: true
+  labelPrefix:
+    description: 'Prefix for bot-managed labels (e.g., "pr-reviewer: ")'
+    required: false
+  disabledRules:
+    description: 'Comma-separated list of rule codes to disable.'
+    required: false
+  dryRun:
+    description: 'Run without making any changes to the PR (zero write API calls). Defaults to true for first adoption.'
+    required: false
+  protectedGlobs:
+    description: 'Comma-separated list of glob patterns for protected paths.'
+    required: false
+  hugeDiffThresholdLines:
+    description: 'Number of changed lines before a diff is considered "huge".'
+    required: false
+  staleDays:
+    description: 'Number of days of inactivity before a PR is marked as stale.'
+    required: false
+  dcoEnabled:
+    description: 'Whether to enforce Developer Certificate of Origin.'
+    required: false
+  labelsEnabled:
+    description: 'Whether the bot should manage labels.'
+    required: false
+runs:
+  using: 'node20'
+  main: 'dist/action.js'
+branding:
+  icon: 'check-square'
+  color: 'green'

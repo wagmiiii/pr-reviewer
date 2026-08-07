@@ -1,9 +1,10 @@
 import fs from 'node:fs';
 import { Octokit } from 'octokit';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 import type { PullRequestContext, RepoConfig } from '../types.js';
 import { collectPullRequestCore } from '../collect/pr.js';
 import { runRules, CORE_RULES, deriveStatus } from '../rules/index.js';
+import * as core from '@actions/core';
 import { applyComment } from '../act/comment.js';
 import { applyLabels, deriveDesiredLabels } from '../act/labels.js';
 
@@ -15,6 +16,8 @@ const ALLOWED_CONFIG_KEYS = new Set([
   'hugeDiffThresholdLines',
   'staleDays',
   'dcoEnabled',
+  'labelsEnabled',
+  'labelMapping',
 ]);
 
 async function loadConfig(
@@ -52,6 +55,52 @@ async function loadConfig(
     throw error;
   }
   return {};
+}
+
+function overrideConfigWithInputs(config: RepoConfig): RepoConfig {
+  const overrides: any = {};
+
+  const labelPrefix = core.getInput('labelPrefix');
+  if (labelPrefix !== '') overrides.labelPrefix = labelPrefix;
+
+  const disabledRules = core.getInput('disabledRules');
+  if (disabledRules !== '') {
+    overrides.disabledRules = disabledRules
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+
+  const dryRun = core.getInput('dryRun');
+  if (dryRun !== '') overrides.dryRun = dryRun === 'true';
+
+  const protectedGlobs = core.getInput('protectedGlobs');
+  if (protectedGlobs !== '') {
+    overrides.protectedGlobs = protectedGlobs
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+
+  const hugeDiffThresholdLines = core.getInput('hugeDiffThresholdLines');
+  if (hugeDiffThresholdLines !== '') {
+    const parsed = parseInt(hugeDiffThresholdLines, 10);
+    if (!isNaN(parsed)) overrides.hugeDiffThresholdLines = parsed;
+  }
+
+  const staleDays = core.getInput('staleDays');
+  if (staleDays !== '') {
+    const parsed = parseInt(staleDays, 10);
+    if (!isNaN(parsed)) overrides.staleDays = parsed;
+  }
+
+  const dcoEnabled = core.getInput('dcoEnabled');
+  if (dcoEnabled !== '') overrides.dcoEnabled = dcoEnabled === 'true';
+
+  const labelsEnabled = core.getInput('labelsEnabled');
+  if (labelsEnabled !== '') overrides.labelsEnabled = labelsEnabled === 'true';
+
+  return { ...config, ...overrides };
 }
 
 async function processPullRequest(
@@ -143,7 +192,8 @@ export async function runCommand(): Promise<void> {
   }
   const eventPayload = JSON.parse(fs.readFileSync(eventPath, 'utf8'));
 
-  const config = await loadConfig(octokit, owner, repo);
+  let config = await loadConfig(octokit, owner, repo);
+  config = overrideConfigWithInputs(config);
 
   let dryRun = config.dryRun === true;
 
