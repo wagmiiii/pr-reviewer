@@ -178,6 +178,15 @@ export interface RepoConfig {
   readonly hugeDiffThresholdLines?: number;
   readonly staleDays?: number;
   readonly dcoEnabled?: boolean;
+  /**
+   * Whether the bot should manage labels.
+   * @default true
+   */
+  readonly labelsEnabled?: boolean;
+  /**
+   * Optional mapping of managed labels to custom names.
+   */
+  readonly labelMapping?: Record<string, string>;
 }
 
 /**
