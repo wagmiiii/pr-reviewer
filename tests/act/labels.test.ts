@@ -59,7 +59,13 @@ describe('labels action', () => {
     test('respects label mappings', () => {
       const desired = new Set(['needs-ci-fix', 'stale'] as const);
       const actual = ['ci-failing', 'stale-pr'];
-      const config = { labelMapping: { 'needs-ci-fix': 'ci-failing', 'stale': 'stale-pr', 'has-conflicts': 'conflicts' } };
+      const config = {
+        labelMapping: {
+          'needs-ci-fix': 'ci-failing',
+          stale: 'stale-pr',
+          'has-conflicts': 'conflicts',
+        },
+      };
 
       const { add, remove } = reconcileLabels(desired, actual, config);
 
@@ -71,7 +77,10 @@ describe('labels action', () => {
     test('combines prefix and mapping', () => {
       const desired = new Set(['needs-ci-fix'] as const);
       const actual = ['bot/stale-pr'];
-      const config = { labelPrefix: 'bot/', labelMapping: { 'needs-ci-fix': 'ci-failing', 'stale': 'stale-pr' } };
+      const config = {
+        labelPrefix: 'bot/',
+        labelMapping: { 'needs-ci-fix': 'ci-failing', stale: 'stale-pr' },
+      };
 
       const { add, remove } = reconcileLabels(desired, actual, config);
 
