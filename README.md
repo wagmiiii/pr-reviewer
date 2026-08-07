@@ -76,6 +76,37 @@ that.
 The other reason to want one tool rather than five: five bots post five comments per PR,
 which is the problem this project exists to solve. **The integration is the product.**
 
+## Setup as a GitHub Action
+
+Create `.github/workflows/pr-reviewer.yml` in your repository. The action requires `pull-requests: write` and `issues: write` to manage labels and comments. **It will never request `contents: write`.**
+
+```yaml
+name: PR Reviewer
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_run:
+    workflows: ["CI"] # Replace with your CI workflow name
+    types:
+      - completed
+  schedule:
+    - cron: '0 * * * *' # Every hour
+
+permissions:
+  pull-requests: write
+  issues: write
+  contents: read # Required to read the configuration file, but never write.
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: wagmiiii/pr-reviewer@v1
+        with:
+          dryRun: 'false' # Set to 'true' for a dry-run
+```
+
 ## Start here
 
 Two things, in order:
