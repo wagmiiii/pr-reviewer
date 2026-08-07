@@ -33,7 +33,12 @@ if (args[0] === 'recommend') {
     console.error(err);
     process.exit(1);
   });
+} else if (args[0] === 'run') {
+  cli.runCommand().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
 } else {
-  console.log('Usage: pr-reviewer recommend | scan <owner>/<repo>');
+  console.log('Usage: pr-reviewer recommend | scan <owner>/<repo> | run');
   process.exit(1);
 }
