@@ -14,3 +14,4 @@
  */
 
 export * from './labels.js';
+export * from './comment.js';
