@@ -190,5 +190,56 @@ describe('comment actuation', () => {
 
       expect(createComment).not.toHaveBeenCalled();
     });
+
+    test('truncates comment body if over 65536 chars', async () => {
+      const createComment = vi.fn();
+      const octokit: any = {
+        paginate: vi.fn().mockResolvedValue([]),
+        rest: { issues: { createComment } },
+      };
+
+      const hugeMarkdown = 'A'.repeat(70000);
+      await applyComment(
+        octokit,
+        'owner',
+        'repo',
+        1,
+        [],
+        'READY_FOR_REVIEW',
+        hugeMarkdown,
+      );
+
+      expect(createComment).toHaveBeenCalledTimes(1);
+      const body = createComment.mock.calls[0]![0]!.body;
+      expect(body.length).toBeLessThanOrEqual(65536);
+      expect(body.endsWith('\n... (truncated)')).toBe(true);
+      expect(body).toContain('<!-- pr-reviewer:v1');
+    });
+
+    test('deletes duplicate markers and keeps the oldest', async () => {
+      const updateComment = vi.fn();
+      const deleteComment = vi.fn();
+      const marker = createMarker({ hash: 'abc', editsToday: 1, date: '2026-08-05' });
+
+      const octokit: any = {
+        paginate: vi.fn().mockResolvedValue([
+          { id: 101, body: marker, created_at: '2026-08-05T10:00:00Z' }, // Older
+          { id: 102, body: 'Random text' },
+          { id: 103, body: marker, created_at: '2026-08-05T12:00:00Z' }, // Newer
+        ]),
+        rest: { issues: { updateComment, deleteComment } },
+      };
+
+      await applyComment(octokit, 'owner', 'repo', 1, [], 'READY_FOR_REVIEW', 'Hello');
+
+      expect(deleteComment).toHaveBeenCalledTimes(1);
+      expect(deleteComment).toHaveBeenCalledWith({
+        owner: 'owner',
+        repo: 'repo',
+        comment_id: 103,
+      });
+      expect(updateComment).toHaveBeenCalledTimes(1);
+      expect(updateComment.mock.calls[0]![0]!.comment_id).toEqual(101);
+    });
   });
 });
