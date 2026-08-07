@@ -1,14 +1,9 @@
 import { createHash } from 'crypto';
 import type { Octokit } from 'octokit';
-import type { RuleResult, TriageStatus, Comment } from '../types.js';
+import type { RuleResult, TriageStatus } from '../types.js';
+import { type MarkerState, readState, writeState } from './state.js';
 
 export const MARKER_PREFIX = '<!-- pr-reviewer:v1';
-
-export interface MarkerState {
-  hash: string;
-  date: string;
-  editsToday: number;
-}
 
 export function hashVerdict(
   results: readonly RuleResult[],
@@ -30,21 +25,8 @@ export function hashVerdict(
   return createHash('sha256').update(payload).digest('hex');
 }
 
-export function parseMarker(body: string): MarkerState | null {
-  const match = body.match(
-    /<!-- pr-reviewer:v1 hash:([a-f0-9]+) date:([^ ]+) edits:(\d+) -->/,
-  );
-  if (!match || !match[1] || !match[2] || !match[3]) return null;
-  return {
-    hash: match[1]!,
-    date: match[2]!,
-    editsToday: parseInt(match[3]!, 10),
-  };
-}
-
-export function createMarker(hash: string, editsToday: number): string {
-  const date = new Date().toISOString().split('T')[0];
-  return `<!-- pr-reviewer:v1 hash:${hash} date:${date} edits:${editsToday} -->`;
+export function createMarker(state: MarkerState): string {
+  return `<!-- pr-reviewer:v1 ${JSON.stringify(state)} -->`;
 }
 
 export async function applyComment(
@@ -56,6 +38,7 @@ export async function applyComment(
   status: TriageStatus,
   reportMarkdown: string,
   dailyEditCap: number = 10,
+  dryRun: boolean = false,
 ): Promise<void> {
   const hash = hashVerdict(results, status);
 
@@ -67,36 +50,43 @@ export async function applyComment(
   });
 
   const existing = comments.find((c: any) => c.body?.includes(MARKER_PREFIX));
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split('T')[0]!;
 
-  if (existing) {
-    const marker = parseMarker(existing.body || '');
-    if (marker && marker.hash === hash) {
-      // Identical hash to last run produces no write at all
-      return;
-    }
+  const marker = await readState(owner, repo, pullNumber, existing?.body);
 
-    let editsToday = marker?.date === today ? (marker?.editsToday || 0) + 1 : 1;
-
-    if (editsToday > dailyEditCap) {
-      console.warn(`Skipping comment edit: daily edit cap of ${dailyEditCap} reached.`);
-      return;
-    }
-
-    const newBody = `${createMarker(hash, editsToday)}\n${reportMarkdown}`;
-    await octokit.rest.issues.updateComment({
-      owner,
-      repo,
-      comment_id: existing.id,
-      body: newBody,
-    });
-  } else {
-    const newBody = `${createMarker(hash, 1)}\n${reportMarkdown}`;
-    await octokit.rest.issues.createComment({
-      owner,
-      repo,
-      issue_number: pullNumber,
-      body: newBody,
-    });
+  if (marker && marker.hash === hash) {
+    // Identical hash to last run produces no write at all
+    return;
   }
+
+  let editsToday = marker?.date === today ? (marker?.editsToday || 0) + 1 : 1;
+
+  if (editsToday > dailyEditCap) {
+    console.warn(`Skipping comment edit: daily edit cap of ${dailyEditCap} reached.`);
+    return;
+  }
+
+  const newState: MarkerState = { hash, date: today, editsToday };
+
+  if (!dryRun) {
+    const newBody = `${createMarker(newState)}\n${reportMarkdown}`;
+    if (existing) {
+      await octokit.rest.issues.updateComment({
+        owner,
+        repo,
+        comment_id: existing.id,
+        body: newBody,
+      });
+    } else {
+      await octokit.rest.issues.createComment({
+        owner,
+        repo,
+        issue_number: pullNumber,
+        body: newBody,
+      });
+    }
+  }
+
+  // Always write state cache, even in dry run (for subsequent runs to see the state)
+  await writeState(owner, repo, pullNumber, newState);
 }
