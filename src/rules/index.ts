@@ -64,6 +64,7 @@ import { firstTimeContributorRule, staleRule, noDcoRule } from './contributor.js
 import { newDependencyRule } from './dependencies.js';
 import { duplicatePrRule } from './duplicates.js';
 import { possibleSecretRule } from './security.js';
+import { duplicateFilesRule } from './duplicateFiles.js';
 
 export const CORE_RULES: readonly RuleDefinition[] = [
   ...ciRules,
@@ -79,6 +80,7 @@ export const CORE_RULES: readonly RuleDefinition[] = [
   newDependencyRule,
   duplicatePrRule,
   possibleSecretRule,
+  duplicateFilesRule,
 ];
 
 export * from './ci.js';
@@ -89,3 +91,4 @@ export * from './contributor.js';
 export * from './dependencies.js';
 export * from './duplicates.js';
 export * from './security.js';
+export * from './duplicateFiles.js';
