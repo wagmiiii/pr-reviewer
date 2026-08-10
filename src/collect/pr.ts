@@ -1,6 +1,7 @@
 import { Octokit } from 'octokit';
 import type { MergeableState, PullRequestContext } from '../types.js';
 import { parseLinkedIssues } from './issues.js';
+import { detectDuplicatePr } from './duplicates.js';
 
 const MERGEABLE_STATES: readonly MergeableState[] = [
   'clean',
@@ -88,5 +89,12 @@ export async function collectPullRequestCore(
       additions: file.additions,
       deletions: file.deletions,
     })),
+    duplicateOf: await detectDuplicatePr(
+      octokit,
+      owner,
+      repo,
+      pullNumber,
+      files.map((file: any) => file.filename),
+    ),
   };
 }

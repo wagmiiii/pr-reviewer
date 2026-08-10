@@ -262,6 +262,7 @@ export interface PullRequestContext {
   readonly linkedIssues?: readonly LinkedIssue[];
   readonly diff?: CappedDiff;
   readonly config?: RepoConfig;
+  readonly duplicateOf?: number;
 }
 
 /** Which of the three buckets a rule belongs to. See docs/00-concept.md. */
