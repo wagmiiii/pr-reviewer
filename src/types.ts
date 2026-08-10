@@ -187,6 +187,7 @@ export interface RepoConfig {
    * Optional mapping of managed labels to custom names.
    */
   readonly labelMapping?: Record<string, string>;
+  readonly testGlobs?: readonly string[];
 }
 
 /**

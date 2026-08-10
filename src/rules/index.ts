@@ -65,6 +65,7 @@ import { newDependencyRule } from './dependencies.js';
 import { duplicatePrRule } from './duplicates.js';
 import { possibleSecretRule } from './security.js';
 import { duplicateFilesRule } from './duplicateFiles.js';
+import { noTestChangedRule, testsRemovedRule } from './test-heuristics.js';
 
 export const CORE_RULES: readonly RuleDefinition[] = [
   ...ciRules,
@@ -81,6 +82,8 @@ export const CORE_RULES: readonly RuleDefinition[] = [
   duplicatePrRule,
   possibleSecretRule,
   duplicateFilesRule,
+  noTestChangedRule,
+  testsRemovedRule,
 ];
 
 export * from './ci.js';
@@ -92,3 +95,4 @@ export * from './dependencies.js';
 export * from './duplicates.js';
 export * from './security.js';
 export * from './duplicateFiles.js';
+export * from './test-heuristics.js';
