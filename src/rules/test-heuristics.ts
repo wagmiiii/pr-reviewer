@@ -13,6 +13,7 @@ export const noTestChangedRule = {
         owner: 'none',
         severity: 'info',
         explanation: 'No test globs configured',
+        confidence: 1,
       };
     }
 
@@ -24,6 +25,7 @@ export const noTestChangedRule = {
         owner: 'none',
         severity: 'info',
         explanation: 'No files to check',
+        confidence: 1,
       };
     }
 
@@ -39,6 +41,7 @@ export const noTestChangedRule = {
         owner: 'contributor',
         severity: 'warning',
         explanation: 'No files under configured test paths were modified.',
+        confidence: 1,
       };
     }
 
@@ -49,6 +52,7 @@ export const noTestChangedRule = {
       owner: 'none',
       severity: 'info',
       explanation: 'Test files were modified',
+      confidence: 1,
     };
   },
 };
@@ -63,6 +67,7 @@ export const testsRemovedRule = {
         owner: 'none',
         severity: 'info',
         explanation: 'Diff missing or truncated',
+        confidence: 1,
       };
     }
 
@@ -102,6 +107,7 @@ export const testsRemovedRule = {
             owner: 'contributor',
             severity: 'warning',
             explanation: 'Test cases appear to be removed.',
+            confidence: 1,
           };
         }
         if (line.startsWith('+') && !line.startsWith('+++') && skipRegex.test(line)) {
@@ -112,6 +118,7 @@ export const testsRemovedRule = {
             owner: 'contributor',
             severity: 'warning',
             explanation: 'Tests appear to be skipped.',
+            confidence: 1,
           };
         }
       }
@@ -124,6 +131,7 @@ export const testsRemovedRule = {
       owner: 'none',
       severity: 'info',
       explanation: 'No tests removed or skipped.',
+      confidence: 1,
     };
   },
 };
