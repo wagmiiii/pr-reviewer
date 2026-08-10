@@ -10,4 +10,5 @@
  */
 
 export { renderTerminalReport } from './terminal.js';
+export { renderDigest } from './digest.js';
 export type { EvaluatedPR } from './terminal.js';

@@ -18,7 +18,8 @@ const ALLOWED_CONFIG_KEYS = new Set([
   'dryRun',
   'protectedGlobs',
   'hugeDiffThresholdLines',
-  'staleDays',
+  'staleNudgeDays',
+  'staleWarnDays',
   'dcoEnabled',
 ]);
 
@@ -116,12 +117,39 @@ export async function scanCommand(options: ScanOptions): Promise<void> {
     };
 
     const results = runRules(context, CORE_RULES);
-    evaluated.push({ context, results });
+    
+    // Read state to get judgments
+    const { readState } = await import('../act/state.js');
+    let state = await readState(owner, repo, listPr.number);
+    if (!state) {
+      const comments = await octokit.paginate(octokit.rest.issues.listComments, {
+        owner,
+        repo,
+        issue_number: listPr.number,
+      });
+      const existing = comments.find((c: any) => c.body?.includes('<!-- pr-reviewer:v1'));
+      if (existing) state = await readState(owner, repo, listPr.number, existing.body);
+    }
+
+    evaluated.push({ 
+      context, 
+      results,
+      judgments: state?.judgments 
+    });
   }
 
   if (json) {
     console.log(JSON.stringify(evaluated, null, 2));
   } else {
-    console.log('\n' + renderTerminalReport(evaluated));
+    const report = renderTerminalReport(evaluated);
+    console.log('\n' + report);
+    
+    // If not json, this might be a real run. Wait, we want to post the digest.
+    // Let's only post the digest if dryRun is false (config).
+    const { renderDigest } = await import('../render/digest.js');
+    const { applyDigest } = await import('../act/digest.js');
+    
+    const digestMd = renderDigest(evaluated);
+    await applyDigest(octokit, owner, repo, digestMd, config.dryRun === true);
   }
 }

@@ -14,7 +14,8 @@ const ALLOWED_CONFIG_KEYS = new Set([
   'dryRun',
   'protectedGlobs',
   'hugeDiffThresholdLines',
-  'staleDays',
+  'staleNudgeDays',
+  'staleWarnDays',
   'dcoEnabled',
   'labelsEnabled',
   'labelMapping',
@@ -88,10 +89,16 @@ function overrideConfigWithInputs(config: RepoConfig): RepoConfig {
     if (!isNaN(parsed)) overrides.hugeDiffThresholdLines = parsed;
   }
 
-  const staleDays = core.getInput('staleDays');
-  if (staleDays !== '') {
-    const parsed = parseInt(staleDays, 10);
-    if (!isNaN(parsed)) overrides.staleDays = parsed;
+  const staleNudgeDays = core.getInput('staleNudgeDays');
+  if (staleNudgeDays !== '') {
+    const parsed = parseInt(staleNudgeDays, 10);
+    if (!isNaN(parsed)) overrides.staleNudgeDays = parsed;
+  }
+
+  const staleWarnDays = core.getInput('staleWarnDays');
+  if (staleWarnDays !== '') {
+    const parsed = parseInt(staleWarnDays, 10);
+    if (!isNaN(parsed)) overrides.staleWarnDays = parsed;
   }
 
   const dcoEnabled = core.getInput('dcoEnabled');
@@ -163,6 +170,33 @@ async function processPullRequest(
     console.log(`PR #${pullNumber} has 'no-bot' label, forcing dry-run for writes.`);
   }
 
+  let judgments = undefined;
+  if (status === 'READY_FOR_REVIEW') {
+    const { readState } = await import('../act/state.js');
+    let oldState = await readState(owner, repo, pullNumber);
+    if (!oldState) {
+      const comments = await octokit.paginate(octokit.rest.issues.listComments, {
+        owner,
+        repo,
+        issue_number: pullNumber,
+      });
+      const existing = comments.find((c: any) => c.body?.includes('<!-- pr-reviewer:v1'));
+      if (existing) oldState = await readState(owner, repo, pullNumber, existing.body);
+    }
+
+    if (oldState?.status !== 'READY_FOR_REVIEW') {
+      console.log(`PR #${pullNumber} transitioned to READY_FOR_REVIEW. Running judgements...`);
+      const { judgeIssueResolution, judgeReviewerEffort } = await import('../judge/index.js');
+      const judgeConfig = { shadow: true }; // PR-104 shadow mode
+      judgments = {
+        issueResolution: await judgeIssueResolution(context, judgeConfig),
+        effortEstimate: await judgeReviewerEffort(context, judgeConfig),
+      };
+    } else {
+      judgments = oldState.judgments;
+    }
+  }
+
   await applyLabels(
     octokit,
     owner,
@@ -182,6 +216,7 @@ async function processPullRequest(
     reportMarkdown,
     10,
     effectiveDryRun,
+    judgments,
   );
 }
 
