@@ -309,6 +309,9 @@
         "diff": {
           "$ref": "#/definitions/CappedDiff"
         },
+        "duplicateOf": {
+          "type": "number"
+        },
         "files": {
           "items": {
             "$ref": "#/definitions/ChangedFile"
