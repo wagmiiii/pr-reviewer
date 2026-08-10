@@ -359,6 +359,38 @@
         "number": {
           "type": "number"
         },
+        "otherOpenPrs": {
+          "description": "Other open PRs for cross-PR heuristics like DUPLICATE_FILES.",
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "author": {
+                "type": "string"
+              },
+              "files": {
+                "items": {
+                  "$ref": "#/definitions/ChangedFile"
+                },
+                "type": "array"
+              },
+              "linkedIssues": {
+                "items": {
+                  "$ref": "#/definitions/LinkedIssue"
+                },
+                "type": "array"
+              },
+              "number": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "number",
+              "author"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
         "reviews": {
           "items": {
             "$ref": "#/definitions/Review"

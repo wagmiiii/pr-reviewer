@@ -61,6 +61,7 @@ import { mergeConflictRule, behindBaseRule } from './mergeability.js';
 import { changesRequestedRule, draftRule } from './review.js';
 import { touchesProtectedRule, hugeDiffRule } from './path.js';
 import { firstTimeContributorRule, staleRule, noDcoRule } from './contributor.js';
+import { duplicateFilesRule } from './duplicateFiles.js';
 
 export const CORE_RULES: readonly RuleDefinition[] = [
   ...ciRules,
@@ -73,6 +74,7 @@ export const CORE_RULES: readonly RuleDefinition[] = [
   firstTimeContributorRule,
   staleRule,
   noDcoRule,
+  duplicateFilesRule,
 ];
 
 export * from './ci.js';
@@ -80,3 +82,4 @@ export * from './mergeability.js';
 export * from './review.js';
 export * from './path.js';
 export * from './contributor.js';
+export * from './duplicateFiles.js';
