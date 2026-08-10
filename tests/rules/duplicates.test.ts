@@ -28,13 +28,13 @@ describe('duplicatePrRule', () => {
   };
 
   test('passes when duplicateOf is undefined', () => {
-    const result = duplicatePrRule(baseContext);
+    const result = duplicatePrRule.run(baseContext);
     expect(result.outcome).toBe('pass');
     expect(result.code).toBe('POSSIBLE_DUPLICATE_PR');
   });
 
   test('fails and warns when duplicateOf is defined', () => {
-    const result = duplicatePrRule({ ...baseContext, duplicateOf: 456 });
+    const result = duplicatePrRule.run({ ...baseContext, duplicateOf: 456 });
     expect(result.outcome).toBe('fail');
     expect(result.code).toBe('POSSIBLE_DUPLICATE_PR');
     expect(result.severity).toBe('warning');

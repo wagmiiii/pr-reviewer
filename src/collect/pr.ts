@@ -50,6 +50,14 @@ export async function collectPullRequestCore(
 
   const pr = prResponse.data;
 
+  const duplicateOf = await detectDuplicatePr(
+    octokit,
+    owner,
+    repo,
+    pullNumber,
+    files.map((file: any) => file.filename),
+  );
+
   return {
     number: pr.number,
     title: pr.title,
@@ -89,12 +97,6 @@ export async function collectPullRequestCore(
       additions: file.additions,
       deletions: file.deletions,
     })),
-    duplicateOf: await detectDuplicatePr(
-      octokit,
-      owner,
-      repo,
-      pullNumber,
-      files.map((file: any) => file.filename),
-    ),
+    ...(duplicateOf !== undefined ? { duplicateOf } : {}),
   };
 }
