@@ -7,7 +7,8 @@ import { runRules, CORE_RULES, deriveStatus } from '../rules/index.js';
 import * as core from '@actions/core';
 import { applyComment } from '../act/comment.js';
 import { applyLabels, deriveDesiredLabels } from '../act/labels.js';
-import type { EvaluatedPR } from '../render/index.js';
+import { applyDigest } from '../act/digest.js';
+import { renderDigest, type EvaluatedPR } from '../render/index.js';
 
 /** One PR the sweep could not evaluate, and why. */
 export interface SweepFailure {
@@ -315,6 +316,11 @@ export async function runCommand(): Promise<void> {
     for (const failure of sweep.failures) {
       core.warning(`PR #${failure.number} was skipped by the sweep: ${failure.reason}`);
     }
+
+    // The digest is a whole-queue artefact, so it is only meaningful on the
+    // sweep. A partial sweep still publishes: a digest missing two PRs beats no
+    // digest, and the warnings above say which are absent.
+    await applyDigest(octokit, owner, repo, renderDigest(sweep.evaluated), dryRun);
   } else {
     console.log(`Unsupported event: ${eventName}. Doing nothing.`);
   }
