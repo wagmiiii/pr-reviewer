@@ -494,6 +494,12 @@
         },
         "staleDays": {
           "type": "number"
+        },
+        "testGlobs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"
