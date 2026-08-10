@@ -263,6 +263,14 @@ export interface PullRequestContext {
   readonly diff?: CappedDiff;
   readonly config?: RepoConfig;
   readonly duplicateOf?: number;
+
+  /** Other open PRs for cross-PR heuristics like DUPLICATE_FILES. */
+  readonly otherOpenPrs?: readonly {
+    readonly number: number;
+    readonly author: string;
+    readonly files?: readonly ChangedFile[];
+    readonly linkedIssues?: readonly LinkedIssue[];
+  }[];
 }
 
 /** Which of the three buckets a rule belongs to. See docs/00-concept.md. */
