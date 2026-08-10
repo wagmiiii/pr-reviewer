@@ -7,6 +7,23 @@ import { runRules, CORE_RULES, deriveStatus } from '../rules/index.js';
 import * as core from '@actions/core';
 import { applyComment } from '../act/comment.js';
 import { applyLabels, deriveDesiredLabels } from '../act/labels.js';
+import type { EvaluatedPR } from '../render/index.js';
+
+/** One PR the sweep could not evaluate, and why. */
+export interface SweepFailure {
+  readonly number: number;
+  readonly reason: string;
+}
+
+/** The outcome of evaluating the full open-PR queue. */
+export interface SweepResult {
+  /** PRs that were evaluated successfully. */
+  readonly evaluated: readonly EvaluatedPR[];
+  /** PRs that threw, with the reason. Never empty-checked by the caller for control flow. */
+  readonly failures: readonly SweepFailure[];
+  /** How many open PRs the sweep set out to process. */
+  readonly total: number;
+}
 
 const ALLOWED_CONFIG_KEYS = new Set([
   'labelPrefix',
@@ -110,7 +127,7 @@ async function processPullRequest(
   pullNumber: number,
   config: RepoConfig,
   dryRun: boolean,
-) {
+): Promise<EvaluatedPR> {
   const partial = await collectPullRequestCore(octokit, owner, repo, pullNumber);
 
   const context: PullRequestContext = {
@@ -183,6 +200,50 @@ async function processPullRequest(
     10,
     effectiveDryRun,
   );
+
+  return { context, results };
+}
+
+/**
+ * Evaluates every open PR in the repository and returns the whole queue's
+ * results, so a caller can reason about the queue as a unit rather than about
+ * one PR at a time.
+ *
+ * A sweep visits PRs the bot does not otherwise control, so a single bad one —
+ * a deleted fork head, a transient 5xx, one PR's rate-limit slice — must not
+ * cost the rest of the queue. Failures are collected and reported, never
+ * thrown: a sweep that aborts halfway leaves the queue in a partially-actuated
+ * state that is worse than either extreme.
+ */
+export async function sweepOpenPullRequests(
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  config: RepoConfig,
+  dryRun: boolean,
+): Promise<SweepResult> {
+  const openPrs = (await octokit.paginate(octokit.rest.pulls.list, {
+    owner,
+    repo,
+    state: 'open',
+  })) as Array<{ number: number }>;
+
+  const evaluated: EvaluatedPR[] = [];
+  const failures: SweepFailure[] = [];
+
+  for (const pr of openPrs) {
+    try {
+      evaluated.push(
+        await processPullRequest(octokit, owner, repo, pr.number, config, dryRun),
+      );
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : String(error);
+      failures.push({ number: pr.number, reason });
+      console.error(`Failed to process PR #${pr.number}: ${reason}`);
+    }
+  }
+
+  return { evaluated, failures, total: openPrs.length };
 }
 
 export async function runCommand(): Promise<void> {
@@ -241,14 +302,18 @@ export async function runCommand(): Promise<void> {
     // scheduled sweep resolves the full open-PR list
     console.log('Running in schedule event mode (write enabled)');
 
-    const prs = (await octokit.paginate(octokit.rest.pulls.list, {
-      owner,
-      repo,
-      state: 'open',
-    })) as any[];
+    const sweep = await sweepOpenPullRequests(octokit, owner, repo, config, dryRun);
 
-    for (const pr of prs) {
-      await processPullRequest(octokit, owner, repo, pr.number, config, dryRun);
+    console.log(
+      `Sweep complete: ${sweep.evaluated.length}/${sweep.total} open PRs evaluated` +
+        (sweep.failures.length > 0 ? `, ${sweep.failures.length} failed` : ''),
+    );
+
+    // A sweep that silently swallowed failures would look identical to a clean
+    // run in the Actions log. Surface them without failing the job — the PRs
+    // that did process were actuated correctly and that work should stand.
+    for (const failure of sweep.failures) {
+      core.warning(`PR #${failure.number} was skipped by the sweep: ${failure.reason}`);
     }
   } else {
     console.log(`Unsupported event: ${eventName}. Doing nothing.`);

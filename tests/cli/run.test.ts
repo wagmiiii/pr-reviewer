@@ -5,6 +5,7 @@ import * as prCollector from '../../src/collect/pr.js';
 import * as labelsAction from '../../src/act/labels.js';
 import * as commentAction from '../../src/act/comment.js';
 import { Octokit } from 'octokit';
+import * as core from '@actions/core';
 
 vi.mock('node:fs');
 vi.mock('octokit');
@@ -17,6 +18,13 @@ vi.mock('../../src/act/labels.js', async (importOriginal) => {
   };
 });
 vi.mock('../../src/act/comment.js');
+// Partial mock: `getInput` must keep its real behaviour (it reads INPUT_* env
+// vars, which are unset here and correctly yield ''), but `warning` needs to be
+// observable and ESM namespaces cannot be spied on.
+vi.mock('@actions/core', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@actions/core')>();
+  return { ...actual, warning: vi.fn() };
+});
 
 describe('runCommand', () => {
   const originalEnv = process.env;
@@ -197,5 +205,81 @@ describe('runCommand', () => {
       10,
       false, // dryRun = false
     );
+  });
+
+  test('schedule sweep continues past a PR that fails to collect', async () => {
+    process.env.GITHUB_EVENT_NAME = 'schedule';
+    vi.mocked(fs.readFileSync).mockReturnValue('{}');
+
+    const mockOctokit = {
+      rest: {
+        repos: { getContent: vi.fn().mockRejectedValue({ status: 404 }) },
+        pulls: { list: vi.fn() },
+      },
+      paginate: vi.fn().mockResolvedValue([{ number: 1 }, { number: 2 }, { number: 3 }]),
+    };
+    vi.mocked(Octokit).mockImplementation(() => mockOctokit as any);
+
+    // The middle PR blows up the way a deleted fork head does.
+    vi.mocked(prCollector.collectPullRequestCore).mockImplementation(
+      async (_octokit, _owner, _repo, pullNumber) => {
+        if (pullNumber === 2) throw new Error('Not Found');
+        return {
+          number: pullNumber,
+          author: 'contributor',
+          state: 'open',
+          isDraft: false,
+          createdAt: '2026-08-01',
+          updatedAt: '2026-08-01',
+          baseBranch: 'main',
+          headBranch: 'feature',
+          baseSha: 'abc',
+          headSha: 'def',
+          mergeableState: 'clean',
+          additions: 10,
+          deletions: 5,
+          changedFiles: 1,
+          files: [],
+          commits: [],
+          reviews: [],
+          checks: [],
+          baseChecks: [],
+        } as any;
+      },
+    );
+
+    await expect(runCommand()).resolves.toBeUndefined();
+
+    // All three attempted, and the two healthy ones were still actuated.
+    expect(prCollector.collectPullRequestCore).toHaveBeenCalledTimes(3);
+    expect(commentAction.applyComment).toHaveBeenCalledTimes(2);
+
+    const actuated = vi
+      .mocked(commentAction.applyComment)
+      .mock.calls.map((call) => call[3]);
+    expect(actuated).toEqual([1, 3]);
+  });
+
+  test('schedule sweep reports the failure rather than swallowing it', async () => {
+    process.env.GITHUB_EVENT_NAME = 'schedule';
+    vi.mocked(fs.readFileSync).mockReturnValue('{}');
+
+    const mockOctokit = {
+      rest: {
+        repos: { getContent: vi.fn().mockRejectedValue({ status: 404 }) },
+        pulls: { list: vi.fn() },
+      },
+      paginate: vi.fn().mockResolvedValue([{ number: 7 }]),
+    };
+    vi.mocked(Octokit).mockImplementation(() => mockOctokit as any);
+
+    vi.mocked(prCollector.collectPullRequestCore).mockRejectedValue(
+      new Error('Bad credentials'),
+    );
+
+    await runCommand();
+
+    expect(core.warning).toHaveBeenCalledWith(expect.stringContaining('#7'));
+    expect(core.warning).toHaveBeenCalledWith(expect.stringContaining('Bad credentials'));
   });
 });
