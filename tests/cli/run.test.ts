@@ -4,6 +4,7 @@ import { runCommand } from '../../src/cli/run.js';
 import * as prCollector from '../../src/collect/pr.js';
 import * as labelsAction from '../../src/act/labels.js';
 import * as commentAction from '../../src/act/comment.js';
+import * as digestAction from '../../src/act/digest.js';
 import { Octokit } from 'octokit';
 import * as core from '@actions/core';
 
@@ -18,6 +19,7 @@ vi.mock('../../src/act/labels.js', async (importOriginal) => {
   };
 });
 vi.mock('../../src/act/comment.js');
+vi.mock('../../src/act/digest.js');
 // Partial mock: `getInput` must keep its real behaviour (it reads INPUT_* env
 // vars, which are unset here and correctly yield ''), but `warning` needs to be
 // observable and ESM namespaces cannot be spied on.
@@ -281,5 +283,78 @@ describe('runCommand', () => {
 
     expect(core.warning).toHaveBeenCalledWith(expect.stringContaining('#7'));
     expect(core.warning).toHaveBeenCalledWith(expect.stringContaining('Bad credentials'));
+  });
+
+  test('schedule sweep publishes a digest of the whole queue', async () => {
+    process.env.GITHUB_EVENT_NAME = 'schedule';
+    vi.mocked(fs.readFileSync).mockReturnValue('{}');
+
+    const mockOctokit = {
+      rest: {
+        repos: { getContent: vi.fn().mockRejectedValue({ status: 404 }) },
+        pulls: { list: vi.fn() },
+      },
+      paginate: vi.fn().mockResolvedValue([{ number: 11 }]),
+    };
+    vi.mocked(Octokit).mockImplementation(() => mockOctokit as any);
+
+    await runCommand();
+
+    expect(digestAction.applyDigest).toHaveBeenCalledTimes(1);
+    const [, owner, repo, markdown, dryRun] = vi.mocked(digestAction.applyDigest).mock
+      .calls[0]!;
+    expect(owner).toBe('owner');
+    expect(repo).toBe('repo');
+    expect(markdown).toContain('# PR Reviewer digest');
+    expect(dryRun).toBe(false);
+  });
+
+  test('a partial sweep still publishes a digest of what it did evaluate', async () => {
+    process.env.GITHUB_EVENT_NAME = 'schedule';
+    vi.mocked(fs.readFileSync).mockReturnValue('{}');
+
+    const mockOctokit = {
+      rest: {
+        repos: { getContent: vi.fn().mockRejectedValue({ status: 404 }) },
+        pulls: { list: vi.fn() },
+      },
+      paginate: vi.fn().mockResolvedValue([{ number: 1 }, { number: 2 }]),
+    };
+    vi.mocked(Octokit).mockImplementation(() => mockOctokit as any);
+
+    vi.mocked(prCollector.collectPullRequestCore).mockImplementation(
+      async (_octokit, _owner, _repo, pullNumber) => {
+        if (pullNumber === 2) throw new Error('Not Found');
+        return {
+          number: pullNumber,
+          author: 'contributor',
+          state: 'open',
+          isDraft: false,
+          createdAt: '2026-08-01',
+          updatedAt: '2026-08-01',
+          baseBranch: 'main',
+          headBranch: 'feature',
+          baseSha: 'abc',
+          headSha: 'def',
+          mergeableState: 'clean',
+          additions: 10,
+          deletions: 5,
+          changedFiles: 1,
+          files: [],
+          commits: [],
+          reviews: [],
+          checks: [],
+          baseChecks: [],
+        } as any;
+      },
+    );
+
+    await runCommand();
+
+    // A digest missing one PR beats no digest; the warning says which is absent.
+    expect(digestAction.applyDigest).toHaveBeenCalledTimes(1);
+    const markdown = vi.mocked(digestAction.applyDigest).mock.calls[0]![3];
+    expect(markdown).toContain('**#1**');
+    expect(markdown).not.toContain('**#2**');
   });
 });
