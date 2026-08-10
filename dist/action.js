@@ -1,3 +1,4 @@
+import { __commonJS, __require, __toESM, __export } from './chunk-PR4QN5HX.js';
 import * as os2 from 'os';
 import os2__default, { EOL } from 'os';
 import * as http from 'http';
@@ -25,42 +26,6 @@ import zlib from 'zlib';
 import * as Stream from 'stream';
 import Stream__default, { Readable, Transform } from 'stream';
 import { createRequire } from 'module';
-
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
-  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
-}) : x)(function(x) {
-  if (typeof require !== "undefined") return require.apply(this, arguments);
-  throw Error('Dynamic require of "' + x + '" is not supported');
-});
-var __commonJS = (cb, mod) => function __require2() {
-  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
-};
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  __defProp(target, "default", { value: mod, enumerable: true }) ,
-  mod
-));
 
 // node_modules/tunnel/lib/tunnel.js
 var require_tunnel = __commonJS({
@@ -31105,8 +31070,8 @@ var DecodedURL = class extends URL {
 };
 
 // node_modules/@actions/http-client/lib/index.js
-var tunnel = __toESM(require_tunnel2());
-var import_undici = __toESM(require_undici());
+var tunnel = __toESM(require_tunnel2(), 1);
+var import_undici = __toESM(require_undici(), 1);
 var __awaiter = function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve2) {
@@ -32951,7 +32916,7 @@ function withDefaults(oldDefaults, newDefaults) {
 var endpoint = withDefaults(null, DEFAULTS);
 
 // node_modules/@octokit/request/dist-bundle/index.js
-var import_content_type = __toESM(require_dist());
+var import_content_type = __toESM(require_dist(), 1);
 
 // node_modules/json-with-bigint/json-with-bigint.js
 var intRegex = /^-?\d+$/;
@@ -36483,7 +36448,7 @@ function restEndpointMethods(octokit) {
 restEndpointMethods.VERSION = VERSION6;
 
 // node_modules/@octokit/plugin-retry/dist-bundle/index.js
-var import_light = __toESM(require_light());
+var import_light = __toESM(require_light(), 1);
 var VERSION7 = "0.0.0-development";
 function isRequestError(error2) {
   return error2.request !== void 0;
@@ -36557,7 +36522,7 @@ function retry(octokit, octokitOptions) {
 retry.VERSION = VERSION7;
 
 // node_modules/@octokit/plugin-throttling/dist-bundle/index.js
-var import_light2 = __toESM(require_light());
+var import_light2 = __toESM(require_light(), 1);
 var VERSION8 = "0.0.0-development";
 var noop3 = () => Promise.resolve();
 function wrapRequest2(state3, request2, options) {
@@ -40041,7 +40006,7 @@ function match(patterns, itemPath) {
 function partialMatch(patterns, itemPath) {
   return patterns.some((x) => !x.negate && x.partialMatch(itemPath));
 }
-var import_minimatch = __toESM(require_minimatch());
+var import_minimatch = __toESM(require_minimatch(), 1);
 var IS_WINDOWS5 = process.platform === "win32";
 var Path = class {
   /**
@@ -40542,7 +40507,7 @@ function create(patterns, options) {
 }
 
 // node_modules/@actions/cache/lib/internal/cacheUtils.js
-var semver = __toESM(require_semver2());
+var semver = __toESM(require_semver2(), 1);
 
 // node_modules/@actions/cache/lib/internal/constants.js
 var CacheFilename;
@@ -42237,8 +42202,8 @@ function tlsPolicy(tlsSettings) {
 }
 
 // node_modules/@typespec/ts-http-runtime/dist/esm/policies/proxyPolicy.js
-var import_https_proxy_agent = __toESM(require_dist3());
-var import_http_proxy_agent = __toESM(require_dist4());
+var import_https_proxy_agent = __toESM(require_dist3(), 1);
+var import_http_proxy_agent = __toESM(require_dist4(), 1);
 var HTTPS_PROXY = "HTTPS_PROXY";
 var HTTP_PROXY = "HTTP_PROXY";
 var ALL_PROXY = "ALL_PROXY";
@@ -42870,7 +42835,7 @@ var TracingContextImpl = class _TracingContextImpl {
 };
 
 // node_modules/@azure/core-tracing/dist/esm/state.js
-var import_state = __toESM(require_state());
+var import_state = __toESM(require_state(), 1);
 var state = import_state.state;
 
 // node_modules/@azure/core-tracing/dist/esm/instrumenter.js
@@ -44322,7 +44287,7 @@ var MapperTypeNames = {
 };
 
 // node_modules/@azure/core-client/dist/esm/state.js
-var import_state_cjs = __toESM(require_state_cjs());
+var import_state_cjs = __toESM(require_state_cjs(), 1);
 var state2 = import_state_cjs.state;
 
 // node_modules/@azure/core-client/dist/esm/operationHelpers.js
@@ -76091,7 +76056,7 @@ function getCacheServiceURL() {
 }
 
 // node_modules/@actions/cache/lib/internal/shared/user-agent.js
-var import_package_version = __toESM(require_package_version());
+var import_package_version = __toESM(require_package_version(), 1);
 function getUserAgentString2() {
   return `@actions/cache-${import_package_version.version}`;
 }
@@ -80232,7 +80197,7 @@ function saveCacheV2(paths_1, key_1, options_1) {
 }
 
 // src/act/state.ts
-var import_ajv = __toESM(require_ajv());
+var import_ajv = __toESM(require_ajv(), 1);
 var ajv = new import_ajv.Ajv();
 var stateSchema = {
   type: "object",
@@ -80307,10 +80272,26 @@ async function applyComment(octokit, owner, repo, pullNumber, results, status, r
     repo,
     issue_number: pullNumber
   });
-  const existing = comments.find((c) => c.body?.includes(MARKER_PREFIX));
+  const existingComments = comments.filter((c) => c.body?.includes(MARKER_PREFIX));
+  existingComments.sort((a, b) => {
+    const timeA = a.created_at ? new Date(a.created_at).getTime() : a.id;
+    const timeB = b.created_at ? new Date(b.created_at).getTime() : b.id;
+    return timeA - timeB;
+  });
+  const existing = existingComments.length > 0 ? existingComments[0] : void 0;
+  const duplicates = existingComments.slice(1);
+  if (!dryRun) {
+    for (const dup of duplicates) {
+      await octokit.rest.issues.deleteComment({
+        owner,
+        repo,
+        comment_id: dup.id
+      });
+    }
+  }
   const today = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
   const marker2 = await readState(owner, repo, pullNumber, existing?.body);
-  if (marker2 && marker2.hash === hash) {
+  if (marker2 && marker2.hash === hash && duplicates.length === 0) {
     return;
   }
   let editsToday = marker2?.date === today ? (marker2?.editsToday || 0) + 1 : 1;
@@ -80320,8 +80301,16 @@ async function applyComment(octokit, owner, repo, pullNumber, results, status, r
   }
   const newState = { hash, date: today, editsToday };
   if (!dryRun) {
-    const newBody = `${createMarker(newState)}
-${reportMarkdown}`;
+    const markerStr = createMarker(newState);
+    let finalMarkdown = reportMarkdown;
+    const MAX_LENGTH = 65536;
+    const ellipsis = "\n... (truncated)";
+    if (markerStr.length + 1 + finalMarkdown.length > MAX_LENGTH) {
+      const allowedLength = MAX_LENGTH - markerStr.length - 1 - ellipsis.length;
+      finalMarkdown = finalMarkdown.slice(0, Math.max(0, allowedLength)) + ellipsis;
+    }
+    const newBody = `${markerStr}
+${finalMarkdown}`;
     if (existing) {
       await octokit.rest.issues.updateComment({
         owner,
@@ -80560,7 +80549,8 @@ async function processPullRequest(octokit, owner, repo, pullNumber, config, dryR
   const status = deriveStatus(results);
   console.log(`Evaluated PR #${pullNumber}: ${status}`);
   const desiredLabels = deriveDesiredLabels(results, status);
-  const reportMarkdown = "<!-- TODO: Comment renderer not yet implemented -->";
+  const { renderComment } = await import('./render-PV3DMOL6.js');
+  const reportMarkdown = renderComment(context3, results, status);
   await applyLabels(octokit, owner, repo, pullNumber, desiredLabels, dryRun, config);
   await applyComment(
     octokit,
