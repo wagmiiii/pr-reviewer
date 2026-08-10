@@ -13,4 +13,5 @@
  * Not implemented here — PR-050 onwards.
  */
 
-export {};
+export * from './labels.js';
+export * from './comment.js';

@@ -309,6 +309,9 @@
         "diff": {
           "$ref": "#/definitions/CappedDiff"
         },
+        "duplicateOf": {
+          "type": "number"
+        },
         "files": {
           "items": {
             "$ref": "#/definitions/ChangedFile"
@@ -334,6 +337,12 @@
         },
         "isMerged": {
           "type": "boolean"
+        },
+        "labels": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "linkedIssues": {
           "items": {
@@ -423,13 +432,27 @@
           "type": "array"
         },
         "dryRun": {
+          "default": true,
+          "description": "Run without making any changes to the PR (zero write API calls). `dry_run: true` is the documented default for first adoption.",
           "type": "boolean"
         },
         "hugeDiffThresholdLines": {
           "type": "number"
         },
+        "labelMapping": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Optional mapping of managed labels to custom names.",
+          "type": "object"
+        },
         "labelPrefix": {
           "type": "string"
+        },
+        "labelsEnabled": {
+          "default": true,
+          "description": "Whether the bot should manage labels.",
+          "type": "boolean"
         },
         "protectedGlobs": {
           "items": {

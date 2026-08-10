@@ -168,11 +168,25 @@ export interface CappedDiff {
 export interface RepoConfig {
   readonly labelPrefix?: string;
   readonly disabledRules?: readonly string[];
+  /**
+   * Run without making any changes to the PR (zero write API calls).
+   * `dry_run: true` is the documented default for first adoption.
+   * @default true
+   */
   readonly dryRun?: boolean;
   readonly protectedGlobs?: readonly string[];
   readonly hugeDiffThresholdLines?: number;
   readonly staleDays?: number;
   readonly dcoEnabled?: boolean;
+  /**
+   * Whether the bot should manage labels.
+   * @default true
+   */
+  readonly labelsEnabled?: boolean;
+  /**
+   * Optional mapping of managed labels to custom names.
+   */
+  readonly labelMapping?: Record<string, string>;
 }
 
 /**
@@ -227,6 +241,7 @@ export interface PullRequestContext {
   readonly additions: number;
   readonly deletions: number;
   readonly changedFiles: number;
+  readonly labels?: readonly string[];
 
   readonly reviews?: readonly Review[];
   readonly commits?: readonly Commit[];
@@ -247,6 +262,7 @@ export interface PullRequestContext {
   readonly linkedIssues?: readonly LinkedIssue[];
   readonly diff?: CappedDiff;
   readonly config?: RepoConfig;
+  readonly duplicateOf?: number;
 }
 
 /** Which of the three buckets a rule belongs to. See docs/00-concept.md. */
@@ -267,16 +283,28 @@ export type RuleOwner = 'contributor' | 'maintainer' | 'none';
 export type RuleSeverity = 'blocking' | 'wait' | 'warning' | 'info';
 
 /** PR-030 owns the concrete rules; this is only the shape they must return. */
-export interface RuleResult {
+export interface BaseRuleResult {
   /** Stable identifier, e.g. `CI_FAILING`. Never renamed once shipped. */
   readonly code: string;
   readonly outcome: RuleOutcome;
-  readonly bucket: RuleBucket;
   readonly owner: RuleOwner;
-  readonly severity: RuleSeverity;
   /** Human explanation, contributor-facing. */
   readonly explanation: string;
 }
+
+export interface FactRuleResult extends BaseRuleResult {
+  readonly bucket: 'fact';
+  readonly severity: RuleSeverity;
+}
+
+export interface HeuristicRuleResult extends BaseRuleResult {
+  readonly bucket: 'heuristic';
+  readonly severity: 'warning' | 'info';
+  readonly confidence: number;
+  readonly thresholdTuned?: boolean;
+}
+
+export type RuleResult = FactRuleResult | HeuristicRuleResult;
 
 /** Derived from `fact` rules only. See docs/02-architecture.md § rules. */
 export type TriageStatus =

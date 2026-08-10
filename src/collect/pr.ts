@@ -1,6 +1,7 @@
 import { Octokit } from 'octokit';
 import type { MergeableState, PullRequestContext } from '../types.js';
 import { parseLinkedIssues } from './issues.js';
+import { detectDuplicatePr } from './duplicates.js';
 
 const MERGEABLE_STATES: readonly MergeableState[] = [
   'clean',
@@ -49,6 +50,14 @@ export async function collectPullRequestCore(
 
   const pr = prResponse.data;
 
+  const duplicateOf = await detectDuplicatePr(
+    octokit,
+    owner,
+    repo,
+    pullNumber,
+    files.map((file: any) => file.filename),
+  );
+
   return {
     number: pr.number,
     title: pr.title,
@@ -71,6 +80,7 @@ export async function collectPullRequestCore(
     additions: pr.additions,
     deletions: pr.deletions,
     changedFiles: pr.changed_files,
+    labels: pr.labels?.map((l: any) => l.name) || [],
     linkedIssues: parseLinkedIssues(pr.title, pr.body),
     reviews: reviews.map((review: any) => ({
       author: review.user?.login || '',
@@ -87,5 +97,6 @@ export async function collectPullRequestCore(
       additions: file.additions,
       deletions: file.deletions,
     })),
+    ...(duplicateOf !== undefined ? { duplicateOf } : {}),
   };
 }

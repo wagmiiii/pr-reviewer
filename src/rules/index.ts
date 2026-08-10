@@ -62,6 +62,7 @@ import { changesRequestedRule, draftRule } from './review.js';
 import { touchesProtectedRule, hugeDiffRule } from './path.js';
 import { firstTimeContributorRule, staleRule, noDcoRule } from './contributor.js';
 import { newDependencyRule } from './dependencies.js';
+import { duplicatePrRule } from './duplicates.js';
 
 export const CORE_RULES: readonly RuleDefinition[] = [
   ...ciRules,
@@ -75,6 +76,7 @@ export const CORE_RULES: readonly RuleDefinition[] = [
   staleRule,
   noDcoRule,
   newDependencyRule,
+  duplicatePrRule,
 ];
 
 export * from './ci.js';
@@ -83,3 +85,4 @@ export * from './review.js';
 export * from './path.js';
 export * from './contributor.js';
 export * from './dependencies.js';
+export * from './duplicates.js';

@@ -71,6 +71,7 @@ export const hugeDiffRule: RuleDefinition = {
         owner: 'contributor',
         severity: 'warning',
         explanation: `Pull request is exceptionally large (${totalLines} lines modified). Consider splitting it.`,
+        confidence: 0.8,
       };
     }
 
@@ -81,6 +82,7 @@ export const hugeDiffRule: RuleDefinition = {
       owner: 'none',
       severity: 'info',
       explanation: 'Diff size is acceptable.',
+      confidence: 0.8,
     };
   },
 };

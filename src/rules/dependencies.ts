@@ -28,6 +28,7 @@ export const newDependencyRule: RuleDefinition = {
         outcome: 'fail',
         owner: 'maintainer',
         severity: 'warning',
+        confidence: 100,
         explanation:
           'Dependency detection is currently unsupported for this ecosystem (npm only).',
       };
@@ -40,6 +41,7 @@ export const newDependencyRule: RuleDefinition = {
         outcome: 'skip',
         owner: 'none',
         severity: 'info',
+        confidence: 100,
         explanation: 'No dependency files modified.',
       };
     }
@@ -99,6 +101,7 @@ export const newDependencyRule: RuleDefinition = {
         outcome: 'fail',
         owner: 'maintainer',
         severity: 'warning',
+        confidence: 90,
         explanation: 'New npm dependency detected. Verify security and licensing.',
       };
     }
@@ -109,6 +112,7 @@ export const newDependencyRule: RuleDefinition = {
       outcome: 'skip',
       owner: 'none',
       severity: 'info',
+      confidence: 100,
       explanation: 'No new npm dependencies added.',
     };
   },
