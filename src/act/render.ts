@@ -6,10 +6,18 @@ export function renderComment(
   status: TriageStatus,
 ): string {
   // Sort results by severity/bucket/code for stability
-  const activeFailures = results.filter((r) => r.outcome === 'fail' || (r.outcome === 'pass' && false) /* we only want fails for the report */);
+  const activeFailures = results.filter(
+    (r) =>
+      r.outcome === 'fail' ||
+      (r.outcome === 'pass' && false) /* we only want fails for the report */,
+  );
 
-  const factFailures = activeFailures.filter((r) => r.bucket === 'fact' && r.outcome === 'fail');
-  const heuristicFailures = activeFailures.filter((r) => r.bucket === 'heuristic' && r.outcome === 'fail');
+  const factFailures = activeFailures.filter(
+    (r) => r.bucket === 'fact' && r.outcome === 'fail',
+  );
+  const heuristicFailures = activeFailures.filter(
+    (r) => r.bucket === 'heuristic' && r.outcome === 'fail',
+  );
 
   const lines: string[] = [];
 
@@ -37,20 +45,31 @@ export function renderComment(
     lines.push('#### 🛑 Blocking Issues');
     lines.push('');
     for (const failure of factFailures) {
-      const ownerLabel = failure.owner === 'maintainer' ? '*(Maintainer action required)*' : '*(Contributor action required)*';
+      const ownerLabel =
+        failure.owner === 'maintainer'
+          ? '*(Maintainer action required)*'
+          : '*(Contributor action required)*';
       lines.push(`- **${failure.code}**: ${failure.explanation} ${ownerLabel}`);
 
       // PR-072: CI failure formatting in the comment
       if (failure.code === 'CI_FAILING' || failure.code === 'CI_BROKEN_ON_BASE') {
-        const failingChecks = (context.checks || []).filter(c => ['failure', 'timed_out', 'cancelled', 'action_required', 'stale'].includes(c.conclusion!));
+        const failingChecks = (context.checks || []).filter((c) =>
+          ['failure', 'timed_out', 'cancelled', 'action_required', 'stale'].includes(
+            c.conclusion!,
+          ),
+        );
         for (const check of failingChecks) {
-          lines.push(`  - ❌ \`${check.name}\`${check.failureExcerpt ? `:\n    \`\`\`\n    ${check.failureExcerpt}\n    \`\`\`` : ''}`);
+          lines.push(
+            `  - ❌ \`${check.name}\`${check.failureExcerpt ? `:\n    \`\`\`\n    ${check.failureExcerpt}\n    \`\`\`` : ''}`,
+          );
         }
       }
 
       // PR-073: Branch-update instructions for conflicts
       if (failure.code === 'MERGE_CONFLICT') {
-        lines.push(`  - **How to fix**: Resolve conflicts by merging or rebasing against \`${context.baseBranch}\`.`);
+        lines.push(
+          `  - **How to fix**: Resolve conflicts by merging or rebasing against \`${context.baseBranch}\`.`,
+        );
         lines.push(`    \`\`\`sh`);
         lines.push(`    git fetch origin`);
         lines.push(`    git checkout ${context.headBranch}`);
@@ -60,7 +79,9 @@ export function renderComment(
         lines.push(`    \`\`\``);
       }
       if (failure.code === 'BEHIND_BASE') {
-        lines.push(`  - **How to fix**: Update your branch to include the latest changes from \`${context.baseBranch}\`.`);
+        lines.push(
+          `  - **How to fix**: Update your branch to include the latest changes from \`${context.baseBranch}\`.`,
+        );
       }
     }
     lines.push('');
