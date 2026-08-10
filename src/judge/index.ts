@@ -10,4 +10,24 @@
  * Not implemented here — Phase 3 tickets.
  */
 
-export {};
+import type { PullRequestContext } from '../types.js';
+import type { JudgmentResult, ReviewerEffortEstimate, JudgeConfig } from './types.js';
+
+export * from './types.js';
+
+export async function judgeIssueResolution(
+  context: PullRequestContext,
+  config: JudgeConfig,
+): Promise<JudgmentResult | null> {
+  // Stub implementation. PR-101 will provide the LLM provider.
+  // Validation: If evidence is empty, we must drop it (return null).
+  return null;
+}
+
+export async function judgeReviewerEffort(
+  context: PullRequestContext,
+  config: JudgeConfig,
+): Promise<ReviewerEffortEstimate | null> {
+  // Stub implementation.
+  return null;
+}

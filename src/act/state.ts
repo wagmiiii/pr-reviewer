@@ -2,10 +2,17 @@ import * as cache from '@actions/cache';
 import { Ajv } from 'ajv';
 import fs from 'node:fs';
 
+import type { JudgmentResult, ReviewerEffortEstimate } from '../judge/index.js';
+
 export interface MarkerState {
   hash: string;
   date: string;
   editsToday: number;
+  status?: string;
+  judgments?: {
+    issueResolution?: JudgmentResult | null;
+    effortEstimate?: ReviewerEffortEstimate | null;
+  };
 }
 
 const ajv = new Ajv();
@@ -15,9 +22,11 @@ const stateSchema = {
     hash: { type: 'string' },
     date: { type: 'string', pattern: '^\\d{4}-\\d{2}-\\d{2}$' },
     editsToday: { type: 'integer', minimum: 0 },
+    status: { type: 'string' },
+    judgments: { type: 'object' },
   },
   required: ['hash', 'date', 'editsToday'],
-  additionalProperties: false,
+  additionalProperties: true,
 };
 const validateState = ajv.compile(stateSchema);
 

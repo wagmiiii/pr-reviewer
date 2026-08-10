@@ -1,9 +1,14 @@
 import type { PullRequestContext, RuleResult } from '../types.js';
 import { deriveStatus } from '../rules/index.js';
+import type { JudgmentResult, ReviewerEffortEstimate } from '../judge/index.js';
 
 export interface EvaluatedPR {
   context: PullRequestContext;
   results: readonly RuleResult[];
+  judgments?: {
+    issueResolution?: JudgmentResult | null;
+    effortEstimate?: ReviewerEffortEstimate | null;
+  };
 }
 
 export function renderTerminalReport(prs: readonly EvaluatedPR[]): string {
