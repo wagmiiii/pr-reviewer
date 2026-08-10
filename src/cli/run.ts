@@ -152,7 +152,8 @@ async function processPullRequest(
   console.log(`Evaluated PR #${pullNumber}: ${status}`);
 
   const desiredLabels = deriveDesiredLabels(results, status);
-  const reportMarkdown = '<!-- TODO: Comment renderer not yet implemented -->';
+  const { renderComment } = await import('../act/render.js');
+  const reportMarkdown = renderComment(context, results, status);
 
   await applyLabels(octokit, owner, repo, pullNumber, desiredLabels, dryRun, config);
   await applyComment(
