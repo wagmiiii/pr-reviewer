@@ -45,6 +45,7 @@ export const behindBaseRule: RuleDefinition = {
         owner: 'contributor',
         severity: 'warning',
         explanation: 'The pull request is behind the base branch.',
+        confidence: 1,
       };
     }
     return {
@@ -54,6 +55,7 @@ export const behindBaseRule: RuleDefinition = {
       owner: 'none',
       severity: 'info',
       explanation: 'The pull request is not behind the base branch.',
+      confidence: 1,
     };
   },
 };

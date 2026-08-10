@@ -282,16 +282,28 @@ export type RuleOwner = 'contributor' | 'maintainer' | 'none';
 export type RuleSeverity = 'blocking' | 'wait' | 'warning' | 'info';
 
 /** PR-030 owns the concrete rules; this is only the shape they must return. */
-export interface RuleResult {
+export interface BaseRuleResult {
   /** Stable identifier, e.g. `CI_FAILING`. Never renamed once shipped. */
   readonly code: string;
   readonly outcome: RuleOutcome;
-  readonly bucket: RuleBucket;
   readonly owner: RuleOwner;
-  readonly severity: RuleSeverity;
   /** Human explanation, contributor-facing. */
   readonly explanation: string;
 }
+
+export interface FactRuleResult extends BaseRuleResult {
+  readonly bucket: 'fact';
+  readonly severity: RuleSeverity;
+}
+
+export interface HeuristicRuleResult extends BaseRuleResult {
+  readonly bucket: 'heuristic';
+  readonly severity: 'warning' | 'info';
+  readonly confidence: number;
+  readonly thresholdTuned?: boolean;
+}
+
+export type RuleResult = FactRuleResult | HeuristicRuleResult;
 
 /** Derived from `fact` rules only. See docs/02-architecture.md § rules. */
 export type TriageStatus =
