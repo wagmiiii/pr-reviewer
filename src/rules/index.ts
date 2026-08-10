@@ -61,6 +61,7 @@ import { mergeConflictRule, behindBaseRule } from './mergeability.js';
 import { changesRequestedRule, draftRule } from './review.js';
 import { touchesProtectedRule, hugeDiffRule } from './path.js';
 import { firstTimeContributorRule, staleRule, noDcoRule } from './contributor.js';
+import { newDependencyRule } from './dependencies.js';
 import { duplicatePrRule } from './duplicates.js';
 import { possibleSecretRule } from './security.js';
 
@@ -75,6 +76,7 @@ export const CORE_RULES: readonly RuleDefinition[] = [
   firstTimeContributorRule,
   staleRule,
   noDcoRule,
+  newDependencyRule,
   duplicatePrRule,
   possibleSecretRule,
 ];
@@ -84,5 +86,6 @@ export * from './mergeability.js';
 export * from './review.js';
 export * from './path.js';
 export * from './contributor.js';
+export * from './dependencies.js';
 export * from './duplicates.js';
 export * from './security.js';
