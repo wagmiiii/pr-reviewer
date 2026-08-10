@@ -137,6 +137,7 @@ async function processPullRequest(
     changedFiles: partial.changedFiles!,
     config,
     ...(partial.title !== undefined ? { title: partial.title } : {}),
+    ...(partial.labels !== undefined ? { labels: partial.labels } : {}),
     ...(partial.headRepo !== undefined ? { headRepo: partial.headRepo } : {}),
     ...(partial.linkedIssues !== undefined ? { linkedIssues: partial.linkedIssues } : {}),
     ...(partial.reviews !== undefined ? { reviews: partial.reviews } : {}),
@@ -155,7 +156,22 @@ async function processPullRequest(
   const { renderComment } = await import('../act/render.js');
   const reportMarkdown = renderComment(context, results, status);
 
-  await applyLabels(octokit, owner, repo, pullNumber, desiredLabels, dryRun, config);
+  const isNoBot = context.labels?.includes('no-bot') || false;
+  const effectiveDryRun = dryRun || isNoBot;
+
+  if (isNoBot) {
+    console.log(`PR #${pullNumber} has 'no-bot' label, forcing dry-run for writes.`);
+  }
+
+  await applyLabels(
+    octokit,
+    owner,
+    repo,
+    pullNumber,
+    desiredLabels,
+    effectiveDryRun,
+    config,
+  );
   await applyComment(
     octokit,
     owner,
@@ -165,7 +181,7 @@ async function processPullRequest(
     status,
     reportMarkdown,
     10,
-    dryRun,
+    effectiveDryRun,
   );
 }
 
