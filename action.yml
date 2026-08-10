@@ -21,7 +21,15 @@ inputs:
     description: 'Number of changed lines before a diff is considered "huge".'
     required: false
   staleDays:
-    description: 'Number of days of inactivity before a PR is marked as stale.'
+    description: 'Deprecated alias for staleNudgeAfterDays. Still honoured.'
+    required: false
+  staleNudgeAfterDays:
+    description: 'Days of author inactivity before the PR is nudged. Defaults to 14.'
+    required: false
+  staleWarnAfterDays:
+    description: >-
+      Days of author inactivity before the nudge escalates to a warning.
+      Defaults to 28. The bot never closes a PR.
     required: false
   dcoEnabled:
     description: 'Whether to enforce Developer Certificate of Origin.'

@@ -19,6 +19,8 @@ const ALLOWED_CONFIG_KEYS = new Set([
   'protectedGlobs',
   'hugeDiffThresholdLines',
   'staleDays',
+  'staleNudgeAfterDays',
+  'staleWarnAfterDays',
   'dcoEnabled',
 ]);
 

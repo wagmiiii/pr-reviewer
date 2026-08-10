@@ -36,6 +36,22 @@ comment:
   ci_log_lines: 20
 ```
 
+### `nudge_interval_days` was specified and is not implemented
+
+The Phase 2 draft carried `nudge_interval_days` alongside the noise-budget rule
+"no stale nudge more than once per configured interval". PR-093 dropped it, because
+the interval it was guarding is already structural rather than configurable.
+
+There is no separate nudge comment to rate-limit: `docs/03-review-pipeline.md` allows
+**one comment per PR, ever**, and every later change is an edit suppressed by the
+verdict hash. The hash covers the rule's code, outcome, bucket, owner, severity and
+stage — deliberately not its explanation, so the day count in "no activity in 15 days"
+rising to 16 does not re-edit anything. A stale PR therefore produces exactly two
+edits over its life: one entering `nudge`, one entering `warn`.
+
+A key that cannot change behaviour is still a compatibility promise, so it was not
+shipped. If separate nudge comments are ever introduced, it comes back with them.
+
 Every threshold above is a starting guess, not a researched default. Tune them against
 a real queue and record what you changed and why — that record is more valuable than
 the numbers.
@@ -50,7 +66,7 @@ digest:
 
 stale:
   nudge_after_days: 14
-  nudge_interval_days: 14
+  warn_after_days: 28
   # No close_after_days. The bot does not close PRs.
 
 # Required for the NO_TEST_CHANGED / TESTS_REMOVED rules — repo-specific, no

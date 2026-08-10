@@ -29,10 +29,29 @@ export const firstTimeContributorRule: RuleDefinition = {
   },
 };
 
+/** Defaults are untuned guesses, per `docs/05-configuration.md`. */
+const DEFAULT_NUDGE_AFTER_DAYS = 14;
+const DEFAULT_WARN_AFTER_DAYS = 28;
+
 export const staleRule: RuleDefinition = {
   code: 'STALE',
   run: (context) => {
-    const thresholdDays = context.config?.staleDays ?? 14;
+    // `staleDays` is the pre-lifecycle name for the nudge threshold. Honoured
+    // rather than dropped: unknown config keys are a hard error, so removing it
+    // would break every existing config on upgrade.
+    const nudgeAfterDays =
+      context.config?.staleNudgeAfterDays ??
+      context.config?.staleDays ??
+      DEFAULT_NUDGE_AFTER_DAYS;
+
+    // Floored at the nudge threshold so a warning can never fire before the PR
+    // is even considered stale. Setting warn at or below nudge collapses the
+    // nudge stage — staleness then goes straight to `warn` at the nudge
+    // threshold, which is the reasonable reading of "warn me earlier".
+    const warnAfterDays = Math.max(
+      context.config?.staleWarnAfterDays ?? DEFAULT_WARN_AFTER_DAYS,
+      nudgeAfterDays,
+    );
 
     let lastActivityStr = context.createdAt;
 
@@ -72,14 +91,38 @@ export const staleRule: RuleDefinition = {
     const collectedAt = new Date(context.collectedAt).getTime();
     const daysSince = (collectedAt - lastActivity) / (1000 * 60 * 60 * 24);
 
-    if (daysSince > thresholdDays) {
+    const days = Math.round(daysSince);
+
+    // Both stages stay `wait`. Escalating to `blocking` would flip the PR to
+    // BLOCKED_ON_CONTRIBUTOR, and a stale PR is waiting, not blocked — the
+    // author has nothing to fix. It would also be a step toward treating stale
+    // as a hard stop, and `docs/04-roadmap.md` rules out auto-closing outright.
+    if (daysSince > warnAfterDays) {
       return {
         code: 'STALE',
         outcome: 'fail',
         bucket: 'fact',
         owner: 'contributor',
         severity: 'wait',
-        explanation: `No activity from the author in ${Math.round(daysSince)} days.`,
+        stage: 'warn',
+        explanation:
+          `No activity from the author in ${days} days. This pull request will stay ` +
+          'open, but it is no longer being tracked as active. A comment saying it is ' +
+          'still wanted is enough to keep it alive.',
+      };
+    }
+
+    if (daysSince > nudgeAfterDays) {
+      return {
+        code: 'STALE',
+        outcome: 'fail',
+        bucket: 'fact',
+        owner: 'contributor',
+        severity: 'wait',
+        stage: 'nudge',
+        explanation:
+          `No activity from the author in ${days} days. Still working on this? ` +
+          'No action is needed if you are.',
       };
     }
 
