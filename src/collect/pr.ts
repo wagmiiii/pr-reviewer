@@ -71,6 +71,7 @@ export async function collectPullRequestCore(
     additions: pr.additions,
     deletions: pr.deletions,
     changedFiles: pr.changed_files,
+    labels: pr.labels?.map((l: any) => l.name) || [],
     linkedIssues: parseLinkedIssues(pr.title, pr.body),
     reviews: reviews.map((review: any) => ({
       author: review.user?.login || '',

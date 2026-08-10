@@ -241,6 +241,7 @@ export interface PullRequestContext {
   readonly additions: number;
   readonly deletions: number;
   readonly changedFiles: number;
+  readonly labels?: readonly string[];
 
   readonly reviews?: readonly Review[];
   readonly commits?: readonly Commit[];

@@ -335,6 +335,12 @@
         "isMerged": {
           "type": "boolean"
         },
+        "labels": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "linkedIssues": {
           "items": {
             "$ref": "#/definitions/LinkedIssue"
@@ -416,18 +422,6 @@
         "dcoEnabled": {
           "type": "boolean"
         },
-        "labelsEnabled": {
-          "type": "boolean",
-          "description": "Whether the bot should manage labels.",
-          "default": true
-        },
-        "labelMapping": {
-          "type": "object",
-          "description": "Optional mapping of managed labels to custom names.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "disabledRules": {
           "items": {
             "type": "string"
@@ -442,8 +436,20 @@
         "hugeDiffThresholdLines": {
           "type": "number"
         },
+        "labelMapping": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Optional mapping of managed labels to custom names.",
+          "type": "object"
+        },
         "labelPrefix": {
           "type": "string"
+        },
+        "labelsEnabled": {
+          "default": true,
+          "description": "Whether the bot should manage labels.",
+          "type": "boolean"
         },
         "protectedGlobs": {
           "items": {
