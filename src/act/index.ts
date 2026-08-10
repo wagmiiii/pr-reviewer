@@ -15,3 +15,5 @@
 
 export * from './labels.js';
 export * from './comment.js';
+export * from './digest.js';
+export * from './state.js';

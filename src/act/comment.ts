@@ -39,6 +39,7 @@ export async function applyComment(
   reportMarkdown: string,
   dailyEditCap: number = 10,
   dryRun: boolean = false,
+  judgments?: MarkerState['judgments'],
 ): Promise<void> {
   const hash = hashVerdict(results, status);
 
@@ -89,7 +90,13 @@ export async function applyComment(
     return;
   }
 
-  const newState: MarkerState = { hash, date: today, editsToday };
+  const newState: MarkerState = { 
+    hash, 
+    date: today, 
+    editsToday, 
+    status,
+    judgments: judgments ?? marker?.judgments 
+  };
 
   if (!dryRun) {
     const markerStr = createMarker(newState);

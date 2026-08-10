@@ -176,7 +176,8 @@ export interface RepoConfig {
   readonly dryRun?: boolean;
   readonly protectedGlobs?: readonly string[];
   readonly hugeDiffThresholdLines?: number;
-  readonly staleDays?: number;
+  readonly staleNudgeDays?: number;
+  readonly staleWarnDays?: number;
   readonly dcoEnabled?: boolean;
   /**
    * Whether the bot should manage labels.

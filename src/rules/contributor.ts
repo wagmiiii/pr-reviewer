@@ -32,7 +32,19 @@ export const firstTimeContributorRule: RuleDefinition = {
 export const staleRule: RuleDefinition = {
   code: 'STALE',
   run: (context) => {
-    const thresholdDays = context.config?.staleDays ?? 14;
+    const nudgeDays = context.config?.staleNudgeDays;
+    const warnDays = context.config?.staleWarnDays;
+
+    if (nudgeDays === undefined && warnDays === undefined) {
+      return {
+        code: 'STALE',
+        outcome: 'skip',
+        bucket: 'fact',
+        owner: 'none',
+        severity: 'info',
+        explanation: 'Stale tracking disabled.',
+      };
+    }
 
     let lastActivityStr = context.createdAt;
 
@@ -72,14 +84,25 @@ export const staleRule: RuleDefinition = {
     const collectedAt = new Date(context.collectedAt).getTime();
     const daysSince = (collectedAt - lastActivity) / (1000 * 60 * 60 * 24);
 
-    if (daysSince > thresholdDays) {
+    if (warnDays !== undefined && daysSince > warnDays) {
       return {
         code: 'STALE',
         outcome: 'fail',
         bucket: 'fact',
         owner: 'contributor',
         severity: 'wait',
-        explanation: `No activity from the author in ${Math.round(daysSince)} days.`,
+        explanation: `No activity from the author in ${Math.round(daysSince)} days (warning threshold passed).`,
+      };
+    }
+
+    if (nudgeDays !== undefined && daysSince > nudgeDays) {
+      return {
+        code: 'STALE',
+        outcome: 'fail',
+        bucket: 'fact',
+        owner: 'contributor',
+        severity: 'warning',
+        explanation: `No activity from the author in ${Math.round(daysSince)} days (nudge threshold passed).`,
       };
     }
 
