@@ -1,0 +1,25 @@
+name: PR Reviewer
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_run:
+    workflows: ['CI']
+    types:
+      - completed
+  schedule:
+    - cron: '0 * * * *' # Every hour
+
+permissions:
+  pull-requests: write
+  issues: write
+  contents: read
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # Need to checkout for dogfooding if using ./
+      - uses: wagmiiii/pr-reviewer@feat/sweep-performance-optimizations
+        with:
+          dryRun: 'false'

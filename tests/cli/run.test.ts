@@ -11,6 +11,7 @@ import * as core from '@actions/core';
 vi.mock('node:fs');
 vi.mock('octokit');
 vi.mock('../../src/collect/pr.js');
+vi.mock('../../src/collect/checks.js');
 vi.mock('../../src/act/labels.js', async (importOriginal) => {
   const actual = await importOriginal<typeof import('../../src/act/labels.js')>();
   return {

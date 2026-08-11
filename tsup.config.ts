@@ -13,7 +13,7 @@ export default defineConfig([
   },
   {
     entry: ['src/action.ts'],
-    format: ['esm'],
+    format: ['cjs'],
     target: 'node24',
     platform: 'node',
     dts: false,

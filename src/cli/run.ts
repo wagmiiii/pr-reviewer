@@ -1,8 +1,9 @@
 import fs from 'node:fs';
 import { Octokit } from 'octokit';
 import * as yaml from 'js-yaml';
-import type { PullRequestContext, RepoConfig } from '../types.js';
+import type { PullRequestContext, RepoConfig, CheckRun } from '../types.js';
 import { collectPullRequestCore } from '../collect/pr.js';
+import { collectCheckRuns, collectBaseCheckRuns } from '../collect/checks.js';
 import { runRules, CORE_RULES, deriveStatus } from '../rules/index.js';
 import * as core from '@actions/core';
 import { applyComment } from '../act/comment.js';
@@ -142,8 +143,20 @@ async function processPullRequest(
   pullNumber: number,
   config: RepoConfig,
   dryRun: boolean,
+  prefetchedBaseChecks?: CheckRun[],
 ): Promise<EvaluatedPR> {
   const partial = await collectPullRequestCore(octokit, owner, repo, pullNumber);
+
+  const checks = await collectCheckRuns(
+    octokit,
+    owner,
+    repo,
+    partial.headSha!,
+    partial.baseBranch!,
+  );
+  const baseChecks =
+    prefetchedBaseChecks ??
+    (await collectBaseCheckRuns(octokit, owner, repo, partial.baseSha!));
 
   const context: PullRequestContext = {
     schemaVersion: 1,
@@ -175,8 +188,8 @@ async function processPullRequest(
     ...(partial.reviews !== undefined ? { reviews: partial.reviews } : {}),
     ...(partial.commits !== undefined ? { commits: partial.commits } : {}),
     ...(partial.files !== undefined ? { files: partial.files } : {}),
-    ...(partial.checks !== undefined ? { checks: partial.checks } : {}),
-    ...(partial.baseChecks !== undefined ? { baseChecks: partial.baseChecks } : {}),
+    ...(checks !== undefined ? { checks } : {}),
+    ...(baseChecks !== undefined ? { baseChecks } : {}),
   };
 
   const results = runRules(context, CORE_RULES);
@@ -241,28 +254,64 @@ export async function sweepOpenPullRequests(
     owner,
     repo,
     state: 'open',
-  })) as Array<{ number: number }>;
+  })) as Array<any>;
 
   const evaluated: EvaluatedPR[] = [];
   const failures: SweepFailure[] = [];
 
+  // Pre-fetch base checks for unique base SHAs
+  const baseChecksMap = new Map<string, readonly CheckRun[] | undefined>();
   for (const pr of openPrs) {
-    try {
-      evaluated.push(
-        await processPullRequest(octokit, owner, repo, pr.number, config, dryRun),
-      );
-    } catch (error) {
-      const reason = error instanceof Error ? error.message : String(error);
-      failures.push({ number: pr.number, reason });
-      console.error(`Failed to process PR #${pr.number}: ${reason}`);
+    const baseSha = pr.base?.sha;
+    if (baseSha && !baseChecksMap.has(baseSha)) {
+      try {
+        const baseChecks = await collectBaseCheckRuns(octokit, owner, repo, baseSha);
+        baseChecksMap.set(baseSha, baseChecks);
+      } catch (err) {
+        console.error(`Failed to fetch base checks for ${baseSha}`, err);
+      }
     }
   }
+
+  // Process PRs concurrently, honoring secondary rate limits
+  const limit = 3;
+  const queue = [...openPrs];
+  const results: Promise<void>[] = [];
+
+  const worker = async () => {
+    while (queue.length > 0) {
+      const pr = queue.shift()!;
+      try {
+        const baseChecks = baseChecksMap.get(pr.base?.sha);
+        const evalPr = await processPullRequest(
+          octokit,
+          owner,
+          repo,
+          pr.number,
+          config,
+          dryRun,
+          baseChecks as CheckRun[] | undefined,
+        );
+        evaluated.push(evalPr);
+      } catch (error) {
+        const reason = error instanceof Error ? error.message : String(error);
+        failures.push({ number: pr.number, reason });
+        console.error(`Failed to process PR #${pr.number}: ${reason}`);
+      }
+    }
+  };
+
+  for (let i = 0; i < limit; i++) {
+    results.push(worker());
+  }
+
+  await Promise.all(results);
 
   return { evaluated, failures, total: openPrs.length };
 }
 
 export async function runCommand(): Promise<void> {
-  const token = process.env.GITHUB_TOKEN;
+  const token = core.getInput('github-token') || process.env.GITHUB_TOKEN;
   if (!token) {
     throw new Error('Missing GITHUB_TOKEN environment variable');
   }
