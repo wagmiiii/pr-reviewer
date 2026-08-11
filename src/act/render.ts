@@ -1,4 +1,5 @@
 import type { PullRequestContext, RuleResult, TriageStatus, CheckRun } from '../types.js';
+import { MAINTAINER_ONLY_CODES } from '../rules/index.js';
 
 export function renderComment(
   context: PullRequestContext,
@@ -8,8 +9,11 @@ export function renderComment(
   // Sort results by severity/bucket/code for stability
   const activeFailures = results.filter(
     (r) =>
-      r.outcome === 'fail' ||
-      (r.outcome === 'pass' && false) /* we only want fails for the report */,
+      (r.outcome === 'fail' ||
+        (r.outcome === 'pass' && false)) /* we only want fails for the report */ &&
+      // PR-085: maintainer-only findings never reach the contributor's PR.
+      // This comment is public; the digest is where these belong.
+      !MAINTAINER_ONLY_CODES.includes(r.code),
   );
 
   const factFailures = activeFailures.filter(

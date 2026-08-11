@@ -67,6 +67,18 @@ import { possibleSecretRule } from './security.js';
 import { duplicateFilesRule } from './duplicateFiles.js';
 import { noTestChangedRule, testsRemovedRule } from './test-heuristics.js';
 
+/**
+ * Rule codes that must never appear in the contributor-facing sticky comment.
+ *
+ * PR-085: a false positive published on a contributor's PR is worse than a
+ * miss. `POSSIBLE_SECRET` accuses someone of leaking a credential, so it goes
+ * to the maintainer-facing digest only.
+ *
+ * Enforced by `tests/act/maintainer-only.test.ts`, not by convention — the same
+ * treatment PR-003 gave "never check out contributor code".
+ */
+export const MAINTAINER_ONLY_CODES: readonly string[] = ['POSSIBLE_SECRET'];
+
 export const CORE_RULES: readonly RuleDefinition[] = [
   ...ciRules,
   mergeConflictRule,
