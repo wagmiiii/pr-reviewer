@@ -10319,7 +10319,13 @@ async function scanCommand(options) {
   const evaluated = [];
   for (const listPr of prs) {
     const partial = await collectPullRequestCore(octokit, owner, repo, listPr.number);
-    const checks = await collectCheckRuns(octokit, owner, repo, partial.headSha, partial.baseBranch);
+    const checks = await collectCheckRuns(
+      octokit,
+      owner,
+      repo,
+      partial.headSha,
+      partial.baseBranch
+    );
     const baseChecks = await collectBaseCheckRuns(octokit, owner, repo, partial.baseSha);
     const context = {
       schemaVersion: 1,
@@ -10445,7 +10451,13 @@ function overrideConfigWithInputs(config) {
 }
 async function processPullRequest(octokit, owner, repo, pullNumber, config, dryRun, prefetchedBaseChecks) {
   const partial = await collectPullRequestCore(octokit, owner, repo, pullNumber);
-  const checks = await collectCheckRuns(octokit, owner, repo, partial.headSha, partial.baseBranch);
+  const checks = await collectCheckRuns(
+    octokit,
+    owner,
+    repo,
+    partial.headSha,
+    partial.baseBranch
+  );
   const baseChecks = prefetchedBaseChecks ?? await collectBaseCheckRuns(octokit, owner, repo, partial.baseSha);
   const context = {
     schemaVersion: 1,
@@ -10541,7 +10553,15 @@ async function sweepOpenPullRequests(octokit, owner, repo, config, dryRun) {
       const pr = queue.shift();
       try {
         const baseChecks = baseChecksMap.get(pr.base?.sha);
-        const evalPr = await processPullRequest(octokit, owner, repo, pr.number, config, dryRun, baseChecks);
+        const evalPr = await processPullRequest(
+          octokit,
+          owner,
+          repo,
+          pr.number,
+          config,
+          dryRun,
+          baseChecks
+        );
         evaluated.push(evalPr);
       } catch (error) {
         const reason = error instanceof Error ? error.message : String(error);
@@ -10557,7 +10577,7 @@ async function sweepOpenPullRequests(octokit, owner, repo, config, dryRun) {
   return { evaluated, failures, total: openPrs.length };
 }
 async function runCommand() {
-  const token = process.env.GITHUB_TOKEN;
+  const token = core.getInput("github-token") || process.env.GITHUB_TOKEN;
   if (!token) {
     throw new Error("Missing GITHUB_TOKEN environment variable");
   }

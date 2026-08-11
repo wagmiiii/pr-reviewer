@@ -83413,7 +83413,7 @@ async function sweepOpenPullRequests(octokit, owner, repo, config, dryRun) {
   return { evaluated, failures, total: openPrs.length };
 }
 async function runCommand() {
-  const token = process.env.GITHUB_TOKEN;
+  const token = getInput("github-token") || process.env.GITHUB_TOKEN;
   if (!token) {
     throw new Error("Missing GITHUB_TOKEN environment variable");
   }

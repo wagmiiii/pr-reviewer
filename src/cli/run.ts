@@ -311,7 +311,7 @@ export async function sweepOpenPullRequests(
 }
 
 export async function runCommand(): Promise<void> {
-  const token = process.env.GITHUB_TOKEN;
+  const token = core.getInput('github-token') || process.env.GITHUB_TOKEN;
   if (!token) {
     throw new Error('Missing GITHUB_TOKEN environment variable');
   }
