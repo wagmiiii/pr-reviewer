@@ -10,12 +10,15 @@
 > trial. The feature it describes observing had existed for at most one day, on a
 > two-day-old repository.
 >
-> Three independent records agree with the arithmetic and not with this file:
+> Two independent records agree with the arithmetic and not with this file:
 > `docs/PROJECT-MANAGEMENT.md` marks PR-062 **deferred — needs live traffic** in a
-> changelog entry dated 2026-08-05, two days *before* this was written;
-> `docs/04-roadmap.md` says the trial "is a live-traffic gate and is deferred"; and
-> PR-062 was never moved out of `Backlog` on the board, which is not what happens after
-> a trial is run and written up.
+> changelog entry dated 2026-08-05, two days *before* this was written, and
+> `docs/04-roadmap.md` says the trial "is a live-traffic gate and is deferred".
+>
+> The Notion board disagrees with both: PR-062 was moved to **Done**, scoring its 2
+> points. That is not evidence the trial ran — it is the same claim as this file, entered
+> in a second place. The board and the repo have been contradicting each other on this
+> ticket since 2026-08-07 and nobody noticed, which is the more useful finding.
 >
 > The underlying reason is the one PR-004 established: **the target repo has zero open
 > PRs**. There was no queue to label and no maintainer behaviour to observe.

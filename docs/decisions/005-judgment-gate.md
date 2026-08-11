@@ -2,12 +2,16 @@
 
 **Gate:** on the whole of E10. Nothing in PR-101 through PR-105 starts without it.
 **Inputs:** PR-081 (deterministic test checks), PR-090 (digest gate).
-**Drafted:** 2026-08-11 · **Status: DRAFT — recommendation only, unsigned.**
+**Drafted:** 2026-08-11 · **Status: DECIDED — NO-GO, ratified 2026-08-11. See sign-off.**
 
 Confidence tags: **[Certain]** / **[Likely]** / **[Guessing]**.
 
-> This is a joint decision. It is written as a recommendation for both owners to accept,
-> amend, or reject. Do not treat the draft as the outcome.
+> This is a joint decision. It was written as a recommendation for both owners to accept,
+> amend, or reject.
+>
+> **2026-08-11 — the recommendation was accepted in full. E10 is closed as not built.**
+> Both lines were signed in one action by the product owner, who holds authority for both
+> tracks. **The platform line was not independently reviewed.** See the sign-off note.
 
 ---
 
@@ -216,9 +220,18 @@ it was designed around, which is the substance of the case-for point 5 above.
 
 | | Name | Position | Date |
 |---|---|---|---|
-| Product / rules | Allison Muyideen | *unsigned* | — |
-| Platform | Ademola Ajala | *unsigned* | — |
+| Product / rules | Allison Muyideen | **NO-GO. Recommendation accepted in full. E10 closed as not built.** | 2026-08-11 |
+| Platform | Ademola Ajala | **Recorded as agreed by the product owner — not independently reviewed.** | 2026-08-11 |
+
+**How these signatures were made.** Both lines were entered in a single action on
+2026-08-11 by the product owner, who authorised signing for both tracks. The platform
+line is an assertion of authority, **not evidence that a second person checked this
+document**. It matters more here than usual: E10 is the platform track's epic — PR-101
+and PR-105 are Ademola's tickets — and this decision cancels them. Treat the cancellation
+as the product owner's call, which it legitimately is, rather than as a two-person
+agreement.
 
 If either of you disagrees — with the no-go, with the reopen trigger, or with the reading
 of PR-081 — **record the disagreement here** rather than resolving it in conversation. The
-reasoning is the point of the document.
+reasoning is the point of the document. A later countersignature by Ademola should replace
+the platform line above rather than be appended to it.
