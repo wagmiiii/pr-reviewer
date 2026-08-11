@@ -2,6 +2,7 @@ import { Octokit } from 'octokit';
 import yaml from 'js-yaml';
 import type { PullRequestContext, RepoConfig } from '../types.js';
 import { collectPullRequestCore } from '../collect/pr.js';
+import { collectCheckRuns, collectBaseCheckRuns } from '../collect/checks.js';
 import { runRules, CORE_RULES } from '../rules/index.js';
 import { renderTerminalReport, type EvaluatedPR } from '../render/terminal.js';
 
@@ -81,6 +82,9 @@ export async function scanCommand(options: ScanOptions): Promise<void> {
   for (const listPr of prs) {
     const partial = await collectPullRequestCore(octokit, owner, repo, listPr.number);
 
+    const checks = await collectCheckRuns(octokit, owner, repo, partial.headSha!, partial.baseBranch!);
+    const baseChecks = await collectBaseCheckRuns(octokit, owner, repo, partial.baseSha!);
+
     // Convert to full PullRequestContext
     const context: PullRequestContext = {
       schemaVersion: 1,
@@ -113,8 +117,8 @@ export async function scanCommand(options: ScanOptions): Promise<void> {
       ...(partial.reviews !== undefined ? { reviews: partial.reviews } : {}),
       ...(partial.commits !== undefined ? { commits: partial.commits } : {}),
       ...(partial.files !== undefined ? { files: partial.files } : {}),
-      ...(partial.checks !== undefined ? { checks: partial.checks } : {}),
-      ...(partial.baseChecks !== undefined ? { baseChecks: partial.baseChecks } : {}),
+      ...(checks !== undefined ? { checks } : {}),
+      ...(baseChecks !== undefined ? { baseChecks } : {}),
     };
 
     const results = runRules(context, CORE_RULES);
