@@ -1,4 +1,4 @@
-name: 'PR Reviewer'
+name: 'Maintainer PR Triage Bot'
 description: 'A PR triage bot for maintainers drowning in contributor pull requests.'
 inputs:
   github-token:
