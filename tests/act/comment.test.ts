@@ -1,4 +1,5 @@
 import { describe, expect, test, vi, beforeEach } from 'vitest';
+import { createHash } from 'node:crypto';
 import { hashVerdict, createMarker, applyComment } from '../../src/act/comment.js';
 import * as state from '../../src/act/state.js';
 import type { RuleResult } from '../../src/types.js';
@@ -74,6 +75,59 @@ describe('comment actuation', () => {
       const hash2 = hashVerdict(results, 'READY_FOR_REVIEW');
 
       expect(hash1).not.toEqual(hash2);
+    });
+
+    test('a stage change is hashed, so an escalation reaches the comment', () => {
+      // STALE escalates nudge -> warn without changing severity, and the
+      // explanation is deliberately unhashed. Without stage in the hash the
+      // escalation would never trigger an edit.
+      const nudge: RuleResult[] = [
+        {
+          code: 'STALE',
+          outcome: 'fail',
+          bucket: 'fact',
+          owner: 'contributor',
+          severity: 'wait',
+          stage: 'nudge',
+          explanation: 'No activity from the author in 20 days.',
+        },
+      ];
+      const warn: RuleResult[] = [{ ...nudge[0]!, stage: 'warn' }];
+
+      expect(hashVerdict(nudge, 'WAITING')).not.toEqual(hashVerdict(warn, 'WAITING'));
+    });
+
+    test('a rule without a stage hashes exactly as it did before the field existed', () => {
+      // Adding `stage` to the hashed material must not invalidate the sticky
+      // comment on every open PR. JSON.stringify drops undefined values, so the
+      // payload for a stage-less rule is byte-identical to the pre-PR-093 one.
+      // Pinned against that payload rather than against the implementation.
+      const results: RuleResult[] = [
+        {
+          code: 'CI_FAILING',
+          outcome: 'fail',
+          bucket: 'fact',
+          owner: 'contributor',
+          severity: 'blocking',
+          explanation: 'anything',
+        },
+      ];
+
+      const legacyPayload = JSON.stringify({
+        status: 'BLOCKED_ON_CONTRIBUTOR',
+        material: [
+          {
+            code: 'CI_FAILING',
+            outcome: 'fail',
+            bucket: 'fact',
+            owner: 'contributor',
+            severity: 'blocking',
+          },
+        ],
+      });
+      const legacyHash = createHash('sha256').update(legacyPayload).digest('hex');
+
+      expect(hashVerdict(results, 'BLOCKED_ON_CONTRIBUTOR')).toEqual(legacyHash);
     });
   });
 

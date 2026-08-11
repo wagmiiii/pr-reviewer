@@ -493,6 +493,17 @@
           "type": "array"
         },
         "staleDays": {
+          "deprecated": "Superseded by `staleNudgeAfterDays`, which means the same\nthing. Still honoured so existing configs keep working — unknown keys are\na hard error, so removing it would break adopters on upgrade.",
+          "type": "number"
+        },
+        "staleNudgeAfterDays": {
+          "default": 14,
+          "description": "Days without author activity before the PR is nudged.",
+          "type": "number"
+        },
+        "staleWarnAfterDays": {
+          "default": 28,
+          "description": "Days without author activity before the nudge escalates to a warning. Clamped to at least the nudge threshold. The bot never closes a PR — see `docs/04-roadmap.md`; closing a contributor's work stays a human decision.",
           "type": "number"
         },
         "testGlobs": {

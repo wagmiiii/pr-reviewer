@@ -33,6 +33,8 @@ const ALLOWED_CONFIG_KEYS = new Set([
   'protectedGlobs',
   'hugeDiffThresholdLines',
   'staleDays',
+  'staleNudgeAfterDays',
+  'staleWarnAfterDays',
   'dcoEnabled',
   'labelsEnabled',
   'labelMapping',
@@ -110,6 +112,18 @@ function overrideConfigWithInputs(config: RepoConfig): RepoConfig {
   if (staleDays !== '') {
     const parsed = parseInt(staleDays, 10);
     if (!isNaN(parsed)) overrides.staleDays = parsed;
+  }
+
+  const staleNudgeAfterDays = core.getInput('staleNudgeAfterDays');
+  if (staleNudgeAfterDays !== '') {
+    const parsed = parseInt(staleNudgeAfterDays, 10);
+    if (!isNaN(parsed)) overrides.staleNudgeAfterDays = parsed;
+  }
+
+  const staleWarnAfterDays = core.getInput('staleWarnAfterDays');
+  if (staleWarnAfterDays !== '') {
+    const parsed = parseInt(staleWarnAfterDays, 10);
+    if (!isNaN(parsed)) overrides.staleWarnAfterDays = parsed;
   }
 
   const dcoEnabled = core.getInput('dcoEnabled');

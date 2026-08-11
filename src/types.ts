@@ -176,7 +176,24 @@ export interface RepoConfig {
   readonly dryRun?: boolean;
   readonly protectedGlobs?: readonly string[];
   readonly hugeDiffThresholdLines?: number;
+  /**
+   * @deprecated Superseded by `staleNudgeAfterDays`, which means the same
+   * thing. Still honoured so existing configs keep working — unknown keys are
+   * a hard error, so removing it would break adopters on upgrade.
+   */
   readonly staleDays?: number;
+  /**
+   * Days without author activity before the PR is nudged.
+   * @default 14
+   */
+  readonly staleNudgeAfterDays?: number;
+  /**
+   * Days without author activity before the nudge escalates to a warning.
+   * Clamped to at least the nudge threshold. The bot never closes a PR — see
+   * `docs/04-roadmap.md`; closing a contributor's work stays a human decision.
+   * @default 28
+   */
+  readonly staleWarnAfterDays?: number;
   readonly dcoEnabled?: boolean;
   /**
    * Whether the bot should manage labels.
@@ -299,6 +316,16 @@ export interface BaseRuleResult {
   readonly owner: RuleOwner;
   /** Human explanation, contributor-facing. */
   readonly explanation: string;
+  /**
+   * Optional sub-state within a stable code, for a rule that escalates without
+   * changing severity — `STALE` going from nudge to warn, for instance.
+   *
+   * It is part of the verdict hash, so an escalation reaches the sticky
+   * comment. The explanation deliberately is not hashed (otherwise a daily
+   * day-count would re-edit every stale PR every day), so without this a
+   * rule could escalate invisibly.
+   */
+  readonly stage?: string;
 }
 
 export interface FactRuleResult extends BaseRuleResult {

@@ -18,6 +18,10 @@ export function hashVerdict(
       bucket: r.bucket,
       owner: r.owner,
       severity: r.severity,
+      // `undefined` is dropped by JSON.stringify, so rules without a stage hash
+      // exactly as they did before this field existed. Only a rule that
+      // escalates in place — currently just STALE — changes its hash.
+      stage: r.stage,
     }))
     .sort((a, b) => a.code.localeCompare(b.code));
 
