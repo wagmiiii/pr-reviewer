@@ -1,31 +1,97 @@
-import { __commonJS, __require, __toESM, __export } from './chunk-PR4QN5HX.js';
-import * as os2 from 'os';
-import os2__default, { EOL } from 'os';
-import * as http from 'http';
-import http__default from 'http';
-import * as https2 from 'https';
-import https2__default from 'https';
-import * as fs2 from 'fs';
-import fs2__default, { promises, writeFileSync, existsSync } from 'fs';
-import * as events from 'events';
-import { EventEmitter } from 'events';
-import * as child from 'child_process';
-import * as path10 from 'path';
-import { dirname } from 'path';
-import assert, { ok } from 'assert';
-import { setTimeout as setTimeout$1 } from 'timers';
-import * as crypto2 from 'crypto';
-import { createHash, createHmac } from 'crypto';
-import * as buffer from 'buffer';
-import buffer__default, { Buffer as Buffer$1 } from 'buffer';
-import * as util from 'util';
-import util__default, { inspect } from 'util';
-import { fileURLToPath, URL as URL$1 } from 'url';
-import process5 from 'process';
-import zlib from 'zlib';
-import * as Stream from 'stream';
-import Stream__default, { Readable, Transform } from 'stream';
-import { createRequire } from 'module';
+'use strict';
+
+var os2 = require('os');
+var http = require('http');
+var https2 = require('https');
+var fs2 = require('fs');
+var events = require('events');
+var child = require('child_process');
+var path10 = require('path');
+var assert = require('assert');
+var timers = require('timers');
+var crypto2 = require('crypto');
+var buffer = require('buffer');
+var util = require('util');
+var url$1 = require('url');
+var process5 = require('process');
+var zlib = require('zlib');
+var Stream = require('stream');
+var module$1 = require('module');
+
+var _documentCurrentScript = typeof document !== 'undefined' ? document.currentScript : null;
+function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
+
+function _interopNamespace(e) {
+  if (e && e.__esModule) return e;
+  var n = Object.create(null);
+  if (e) {
+    Object.keys(e).forEach(function (k) {
+      if (k !== 'default') {
+        var d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: function () { return e[k]; }
+        });
+      }
+    });
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+
+var os2__namespace = /*#__PURE__*/_interopNamespace(os2);
+var http__namespace = /*#__PURE__*/_interopNamespace(http);
+var https2__namespace = /*#__PURE__*/_interopNamespace(https2);
+var fs2__namespace = /*#__PURE__*/_interopNamespace(fs2);
+var events__namespace = /*#__PURE__*/_interopNamespace(events);
+var child__namespace = /*#__PURE__*/_interopNamespace(child);
+var path10__namespace = /*#__PURE__*/_interopNamespace(path10);
+var assert__default = /*#__PURE__*/_interopDefault(assert);
+var crypto2__namespace = /*#__PURE__*/_interopNamespace(crypto2);
+var buffer__namespace = /*#__PURE__*/_interopNamespace(buffer);
+var util__namespace = /*#__PURE__*/_interopNamespace(util);
+var process5__default = /*#__PURE__*/_interopDefault(process5);
+var zlib__default = /*#__PURE__*/_interopDefault(zlib);
+var Stream__namespace = /*#__PURE__*/_interopNamespace(Stream);
+
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
+  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
+}) : x)(function(x) {
+  if (typeof require !== "undefined") return require.apply(this, arguments);
+  throw Error('Dynamic require of "' + x + '" is not supported');
+});
+var __esm = (fn, res) => function __init() {
+  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+};
+var __commonJS = (cb, mod) => function __require2() {
+  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  __defProp(target, "default", { value: mod, enumerable: true }) ,
+  mod
+));
 
 // node_modules/tunnel/lib/tunnel.js
 var require_tunnel = __commonJS({
@@ -30928,6 +30994,99 @@ var require_ajv = __commonJS({
   }
 });
 
+// src/act/render.ts
+var render_exports = {};
+__export(render_exports, {
+  renderComment: () => renderComment
+});
+function renderComment(context3, results, status) {
+  const activeFailures = results.filter(
+    (r) => r.outcome === "fail" || r.outcome === "pass" && false
+  );
+  const factFailures = activeFailures.filter(
+    (r) => r.bucket === "fact" && r.outcome === "fail"
+  );
+  const heuristicFailures = activeFailures.filter(
+    (r) => r.bucket === "heuristic" && r.outcome === "fail"
+  );
+  const lines = [];
+  let statusBadge = "";
+  switch (status) {
+    case "READY_FOR_REVIEW":
+      statusBadge = "\u{1F7E2} **Ready for Review**";
+      break;
+    case "BLOCKED_ON_CONTRIBUTOR":
+      statusBadge = "\u{1F534} **Blocked (Contributor)**";
+      break;
+    case "BLOCKED_ON_MAINTAINER":
+      statusBadge = "\u{1F534} **Blocked (Maintainer)**";
+      break;
+    case "WAITING":
+      statusBadge = "\u{1F7E1} **Waiting**";
+      break;
+  }
+  lines.push(`### PR Status: ${statusBadge}`);
+  lines.push("");
+  if (factFailures.length > 0) {
+    lines.push("#### \u{1F6D1} Blocking Issues");
+    lines.push("");
+    for (const failure of factFailures) {
+      const ownerLabel = failure.owner === "maintainer" ? "*(Maintainer action required)*" : "*(Contributor action required)*";
+      lines.push(`- **${failure.code}**: ${failure.explanation} ${ownerLabel}`);
+      if (failure.code === "CI_FAILING" || failure.code === "CI_BROKEN_ON_BASE") {
+        const failingChecks = (context3.checks || []).filter(
+          (c) => ["failure", "timed_out", "cancelled", "action_required", "stale"].includes(
+            c.conclusion
+          )
+        );
+        for (const check of failingChecks) {
+          lines.push(
+            `  - \u274C \`${check.name}\`${check.failureExcerpt ? `:
+    \`\`\`
+    ${check.failureExcerpt}
+    \`\`\`` : ""}`
+          );
+        }
+      }
+      if (failure.code === "MERGE_CONFLICT") {
+        lines.push(
+          `  - **How to fix**: Resolve conflicts by merging or rebasing against \`${context3.baseBranch}\`.`
+        );
+        lines.push(`    \`\`\`sh`);
+        lines.push(`    git fetch origin`);
+        lines.push(`    git checkout ${context3.headBranch}`);
+        lines.push(`    git merge origin/${context3.baseBranch}`);
+        lines.push(`    # resolve conflicts, then:`);
+        lines.push(`    git push`);
+        lines.push(`    \`\`\``);
+      }
+      if (failure.code === "BEHIND_BASE") {
+        lines.push(
+          `  - **How to fix**: Update your branch to include the latest changes from \`${context3.baseBranch}\`.`
+        );
+      }
+    }
+    lines.push("");
+  }
+  if (heuristicFailures.length > 0) {
+    lines.push("#### \u26A0\uFE0F Warnings & Notes");
+    lines.push("");
+    for (const failure of heuristicFailures) {
+      lines.push(`- **${failure.code}**: ${failure.explanation}`);
+    }
+    lines.push("");
+  }
+  if (factFailures.length === 0 && heuristicFailures.length === 0) {
+    lines.push("No mechanical issues found.");
+    lines.push("");
+  }
+  return lines.join("\n").trim();
+}
+var init_render = __esm({
+  "src/act/render.ts"() {
+  }
+});
+
 // node_modules/@actions/core/lib/utils.js
 function toCommandValue(input) {
   if (input === null || input === void 0) {
@@ -30954,7 +31113,7 @@ function toCommandProperties(annotationProperties) {
 // node_modules/@actions/core/lib/command.js
 function issueCommand(command, properties, message) {
   const cmd = new Command(command, properties, message);
-  process.stdout.write(cmd.toString() + os2.EOL);
+  process.stdout.write(cmd.toString() + os2__namespace.EOL);
 }
 var CMD_STRING = "::";
 var Command = class {
@@ -31070,8 +31229,8 @@ var DecodedURL = class extends URL {
 };
 
 // node_modules/@actions/http-client/lib/index.js
-var tunnel = __toESM(require_tunnel2(), 1);
-var import_undici = __toESM(require_undici(), 1);
+var tunnel = __toESM(require_tunnel2());
+var import_undici = __toESM(require_undici());
 var __awaiter = function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve2) {
@@ -31474,7 +31633,7 @@ var HttpClient = class {
     const info2 = {};
     info2.parsedUrl = requestUrl;
     const usingSsl = info2.parsedUrl.protocol === "https:";
-    info2.httpModule = usingSsl ? https2 : http;
+    info2.httpModule = usingSsl ? https2__namespace : http__namespace;
     const defaultPort = usingSsl ? 443 : 80;
     info2.options = {};
     info2.options.host = info2.parsedUrl.hostname;
@@ -31575,7 +31734,7 @@ var HttpClient = class {
     const usingSsl = parsedUrl.protocol === "https:";
     let maxSockets = 100;
     if (this.requestOptions) {
-      maxSockets = this.requestOptions.maxSockets || http.globalAgent.maxSockets;
+      maxSockets = this.requestOptions.maxSockets || http__namespace.globalAgent.maxSockets;
     }
     if (proxyUrl && proxyUrl.hostname) {
       const agentOptions = {
@@ -31597,7 +31756,7 @@ var HttpClient = class {
     }
     if (!agent) {
       const options = { keepAlive: this._keepAlive, maxSockets };
-      agent = usingSsl ? new https2.Agent(options) : new http.Agent(options);
+      agent = usingSsl ? new https2__namespace.Agent(options) : new http__namespace.Agent(options);
       this._agent = agent;
     }
     if (usingSsl && this._ignoreSslError) {
@@ -31750,7 +31909,7 @@ var BearerCredentialHandler = class {
     });
   }
 };
-var { access, appendFile, writeFile } = promises;
+var { access, appendFile, writeFile } = fs2.promises;
 var __awaiter4 = function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve2) {
@@ -31778,9 +31937,9 @@ var __awaiter4 = function(thisArg, _arguments, P, generator) {
     step((generator = generator.apply(thisArg, [])).next());
   });
 };
-var { chmod, copyFile, lstat, mkdir, open, readdir, rename, rm, rmdir, stat, symlink, unlink } = fs2.promises;
+var { chmod, copyFile, lstat, mkdir, open, readdir, rename, rm, rmdir, stat, symlink, unlink } = fs2__namespace.promises;
 var IS_WINDOWS = process.platform === "win32";
-fs2.constants.O_RDONLY;
+fs2__namespace.constants.O_RDONLY;
 function exists(fsPath) {
   return __awaiter4(this, void 0, void 0, function* () {
     try {
@@ -31816,7 +31975,7 @@ function tryGetExecutablePath(filePath, extensions) {
     }
     if (stats && stats.isFile()) {
       if (IS_WINDOWS) {
-        const upperExt = path10.extname(filePath).toUpperCase();
+        const upperExt = path10__namespace.extname(filePath).toUpperCase();
         if (extensions.some((validExt) => validExt.toUpperCase() === upperExt)) {
           return filePath;
         }
@@ -31840,11 +31999,11 @@ function tryGetExecutablePath(filePath, extensions) {
       if (stats && stats.isFile()) {
         if (IS_WINDOWS) {
           try {
-            const directory = path10.dirname(filePath);
-            const upperName = path10.basename(filePath).toUpperCase();
+            const directory = path10__namespace.dirname(filePath);
+            const upperName = path10__namespace.basename(filePath).toUpperCase();
             for (const actualName of yield readdir(directory)) {
               if (upperName === actualName.toUpperCase()) {
-                filePath = path10.join(directory, actualName);
+                filePath = path10__namespace.join(directory, actualName);
                 break;
               }
             }
@@ -31904,7 +32063,7 @@ var __awaiter5 = function(thisArg, _arguments, P, generator) {
 };
 function mkdirP(fsPath) {
   return __awaiter5(this, void 0, void 0, function* () {
-    ok(fsPath, "a path argument must be provided");
+    assert.ok(fsPath, "a path argument must be provided");
     yield mkdir(fsPath, { recursive: true });
   });
 }
@@ -31938,7 +32097,7 @@ function findInPath(tool) {
     }
     const extensions = [];
     if (IS_WINDOWS && process.env["PATHEXT"]) {
-      for (const extension of process.env["PATHEXT"].split(path10.delimiter)) {
+      for (const extension of process.env["PATHEXT"].split(path10__namespace.delimiter)) {
         if (extension) {
           extensions.push(extension);
         }
@@ -31951,12 +32110,12 @@ function findInPath(tool) {
       }
       return [];
     }
-    if (tool.includes(path10.sep)) {
+    if (tool.includes(path10__namespace.sep)) {
       return [];
     }
     const directories = [];
     if (process.env.PATH) {
-      for (const p of process.env.PATH.split(path10.delimiter)) {
+      for (const p of process.env.PATH.split(path10__namespace.delimiter)) {
         if (p) {
           directories.push(p);
         }
@@ -31964,7 +32123,7 @@ function findInPath(tool) {
     }
     const matches = [];
     for (const directory of directories) {
-      const filePath = yield tryGetExecutablePath(path10.join(directory, tool), extensions);
+      const filePath = yield tryGetExecutablePath(path10__namespace.join(directory, tool), extensions);
       if (filePath) {
         matches.push(filePath);
       }
@@ -32000,7 +32159,7 @@ var __awaiter6 = function(thisArg, _arguments, P, generator) {
   });
 };
 var IS_WINDOWS2 = process.platform === "win32";
-var ToolRunner = class extends events.EventEmitter {
+var ToolRunner = class extends events__namespace.EventEmitter {
   constructor(toolPath, args, options) {
     super();
     if (!toolPath) {
@@ -32047,12 +32206,12 @@ var ToolRunner = class extends events.EventEmitter {
   _processLineBuffer(data, strBuffer, onLine) {
     try {
       let s = strBuffer + data.toString();
-      let n = s.indexOf(os2.EOL);
+      let n = s.indexOf(os2__namespace.EOL);
       while (n > -1) {
         const line = s.substring(0, n);
         onLine(line);
-        s = s.substring(n + os2.EOL.length);
-        n = s.indexOf(os2.EOL);
+        s = s.substring(n + os2__namespace.EOL.length);
+        n = s.indexOf(os2__namespace.EOL);
       }
       return s;
     } catch (err) {
@@ -32210,7 +32369,7 @@ var ToolRunner = class extends events.EventEmitter {
   exec() {
     return __awaiter6(this, void 0, void 0, function* () {
       if (!isRooted(this.toolPath) && (this.toolPath.includes("/") || IS_WINDOWS2 && this.toolPath.includes("\\"))) {
-        this.toolPath = path10.resolve(process.cwd(), this.options.cwd || process.cwd(), this.toolPath);
+        this.toolPath = path10__namespace.resolve(process.cwd(), this.options.cwd || process.cwd(), this.toolPath);
       }
       this.toolPath = yield which(this.toolPath, true);
       return new Promise((resolve2, reject) => __awaiter6(this, void 0, void 0, function* () {
@@ -32221,7 +32380,7 @@ var ToolRunner = class extends events.EventEmitter {
         }
         const optionsNonNull = this._cloneExecOptions(this.options);
         if (!optionsNonNull.silent && optionsNonNull.outStream) {
-          optionsNonNull.outStream.write(this._getCommandString(optionsNonNull) + os2.EOL);
+          optionsNonNull.outStream.write(this._getCommandString(optionsNonNull) + os2__namespace.EOL);
         }
         const state3 = new ExecState(optionsNonNull, this.toolPath);
         state3.on("debug", (message) => {
@@ -32231,7 +32390,7 @@ var ToolRunner = class extends events.EventEmitter {
           return reject(new Error(`The cwd: ${this.options.cwd} does not exist!`));
         }
         const fileName = this._getSpawnFileName();
-        const cp = child.spawn(fileName, this._getSpawnArgs(optionsNonNull), this._getSpawnOptions(this.options, fileName));
+        const cp = child__namespace.spawn(fileName, this._getSpawnArgs(optionsNonNull), this._getSpawnOptions(this.options, fileName));
         let stdbuffer = "";
         if (cp.stdout) {
           cp.stdout.on("data", (data) => {
@@ -32353,7 +32512,7 @@ function argStringToArray(argString) {
   }
   return args;
 }
-var ExecState = class _ExecState extends events.EventEmitter {
+var ExecState = class _ExecState extends events__namespace.EventEmitter {
   constructor(options, toolPath) {
     super();
     this.processClosed = false;
@@ -32380,7 +32539,7 @@ var ExecState = class _ExecState extends events.EventEmitter {
     if (this.processClosed) {
       this._setResult();
     } else if (this.processExited) {
-      this.timeout = setTimeout$1(_ExecState.HandleTimeout, this.delay, this);
+      this.timeout = timers.setTimeout(_ExecState.HandleTimeout, this.delay, this);
     }
   }
   _debug(message) {
@@ -32458,8 +32617,8 @@ function exec(commandLine, args, options) {
 }
 
 // node_modules/@actions/core/lib/platform.js
-os2__default.platform();
-os2__default.arch();
+os2__namespace.default.platform();
+os2__namespace.default.arch();
 
 // node_modules/@actions/core/lib/core.js
 var ExitCode;
@@ -32491,7 +32650,7 @@ function warning(message, properties = {}) {
   issueCommand("warning", toCommandProperties(properties), message instanceof Error ? message.toString() : message);
 }
 function info(message) {
-  process.stdout.write(message + os2.EOL);
+  process.stdout.write(message + os2__namespace.EOL);
 }
 
 // node_modules/universal-user-agent/index.js
@@ -32916,7 +33075,7 @@ function withDefaults(oldDefaults, newDefaults) {
 var endpoint = withDefaults(null, DEFAULTS);
 
 // node_modules/@octokit/request/dist-bundle/index.js
-var import_content_type = __toESM(require_dist(), 1);
+var import_content_type = __toESM(require_dist());
 
 // node_modules/json-with-bigint/json-with-bigint.js
 var intRegex = /^-?\d+$/;
@@ -36448,7 +36607,7 @@ function restEndpointMethods(octokit) {
 restEndpointMethods.VERSION = VERSION6;
 
 // node_modules/@octokit/plugin-retry/dist-bundle/index.js
-var import_light = __toESM(require_light(), 1);
+var import_light = __toESM(require_light());
 var VERSION7 = "0.0.0-development";
 function isRequestError(error2) {
   return error2.request !== void 0;
@@ -36522,7 +36681,7 @@ function retry(octokit, octokitOptions) {
 retry.VERSION = VERSION7;
 
 // node_modules/@octokit/plugin-throttling/dist-bundle/index.js
-var import_light2 = __toESM(require_light(), 1);
+var import_light2 = __toESM(require_light());
 var VERSION8 = "0.0.0-development";
 var noop3 = () => Promise.resolve();
 function wrapRequest2(state3, request2, options) {
@@ -42293,22 +42452,22 @@ function dirname4(p) {
   if (IS_WINDOWS3 && /^\\\\[^\\]+(\\[^\\]+)?$/.test(p)) {
     return p;
   }
-  let result = path10.dirname(p);
+  let result = path10__namespace.dirname(p);
   if (IS_WINDOWS3 && /^\\\\[^\\]+\\[^\\]+\\$/.test(result)) {
     result = safeTrimTrailingSeparator(result);
   }
   return result;
 }
 function ensureAbsoluteRoot(root, itemPath) {
-  assert(root, `ensureAbsoluteRoot parameter 'root' must not be empty`);
-  assert(itemPath, `ensureAbsoluteRoot parameter 'itemPath' must not be empty`);
+  assert__default.default(root, `ensureAbsoluteRoot parameter 'root' must not be empty`);
+  assert__default.default(itemPath, `ensureAbsoluteRoot parameter 'itemPath' must not be empty`);
   if (hasAbsoluteRoot(itemPath)) {
     return itemPath;
   }
   if (IS_WINDOWS3) {
     if (itemPath.match(/^[A-Z]:[^\\/]|^[A-Z]:$/i)) {
       let cwd = process.cwd();
-      assert(cwd.match(/^[A-Z]:\\/i), `Expected current directory to start with an absolute drive root. Actual '${cwd}'`);
+      assert__default.default(cwd.match(/^[A-Z]:\\/i), `Expected current directory to start with an absolute drive root. Actual '${cwd}'`);
       if (itemPath[0].toUpperCase() === cwd[0].toUpperCase()) {
         if (itemPath.length === 2) {
           return `${itemPath[0]}:\\${cwd.substr(3)}`;
@@ -42323,18 +42482,18 @@ function ensureAbsoluteRoot(root, itemPath) {
       }
     } else if (normalizeSeparators2(itemPath).match(/^\\$|^\\[^\\]/)) {
       const cwd = process.cwd();
-      assert(cwd.match(/^[A-Z]:\\/i), `Expected current directory to start with an absolute drive root. Actual '${cwd}'`);
+      assert__default.default(cwd.match(/^[A-Z]:\\/i), `Expected current directory to start with an absolute drive root. Actual '${cwd}'`);
       return `${cwd[0]}:\\${itemPath.substr(1)}`;
     }
   }
-  assert(hasAbsoluteRoot(root), `ensureAbsoluteRoot parameter 'root' must have an absolute root`);
+  assert__default.default(hasAbsoluteRoot(root), `ensureAbsoluteRoot parameter 'root' must have an absolute root`);
   if (root.endsWith("/") || IS_WINDOWS3 && root.endsWith("\\")) ; else {
-    root += path10.sep;
+    root += path10__namespace.sep;
   }
   return root + itemPath;
 }
 function hasAbsoluteRoot(itemPath) {
-  assert(itemPath, `hasAbsoluteRoot parameter 'itemPath' must not be empty`);
+  assert__default.default(itemPath, `hasAbsoluteRoot parameter 'itemPath' must not be empty`);
   itemPath = normalizeSeparators2(itemPath);
   if (IS_WINDOWS3) {
     return itemPath.startsWith("\\\\") || /^[A-Z]:\\/i.test(itemPath);
@@ -42342,7 +42501,7 @@ function hasAbsoluteRoot(itemPath) {
   return itemPath.startsWith("/");
 }
 function hasRoot(itemPath) {
-  assert(itemPath, `isRooted parameter 'itemPath' must not be empty`);
+  assert__default.default(itemPath, `isRooted parameter 'itemPath' must not be empty`);
   itemPath = normalizeSeparators2(itemPath);
   if (IS_WINDOWS3) {
     return itemPath.startsWith("\\") || /^[A-Z]:/i.test(itemPath);
@@ -42363,10 +42522,10 @@ function safeTrimTrailingSeparator(p) {
     return "";
   }
   p = normalizeSeparators2(p);
-  if (!p.endsWith(path10.sep)) {
+  if (!p.endsWith(path10__namespace.sep)) {
     return p;
   }
-  if (p === path10.sep) {
+  if (p === path10__namespace.sep) {
     return p;
   }
   if (IS_WINDOWS3 && /^[A-Z]:\\$/i.test(p)) {
@@ -42431,7 +42590,7 @@ function match2(patterns, itemPath) {
 function partialMatch(patterns, itemPath) {
   return patterns.some((x) => !x.negate && x.partialMatch(itemPath));
 }
-var import_minimatch2 = __toESM(require_minimatch(), 1);
+var import_minimatch2 = __toESM(require_minimatch());
 var IS_WINDOWS5 = process.platform === "win32";
 var Path = class {
   /**
@@ -42441,15 +42600,15 @@ var Path = class {
   constructor(itemPath) {
     this.segments = [];
     if (typeof itemPath === "string") {
-      assert(itemPath, `Parameter 'itemPath' must not be empty`);
+      assert__default.default(itemPath, `Parameter 'itemPath' must not be empty`);
       itemPath = safeTrimTrailingSeparator(itemPath);
       if (!hasRoot(itemPath)) {
-        this.segments = itemPath.split(path10.sep);
+        this.segments = itemPath.split(path10__namespace.sep);
       } else {
         let remaining = itemPath;
         let dir = dirname4(remaining);
         while (dir !== remaining) {
-          const basename5 = path10.basename(remaining);
+          const basename5 = path10__namespace.basename(remaining);
           this.segments.unshift(basename5);
           remaining = dir;
           dir = dirname4(remaining);
@@ -42457,17 +42616,17 @@ var Path = class {
         this.segments.unshift(remaining);
       }
     } else {
-      assert(itemPath.length > 0, `Parameter 'itemPath' must not be an empty array`);
+      assert__default.default(itemPath.length > 0, `Parameter 'itemPath' must not be an empty array`);
       for (let i = 0; i < itemPath.length; i++) {
         let segment = itemPath[i];
-        assert(segment, `Parameter 'itemPath' must not contain any empty segments`);
+        assert__default.default(segment, `Parameter 'itemPath' must not contain any empty segments`);
         segment = normalizeSeparators2(itemPath[i]);
         if (i === 0 && hasRoot(segment)) {
           segment = safeTrimTrailingSeparator(segment);
-          assert(segment === dirname4(segment), `Parameter 'itemPath' root segment contains information for multiple segments`);
+          assert__default.default(segment === dirname4(segment), `Parameter 'itemPath' root segment contains information for multiple segments`);
           this.segments.push(segment);
         } else {
-          assert(!segment.includes(path10.sep), `Parameter 'itemPath' contains unexpected path separators`);
+          assert__default.default(!segment.includes(path10__namespace.sep), `Parameter 'itemPath' contains unexpected path separators`);
           this.segments.push(segment);
         }
       }
@@ -42478,12 +42637,12 @@ var Path = class {
    */
   toString() {
     let result = this.segments[0];
-    let skipSlash = result.endsWith(path10.sep) || IS_WINDOWS5 && /^[A-Z]:$/i.test(result);
+    let skipSlash = result.endsWith(path10__namespace.sep) || IS_WINDOWS5 && /^[A-Z]:$/i.test(result);
     for (let i = 1; i < this.segments.length; i++) {
       if (skipSlash) {
         skipSlash = false;
       } else {
-        result += path10.sep;
+        result += path10__namespace.sep;
       }
       result += this.segments[i];
     }
@@ -42502,9 +42661,9 @@ var Pattern = class _Pattern {
       pattern = patternOrNegate.trim();
     } else {
       segments = segments || [];
-      assert(segments.length, `Parameter 'segments' must not empty`);
+      assert__default.default(segments.length, `Parameter 'segments' must not empty`);
       const root = _Pattern.getLiteral(segments[0]);
-      assert(root && hasAbsoluteRoot(root), `Parameter 'segments' first element must be a root path`);
+      assert__default.default(root && hasAbsoluteRoot(root), `Parameter 'segments' first element must be a root path`);
       pattern = new Path(segments).toString().trim();
       if (patternOrNegate) {
         pattern = `!${pattern}`;
@@ -42516,7 +42675,7 @@ var Pattern = class _Pattern {
     }
     pattern = _Pattern.fixupPattern(pattern, homedir2);
     this.segments = new Path(pattern).segments;
-    this.trailingSeparator = normalizeSeparators2(pattern).endsWith(path10.sep);
+    this.trailingSeparator = normalizeSeparators2(pattern).endsWith(path10__namespace.sep);
     pattern = safeTrimTrailingSeparator(pattern);
     let foundGlob = false;
     const searchSegments = this.segments.map((x) => _Pattern.getLiteral(x)).filter((x) => !foundGlob && !(foundGlob = x === ""));
@@ -42540,8 +42699,8 @@ var Pattern = class _Pattern {
   match(itemPath) {
     if (this.segments[this.segments.length - 1] === "**") {
       itemPath = normalizeSeparators2(itemPath);
-      if (!itemPath.endsWith(path10.sep) && this.isImplicitPattern === false) {
-        itemPath = `${itemPath}${path10.sep}`;
+      if (!itemPath.endsWith(path10__namespace.sep) && this.isImplicitPattern === false) {
+        itemPath = `${itemPath}${path10__namespace.sep}`;
       }
     } else {
       itemPath = safeTrimTrailingSeparator(itemPath);
@@ -42571,17 +42730,17 @@ var Pattern = class _Pattern {
    * Normalizes slashes and ensures absolute root
    */
   static fixupPattern(pattern, homedir2) {
-    assert(pattern, "pattern cannot be empty");
+    assert__default.default(pattern, "pattern cannot be empty");
     const literalSegments = new Path(pattern).segments.map((x) => _Pattern.getLiteral(x));
-    assert(literalSegments.every((x, i) => (x !== "." || i === 0) && x !== ".."), `Invalid pattern '${pattern}'. Relative pathing '.' and '..' is not allowed.`);
-    assert(!hasRoot(pattern) || literalSegments[0], `Invalid pattern '${pattern}'. Root segment must not contain globs.`);
+    assert__default.default(literalSegments.every((x, i) => (x !== "." || i === 0) && x !== ".."), `Invalid pattern '${pattern}'. Relative pathing '.' and '..' is not allowed.`);
+    assert__default.default(!hasRoot(pattern) || literalSegments[0], `Invalid pattern '${pattern}'. Root segment must not contain globs.`);
     pattern = normalizeSeparators2(pattern);
-    if (pattern === "." || pattern.startsWith(`.${path10.sep}`)) {
+    if (pattern === "." || pattern.startsWith(`.${path10__namespace.sep}`)) {
       pattern = _Pattern.globEscape(process.cwd()) + pattern.substr(1);
-    } else if (pattern === "~" || pattern.startsWith(`~${path10.sep}`)) {
-      homedir2 = homedir2 || os2.homedir();
-      assert(homedir2, "Unable to determine HOME directory");
-      assert(hasAbsoluteRoot(homedir2), `Expected HOME directory to be a rooted path. Actual '${homedir2}'`);
+    } else if (pattern === "~" || pattern.startsWith(`~${path10__namespace.sep}`)) {
+      homedir2 = homedir2 || os2__namespace.homedir();
+      assert__default.default(homedir2, "Unable to determine HOME directory");
+      assert__default.default(hasAbsoluteRoot(homedir2), `Expected HOME directory to be a rooted path. Actual '${homedir2}'`);
       pattern = _Pattern.globEscape(homedir2) + pattern.substr(1);
     } else if (IS_WINDOWS6 && (pattern.match(/^[A-Z]:$/i) || pattern.match(/^[A-Z]:[^\\]/i))) {
       let root = ensureAbsoluteRoot("C:\\dummy-root", pattern.substr(0, 2));
@@ -42798,7 +42957,7 @@ var DefaultGlobber = class _DefaultGlobber {
       for (const searchPath of getSearchPaths(patterns)) {
         debug(`Search path '${searchPath}'`);
         try {
-          yield __await(fs2.promises.lstat(searchPath));
+          yield __await(fs2__namespace.promises.lstat(searchPath));
         } catch (err) {
           if (err.code === "ENOENT") {
             continue;
@@ -42822,7 +42981,7 @@ var DefaultGlobber = class _DefaultGlobber {
         if (!stats) {
           continue;
         }
-        if (options.excludeHiddenFiles && path10.basename(item.path).match(/^\./)) {
+        if (options.excludeHiddenFiles && path10__namespace.basename(item.path).match(/^\./)) {
           continue;
         }
         if (stats.isDirectory()) {
@@ -42832,7 +42991,7 @@ var DefaultGlobber = class _DefaultGlobber {
             continue;
           }
           const childLevel = item.level + 1;
-          const childItems = (yield __await(fs2.promises.readdir(item.path))).map((x) => new SearchState(path10.join(item.path, x), childLevel));
+          const childItems = (yield __await(fs2__namespace.promises.readdir(item.path))).map((x) => new SearchState(path10__namespace.join(item.path, x), childLevel));
           stack.push(...childItems.reverse());
         } else if (match3 & MatchKind.File) {
           yield yield __await(item.path);
@@ -42867,7 +43026,7 @@ var DefaultGlobber = class _DefaultGlobber {
       let stats;
       if (options.followSymbolicLinks) {
         try {
-          stats = yield fs2.promises.stat(item.path);
+          stats = yield fs2__namespace.promises.stat(item.path);
         } catch (err) {
           if (err.code === "ENOENT") {
             if (options.omitBrokenSymbolicLinks) {
@@ -42879,10 +43038,10 @@ var DefaultGlobber = class _DefaultGlobber {
           throw err;
         }
       } else {
-        stats = yield fs2.promises.lstat(item.path);
+        stats = yield fs2__namespace.promises.lstat(item.path);
       }
       if (stats.isDirectory() && options.followSymbolicLinks) {
-        const realPath = yield fs2.promises.realpath(item.path);
+        const realPath = yield fs2__namespace.promises.realpath(item.path);
         while (traversalChain.length >= item.level) {
           traversalChain.pop();
         }
@@ -42932,7 +43091,7 @@ function create(patterns, options) {
 }
 
 // node_modules/@actions/cache/lib/internal/cacheUtils.js
-var semver = __toESM(require_semver2(), 1);
+var semver = __toESM(require_semver2());
 
 // node_modules/@actions/cache/lib/internal/constants.js
 var CacheFilename;
@@ -43023,15 +43182,15 @@ function createTempDirectory() {
           baseLocation = "/home";
         }
       }
-      tempDirectory = path10.join(baseLocation, "actions", "temp");
+      tempDirectory = path10__namespace.join(baseLocation, "actions", "temp");
     }
-    const dest = path10.join(tempDirectory, crypto2.randomUUID());
+    const dest = path10__namespace.join(tempDirectory, crypto2__namespace.randomUUID());
     yield mkdirP(dest);
     return dest;
   });
 }
 function getArchiveFileSizeInBytes(filePath) {
-  return fs2.statSync(filePath).size;
+  return fs2__namespace.statSync(filePath).size;
 }
 function resolvePaths(patterns) {
   return __awaiter10(this, void 0, void 0, function* () {
@@ -43047,7 +43206,7 @@ function resolvePaths(patterns) {
         _c = _g.value;
         _e = false;
         const file = _c;
-        const relativeFile = path10.relative(workspace, file).replace(new RegExp(`\\${path10.sep}`, "g"), "/");
+        const relativeFile = path10__namespace.relative(workspace, file).replace(new RegExp(`\\${path10__namespace.sep}`, "g"), "/");
         debug(`Matched: ${relativeFile}`);
         if (relativeFile === "") {
           paths.push(".");
@@ -43069,7 +43228,7 @@ function resolvePaths(patterns) {
 }
 function unlinkFile(filePath) {
   return __awaiter10(this, void 0, void 0, function* () {
-    return util.promisify(fs2.unlink)(filePath);
+    return util__namespace.promisify(fs2__namespace.unlink)(filePath);
   });
 }
 function getVersion(app_1) {
@@ -43111,7 +43270,7 @@ function getCacheFileName(compressionMethod) {
 }
 function getGnuTarPathOnWindows() {
   return __awaiter10(this, void 0, void 0, function* () {
-    if (fs2.existsSync(GnuTarPathOnWindows)) {
+    if (fs2__namespace.existsSync(GnuTarPathOnWindows)) {
       return GnuTarPathOnWindows;
     }
     const versionOutput = yield getVersion("tar");
@@ -43133,7 +43292,7 @@ function getCacheVersion(paths, compressionMethod, enableCrossOsArchive = false)
     components.push("windows-only");
   }
   components.push(versionSalt);
-  return crypto2.createHash("sha256").update(components.join("|")).digest("hex");
+  return crypto2__namespace.createHash("sha256").update(components.join("|")).digest("hex");
 }
 function getRuntimeToken() {
   const token = process.env["ACTIONS_RUNTIME_TOKEN"];
@@ -43151,13 +43310,13 @@ var AbortError = class extends Error {
   }
 };
 function log(message, ...args) {
-  process5.stderr.write(`${util__default.format(message, ...args)}${EOL}`);
+  process5__default.default.stderr.write(`${util__namespace.default.format(message, ...args)}${os2.EOL}`);
 }
 function getEnvironmentVariable(name) {
-  return process5.env[name];
+  return process5__default.default.env[name];
 }
-typeof process5.versions.deno === "string" && process5.versions.deno.length > 0;
-typeof process5.versions.bun === "string" && process5.versions.bun.length > 0;
+typeof process5__default.default.versions.deno === "string" && process5__default.default.versions.deno.length > 0;
+typeof process5__default.default.versions.bun === "string" && process5__default.default.versions.bun.length > 0;
 
 // node_modules/@typespec/ts-http-runtime/dist/esm/logger/debug.js
 var debugEnvVariable = getEnvironmentVariable("DEBUG");
@@ -43737,7 +43896,7 @@ function isError(e) {
   }
   return false;
 }
-var custom = inspect.custom;
+var custom = util.inspect.custom;
 
 // node_modules/@typespec/ts-http-runtime/dist/esm/util/sanitizer.js
 var RedactedString = "REDACTED";
@@ -43978,7 +44137,7 @@ function isStreamComplete(stream2) {
 function isArrayBuffer(body2) {
   return body2 && typeof body2.byteLength === "number";
 }
-var ReportTransform = class extends Transform {
+var ReportTransform = class extends Stream.Transform {
   loadedBytes = 0;
   progressCallback;
   // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
@@ -44121,7 +44280,7 @@ var NodeHttpClient = class {
       ...request2.requestOverrides
     };
     return new Promise((resolve2, reject) => {
-      const req = isInsecure ? http__default.request(options, resolve2) : https2__default.request(options, resolve2);
+      const req = isInsecure ? http__namespace.default.request(options, resolve2) : https2__namespace.default.request(options, resolve2);
       req.once("error", (err) => {
         reject(new RestError(err.message, { code: err.code ?? RestError.REQUEST_SEND_ERROR, request: request2 }));
       });
@@ -44150,15 +44309,15 @@ var NodeHttpClient = class {
     const disableKeepAlive = request2.disableKeepAlive;
     if (isInsecure) {
       if (disableKeepAlive) {
-        return http__default.globalAgent;
+        return http__namespace.default.globalAgent;
       }
       if (!this.cachedHttpAgent) {
-        this.cachedHttpAgent = new http__default.Agent({ keepAlive: true });
+        this.cachedHttpAgent = new http__namespace.default.Agent({ keepAlive: true });
       }
       return this.cachedHttpAgent;
     } else {
       if (disableKeepAlive && !request2.tlsSettings) {
-        return https2__default.globalAgent;
+        return https2__namespace.default.globalAgent;
       }
       const tlsSettings = request2.tlsSettings ?? DEFAULT_TLS_SETTINGS;
       let agent = this.cachedHttpsAgents.get(tlsSettings);
@@ -44166,7 +44325,7 @@ var NodeHttpClient = class {
         return agent;
       }
       logger.info("No cached TLS Agent exist, creating a new Agent");
-      agent = new https2__default.Agent({
+      agent = new https2__namespace.default.Agent({
         // keepAlive is true if disableKeepAlive is false.
         keepAlive: !disableKeepAlive,
         // Since we are spreading, if no tslSettings were provided, nothing is added to the agent options.
@@ -44194,11 +44353,11 @@ function getResponseHeaders(res) {
 function getDecodedResponseStream(stream2, headers) {
   const contentEncoding = headers.get("Content-Encoding");
   if (contentEncoding === "gzip") {
-    const unzip = zlib.createGunzip();
+    const unzip = zlib__default.default.createGunzip();
     stream2.pipe(unzip);
     return unzip;
   } else if (contentEncoding === "deflate") {
-    const inflate = zlib.createInflate();
+    const inflate = zlib__default.default.createInflate();
     stream2.pipe(inflate);
     return inflate;
   }
@@ -44627,8 +44786,8 @@ function tlsPolicy(tlsSettings) {
 }
 
 // node_modules/@typespec/ts-http-runtime/dist/esm/policies/proxyPolicy.js
-var import_https_proxy_agent = __toESM(require_dist3(), 1);
-var import_http_proxy_agent = __toESM(require_dist4(), 1);
+var import_https_proxy_agent = __toESM(require_dist3());
+var import_http_proxy_agent = __toESM(require_dist4());
 var HTTPS_PROXY = "HTTPS_PROXY";
 var HTTP_PROXY = "HTTP_PROXY";
 var ALL_PROXY = "ALL_PROXY";
@@ -44846,14 +45005,14 @@ function makeAsyncIterable(webStream) {
 function ensureNodeStream(stream2) {
   if (stream2 instanceof ReadableStream) {
     makeAsyncIterable(stream2);
-    return Readable.fromWeb(stream2);
+    return Stream.Readable.fromWeb(stream2);
   } else {
     return stream2;
   }
 }
 function toStream(source) {
   if (source instanceof Uint8Array) {
-    return Readable.from(Buffer.from(source));
+    return Stream.Readable.from(Buffer.from(source));
   } else if (isBlob(source)) {
     return ensureNodeStream(source.stream());
   } else {
@@ -44863,7 +45022,7 @@ function toStream(source) {
 async function concat(sources) {
   return function() {
     const streams = sources.map((x) => typeof x === "function" ? x() : x).map(toStream);
-    return Readable.from((async function* () {
+    return Stream.Readable.from((async function* () {
       for (const stream2 of streams) {
         for await (const chunk of stream2) {
           yield chunk;
@@ -45004,14 +45163,14 @@ function getHeaderName2() {
   return "User-Agent";
 }
 async function setPlatformSpecificData2(map) {
-  if (process5 && process5.versions) {
-    const osInfo = `${os2__default.type()} ${os2__default.release()}; ${os2__default.arch()}`;
-    if (process5.versions.bun) {
-      map.set("Bun", `${process5.versions.bun} (${osInfo})`);
-    } else if (process5.versions.deno) {
-      map.set("Deno", `${process5.versions.deno} (${osInfo})`);
-    } else if (process5.versions.node) {
-      map.set("Node", `${process5.versions.node} (${osInfo})`);
+  if (process5__default.default && process5__default.default.versions) {
+    const osInfo = `${os2__namespace.default.type()} ${os2__namespace.default.release()}; ${os2__namespace.default.arch()}`;
+    if (process5__default.default.versions.bun) {
+      map.set("Bun", `${process5__default.default.versions.bun} (${osInfo})`);
+    } else if (process5__default.default.versions.deno) {
+      map.set("Deno", `${process5__default.default.versions.deno} (${osInfo})`);
+    } else if (process5__default.default.versions.node) {
+      map.set("Node", `${process5__default.default.versions.node} (${osInfo})`);
     }
   }
 }
@@ -45260,7 +45419,7 @@ var TracingContextImpl = class _TracingContextImpl {
 };
 
 // node_modules/@azure/core-tracing/dist/esm/state.js
-var import_state = __toESM(require_state(), 1);
+var import_state = __toESM(require_state());
 var state = import_state.state;
 
 // node_modules/@azure/core-tracing/dist/esm/instrumenter.js
@@ -46712,7 +46871,7 @@ var MapperTypeNames = {
 };
 
 // node_modules/@azure/core-client/dist/esm/state.js
-var import_state_cjs = __toESM(require_state_cjs(), 1);
+var import_state_cjs = __toESM(require_state_cjs());
 var state2 = import_state_cjs.state;
 
 // node_modules/@azure/core-client/dist/esm/operationHelpers.js
@@ -52781,7 +52940,7 @@ async function parseXML(str, opts = {}) {
 
 // node_modules/@azure/storage-blob/dist/esm/log.js
 var logger4 = createClientLogger2("storage-blob");
-var BuffersStream = class extends Readable {
+var BuffersStream = class extends Stream.Readable {
   buffers;
   byteLength;
   /**
@@ -52863,7 +53022,7 @@ var BuffersStream = class extends Readable {
     }
   }
 };
-var maxBufferLength = buffer__default.constants.MAX_LENGTH;
+var maxBufferLength = buffer__namespace.default.constants.MAX_LENGTH;
 var PooledBuffer = class {
   /**
    * Internal buffers used to keep the data.
@@ -52964,7 +53123,7 @@ var BufferScheduler = class {
   /**
    * An internal event emitter.
    */
-  emitter = new EventEmitter();
+  emitter = new events.EventEmitter();
   /**
    * Concurrency of executing outgoingHandlers. (0 lesser than concurrency lesser than or equal to maxBuffers)
    */
@@ -53189,9 +53348,9 @@ var require2;
 var __filename$1;
 var __dirname$1;
 if (__isNode__) {
-  require2 = createRequire(import.meta.url);
-  __filename$1 = fileURLToPath(import.meta.url);
-  __dirname$1 = dirname(__filename$1);
+  require2 = module$1.createRequire((typeof document === 'undefined' ? require('u' + 'rl').pathToFileURL(__filename).href : (_documentCurrentScript && _documentCurrentScript.tagName.toUpperCase() === 'SCRIPT' && _documentCurrentScript.src || new URL('action.cjs', document.baseURI).href)));
+  __filename$1 = url$1.fileURLToPath((typeof document === 'undefined' ? require('u' + 'rl').pathToFileURL(__filename).href : (_documentCurrentScript && _documentCurrentScript.tagName.toUpperCase() === 'SCRIPT' && _documentCurrentScript.src || new URL('action.cjs', document.baseURI).href)));
+  __dirname$1 = path10.dirname(__filename$1);
 }
 var NativeCRC64 = (() => {
   var _scriptDir = typeof document !== "undefined" && document.currentScript ? document.currentScript.src : void 0;
@@ -55190,7 +55349,7 @@ var StructuredMessageEncoding = class {
 
 // node_modules/@azure/storage-common/dist/esm/StructuredMessageEncodingStream.js
 function isNodeReadableStream2(source) {
-  return source !== null && source instanceof Stream__default && typeof source._read === "function" && typeof source._readableState === "object" && typeof source.pipe === "function";
+  return source !== null && source instanceof Stream__namespace.default && typeof source._read === "function" && typeof source._readableState === "object" && typeof source.pipe === "function";
 }
 async function structuredMessageEncoding(source, contentLength2) {
   if (source === null) {
@@ -55221,7 +55380,7 @@ async function structuredMessageEncoding(source, contentLength2) {
     };
   }
   if (typeof source === "string") {
-    const s = new Readable();
+    const s = new Stream.Readable();
     s._read = () => {
     };
     s.push(source);
@@ -55234,7 +55393,7 @@ async function structuredMessageEncoding(source, contentLength2) {
     };
   }
   if (source instanceof ArrayBuffer) {
-    const stream2 = Readable.from(Buffer.from(source));
+    const stream2 = Stream.Readable.from(Buffer.from(source));
     const encodingMessage = await new StructuredMessageEncodingStream(stream2, contentLength2, {});
     return {
       body: encodingMessage,
@@ -55242,7 +55401,7 @@ async function structuredMessageEncoding(source, contentLength2) {
     };
   }
   if (source instanceof Buffer) {
-    const stream2 = Readable.from(source);
+    const stream2 = Stream.Readable.from(source);
     const encodingMessage = await new StructuredMessageEncodingStream(stream2, contentLength2, {});
     return {
       body: encodingMessage,
@@ -55250,7 +55409,7 @@ async function structuredMessageEncoding(source, contentLength2) {
     };
   }
   if (ArrayBuffer.isView(source)) {
-    const stream2 = Readable.from(Buffer.from(source.buffer, source.byteOffset, source.byteLength));
+    const stream2 = Stream.Readable.from(Buffer.from(source.buffer, source.byteOffset, source.byteLength));
     const encodingMessage = await new StructuredMessageEncodingStream(stream2, contentLength2, {});
     return {
       body: encodingMessage,
@@ -55291,7 +55450,7 @@ async function BrowserStream(source, contentLength2) {
     encodedContentLength: encodingStream.messageLength
   };
 }
-var StructuredMessageEncodingStream = class extends Readable {
+var StructuredMessageEncodingStream = class extends Stream.Readable {
   source;
   encodingMethods;
   constructor(source, contentLength2, options) {
@@ -55524,7 +55683,7 @@ var StructuredMessageDecoding = class {
 function structuredMessageDecodingStream(source, options) {
   return new StructuredMessageDecodingStream(source, options);
 }
-var StructuredMessageDecodingStream = class extends Readable {
+var StructuredMessageDecodingStream = class extends Stream.Readable {
   source;
   decodingMethods;
   constructor(source, options) {
@@ -56398,7 +56557,7 @@ var StorageSharedKeyCredential = class extends Credential {
    * @param stringToSign -
    */
   computeHMACSHA256(stringToSign) {
-    return createHmac("sha256", this.accountKey).update(stringToSign, "utf8").digest("base64");
+    return crypto2.createHmac("sha256", this.accountKey).update(stringToSign, "utf8").digest("base64");
   }
 };
 
@@ -56783,7 +56942,7 @@ function storageSharedKeyCredentialPolicy(options) {
       getHeaderValueToSign(request2, HeaderConstants.IF_UNMODIFIED_SINCE),
       getHeaderValueToSign(request2, HeaderConstants.RANGE)
     ].join("\n") + "\n" + getCanonicalizedHeadersString(request2) + getCanonicalizedResourceString(request2);
-    const signature = createHmac("sha256", options.accountKey).update(stringToSign, "utf8").digest("base64");
+    const signature = crypto2.createHmac("sha256", options.accountKey).update(stringToSign, "utf8").digest("base64");
     request2.headers.set(HeaderConstants.AUTHORIZATION, `SharedKey ${options.accountName}:${signature}`);
   }
   function getHeaderValueToSign(request2, headerName) {
@@ -56900,7 +57059,7 @@ var UserDelegationKeyCredential = class {
    * @param stringToSign -
    */
   computeHMACSHA256(stringToSign) {
-    return createHmac("sha256", this.key).update(stringToSign, "utf8").digest("base64");
+    return crypto2.createHmac("sha256", this.key).update(stringToSign, "utf8").digest("base64");
   }
 };
 
@@ -72851,7 +73010,7 @@ var BlobLeaseClient = class {
     });
   }
 };
-var RetriableReadableStream = class extends Readable {
+var RetriableReadableStream = class extends Stream.Readable {
   start;
   offset;
   end;
@@ -73848,7 +74007,7 @@ var AvroReadableFromStream = class extends AvroReadable {
   _readable;
   toUint8Array(data) {
     if (typeof data === "string") {
-      return Buffer$1.from(data);
+      return buffer.Buffer.from(data);
     }
     return data;
   }
@@ -73917,7 +74076,7 @@ var AvroReadableFromStream = class extends AvroReadable {
 };
 
 // node_modules/@azure/storage-blob/dist/esm/utils/BlobQuickQueryStream.js
-var BlobQuickQueryStream = class extends Readable {
+var BlobQuickQueryStream = class extends Stream.Readable {
   source;
   avroReader;
   avroIter;
@@ -74913,7 +75072,7 @@ var Batch = class {
       throw new RangeError("concurrency must be larger than 0");
     }
     this.concurrency = concurrency;
-    this.emitter = new EventEmitter();
+    this.emitter = new events.EventEmitter();
   }
   /**
    * Add a operation into queue.
@@ -75024,7 +75183,7 @@ async function streamToBuffer(stream2, buffer3, offset, end, encoding) {
 }
 async function readStreamToLocalFile(rs, file) {
   return new Promise((resolve2, reject) => {
-    const ws = fs2__default.createWriteStream(file);
+    const ws = fs2__namespace.default.createWriteStream(file);
     rs.on("error", (err) => {
       reject(err);
     });
@@ -75035,8 +75194,8 @@ async function readStreamToLocalFile(rs, file) {
     rs.pipe(ws);
   });
 }
-var fsStat = util__default.promisify(fs2__default.stat);
-var fsCreateReadStream = fs2__default.createReadStream;
+var fsStat = util__namespace.default.promisify(fs2__namespace.default.stat);
+var fsCreateReadStream = fs2__namespace.default.createReadStream;
 
 // node_modules/@azure/storage-blob/dist/esm/Clients.js
 var BlobClient = class _BlobClient extends StorageClient2 {
@@ -78092,7 +78251,7 @@ var __awaiter13 = function(thisArg, _arguments, P, generator) {
 };
 function pipeResponseToStream(response, output) {
   return __awaiter13(this, void 0, void 0, function* () {
-    const pipeline2 = util.promisify(Stream.pipeline);
+    const pipeline2 = util__namespace.promisify(Stream__namespace.pipeline);
     yield pipeline2(response.message, output);
   });
 }
@@ -78193,7 +78352,7 @@ var DownloadProgress = class {
 };
 function downloadCacheHttpClient(archiveLocation, archivePath) {
   return __awaiter13(this, void 0, void 0, function* () {
-    const writeStream = fs2.createWriteStream(archivePath);
+    const writeStream = fs2__namespace.createWriteStream(archivePath);
     const httpClient = new HttpClient("actions/cache");
     const downloadResponse = yield retryHttpClientResponse("downloadCache", () => __awaiter13(this, void 0, void 0, function* () {
       return httpClient.get(archiveLocation);
@@ -78218,7 +78377,7 @@ function downloadCacheHttpClient(archiveLocation, archivePath) {
 function downloadCacheHttpClientConcurrent(archiveLocation, archivePath, options) {
   return __awaiter13(this, void 0, void 0, function* () {
     var _a2;
-    const archiveDescriptor = yield fs2.promises.open(archivePath, "w");
+    const archiveDescriptor = yield fs2__namespace.promises.open(archivePath, "w");
     const httpClient = new HttpClient("actions/cache", void 0, {
       socketTimeout: options.timeoutInMs,
       keepAlive: true
@@ -78332,9 +78491,9 @@ function downloadCacheStorageSDK(archiveLocation, archivePath, options) {
       debug("Unable to determine content length, downloading file with http-client...");
       yield downloadCacheHttpClient(archiveLocation, archivePath);
     } else {
-      const maxSegmentSize = Math.min(134217728, buffer.constants.MAX_LENGTH);
+      const maxSegmentSize = Math.min(134217728, buffer__namespace.constants.MAX_LENGTH);
       const downloadProgress = new DownloadProgress(contentLength2);
-      const fd = fs2.openSync(archivePath, "w");
+      const fd = fs2__namespace.openSync(archivePath, "w");
       try {
         downloadProgress.startDisplayTimer();
         const controller = new AbortController();
@@ -78352,12 +78511,12 @@ function downloadCacheStorageSDK(archiveLocation, archivePath, options) {
             controller.abort();
             throw new Error("Aborting cache download as the download time exceeded the timeout.");
           } else if (Buffer.isBuffer(result)) {
-            fs2.writeFileSync(fd, result);
+            fs2__namespace.writeFileSync(fd, result);
           }
         }
       } finally {
         downloadProgress.stopDisplayTimer();
-        fs2.closeSync(fd);
+        fs2__namespace.closeSync(fd);
       }
     }
   });
@@ -78481,7 +78640,7 @@ function getCacheServiceURL() {
 }
 
 // node_modules/@actions/cache/lib/internal/shared/user-agent.js
-var import_package_version = __toESM(require_package_version(), 1);
+var import_package_version = __toESM(require_package_version());
 function getUserAgentString2() {
   return `@actions/cache-${import_package_version.version}`;
 }
@@ -78593,7 +78752,7 @@ Other caches with similar key:`);
 }
 function downloadCache(archiveLocation, archivePath, options) {
   return __awaiter14(this, void 0, void 0, function* () {
-    const archiveUrl = new URL$1(archiveLocation);
+    const archiveUrl = new url$1.URL(archiveLocation);
     const downloadOptions = getDownloadOptions(options);
     if (archiveUrl.hostname.endsWith(".blob.core.windows.net")) {
       if (downloadOptions.useAzureSdk) {
@@ -78645,7 +78804,7 @@ function uploadFile(httpClient, cacheId, archivePath, options) {
   return __awaiter14(this, void 0, void 0, function* () {
     const fileSize = getArchiveFileSizeInBytes(archivePath);
     const resourceUrl = getCacheApiUrl(`caches/${cacheId.toString()}`);
-    const fd = fs2.openSync(archivePath, "r");
+    const fd = fs2__namespace.openSync(archivePath, "r");
     const uploadOptions = getUploadOptions(options);
     const concurrency = assertDefined("uploadConcurrency", uploadOptions.uploadConcurrency);
     const maxChunkSize = assertDefined("uploadChunkSize", uploadOptions.uploadChunkSize);
@@ -78659,7 +78818,7 @@ function uploadFile(httpClient, cacheId, archivePath, options) {
           const start = offset;
           const end = offset + chunkSize - 1;
           offset += maxChunkSize;
-          yield uploadChunk(httpClient, resourceUrl, () => fs2.createReadStream(archivePath, {
+          yield uploadChunk(httpClient, resourceUrl, () => fs2__namespace.createReadStream(archivePath, {
             fd,
             start,
             end,
@@ -78670,7 +78829,7 @@ function uploadFile(httpClient, cacheId, archivePath, options) {
         }
       })));
     } finally {
-      fs2.closeSync(fd);
+      fs2__namespace.closeSync(fd);
     }
     return;
   });
@@ -82033,7 +82192,7 @@ function getTarPath() {
         const systemTar = SystemTarPathOnWindows;
         if (gnuTar) {
           return { path: gnuTar, type: ArchiveToolType.GNU };
-        } else if (existsSync(systemTar)) {
+        } else if (fs2.existsSync(systemTar)) {
           return { path: systemTar, type: ArchiveToolType.BSD };
         }
         break;
@@ -82065,13 +82224,13 @@ function getTarArgs(tarPath_1, compressionMethod_1, type_1) {
     const BSD_TAR_ZSTD = tarPath.type === ArchiveToolType.BSD && compressionMethod !== CompressionMethod.Gzip && IS_WINDOWS8;
     switch (type) {
       case "create":
-        args.push("--posix", "-cf", BSD_TAR_ZSTD ? tarFile : cacheFileName.replace(new RegExp(`\\${path10.sep}`, "g"), "/"), "--exclude", BSD_TAR_ZSTD ? tarFile : cacheFileName.replace(new RegExp(`\\${path10.sep}`, "g"), "/"), "-P", "-C", workingDirectory.replace(new RegExp(`\\${path10.sep}`, "g"), "/"), "--files-from", ManifestFilename);
+        args.push("--posix", "-cf", BSD_TAR_ZSTD ? tarFile : cacheFileName.replace(new RegExp(`\\${path10__namespace.sep}`, "g"), "/"), "--exclude", BSD_TAR_ZSTD ? tarFile : cacheFileName.replace(new RegExp(`\\${path10__namespace.sep}`, "g"), "/"), "-P", "-C", workingDirectory.replace(new RegExp(`\\${path10__namespace.sep}`, "g"), "/"), "--files-from", ManifestFilename);
         break;
       case "extract":
-        args.push("-xf", BSD_TAR_ZSTD ? tarFile : archivePath.replace(new RegExp(`\\${path10.sep}`, "g"), "/"), "-P", "-C", workingDirectory.replace(new RegExp(`\\${path10.sep}`, "g"), "/"));
+        args.push("-xf", BSD_TAR_ZSTD ? tarFile : archivePath.replace(new RegExp(`\\${path10__namespace.sep}`, "g"), "/"), "-P", "-C", workingDirectory.replace(new RegExp(`\\${path10__namespace.sep}`, "g"), "/"));
         break;
       case "list":
-        args.push("-tf", BSD_TAR_ZSTD ? tarFile : archivePath.replace(new RegExp(`\\${path10.sep}`, "g"), "/"), "-P");
+        args.push("-tf", BSD_TAR_ZSTD ? tarFile : archivePath.replace(new RegExp(`\\${path10__namespace.sep}`, "g"), "/"), "-P");
         break;
     }
     if (tarPath.type === ArchiveToolType.GNU) {
@@ -82117,7 +82276,7 @@ function getDecompressionProgram(tarPath, compressionMethod, archivePath) {
         return BSD_TAR_ZSTD ? [
           "zstd -d --long=30 --force -o",
           TarFilename,
-          archivePath.replace(new RegExp(`\\${path10.sep}`, "g"), "/")
+          archivePath.replace(new RegExp(`\\${path10__namespace.sep}`, "g"), "/")
         ] : [
           "--use-compress-program",
           IS_WINDOWS8 ? '"zstd -d --long=30"' : "unzstd --long=30"
@@ -82126,7 +82285,7 @@ function getDecompressionProgram(tarPath, compressionMethod, archivePath) {
         return BSD_TAR_ZSTD ? [
           "zstd -d --force -o",
           TarFilename,
-          archivePath.replace(new RegExp(`\\${path10.sep}`, "g"), "/")
+          archivePath.replace(new RegExp(`\\${path10__namespace.sep}`, "g"), "/")
         ] : ["--use-compress-program", IS_WINDOWS8 ? '"zstd -d"' : "unzstd"];
       default:
         return ["-z"];
@@ -82141,7 +82300,7 @@ function getCompressionProgram(tarPath, compressionMethod) {
       case CompressionMethod.Zstd:
         return BSD_TAR_ZSTD ? [
           "zstd -T0 --long=30 --force -o",
-          cacheFileName.replace(new RegExp(`\\${path10.sep}`, "g"), "/"),
+          cacheFileName.replace(new RegExp(`\\${path10__namespace.sep}`, "g"), "/"),
           TarFilename
         ] : [
           "--use-compress-program",
@@ -82150,7 +82309,7 @@ function getCompressionProgram(tarPath, compressionMethod) {
       case CompressionMethod.ZstdWithoutLong:
         return BSD_TAR_ZSTD ? [
           "zstd -T0 --force -o",
-          cacheFileName.replace(new RegExp(`\\${path10.sep}`, "g"), "/"),
+          cacheFileName.replace(new RegExp(`\\${path10__namespace.sep}`, "g"), "/"),
           TarFilename
         ] : ["--use-compress-program", IS_WINDOWS8 ? '"zstd -T0"' : "zstdmt"];
       default:
@@ -82188,7 +82347,7 @@ function extractTar(archivePath, compressionMethod) {
 }
 function createTar(archiveFolder, sourceDirectories, compressionMethod) {
   return __awaiter16(this, void 0, void 0, function* () {
-    writeFileSync(path10.join(archiveFolder, ManifestFilename), sourceDirectories.join("\n"));
+    fs2.writeFileSync(path10__namespace.join(archiveFolder, ManifestFilename), sourceDirectories.join("\n"));
     const commands = yield getCommands(compressionMethod, "create");
     yield execCommands(commands, archiveFolder);
   });
@@ -82329,7 +82488,7 @@ function restoreCacheV1(paths_1, primaryKey_1, restoreKeys_1, options_1) {
         info("Lookup only - skipping download");
         return cacheEntry.cacheKey;
       }
-      archivePath = path10.join(yield createTempDirectory(), getCacheFileName(compressionMethod));
+      archivePath = path10__namespace.join(yield createTempDirectory(), getCacheFileName(compressionMethod));
       debug(`Archive Path: ${archivePath}`);
       yield downloadCache(cacheEntry.archiveLocation, archivePath, options);
       if (isDebug()) {
@@ -82408,7 +82567,7 @@ function restoreCacheV2(paths_1, primaryKey_1, restoreKeys_1, options_1) {
         info("Lookup only - skipping download");
         return response.matchedKey;
       }
-      archivePath = path10.join(yield createTempDirectory(), getCacheFileName(compressionMethod));
+      archivePath = path10__namespace.join(yield createTempDirectory(), getCacheFileName(compressionMethod));
       debug(`Archive path: ${archivePath}`);
       debug(`Starting download of archive to: ${archivePath}`);
       yield downloadCache(response.signedDownloadUrl, archivePath, options);
@@ -82476,7 +82635,7 @@ function saveCacheV1(paths_1, key_1, options_1) {
       throw new Error(`Path Validation Error: Path(s) specified in the action for caching do(es) not exist, hence no cache is being saved.`);
     }
     const archiveFolder = yield createTempDirectory();
-    const archivePath = path10.join(archiveFolder, getCacheFileName(compressionMethod));
+    const archivePath = path10__namespace.join(archiveFolder, getCacheFileName(compressionMethod));
     debug(`Archive Path: ${archivePath}`);
     try {
       yield createTar(archiveFolder, cachePaths, compressionMethod);
@@ -82545,7 +82704,7 @@ function saveCacheV2(paths_1, key_1, options_1) {
       throw new Error(`Path Validation Error: Path(s) specified in the action for caching do(es) not exist, hence no cache is being saved.`);
     }
     const archiveFolder = yield createTempDirectory();
-    const archivePath = path10.join(archiveFolder, getCacheFileName(compressionMethod));
+    const archivePath = path10__namespace.join(archiveFolder, getCacheFileName(compressionMethod));
     debug(`Archive Path: ${archivePath}`);
     try {
       yield createTar(archiveFolder, cachePaths, compressionMethod);
@@ -82622,7 +82781,7 @@ function saveCacheV2(paths_1, key_1, options_1) {
 }
 
 // src/act/state.ts
-var import_ajv = __toESM(require_ajv(), 1);
+var import_ajv = __toESM(require_ajv());
 var ajv = new import_ajv.Ajv();
 var stateSchema = {
   type: "object",
@@ -82643,7 +82802,7 @@ async function readState(owner, repo, pullNumber, commentBody) {
       keyPrefix
     ]);
     if (cacheHit) {
-      const data = JSON.parse(await fs2__default.promises.readFile(cachePath, "utf8"));
+      const data = JSON.parse(await fs2__namespace.default.promises.readFile(cachePath, "utf8"));
       if (validateState(data)) {
         return data;
       }
@@ -82668,7 +82827,7 @@ async function writeState(owner, repo, pullNumber, state3) {
   const key = `pr-reviewer-${owner}-${repo}-${pullNumber}-${Date.now()}`;
   const cachePath = ".pr-reviewer-state.json";
   try {
-    await fs2__default.promises.writeFile(cachePath, JSON.stringify(state3));
+    await fs2__namespace.default.promises.writeFile(cachePath, JSON.stringify(state3));
     await saveCache2([cachePath], key);
   } catch (error2) {
   }
@@ -82689,7 +82848,7 @@ function hashVerdict(results, status) {
     stage: r.stage
   })).sort((a, b) => a.code.localeCompare(b.code));
   const payload = JSON.stringify({ status, material });
-  return createHash("sha256").update(payload).digest("hex");
+  return crypto2.createHash("sha256").update(payload).digest("hex");
 }
 function createMarker(state3) {
   return `<!-- pr-reviewer:v1 ${JSON.stringify(state3)} -->`;
@@ -83128,7 +83287,13 @@ function overrideConfigWithInputs(config) {
 }
 async function processPullRequest(octokit, owner, repo, pullNumber, config, dryRun, prefetchedBaseChecks) {
   const partial = await collectPullRequestCore(octokit, owner, repo, pullNumber);
-  const checks = await collectCheckRuns(octokit, owner, repo, partial.headSha, partial.baseBranch);
+  const checks = await collectCheckRuns(
+    octokit,
+    owner,
+    repo,
+    partial.headSha,
+    partial.baseBranch
+  );
   const baseChecks = prefetchedBaseChecks ?? await collectBaseCheckRuns(octokit, owner, repo, partial.baseSha);
   const context3 = {
     schemaVersion: 1,
@@ -83167,8 +83332,8 @@ async function processPullRequest(octokit, owner, repo, pullNumber, config, dryR
   const status = deriveStatus(results);
   console.log(`Evaluated PR #${pullNumber}: ${status}`);
   const desiredLabels = deriveDesiredLabels(results, status);
-  const { renderComment } = await import('./render-GZFSU3BZ.js');
-  const reportMarkdown = renderComment(context3, results, status);
+  const { renderComment: renderComment2 } = await Promise.resolve().then(() => (init_render(), render_exports));
+  const reportMarkdown = renderComment2(context3, results, status);
   const isNoBot = context3.labels?.includes("no-bot") || false;
   const effectiveDryRun = dryRun || isNoBot;
   if (isNoBot) {
@@ -83224,7 +83389,15 @@ async function sweepOpenPullRequests(octokit, owner, repo, config, dryRun) {
       const pr = queue.shift();
       try {
         const baseChecks = baseChecksMap.get(pr.base?.sha);
-        const evalPr = await processPullRequest(octokit, owner, repo, pr.number, config, dryRun, baseChecks);
+        const evalPr = await processPullRequest(
+          octokit,
+          owner,
+          repo,
+          pr.number,
+          config,
+          dryRun,
+          baseChecks
+        );
         evaluated.push(evalPr);
       } catch (error2) {
         const reason = error2 instanceof Error ? error2.message : String(error2);
@@ -83257,7 +83430,7 @@ async function runCommand() {
   if (!owner || !repo) {
     throw new Error("Invalid GITHUB_REPOSITORY format");
   }
-  const eventPayload = JSON.parse(fs2__default.readFileSync(eventPath, "utf8"));
+  const eventPayload = JSON.parse(fs2__namespace.default.readFileSync(eventPath, "utf8"));
   let config = await loadConfig(octokit, owner, repo);
   config = overrideConfigWithInputs(config);
   let dryRun = config.dryRun === true;
@@ -83358,5 +83531,5 @@ octokit/dist-bundle/index.js:
 js-yaml/dist/js-yaml.mjs:
   (*! js-yaml 5.2.3 https://github.com/nodeca/js-yaml @license MIT *)
 */
-//# sourceMappingURL=action.js.map
-//# sourceMappingURL=action.js.map
+//# sourceMappingURL=action.cjs.map
+//# sourceMappingURL=action.cjs.map
