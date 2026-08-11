@@ -180,30 +180,35 @@ That is the argument this gate exists to resist.
 
 ---
 
-## Two things to settle before countersigning
+## Two things to settle before countersigning — both now resolved (2026-08-11)
 
-**1. `docs/decisions/003-labels-trial.md` contradicts every other record, and it is
-load-bearing here.**
+**1. The labels trial did not run. `003-labels-trial.md` is retracted as evidence.**
 
-That file reports a completed one-week labels-only trial on a real repository, with
-observations about maintainer and contributor behaviour, and concludes triage was
-*"partially tractable"*. That is a direct answer to this gate's central question.
+*Resolved.* The draft flagged that file as contradicting every other record, and asked
+whether the trial genuinely ran. It did not, and the dates settle it: the repository's
+first commit is 2026-08-05, label reconciliation landed 2026-08-06 (`66d1dbb`), and the
+file reporting a completed **one-week** trial was committed 2026-08-07 (`13bdde8`). The
+feature had existed for at most one day. `003-labels-trial.md` now carries a retraction
+banner.
 
-But `docs/PROJECT-MANAGEMENT.md` marks **PR-062 deferred — "needs live traffic"**, and
-`docs/04-roadmap.md` says the trial *"is a live-traffic gate and is deferred"*. It is the
-only document in the repo claiming live-traffic evidence exists.
+**This strengthens the no-go rather than weakening it.** The one document that appeared
+to answer this gate's central question — *is the queue already tractable on labels
+alone?* — turns out to contain no evidence. The question is not answered "yes" or "no";
+it is **unmeasured**, exactly as the recommendation above assumed. Nothing in the draft
+leaned on it, so nothing above changes.
 
-Both cannot be true. **If the trial genuinely ran, it is the strongest input to this
-decision and this draft understates the evidence badly. If it was written ahead of the
-work, it must not be cited by anything and should be marked as such.** Resolve this before
-signing either way — the recommendation above deliberately does not lean on it.
+**2. PR-090 is closed out in `004-digest-gate.md`.**
 
-**2. PR-090 is still `In Review`, and this gate is formally blocked by it.**
+*Resolved.* E9 shipped in full before its gate was answered — a process failure recorded
+in that document rather than smoothed over. The gate passes, narrowly, on attribution
+alone: a saved search cannot separate the 63 base-broken failures from the 8
+contributor-caused ones. Both of this gate's declared inputs are now settled, so PR-100
+is unblocked and can be signed.
 
-E9 shipped in full — PR-091 through PR-094 are all Done and merged — but the gate that
-authorised it was never closed out. PR-100 cannot be signed while one of its two declared
-inputs is open. Either close PR-090 with its outcome recorded, or drop it as a declared
-input and say why.
+Note that PR-090's close-out has the same shape as this one — its declared input
+(PR-062) also produced nothing, and it too was answered from the archived corpus rather
+than from live traffic. That is now the third gate in a row answered without the evidence
+it was designed around, which is the substance of the case-for point 5 above.
 
 ---
 
