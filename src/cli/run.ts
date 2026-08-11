@@ -143,12 +143,20 @@ async function processPullRequest(
   pullNumber: number,
   config: RepoConfig,
   dryRun: boolean,
-  prefetchedBaseChecks?: CheckRun[]
+  prefetchedBaseChecks?: CheckRun[],
 ): Promise<EvaluatedPR> {
   const partial = await collectPullRequestCore(octokit, owner, repo, pullNumber);
 
-  const checks = await collectCheckRuns(octokit, owner, repo, partial.headSha!, partial.baseBranch!);
-  const baseChecks = prefetchedBaseChecks ?? await collectBaseCheckRuns(octokit, owner, repo, partial.baseSha!);
+  const checks = await collectCheckRuns(
+    octokit,
+    owner,
+    repo,
+    partial.headSha!,
+    partial.baseBranch!,
+  );
+  const baseChecks =
+    prefetchedBaseChecks ??
+    (await collectBaseCheckRuns(octokit, owner, repo, partial.baseSha!));
 
   const context: PullRequestContext = {
     schemaVersion: 1,
@@ -275,7 +283,15 @@ export async function sweepOpenPullRequests(
       const pr = queue.shift()!;
       try {
         const baseChecks = baseChecksMap.get(pr.base?.sha);
-        const evalPr = await processPullRequest(octokit, owner, repo, pr.number, config, dryRun, baseChecks as CheckRun[] | undefined);
+        const evalPr = await processPullRequest(
+          octokit,
+          owner,
+          repo,
+          pr.number,
+          config,
+          dryRun,
+          baseChecks as CheckRun[] | undefined,
+        );
         evaluated.push(evalPr);
       } catch (error) {
         const reason = error instanceof Error ? error.message : String(error);

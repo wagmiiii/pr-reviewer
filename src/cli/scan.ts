@@ -82,7 +82,13 @@ export async function scanCommand(options: ScanOptions): Promise<void> {
   for (const listPr of prs) {
     const partial = await collectPullRequestCore(octokit, owner, repo, listPr.number);
 
-    const checks = await collectCheckRuns(octokit, owner, repo, partial.headSha!, partial.baseBranch!);
+    const checks = await collectCheckRuns(
+      octokit,
+      owner,
+      repo,
+      partial.headSha!,
+      partial.baseBranch!,
+    );
     const baseChecks = await collectBaseCheckRuns(octokit, owner, repo, partial.baseSha!);
 
     // Convert to full PullRequestContext
