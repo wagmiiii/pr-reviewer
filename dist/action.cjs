@@ -83434,9 +83434,13 @@ async function runCommand() {
   let config = await loadConfig(octokit, owner, repo);
   config = overrideConfigWithInputs(config);
   let dryRun = config.dryRun === true;
-  if (eventName === "pull_request") {
-    dryRun = true;
-    console.log("Running in pull_request event mode (dry-run forced)");
+  if (eventName === "pull_request" || eventName === "pull_request_target") {
+    if (eventName === "pull_request") {
+      dryRun = true;
+      console.log("Running in pull_request event mode (dry-run forced)");
+    } else {
+      console.log("Running in pull_request_target event mode (write enabled)");
+    }
     const pullNumber = eventPayload.pull_request?.number;
     if (!pullNumber) {
       throw new Error("Could not find pull request number in event payload");

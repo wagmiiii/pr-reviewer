@@ -339,10 +339,14 @@ export async function runCommand(): Promise<void> {
 
   let dryRun = config.dryRun === true;
 
-  if (eventName === 'pull_request') {
-    // pull_request triggers are strictly read-only mode to prevent fork PRs from failing during actuation
-    dryRun = true;
-    console.log('Running in pull_request event mode (dry-run forced)');
+  if (eventName === 'pull_request' || eventName === 'pull_request_target') {
+    if (eventName === 'pull_request') {
+      // pull_request triggers are strictly read-only mode to prevent fork PRs from failing during actuation
+      dryRun = true;
+      console.log('Running in pull_request event mode (dry-run forced)');
+    } else {
+      console.log('Running in pull_request_target event mode (write enabled)');
+    }
 
     const pullNumber = eventPayload.pull_request?.number;
     if (!pullNumber) {
