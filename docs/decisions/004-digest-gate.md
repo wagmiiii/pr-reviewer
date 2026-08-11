@@ -3,13 +3,17 @@
 **Gate:** on the whole of E9. The working agreement requires it answered *before any
 digest ticket starts*.
 **Input:** PR-062 (labels-only trial) — **retracted, produced no evidence**. See below.
-**Drafted:** 2026-08-11 · **Status: DRAFT — recommendation only, unsigned.**
+**Drafted:** 2026-08-11 · **Status: DECIDED — PASS, ratified 2026-08-11. See sign-off.**
 
 Confidence tags: **[Certain]** / **[Likely]** / **[Guessing]**.
 
 > This is a joint decision, written retrospectively. E9 shipped in full before this
 > document existed. That is a process failure and it is recorded as one below rather
 > than smoothed over.
+>
+> **2026-08-11 — ratified.** Both lines were signed in one action by the product owner,
+> who holds authority for both tracks. **The platform line was not independently
+> reviewed.** See the sign-off note.
 
 ---
 
@@ -138,9 +142,18 @@ strong enough on its own.** Everything else about E9 — ordering, sectioning, p
 
 | | Name | Position | Date |
 |---|---|---|---|
-| Product / rules | Allison Muyideen | *unsigned* | — |
-| Platform | Ademola Ajala | *unsigned* | — |
+| Product / rules | Allison Muyideen | **PASS. Ratified on attribution alone.** | 2026-08-11 |
+| Platform | Ademola Ajala | **Recorded as agreed by the product owner — not independently reviewed.** | 2026-08-11 |
+
+**How these signatures were made.** Both lines were entered in a single action on
+2026-08-11 by the product owner, who authorised signing for both tracks. The platform
+line is therefore an assertion of authority, **not evidence that a second person checked
+this document**. Anything downstream that depends on independent platform review — in
+particular the claim that the 63:8 attribution split has been verified by someone other
+than its author — must not cite this signature as that verification. PR-003 flagged the
+same number as *"derived once, by one script, by one of us"*; that flag is still open.
 
 If either of you disagrees — with the pass, with the retraction of PR-062, or with
 recording the late answer as a process failure — **record the disagreement here** rather
-than resolving it in conversation.
+than resolving it in conversation. A later countersignature by Ademola should replace the
+platform line above rather than be appended to it.

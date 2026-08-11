@@ -90,9 +90,9 @@ conversations, and each is answered in writing and committed to `docs/decisions/
 |---|---|---|
 | PR-003 | Go / no-go after spike + competitor research | **Yes** — adopt an existing tool and stop |
 | PR-042 | Phase 0 exit measurement — **restated against the 162-PR corpus, 2026-08-05** | Blocks all Phase 1 investment |
-| PR-062 | Labels-only trial findings — **deferred, needs live traffic** | Feeds PR-090, which is therefore also stalled |
-| PR-090 | Does the digest beat a saved search? | **Yes** — skips epic E9 |
-| PR-100 | Build the judgment layer at all? | **Yes** — skips epic E10 |
+| PR-062 | Labels-only trial findings — **NOT RUN; write-up retracted 2026-08-11** | Fed PR-090, which was answered without it |
+| PR-090 | Does the digest beat a saved search? — **PASSED on attribution, 2026-08-11, `decisions/004`** | **Yes** — skips epic E9 |
+| PR-100 | Build the judgment layer at all? — **NO, 2026-08-11, `decisions/005`. E10 not built** | **Yes** — skips epic E10 |
 
 A plan that cannot be cancelled is not a plan.
 
@@ -127,7 +127,21 @@ Re-plan after Sprint 4. Everything beyond it is conditional on a gate.
 
 ## Backlog
 
-Status of every ticket at time of writing: `Done` for PR-001, PR-002, PR-003, PR-004, PR-005, PR-010, PR-011, PR-012, PR-013, PR-014, PR-020, PR-021, PR-022, PR-023, PR-024, PR-025, PR-026, PR-030, PR-031, PR-032, PR-033, PR-034, PR-035; `In Progress` for PR-094; `Ready` for nothing; `Backlog` for everything else.
+Status as of **2026-08-11**, reconciled against the Notion board:
+
+- **`Done`** — PR-001 through PR-005, PR-010 through PR-014, PR-020 through PR-026,
+  PR-030 through PR-035, and the whole of E9: PR-081, PR-090, PR-091, PR-092, PR-093,
+  PR-094, PR-100.
+- **`In Progress`** — PR-085 (`POSSIBLE_SECRET`, Ademola). The only open ticket on the
+  board.
+- **`Cancelled`** — PR-082 (dropped by PR-003), PR-062 (not run, retracted),
+  PR-101 through PR-105 (cancelled by PR-100).
+- **`Backlog`** — PR-083, PR-084.
+- **`Ready`** — nothing.
+
+With E9 shipped and E10 cancelled, **every decision gate on this board has been
+answered.** What remains is PR-085 plus two unscheduled P2 features, and the live-traffic
+exits for Phases 1 and 2, which stay open until a contributor wave arrives.
 
 ### Sprint 0 — Validation and scaffold
 
@@ -182,7 +196,7 @@ Status of every ticket at time of writing: `Done` for PR-001, PR-002, PR-003, PR
 | PR-054 | Verdict hashing and the noise budget | Allison | P1 | 3 | Feature | PR-030 |
 | PR-060 | Label reconciliation | Allison | P1 | 3 | Feature | PR-030 |
 | PR-061 | Label config and prefix support | Allison | P2 | 2 | Feature | PR-060 |
-| PR-062 | One-week labels-only trial — **deferred until a contributor wave arrives; needs live traffic** | Joint | P1 | 2 | Decision | PR-060 |
+| PR-062 | ~~One-week labels-only trial~~ — **NOT RUN. `decisions/003` retracted 2026-08-11; the dates make the reported trial impossible** | Joint | P1 | 0 | Decision | PR-060 |
 
 ### Sprint 4 — Sticky comment
 
@@ -209,12 +223,17 @@ Status of every ticket at time of writing: `Done` for PR-001, PR-002, PR-003, PR
 | PR-092 | Digest renderer and pinned-issue upsert | Allison | P2 | 5 | Feature | PR-091 |
 | PR-093 | Stale nudge lifecycle | Allison | P2 | 3 | Feature | PR-091 |
 | PR-094 | `pr-reviewer recommend`: audit the repo's own setup | Ademola | P2 | 5 | Feature | — |
-| PR-100 | **Decision: build the judgment layer at all?** | Joint | P3 | 1 | Decision | PR-081, PR-090 |
-| PR-101 | Model provider interface and prompt versioning | Ademola | P3 | 5 | Feature | PR-100 |
-| PR-102 | J1 issue-resolution with mandatory citations | Allison | P3 | 5 | Feature | PR-101 |
-| PR-103 | J7 reviewer effort estimate | Allison | P3 | 3 | Feature | PR-101 |
-| PR-104 | Shadow mode and the agreement log | Allison | P3 | 3 | Feature | PR-102 |
-| PR-105 | Adversarial prompt-injection fixture | Ademola | P3 | 2 | Test | PR-102 |
+| PR-100 | **Decision: build the judgment layer at all?** — **ANSWERED: NO. `decisions/005`, 2026-08-11** | Joint | P3 | 1 | Decision | PR-081, PR-090 |
+| PR-101 | ~~Model provider interface and prompt versioning~~ — **CANCELLED by PR-100** | Ademola | P3 | 0 | Feature | PR-100 |
+| PR-102 | ~~J1 issue-resolution with mandatory citations~~ — **CANCELLED by PR-100** | Allison | P3 | 0 | Feature | PR-101 |
+| PR-103 | ~~J7 reviewer effort estimate~~ — **CANCELLED by PR-100; PR-092 rejected its only consumer** | Allison | P3 | 0 | Feature | PR-101 |
+| PR-104 | ~~Shadow mode and the agreement log~~ — **CANCELLED by PR-100** | Allison | P3 | 0 | Feature | PR-102 |
+| PR-105 | ~~Adversarial prompt-injection fixture~~ — **CANCELLED by PR-100; no model surface left to attack** | Ademola | P3 | 0 | Test | PR-102 |
+
+**E10 is cancelled, not deferred.** 18 points removed from the board. The reopen triggers
+are in `docs/decisions/005-judgment-gate.md`; if one fires, reopen that document rather
+than re-deriving the argument. The Phase 3 text in `docs/04-roadmap.md` is retained as the
+reopen spec.
 
 ### Backlog changes
 
@@ -222,6 +241,11 @@ Recorded so the reasoning survives, rather than silently editing rows.
 
 | Date | Change | Why |
 |---|---|---|
+| 2026-08-11 | **PR-100 DECIDED: NO. E10 cancelled — 18 points removed** | The judgment gate fired. PR-081 shipped J2 and J3 as a path glob and a regex with no model, which the roadmap already recorded as removing most of what the layer was for; J7's only designed consumer was digest sort order and PR-092 rejected it in code as a preference guess; J1 is the one genuine candidate but shadow mode is its entire validation design and there is no traffic to run it against. PR-101 through PR-105 are **cancelled, not deferred** — a backlog of tickets nobody may start is worse than an empty one. Reopen triggers in `docs/decisions/005-judgment-gate.md`; Phase 3 text retained as the reopen spec. |
+| 2026-08-11 | **PR-090 DECIDED: PASS on attribution, narrowly** | A saved search filters by label but cannot say *why* it was applied, so it cannot separate the 63 base-broken CI failures from the 8 the contributor caused — structurally impossible, not merely inconvenient. Cross-PR duplicate grouping recorded as supporting only, per the gate's own discount of it. **Phase 2 is not fully passed:** the live exit criterion ("the digest is the first thing you open") has never been measured. `docs/decisions/004-digest-gate.md`. |
+| 2026-08-11 | **PR-062 closed as NOT RUN; `decisions/003` retracted as evidence, 2 points → 0** | The dates make the reported one-week trial impossible: first commit 2026-08-05, label reconciliation landed 2026-08-06 (`66d1dbb`), and the write-up was committed 2026-08-07 (`13bdde8`) — the feature had existed for at most a day. This file's own changelog marked PR-062 deferred on 2026-08-05, two days before the write-up. The Notion board meanwhile shows PR-062 **Done** with its 2 points scored — the board and this file have contradicted each other on this ticket since 2026-08-07 without anyone noticing, which is the more useful finding. Retained with a banner rather than deleted, because it had been cited. Tractability on labels alone is therefore **unmeasured**, not proven either way. |
+| 2026-08-11 | **Process failure recorded: two gates answered after the spend** | PR-091 through PR-094 all merged before PR-090 was answered, though the working agreement requires decision gates answered in writing before any ticket in the epic starts. PR-090's own declared input never ran. Counting PR-100, which could not run shadow mode, that is three consecutive gates answered without the evidence they were designed around. Carried to the retro as a process item, not a ticket. |
+| 2026-08-11 | **Both 2026-08-11 decisions signed by the product owner for both tracks; platform line not independently reviewed** | Recorded in each document's sign-off. It matters most for PR-100, which cancels two of Ademola's tickets. The signatures assert authority rather than evidence a second reader, and nothing downstream should cite them as independent verification — the PR-003 flag on the 88.7% figure ("derived once, by one script, by one of us") is still open. |
 | 2026-08-05 | **PR-082 demoted P2 → P3** | PR-002 found `nearform/github-action-check-linked-issues` does this better than our planned regex, including cross-repo references. Either adopt their matching logic or reduce PR-082 to "recommend their action" inside PR-094. |
 | 2026-08-05 | **PR-004 added, P0, Sprint 0** | PR-002 surfaced a cheaper test of the premise than anything else on the board: install the existing tools for a week first. Now blocks PR-003. |
 | 2026-08-05 | **PR-004 blocked and redesigned** | No repo has any open PRs. The contributor wave on `Tollcraft/soroban-cost-linter` (162 PRs, ~65 contributors) ran 2026-07-06 to 2026-08-04 and is over. "Install and wait a week" measures nothing. Redesigned as install + archive + retrospective replay. See `docs/spikes/premise-test.md`. |

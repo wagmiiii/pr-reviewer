@@ -155,6 +155,20 @@ explicitly open. Do not mark it passed.
 
 ## Phase 2 — Maintainer digest *(conditional)*
 
+> ## ✅ GATE PASSED on attribution — 2026-08-11 · live exit still open
+>
+> **PR-090 answered YES, narrowly.** See `docs/decisions/004-digest-gate.md`. The digest
+> earns its place on one argument: a saved search can filter by label but cannot say *why*
+> it was applied, so it cannot separate the **63** base-broken CI failures from the **8**
+> the contributor caused. Cross-PR duplicate grouping is supporting, not load-bearing.
+>
+> **This phase is not fully passed.** The exit criterion below — "the digest is the first
+> thing you open" — has never been measured and remains deferred. Nobody has opened the
+> digest.
+>
+> Two process notes recorded rather than smoothed over: the gate was answered **after**
+> PR-091 through PR-094 had all shipped, and its declared input (PR-062) never ran.
+
 **Do not start this phase without answering:** what does the digest show that
 `is:pr is:open label:ready-for-review` does not? If the honest answer is "it's
 prettier", skip to Phase 3 or stop.
@@ -190,6 +204,23 @@ substitute for the exit criterion.
 ---
 
 ## Phase 3 — Judgment layer *(two checks, shadow mode)*
+
+> ## ❌ NOT BUILT — kill condition fired 2026-08-11
+>
+> **PR-100 answered NO.** See `docs/decisions/005-judgment-gate.md`. The kill condition at
+> the foot of this section — *"if Phases 1–2 have made the queue tractable on labels and
+> deterministic checks alone, J1 is a nice-to-have and J7 is a novelty"* — fired, though
+> not in the way it was written: tractability was never measured, because the trial that
+> would have measured it never ran (`003-labels-trial.md`, retracted).
+>
+> The decisive facts were that PR-081 shipped J2 and J3 as a path glob and a regex with no
+> model, that J7's only designed consumer (digest sort order) explicitly rejected it in
+> PR-092, and that J1's entire validation design — shadow mode — needs live traffic that
+> does not exist.
+>
+> **The text below is left intact deliberately. It is the reopen spec**, and the reopen
+> triggers are listed in the decision document. PR-101 through PR-105 are cancelled, not
+> deferred.
 
 The blockers that made this phase indefinite are resolved. Recorded here because the
 resolutions are the reason the phase is small:
