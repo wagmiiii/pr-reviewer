@@ -83,7 +83,7 @@ completes. Correct it from actuals; do not defend it.
 
 ## Decision gates
 
-Five tickets can legitimately end or redirect the project. They are tickets, not
+Six tickets can legitimately end or redirect the project. They are tickets, not
 conversations, and each is answered in writing and committed to `docs/decisions/`.
 
 | Ref | Gate | Can it stop the project? |
@@ -93,6 +93,7 @@ conversations, and each is answered in writing and committed to `docs/decisions/
 | PR-062 | Labels-only trial findings — **NOT RUN; write-up retracted 2026-08-11** | Fed PR-090, which was answered without it |
 | PR-090 | Does the digest beat a saved search? — **PASSED on attribution, 2026-08-11, `decisions/004`** | **Yes** — skips epic E9 |
 | PR-100 | Build the judgment layer at all? — **NO, 2026-08-11, `decisions/005`. E10 not built** | **Yes** — skips epic E10 |
+| PR-110 | **Does this project have a user? — OPEN, P0, the only open question on the board** | **Yes** — stops the project outright |
 
 A plan that cannot be cancelled is not a plan.
 
@@ -130,18 +131,23 @@ Re-plan after Sprint 4. Everything beyond it is conditional on a gate.
 Status as of **2026-08-11**, reconciled against the Notion board:
 
 - **`Done`** — PR-001 through PR-005, PR-010 through PR-014, PR-020 through PR-026,
-  PR-030 through PR-035, and the whole of E9: PR-081, PR-090, PR-091, PR-092, PR-093,
-  PR-094, PR-100.
-- **`In Progress`** — PR-085 (`POSSIBLE_SECRET`, Ademola). The only open ticket on the
-  board.
-- **`Cancelled`** — PR-082 (dropped by PR-003), PR-062 (not run, retracted),
-  PR-101 through PR-105 (cancelled by PR-100).
-- **`Backlog`** — PR-083, PR-084.
+  PR-030 through PR-035, all of E8 that survived (PR-080, PR-081, PR-083, PR-084,
+  PR-085), and all of E9 (PR-090 through PR-094). PR-100 answered.
+- **`In Progress`** — nothing.
 - **`Ready`** — nothing.
+- **`Backlog`, and the only real work left** — **PR-110** (does this project have a user?,
+  P0, joint) and **PR-086** (`confidence` scale, P2, Ademola).
+- **Cancelled, kept at 0 points so the reasoning survives** — PR-062 (not run, retracted),
+  PR-082 (dropped by PR-003), PR-101 through PR-105 (cancelled by PR-100).
 
-With E9 shipped and E10 cancelled, **every decision gate on this board has been
-answered.** What remains is PR-085 plus two unscheduled P2 features, and the live-traffic
-exits for Phases 1 and 2, which stay open until a contributor wave arrives.
+Every decision gate that existed on 2026-08-11 has been answered, E9 shipped, and E10 is
+cancelled. **The engineering backlog is empty.**
+
+What is left is not a feature. Phase 1's noise gate, Phase 2's "the digest is the first
+thing you open", and PR-100's reopen trigger all wait on a contributor wave that has not
+arrived, and the target repo has zero open PRs. **PR-110 asks whether that wave is ever
+coming, and it is a P0 for the same reason PR-003 was:** it can end the project, and
+building anything else before answering it is a bet that nobody has placed in writing.
 
 ### Sprint 0 — Validation and scaffold
 
@@ -217,7 +223,8 @@ exits for Phases 1 and 2, which stay open until a contributor wave arrives.
 | PR-082 | ~~Issue-linkage heuristics~~ — **DROPPED by PR-003; folded into PR-094 as a recommendation** | Allison | P3 | 0 | Feature | — |
 | PR-083 | Duplicate-PR detection and threshold tuning | Ademola | P2 | 5 | Feature | PR-080 |
 | PR-084 | `NEW_DEPENDENCY` detection (npm only) | Ademola | P2 | 3 | Feature | PR-080 |
-| PR-085 | `POSSIBLE_SECRET` detection | Ademola | P3 | 3 | Feature | PR-080 |
+| PR-085 | `POSSIBLE_SECRET` detection — **tuning log in `docs/spikes/possible-secret-tuning.md`** | Ademola | P3 | 3 | Feature | PR-080 |
+| PR-086 | `confidence` scale is inconsistent across rules — **found during PR-085; latent, nothing reads the field yet** | Ademola | P2 | 1 | Chore | — |
 | PR-090 | **Decision: does the digest beat a saved search?** | Joint | P2 | 1 | Decision | PR-062 |
 | PR-091 | Scheduled sweep across all open PRs | Ademola | P2 | 3 | Feature | PR-090 |
 | PR-092 | Digest renderer and pinned-issue upsert | Allison | P2 | 5 | Feature | PR-091 |
@@ -230,6 +237,8 @@ exits for Phases 1 and 2, which stay open until a contributor wave arrives.
 | PR-104 | ~~Shadow mode and the agreement log~~ — **CANCELLED by PR-100** | Allison | P3 | 0 | Feature | PR-102 |
 | PR-105 | ~~Adversarial prompt-injection fixture~~ — **CANCELLED by PR-100; no model surface left to attack** | Ademola | P3 | 0 | Test | PR-102 |
 
+| PR-110 | **Decision: does this project have a user?** — **OPEN. P0. The only open question on the board** | Joint | P0 | 2 | Decision | — |
+
 **E10 is cancelled, not deferred.** 18 points removed from the board. The reopen triggers
 are in `docs/decisions/005-judgment-gate.md`; if one fires, reopen that document rather
 than re-deriving the argument. The Phase 3 text in `docs/04-roadmap.md` is retained as the
@@ -241,6 +250,8 @@ Recorded so the reasoning survives, rather than silently editing rows.
 
 | Date | Change | Why |
 |---|---|---|
+| 2026-08-11 | **PR-110 added: "Does this project have a user?" — P0, joint, the only open question** | With E9 shipped, E10 cancelled and PR-085 landed, the engineering backlog is empty and every remaining exit criterion waits on a contributor wave that has not arrived. `decisions/005` deliberately refused to settle this inside a technical gate — *"an argument about whether this project has a user… belongs in its own decision"* — so it is now its own ticket. **The evidence-gathering is written into the acceptance criteria rather than filed as a blocking input spike**, because three consecutive gates have already stalled on evidence nobody collected (PR-062 never ran, PR-090 fell back to the corpus, PR-100 could not run shadow mode). Three permitted outcomes: adopt a named repo, wait with a dated review point, or stop. |
+| 2026-08-11 | **PR-086 added: `confidence` scale inconsistent across rules** | Found while finishing PR-085. `src/rules/dependencies.ts` returns `100` and `90`; every other rule uses 0–1. `BaseRuleResult.confidence` is an undocumented bare `number`, so nothing catches it. Latent today because no consumer reads the field — the first one that sorts or filters on it will silently rank every `NEW_DEPENDENCY` result above everything else, and it will present as a ranking bug three files from its cause. Filed rather than fixed inside PR-085, since it belongs to PR-084's work. |
 | 2026-08-11 | **PR-100 DECIDED: NO. E10 cancelled — 18 points removed** | The judgment gate fired. PR-081 shipped J2 and J3 as a path glob and a regex with no model, which the roadmap already recorded as removing most of what the layer was for; J7's only designed consumer was digest sort order and PR-092 rejected it in code as a preference guess; J1 is the one genuine candidate but shadow mode is its entire validation design and there is no traffic to run it against. PR-101 through PR-105 are **cancelled, not deferred** — a backlog of tickets nobody may start is worse than an empty one. Reopen triggers in `docs/decisions/005-judgment-gate.md`; Phase 3 text retained as the reopen spec. |
 | 2026-08-11 | **PR-090 DECIDED: PASS on attribution, narrowly** | A saved search filters by label but cannot say *why* it was applied, so it cannot separate the 63 base-broken CI failures from the 8 the contributor caused — structurally impossible, not merely inconvenient. Cross-PR duplicate grouping recorded as supporting only, per the gate's own discount of it. **Phase 2 is not fully passed:** the live exit criterion ("the digest is the first thing you open") has never been measured. `docs/decisions/004-digest-gate.md`. |
 | 2026-08-11 | **PR-062 closed as NOT RUN; `decisions/003` retracted as evidence, 2 points → 0** | The dates make the reported one-week trial impossible: first commit 2026-08-05, label reconciliation landed 2026-08-06 (`66d1dbb`), and the write-up was committed 2026-08-07 (`13bdde8`) — the feature had existed for at most a day. This file's own changelog marked PR-062 deferred on 2026-08-05, two days before the write-up. The Notion board meanwhile shows PR-062 **Done** with its 2 points scored — the board and this file have contradicted each other on this ticket since 2026-08-07 without anyone noticing, which is the more useful finding. Retained with a banner rather than deleted, because it had been cited. Tractability on labels alone is therefore **unmeasured**, not proven either way. |
