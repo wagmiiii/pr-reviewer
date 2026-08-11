@@ -81,10 +81,10 @@ which is the problem this project exists to solve. **The integration is the prod
 Create `.github/workflows/pr-reviewer.yml` in your repository. The action requires `pull-requests: write` and `issues: write` to manage labels and comments. **It will never request `contents: write`.**
 
 ```yaml
-name: PR Reviewer
+name: PR Triage Bot
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize, reopened, ready_for_review]
   workflow_run:
     workflows: ["CI"] # Replace with your CI workflow name
