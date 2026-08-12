@@ -336,6 +336,17 @@ export interface FactRuleResult extends BaseRuleResult {
 export interface HeuristicRuleResult extends BaseRuleResult {
   readonly bucket: 'heuristic';
   readonly severity: 'warning' | 'info';
+  /**
+   * How sure the rule is, on a **0–1 scale**: `1` is certain, `0.5` is a coin
+   * flip. Not a percentage — `90` is a bug, not "90%".
+   *
+   * PR-086: `dependencies.ts` returned `100` and `90` here for a week without
+   * anything noticing, because nothing reads the field yet. The first consumer
+   * that sorts or filters on it would have ranked every `NEW_DEPENDENCY`
+   * result above everything else, and it would have presented as a ranking bug
+   * three files from its cause. Enforced by
+   * `tests/rules/confidence-scale.test.ts`, not by this comment.
+   */
   readonly confidence: number;
   readonly thresholdTuned?: boolean;
 }
