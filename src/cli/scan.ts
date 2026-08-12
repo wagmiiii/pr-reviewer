@@ -1,5 +1,5 @@
 import { Octokit } from 'octokit';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 import type { PullRequestContext, RepoConfig } from '../types.js';
 import { collectPullRequestCore } from '../collect/pr.js';
 import { collectCheckRuns, collectBaseCheckRuns } from '../collect/checks.js';
