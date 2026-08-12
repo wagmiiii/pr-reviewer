@@ -16,3 +16,7 @@
 export * from './labels.js';
 export * from './comment.js';
 export * from './digest.js';
+// Rendering a comment is pure and safe to call without writing anything, which
+// is what `pr-reviewer preview` relies on. It was omitted here, so the only way
+// to see a contributor-facing comment was to reach into the module directly.
+export * from './render.js';
