@@ -6,7 +6,6 @@ import fs from 'fs';
 import path from 'path';
 import { Octokit } from 'octokit';
 import * as yaml from 'js-yaml';
-import yaml__default from 'js-yaml';
 import * as core from '@actions/core';
 
 // node_modules/ajv/dist/compile/codegen/code.js
@@ -7407,7 +7406,7 @@ async function loadConfig(octokit, owner, repo) {
     });
     if ("content" in response.data) {
       const content = Buffer.from(response.data.content, "base64").toString("utf-8");
-      const parsed = yaml__default.load(content);
+      const parsed = yaml.load(content);
       if (typeof parsed !== "object" || parsed === null) {
         throw new Error("Config is not a valid YAML object.");
       }
