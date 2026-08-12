@@ -128,15 +128,16 @@ Re-plan after Sprint 4. Everything beyond it is conditional on a gate.
 
 ## Backlog
 
-Status as of **2026-08-11**, reconciled against the Notion board:
+Status as of **2026-08-12**, reconciled against the Notion board:
 
 - **`Done`** — PR-001 through PR-005, PR-010 through PR-014, PR-020 through PR-026,
   PR-030 through PR-035, all of E8 that survived (PR-080, PR-081, PR-083, PR-084,
-  PR-085), and all of E9 (PR-090 through PR-094). PR-100 answered.
+  PR-085, PR-086), and all of E9 (PR-090 through PR-094). PR-100 answered.
 - **`In Progress`** — nothing.
 - **`Ready`** — nothing.
-- **`Backlog`, and the only real work left** — **PR-110** (does this project have a user?,
-  P0, joint) and **PR-086** (`confidence` scale, P2, Ademola).
+- **`Backlog`, and the only work left of any kind** — **PR-110** (does this project have
+  a user?, P0, joint). It is a decision, not code. **There is no engineering ticket open
+  on this board.**
 - **Cancelled, kept at 0 points so the reasoning survives** — PR-062 (not run, retracted),
   PR-082 (dropped by PR-003), PR-101 through PR-105 (cancelled by PR-100).
 
@@ -224,7 +225,7 @@ building anything else before answering it is a bet that nobody has placed in wr
 | PR-083 | Duplicate-PR detection and threshold tuning | Ademola | P2 | 5 | Feature | PR-080 |
 | PR-084 | `NEW_DEPENDENCY` detection (npm only) | Ademola | P2 | 3 | Feature | PR-080 |
 | PR-085 | `POSSIBLE_SECRET` detection — **tuning log in `docs/spikes/possible-secret-tuning.md`** | Ademola | P3 | 3 | Feature | PR-080 |
-| PR-086 | `confidence` scale is inconsistent across rules — **found during PR-085; latent, nothing reads the field yet** | Ademola | P2 | 1 | Chore | — |
+| PR-086 | `confidence` scale is inconsistent across rules — **DONE 2026-08-12, PR #56. Scale documented on the type; guarded by `tests/rules/confidence-scale.test.ts`** | Ademola | P2 | 1 | Chore | — |
 | PR-090 | **Decision: does the digest beat a saved search?** | Joint | P2 | 1 | Decision | PR-062 |
 | PR-091 | Scheduled sweep across all open PRs | Ademola | P2 | 3 | Feature | PR-090 |
 | PR-092 | Digest renderer and pinned-issue upsert | Allison | P2 | 5 | Feature | PR-091 |
@@ -250,6 +251,7 @@ Recorded so the reasoning survives, rather than silently editing rows.
 
 | Date | Change | Why |
 |---|---|---|
+| 2026-08-12 | **PR-086 DONE — PR #56. The engineering backlog is now empty in fact, not just in plan** | `confidence` is a documented 0–1 scale on `HeuristicRuleResult`, `dependencies.ts` rescaled from `100`/`90` to `1`/`0.9`, no behaviour change because nothing reads the field yet. **The ticket's proposed guard was not sufficient on its own, and that is the transferable finding:** the fixture-replay test over `CORE_RULES` *passed* with `confidence: 90` reintroduced, because no fixture in the 162-PR corpus exercises the branch that carried the bug. A test that cannot fail on the defect that motivated it is not a guard. It shipped alongside a text scan of the `confidence:` literals in `src/rules`, modelled on `architecture.test.ts`, which reaches branches the corpus never hits. Corpus coverage is not the same as branch coverage — worth remembering before the next "the fixtures will catch it" argument. |
 | 2026-08-11 | **PR-110 added: "Does this project have a user?" — P0, joint, the only open question** | With E9 shipped, E10 cancelled and PR-085 landed, the engineering backlog is empty and every remaining exit criterion waits on a contributor wave that has not arrived. `decisions/005` deliberately refused to settle this inside a technical gate — *"an argument about whether this project has a user… belongs in its own decision"* — so it is now its own ticket. **The evidence-gathering is written into the acceptance criteria rather than filed as a blocking input spike**, because three consecutive gates have already stalled on evidence nobody collected (PR-062 never ran, PR-090 fell back to the corpus, PR-100 could not run shadow mode). Three permitted outcomes: adopt a named repo, wait with a dated review point, or stop. |
 | 2026-08-11 | **PR-086 added: `confidence` scale inconsistent across rules** | Found while finishing PR-085. `src/rules/dependencies.ts` returns `100` and `90`; every other rule uses 0–1. `BaseRuleResult.confidence` is an undocumented bare `number`, so nothing catches it. Latent today because no consumer reads the field — the first one that sorts or filters on it will silently rank every `NEW_DEPENDENCY` result above everything else, and it will present as a ranking bug three files from its cause. Filed rather than fixed inside PR-085, since it belongs to PR-084's work. |
 | 2026-08-11 | **PR-100 DECIDED: NO. E10 cancelled — 18 points removed** | The judgment gate fired. PR-081 shipped J2 and J3 as a path glob and a regex with no model, which the roadmap already recorded as removing most of what the layer was for; J7's only designed consumer was digest sort order and PR-092 rejected it in code as a preference guess; J1 is the one genuine candidate but shadow mode is its entire validation design and there is no traffic to run it against. PR-101 through PR-105 are **cancelled, not deferred** — a backlog of tickets nobody may start is worse than an empty one. Reopen triggers in `docs/decisions/005-judgment-gate.md`; Phase 3 text retained as the reopen spec. |
