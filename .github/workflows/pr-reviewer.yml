@@ -20,6 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4 # Need to checkout for dogfooding if using ./
-      - uses: wagmiiii/pr-reviewer@feat/sweep-performance-optimizations
+      # Dogfooding is only evidence if it runs the code we ship. This was
+      # pinned at `feat/sweep-performance-optimizations` for long enough that
+      # everything merged after it — PR-085, PR-086 — was absent from the bot
+      # reviewing our own PRs, while the green `triage` check implied otherwise.
+      - uses: wagmiiii/pr-reviewer@main
         with:
           dryRun: 'false'
