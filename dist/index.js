@@ -1,9 +1,9 @@
-import { __commonJS, __export, deriveStatus, __toESM, runRules, CORE_RULES } from './chunk-TGQFW4ZB.js';
-export { rules_exports as rules } from './chunk-TGQFW4ZB.js';
+import { __commonJS, __export, deriveStatus, renderComment, __toESM, runRules, CORE_RULES } from './chunk-TZLAKU6E.js';
+export { rules_exports as rules } from './chunk-TZLAKU6E.js';
 import { createHash } from 'crypto';
 import * as cache from '@actions/cache';
-import fs from 'fs';
-import path from 'path';
+import fs, { readdirSync, readFileSync } from 'fs';
+import path, { join } from 'path';
 import { Octokit } from 'octokit';
 import * as yaml from 'js-yaml';
 import * as core from '@actions/core';
@@ -6695,7 +6695,8 @@ __export(act_exports, {
   createMarker: () => createMarker,
   deriveDesiredLabels: () => deriveDesiredLabels,
   hashVerdict: () => hashVerdict,
-  reconcileLabels: () => reconcileLabels
+  reconcileLabels: () => reconcileLabels,
+  renderComment: () => renderComment
 });
 
 // src/act/labels.ts
@@ -7022,7 +7023,9 @@ async function pinIssue(octokit, nodeId) {
 // src/cli/index.ts
 var cli_exports = {};
 __export(cli_exports, {
+  previewCommand: () => previewCommand,
   recommend: () => recommend,
+  renderPreview: () => renderPreview,
   runCommand: () => runCommand,
   scanCommand: () => scanCommand,
   sweepOpenPullRequests: () => sweepOpenPullRequests
@@ -7616,8 +7619,8 @@ async function processPullRequest(octokit, owner, repo, pullNumber, config, dryR
   const status = deriveStatus(results);
   console.log(`Evaluated PR #${pullNumber}: ${status}`);
   const desiredLabels = deriveDesiredLabels(results, status);
-  const { renderComment } = await import('./render-JCUPLNYS.js');
-  const reportMarkdown = renderComment(context, results, status);
+  const { renderComment: renderComment2 } = await import('./render-OAQDKPJ4.js');
+  const reportMarkdown = renderComment2(context, results, status);
   const isNoBot = context.labels?.includes("no-bot") || false;
   const effectiveDryRun = dryRun || isNoBot;
   if (isNoBot) {
@@ -7749,6 +7752,78 @@ async function runCommand() {
   } else {
     console.log(`Unsupported event: ${eventName}. Doing nothing.`);
   }
+}
+function loadFixtures(dir) {
+  return readdirSync(dir).filter((file) => file.endsWith(".context.json")).map(
+    (file) => JSON.parse(readFileSync(join(dir, file), "utf8"))
+  ).sort((a, b) => a.number - b.number);
+}
+function evaluate(context) {
+  const results = runRules(context, CORE_RULES);
+  return {
+    context,
+    results,
+    status: deriveStatus(results),
+    failures: results.filter((r) => r.outcome === "fail")
+  };
+}
+function excerptCoverage(evaluated) {
+  const failing = evaluated.filter(
+    (e) => e.failures.some((r) => r.code === "CI_FAILING")
+  );
+  if (failing.length === 0) return void 0;
+  const withExcerpt = failing.filter(
+    (e) => (e.context.checks ?? []).some((check) => check.failureExcerpt)
+  );
+  if (withExcerpt.length === failing.length) return void 0;
+  return `note: ${failing.length - withExcerpt.length} of ${failing.length} CI_FAILING fixture(s) carry no failureExcerpt, so the log block of a CI_FAILING comment is unexercised here. Only a live run covers it.`;
+}
+function renderPreview(options) {
+  const evaluated = loadFixtures(options.fixturesDir).map(evaluate);
+  const lines = [];
+  if (options.number !== void 0) {
+    const match = evaluated.find((e) => e.context.number === options.number);
+    if (!match) {
+      throw new Error(`No fixture recorded for PR #${options.number}.`);
+    }
+    lines.push(`PR #${match.context.number} \u2014 ${match.status}`);
+    lines.push("=".repeat(70));
+    lines.push(renderComment(match.context, match.results, match.status));
+    const note2 = excerptCoverage([match]);
+    if (note2) lines.push("", note2);
+    return lines.join("\n");
+  }
+  const interesting = evaluated.filter(
+    (e) => e.failures.length > 0 && (!options.only || e.status === options.only)
+  );
+  lines.push(
+    `${evaluated.length} fixtures, ${interesting.length} with findings` + (options.only ? ` (filtered to ${options.only})` : "")
+  );
+  lines.push("");
+  const byStatus = /* @__PURE__ */ new Map();
+  for (const item of interesting) {
+    byStatus.set(item.status, [...byStatus.get(item.status) ?? [], item]);
+  }
+  for (const [status, items] of [...byStatus.entries()].sort()) {
+    const codes = /* @__PURE__ */ new Map();
+    for (const item of items) {
+      for (const failure of item.failures) {
+        codes.set(failure.code, (codes.get(failure.code) ?? 0) + 1);
+      }
+    }
+    const breakdown = [...codes.entries()].sort((a, b) => b[1] - a[1]).map(([code, count]) => `${code} ${count}`).join(", ");
+    lines.push(`${status} (${items.length})`);
+    lines.push(`  ${breakdown}`);
+    lines.push(`  ${items.map((i) => `#${i.context.number}`).join(" ")}`);
+    lines.push("");
+  }
+  const note = excerptCoverage(interesting);
+  if (note) lines.push(note);
+  lines.push("Render one in full: pr-reviewer preview <number>");
+  return lines.join("\n");
+}
+function previewCommand(options) {
+  console.log(renderPreview(options));
 }
 
 export { act_exports as act, cli_exports as cli, collect_exports as collect, judge_exports as judge, render_exports as render };
